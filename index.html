@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>SG Table Tennis Tracker</title>
+    <style>
+        /* ---------- GLOBAL ---------- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.5;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            min-height: 100vh;
+        }
+
+        #app {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+            padding-bottom: 90px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
+        h1 { font-size: 1.5rem; margin-bottom: 4px; }
+        h2 { font-size: 1.15rem; margin-bottom: 12px; color: #94a3b8; }
+        h3 { font-size: 1rem; margin-bottom: 8px; }
+
+        /* ---------- CARDS ---------- */
+        .card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+        }
+        .card-accent { border-left: 4px solid #22c55e; }
+        .card-warn   { border-left: 4px solid #f59e0b; }
+        .card-danger { border-left: 4px solid #ef4444; }
+
+        /* ---------- BUTTONS ---------- */
+        button {
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            background: #22c55e;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        button:active { transform: scale(0.97); }
+        button.secondary { background: #334155; color: #e2e8f0; }
+        button.danger { background: #ef4444; color: #fff; }
+        button.warn { background: #f59e0b; color: #0f172a; }
+        button.small {
+            width: auto; padding: 8px 14px; font-size: 0.8rem;
+            display: inline-block; margin-right: 6px; margin-bottom: 6px;
+            border-radius: 10px;
+        }
+        button.tiny {
+            width: auto; padding: 6px 10px; font-size: 0.72rem;
+            display: inline-block; margin-right: 6px; margin-bottom: 6px;
+            border-radius: 8px;
+        }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ---------- INPUTS ---------- */
+        input, select {
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: #e2e8f0;
+            width: 100%;
+            margin-bottom: 12px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        input:focus, select:focus { outline: 2px solid #22c55e; border-color: transparent; }
+        label {
+            display: block; font-size: 0.85rem; font-weight: 500;
+            color: #94a3b8; margin-bottom: 4px;
+        }
+
+        /* ---------- BADGES ---------- */
+        .badge {
+            display: inline-block; padding: 2px 10px; border-radius: 20px;
+            font-size: 0.72rem; font-weight: 600;
+            background: #334155; color: #94a3b8;
+            white-space: nowrap;
+        }
+        .badge-green  { background: #166534; color: #bbf7d0; }
+        .badge-yellow { background: #854d0e; color: #fef08a; }
+        .badge-red    { background: #991b1b; color: #fecaca; }
+        .badge-dev    { background: #78350f; color: #fde68a; }
+        .badge-admin  { background: #1e3a8a; color: #bfdbfe; }
+        .badge-blue   { background: #1e40af; color: #dbeafe; }
+
+        /* ---------- STAT GRID ---------- */
+        .stat-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin-bottom: 12px;
+        }
+        .stat-item {
+            background: #0f172a; padding: 12px;
+            border-radius: 12px; text-align: center;
+        }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: #22c55e; }
+        .stat-label {
+            font-size: 0.75rem; color: #94a3b8;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        /* ---------- MATCH ITEM ---------- */
+        .match-item {
+            background: #0f172a; border-radius: 12px; padding: 12px;
+            margin-bottom: 8px; border: 1px solid #334155;
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 8px;
+        }
+        .match-item .info { flex: 1; min-width: 140px; }
+        .match-item .info strong { display: block; font-size: 0.9rem; }
+        .match-item .info small { color: #94a3b8; font-size: 0.75rem; }
+
+        /* ---------- USER ROW (admin) ---------- */
+        .user-row {
+            background: #0f172a; border-radius: 12px;
+            padding: 12px; margin-bottom: 10px;
+            border: 1px solid #334155;
+        }
+        .user-row .name {
+            font-weight: 600; font-size: 0.95rem;
+            display: flex; align-items: center; gap: 6px;
+            flex-wrap: wrap;
+        }
+        .user-row .meta {
+            font-size: 0.75rem; color: #94a3b8;
+            margin-top: 3px; word-break: break-all;
+        }
+        .user-row .actions {
+            margin-top: 10px; display: flex; flex-wrap: wrap;
+        }
+
+        /* ---------- SCROLLABLE LIST ---------- */
+        .scroll-list {
+            max-height: 320px; overflow-y: auto; overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; padding-right: 4px;
+        }
+
+        /* ---------- COLLAPSIBLE ---------- */
+        .collapsible {
+            cursor: pointer; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .collapsible::after {
+            content: "▸"; font-size: 1.2rem; color: #94a3b8;
+            transition: transform 0.2s;
+        }
+        .collapsible.open::after { transform: rotate(90deg); }
+        .collapsible-content {
+            display: none; margin-top: 12px;
+            font-size: 0.85rem; color: #cbd5e1;
+        }
+        .collapsible-content.show { display: block; }
+        .collapsible-content p { margin-bottom: 8px; }
+        .collapsible-content ul { padding-left: 20px; margin-bottom: 8px; }
+        .collapsible-content li { margin-bottom: 4px; }
+
+        /* ---------- TAB BAR ---------- */
+        .tab-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: #1e293b; border-top: 1px solid #334155;
+            display: flex; justify-content: space-around;
+            padding: 6px 0;
+            padding-bottom: max(6px, env(safe-area-inset-bottom));
+            z-index: 100;
+        }
+        .tab-bar button {
+            background: none; color: #94a3b8;
+            width: auto; padding: 6px 8px;
+            font-size: 0.65rem; margin: 0; border-radius: 8px;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 2px;
+            flex: 1;
+        }
+        .tab-bar button.active { color: #22c55e; }
+        .tab-bar button .icon { font-size: 1.25rem; }
+
+        /* ---------- HIDDEN ---------- */
+        .hidden { display: none !important; }
+
+        /* ---------- TOAST ---------- */
+        #toast {
+            position: fixed; top: 16px; left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b; color: #e2e8f0;
+            padding: 12px 24px; border-radius: 12px;
+            border: 1px solid #334155; font-size: 0.9rem;
+            z-index: 200; max-width: 90vw; text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            transition: opacity 0.3s;
+        }
+        #toast.hidden { display: none; }
+
+        /* ---------- RANK ---------- */
+        .rank-display {
+            font-size: 3rem; font-weight: 800;
+            color: #22c55e; text-align: center; line-height: 1;
+        }
+
+        /* ---------- SUBSCRIPTION ---------- */
+        .sub-price {
+            font-size: 2.8rem; font-weight: 800;
+            color: #22c55e; text-align: center; line-height: 1;
+        }
+        .sub-price small {
+            font-size: 0.9rem; color: #94a3b8; font-weight: 500;
+        }
+        .sub-status {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px; border-radius: 12px;
+            background: #0f172a; margin-bottom: 12px;
+        }
+        .sub-status .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-green  { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+        .dot-yellow { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+        .dot-red    { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (min-width: 480px) {
+            #app { padding: 24px; }
+            .stat-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <!-- ============================================================
+         AUTH SCREEN (hidden in DEV_MODE — re-enable when finalised)
+         ============================================================ -->
+    <div id="auth-screen" class="hidden">
+        <div class="card" style="text-align: center; margin-top: 40px;">
+            <h1>🏓 SG Table Tennis</h1>
+            <p style="color:#94a3b8; margin-bottom: 20px;">Track matches. Earn points. Get discounts.</p>
+        </div>
+
+        <div class="card">
+            <h2 id="auth-title">Login</h2>
+            <div id="auth-fields">
+                <label for="auth-email">Email</label>
+                <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email">
+
+                <label for="auth-password">Password</label>
+                <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+
+                <div id="register-extra" class="hidden">
+                    <label for="auth-name">Full Name</label>
+                    <input type="text" id="auth-name" placeholder="Your name">
+
+                    <label for="auth-age">Age</label>
+                    <input type="number" id="auth-age" placeholder="25" min="8" max="120">
+
+                    <label for="auth-cc">Community Centre</label>
+                    <select id="auth-cc"></select>
+                </div>
+
+                <button id="auth-submit">Login</button>
+                <button id="auth-toggle" class="secondary">Need an account? Register</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN APP ==================== -->
+    <div id="main-screen" class="hidden">
+
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+                <h1 style="margin-bottom: 0;">🏓 Hi, <span id="user-name"></span></h1>
+                <small style="color:#94a3b8;" id="user-cc"></small>
+                <div id="dev-badge" class="hidden" style="margin-top:4px;">
+                    <span class="badge badge-dev">DESIGN MODE • login disabled</span>
+                </div>
+            </div>
+            <button id="logout-btn" class="danger small" style="width:auto;">Logout</button>
+        </div>
+
+        <!-- ========== DASHBOARD TAB ========== -->
+        <div id="tab-dashboard" class="tab-content">
+            <div class="card card-accent">
+                <h2>Your Summary</h2>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-points">0</div>
+                        <div class="stat-label">Points</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-wins">0</div>
+                        <div class="stat-label">Wins</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-losses">0</div>
+                        <div class="stat-label">Losses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-winrate">0%</div>
+                        <div class="stat-label">Win Rate</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 8px;">
+                    <div class="rank-display" id="stat-rank">—</div>
+                    <div style="font-size: 0.8rem; color:#94a3b8;">Overall Position</div>
+                </div>
+            </div>
+
+            <div class="card" id="sub-banner-dash">
+                <h2>Subscription</h2>
+                <div id="dash-sub-status"></div>
+            </div>
+
+            <div class="card">
+                <h2>Shop Discount</h2>
+                <p id="discount-info" style="font-size: 0.9rem;">Play matches to earn points and unlock discounts!</p>
+                <div style="margin-top: 8px;">
+                    <div style="background:#0f172a; border-radius:8px; height:10px; overflow:hidden;">
+                        <div id="discount-bar" style="height:100%; width:0%; background:#22c55e; transition: width 0.5s;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Recent Matches</h2>
+                <div id="match-history" class="scroll-list">
+                    <p style="color:#94a3b8;">No matches yet. Request a match to get started!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== REQUEST MATCH TAB ========== -->
+        <div id="tab-request" class="tab-content hidden">
+            <div id="req-sub-warning" class="card card-danger hidden">
+                <h2>⚠️ Subscription Required</h2>
+                <p style="font-size: 0.9rem;">You need an active subscription to play matches. Go to the <strong>Subscribe</strong> tab to request one ($2/month).</p>
+            </div>
+
+            <div class="card">
+                <h2>Request a Match</h2>
+                <label for="req-opponent">Opponent Email</label>
+                <input type="email" id="req-opponent" placeholder="opponent@example.com">
+
+                <label for="req-type">Match Type</label>
+                <select id="req-type">
+                    <option value="singles">Singles</option>
+                    <option value="doubles">Doubles</option>
+                </select>
+
+                <label for="req-cc">Community Centre</label>
+                <select id="req-cc"></select>
+
+                <label for="req-score">Your Score (sets won)</label>
+                <input type="number" id="req-score" placeholder="e.g. 3" min="0" max="5">
+
+                <label for="req-opp-score">Opponent Score (sets won)</label>
+                <input type="number" id="req-opp-score" placeholder="e.g. 1" min="0" max="5">
+
+                <button id="req-submit">Send Match Request</button>
+            </div>
+
+            <div class="card">
+                <h2>Pending Requests Sent</h2>
+                <div id="pending-sent" class="scroll-list">
+                    <p style="color:#94a3b8;">No pending requests.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Requests Awaiting Your Approval</h2>
+                <div id="pending-received" class="scroll-list">
+                    <p style="color:#94a3b8;">No requests to approve.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SUBSCRIPTION TAB ========== -->
+        <div id="tab-subscribe" class="tab-content hidden">
+            <div class="card card-accent">
+                <h2>Monthly Subscription</h2>
+                <div class="sub-price">$2<small>/month</small></div>
+                <p style="text-align:center; color:#94a3b8; font-size:0.85rem; margin-top:6px;">
+                    Pay $2 to play unlimited matches for 30 days.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Your Status</h2>
+                <div id="sub-current-status"></div>
+            </div>
+
+            <div class="card" id="sub-request-card">
+                <h2>Request Subscription</h2>
+                <p style="font-size:0.9rem; margin-bottom:12px; color:#cbd5e1;">
+                    Step 1: Pay <strong>$2</strong> to the club account (PayNow / cash to admin).<br>
+                    Step 2: Tap the button below to request activation.<br>
+                    Step 3: Admin will verify payment and activate your subscription.
+                </p>
+                <button id="sub-request-btn">Request Subscription Activation</button>
+            </div>
+
+            <div class="card">
+                <h2>Payment Info</h2>
+                <p style="font-size:0.85rem; color:#cbd5e1;">
+                    <strong>PayNow:</strong> 9123 4567 (SG Table Tennis Club)<br>
+                    <strong>Reference:</strong> Your registered email<br>
+                    <strong>Amount:</strong> $2.00 per month
+                </p>
+            </div>
+        </div>
+
+        <!-- ========== ADMIN TAB ========== -->
+        <div id="tab-admin" class="tab-content hidden">
+            <div class="card card-warn">
+                <h2>🔒 Admin Access</h2>
+                <div id="admin-locked">
+                    <p style="font-size:0.9rem; margin-bottom:12px; color:#cbd5e1;">
+                        Enter admin PIN to unlock the admin controls.
+                    </p>
+                    <label for="admin-pin-input">Admin PIN</label>
+                    <input type="password" id="admin-pin-input" placeholder="••••" maxlength="8" inputmode="numeric">
+                    <button id="admin-pin-submit">Unlock Admin Panel</button>
+                </div>
+                <div id="admin-unlocked" class="hidden">
+                    <p style="font-size:0.9rem; color:#bbf7d0;">✅ Admin panel unlocked</p>
+                    <button id="admin-lock-btn" class="secondary small" style="margin-top:8px;">Lock Panel</button>
+                </div>
+            </div>
+
+            <div id="admin-panel" class="hidden">
+                <div class="card">
+                    <h2>Pending Subscription Requests</h2>
+                    <div id="admin-pending-reqs" class="scroll-list">
+                        <p style="color:#94a3b8;">No pending requests.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>All Players</h2>
+                    <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:10px;">
+                        Total: <span id="admin-user-count">0</span> players
+                    </p>
+                    <div id="admin-user-list" class="scroll-list"></div>
+                </div>
+
+                <div class="card">
+                    <h2>Admin Settings</h2>
+                    <label for="admin-new-pin">Change Admin PIN</label>
+                    <input type="password" id="admin-new-pin" placeholder="New 4–8 digit PIN" maxlength="8" inputmode="numeric">
+                    <button id="admin-change-pin" class="secondary small">Update PIN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== POINTS SYSTEM TAB ========== -->
+        <div id="tab-points" class="tab-content hidden">
+            <div class="card">
+                <h2>📖 Pointing System</h2>
+                <p style="font-size:0.9rem; margin-bottom:12px;">
+                    This app uses a simplified version of the <strong>ITTF Rating Points System</strong> for singles and doubles.
+                </p>
+
+                <div class="collapsible" onclick="toggleCollapsible(this)">
+                    <h3>How Points Are Calculated</h3>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>1. Base Rating:</strong> Every player starts with <strong>1000 points</strong>.</p>
+                    <p><strong>2. Match Result:</strong> When a match is approved, the winner gains points and the loser loses points.</p>
+                    <p><strong>3. Point Difference:</strong> The number of points exchanged depends on the rating difference between the two players:</p>
+                    <ul>
+                        <li><strong>If the higher-rated player wins (expected):</strong> Small point gain (1–9 points).</li>
+                        <li><strong>If the lower-rated player wins (upset):</strong> Large point gain (10–40 points).</li>
+                    </ul>
+                    <p><strong>4. ITTF Rating Table (simplified):</strong></p>
+                    <ul>
+                        <li>Rating diff 0–24: Winner +10, Loser −10</li>
+                        <li>Rating diff 25–49: Winner +12, Loser −12</li>
+                        <li>Rating diff 50–99: Winner +14, Loser −14</li>
+                        <li>Rating diff 100–149: Winner +16, Loser −16</li>
+                        <li>Rating diff 150–199: Winner +20, Loser −20</li>
+                        <li>Rating diff 200–299: Winner +24, Loser −24</li>
+                        <li>Rating diff 300–399: Winner +28, Loser −28</li>
+                        <li>Rating diff 400–499: Winner +32, Loser −32</li>
+                        <li>Rating diff 500–749: Winner +36, Loser −36</li>
+                        <li>Rating diff 750+: Winner +40, Loser −40</li>
+                    </ul>
+                    <p><strong>5. Upset Bonus:</strong> If the lower-rated player wins, they gain the upset points shown above, and the higher-rated player loses the same amount.</p>
+                    <p><strong>6. Doubles:</strong> Points are calculated using the average rating of each pair.</p>
+                    <p><strong>7. No points are awarded until both players confirm the match result.</strong></p>
+                </div>
+
+                <div class="collapsible" style="margin-top:16px;" onclick="toggleCollapsible(this)">
+                    <h3>Discount Tiers</h3>
+                </div>
+                <div class="collapsible-content">
+                    <ul>
+                        <li><strong>0–499 points:</strong> 0% discount</li>
+                        <li><strong>500–999 points:</strong> 5% discount</li>
+                        <li><strong>1000–1499 points:</strong> 10% discount</li>
+                        <li><strong>1500–1999 points:</strong> 15% discount</li>
+                        <li><strong>2000+ points:</strong> 20% discount</li>
+                    </ul>
+                </div>
+
+                <div class="collapsible" style="margin-top:16px;" onclick="toggleCollapsible(this)">
+                    <h3>Subscription Rules</h3>
+                </div>
+                <div class="collapsible-content">
+                    <ul>
+                        <li>Monthly subscription: <strong>$2</strong></li>
+                        <li>Required to request and confirm matches.</li>
+                        <li>Valid for <strong>30 days</strong> from admin approval.</li>
+                        <li>Admins can enable / disable / extend subscriptions for any player.</li>
+                        <li>Only admins can approve payment and manage subscriptions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar" id="tab-bar">
+            <button data-tab="dashboard" class="active" onclick="switchTab('dashboard')">
+                <span class="icon">📊</span> Home
+            </button>
+            <button data-tab="request" onclick="switchTab('request')">
+                <span class="icon">🏓</span> Play
+            </button>
+            <button data-tab="subscribe" onclick="switchTab('subscribe')">
+                <span class="icon">💳</span> Subscribe
+            </button>
+            <button data-tab="admin" id="tab-admin-btn" class="hidden" onclick="switchTab('admin')">
+                <span class="icon">⚙️</span> Admin
+            </button>
+            <button data-tab="points" onclick="switchTab('points')">
+                <span class="icon">📖</span> Points
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="hidden"></div>
+
+<script>
+/* =============================================================
+   SG TABLE TENNIS TRACKER  (v2 — subscriptions + admin)
+   ============================================================= */
+
+/* ============================================================
+   >>> DEV MODE TOGGLE <<<
+   true  = skip login, auto-login as dev admin (design review)
+   false = normal email/password login + registration
+   ============================================================ */
+const DEV_MODE = true;
+
+/* ---------- CONSTANTS ---------- */
+const STORAGE_KEY = DEV_MODE ? 'sgtt_dev_data_v2' : 'sgtt_data_v2';
+const SALT = new Uint8Array([83, 71, 84, 84, 45, 83, 65, 76, 84, 0, 0, 0, 0, 0, 0, 0]);
+const ITERATIONS = 100000;
+const SUB_PRICE = 2;
+const SUB_DURATION_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const DEFAULT_ADMIN_PIN = '2468';
+
+/* ---------- DEV MODE SEED ---------- */
+const DEV_PASSWORD    = 'sgtt-dev-mode-key-2024';
+const DEV_USER_EMAIL  = 'dev@sgtt.local';
+const DEV_USER_NAME   = 'Dev Player';
+const DEV_USER_CC     = 'Fernvale Community Club';
+const DEV_USER_AGE    = 25;
+const DEV_USER_POINTS = 1250;
+const DEV_USER_WINS   = 8;
+const DEV_USER_LOSSES = 4;
+
+const SAMPLE_OPPONENTS = [
+    { email: 'alice@sgtt.local',   name: 'Alice Tan',    age: 28, cc: 'Bishan Community Club',
+      points: 1350, wins: 12, losses: 5, sub: 'active' },
+    { email: 'bob@sgtt.local',     name: 'Bob Lim',      age: 34, cc: 'Toa Payoh Central Community Club',
+      points: 900,  wins: 4,  losses: 9, sub: 'inactive' },
+    { email: 'charlie@sgtt.local', name: 'Charlie Wong', age: 22, cc: 'Fernvale Community Club',
+      points: 1100, wins: 7,  losses: 6, sub: 'pending' }
+];
+
+/* ---------- COMMUNITY CENTRE LIST (Singapore) ---------- */
+const COMMUNITY_CENTRES = [
+    "Admiralty Community Club","ACE The Place Community Club","Aljunied Community Centre",
+    "Ang Mo Kio Community Centre","Ang Mo Kio-Hougang Community Club","Ayer Rajah Community Club",
+    "Bedok Community Centre","Bidadari Community Club","Bishan Community Club",
+    "Boon Lay Community Centre","Braddell Heights Community Club","Buangkok Community Club",
+    "Bukit Batok Community Club","Bukit Batok East Community Club","Bukit Merah Community Centre",
+    "Bukit Panjang Community Club","Bukit Timah Community Club","Buona Vista Community Club",
+    "Canberra Community Club","Changi Simei Community Club","Chong Pang Community Club",
+    "Chua Chu Kang Community Club","Clementi Community Centre","Ci Yuan Community Club",
+    "Dover Community Centre","Eunos Community Club","Fengshan Community Club",
+    "Fernvale Community Club","Fuchun Community Club","Gek Poh Ville Community Club",
+    "Geylang Serai Community Club","Geylang West Community Club","Henderson Community Club",
+    "Hillview Community Club","Hong Kah North Community Club","Hougang Community Club",
+    "Hwi Yoh Community Centre","Jalan Besar Community Club","Joo Chiat Community Club",
+    "Jurong Central Community Club","Jurong Green Community Club","Jurong Spring Community Club",
+    "Kaki Bukit Community Club","Kallang Community Club","Kampong Chai Chee Community Centre",
+    "Kampong Glam Community Club","Kampong Kembangan Community Club","Kampong Ubi Community Centre",
+    "Katong Community Centre","Kebun Baru Community Club","Kim Seng Community Centre",
+    "Kolam Ayer Community Club","Kreta Ayer Community Club","Lam Soon Community Centre",
+    "Leng Kee Community Centre","MacPherson Community Club","Marine Parade Community Club",
+    "Marsiling Community Club","Mountbatten Community Club","Nee Soon Central Community Centre",
+    "Nee Soon East Community Club","Nee Soon South Community Club","Pasir Ris East Community Club",
+    "Paya Lebar Kovan Community Club","Pek Kio Community Centre","Punggol Park Community Centre",
+    "Punggol Vista Community Centre","Queenstown Community Centre","Radin Mas Community Club",
+    "Rivervale Community Centre","Sembawang Community Club","Sengkang Community Club",
+    "Siglap Community Centre","Tampines Changkat Community Club","Tampines East Community Club",
+    "Tampines North Community Club","Tampines West Community Club","Tanjong Pagar Community Club",
+    "Teck Ghee Community Club","Telok Blangah Community Club","The Frontier Community Club",
+    "Thomson Community Club","Toa Payoh Central Community Club","Toa Payoh East Community Club",
+    "Toa Payoh West Community Club","Ulu Pandan Community Club","West Coast Community Centre",
+    "Woodgrove Community Centre","Woodlands Community Club","Woodlands Galaxy Community Club",
+    "Yew Tee Community Club","Yio Chu Kang Community Club","Yuhua Community Club",
+    "Zhenghua Community Club"
+].sort();
+
+/* ---------- CRYPTO HELPERS ---------- */
+async function deriveKey(password, salt = SALT) {
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+        'raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']
+    );
+    return crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: salt, iterations: ITERATIONS, hash: 'SHA-256' },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt', 'decrypt']
+    );
+}
+
+async function encryptData(plainText, key) {
+    const enc = new TextEncoder();
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const cipher = await crypto.subtle.encrypt(
+        { name: 'AES-GCM', iv: iv }, key, enc.encode(plainText)
+    );
+    const combined = new Uint8Array(iv.length + cipher.byteLength);
+    combined.set(iv, 0);
+    combined.set(new Uint8Array(cipher), iv.length);
+    return btoa(String.fromCharCode(...combined));
+}
+
+async function decryptData(base64Cipher, key) {
+    const raw = Uint8Array.from(atob(base64Cipher), c => c.charCodeAt(0));
+    const iv = raw.slice(0, 12);
+    const cipher = raw.slice(12);
+    const plain = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: iv }, key, cipher
+    );
+    return new TextDecoder().decode(plain);
+}
+
+async function hashPassword(password) {
+    const enc = new TextEncoder();
+    const hash = await crypto.subtle.digest('SHA-256', enc.encode(password));
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+/* ---------- DATA LAYER ---------- */
+let appData = { users: [], matches: [], requests: [], adminPin: DEFAULT_ADMIN_PIN };
+let currentUser = null;
+let currentKey  = null;
+let adminUnlocked = false; // session-only
+
+async function loadData(password) {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) {
+        appData = { users: [], matches: [], requests: [], adminPin: DEFAULT_ADMIN_PIN };
+        await saveData(password);
+        return;
+    }
+    try {
+        const key = await deriveKey(password);
+        const plain = await decryptData(stored, key);
+        appData = JSON.parse(plain);
+        if (!appData.users)     appData.users = [];
+        if (!appData.matches)   appData.matches = [];
+        if (!appData.requests)  appData.requests = [];
+        if (!appData.adminPin)  appData.adminPin = DEFAULT_ADMIN_PIN;
+    } catch (e) {
+        console.error('Failed to decrypt data:', e);
+        throw new Error('Invalid password or corrupted data.');
+    }
+}
+
+async function saveData(password) {
+    const key = await deriveKey(password);
+    const plain = JSON.stringify(appData);
+    const encrypted = await encryptData(plain, key);
+    localStorage.setItem(STORAGE_KEY, encrypted);
+}
+
+/* ---------- SUBSCRIPTION HELPERS ---------- */
+function makeSubscription(status = 'inactive', paid = false, autoRenew = false) {
+    return {
+        status,               // 'active' | 'inactive' | 'pending'
+        paidUntil: status === 'active' ? Date.now() + SUB_DURATION_MS : 0,
+        paid,
+        autoRenew,
+        requestedAt: status === 'pending' ? Date.now() : 0,
+        lastPayment: 0
+    };
+}
+
+function isSubscriptionActive(user) {
+    if (!user || !user.subscription) return false;
+    const s = user.subscription;
+    if (s.status !== 'active') return false;
+    if (s.paidUntil > 0 && s.paidUntil < Date.now()) return false;
+    return true;
+}
+
+function subStatusLabel(user) {
+    if (!user || !user.subscription) return { text: 'No subscription', cls: 'badge-red' };
+    const s = user.subscription;
+    if (s.status === 'pending')  return { text: 'Pending approval', cls: 'badge-yellow' };
+    if (s.status === 'active' && s.paidUntil > Date.now()) {
+        const days = Math.ceil((s.paidUntil - Date.now()) / (24*60*60*1000));
+        return { text: `Active • ${days}d left`, cls: 'badge-green' };
+    }
+    if (s.status === 'active' && s.paidUntil > 0 && s.paidUntil <= Date.now()) {
+        return { text: 'Expired', cls: 'badge-red' };
+    }
+    return { text: 'Inactive', cls: 'badge-red' };
+}
+
+/* ---------- UI HELPERS ---------- */
+function showToast(msg, duration = 2500) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.remove('hidden');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.add('hidden'), duration);
+}
+
+function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    const el = document.getElementById('tab-' + tab);
+    if (el) el.classList.remove('hidden');
+    document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`.tab-bar button[data-tab="${tab}"]`);
+    if (btn) btn.classList.add('active');
+    if (tab === 'dashboard')   renderDashboard();
+    if (tab === 'request')     renderRequests();
+    if (tab === 'subscribe')   renderSubscription();
+    if (tab === 'admin')       renderAdminPanel();
+}
+
+function toggleCollapsible(el) {
+    el.classList.toggle('open');
+    el.nextElementSibling.classList.toggle('show');
+}
+
+function populateCCDropdowns() {
+    ['auth-cc', 'req-cc'].forEach(id => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        sel.innerHTML = '';
+        COMMUNITY_CENTRES.forEach(cc => {
+            const opt = document.createElement('option');
+            opt.value = cc;
+            opt.textContent = cc;
+            sel.appendChild(opt);
+        });
+    });
+}
+
+/* ============================================================
+   AUTH (login / register) — only runs when DEV_MODE = false
+   ============================================================ */
+if (!DEV_MODE) {
+    let isRegisterMode = false;
+
+    document.getElementById('auth-toggle').addEventListener('click', () => {
+        isRegisterMode = !isRegisterMode;
+        document.getElementById('auth-title').textContent = isRegisterMode ? 'Register' : 'Login';
+        document.getElementById('register-extra').classList.toggle('hidden', !isRegisterMode);
+        document.getElementById('auth-submit').textContent = isRegisterMode ? 'Create Account' : 'Login';
+        document.getElementById('auth-toggle').textContent = isRegisterMode
+            ? 'Already have an account? Login'
+            : 'Need an account? Register';
+    });
+
+    document.getElementById('auth-submit').addEventListener('click', async () => {
+        const email    = document.getElementById('auth-email').value.trim().toLowerCase();
+        const password = document.getElementById('auth-password').value;
+
+        if (!email || !password) { showToast('Please enter email and password.'); return; }
+
+        try { await loadData(password); }
+        catch (e) { showToast(e.message); return; }
+
+        if (isRegisterMode) {
+            const name = document.getElementById('auth-name').value.trim();
+            const age  = parseInt(document.getElementById('auth-age').value, 10);
+            const cc   = document.getElementById('auth-cc').value;
+
+            if (!name || !age || age < 8 || age > 120 || !cc) {
+                showToast('Please fill all fields correctly (age 8–120).'); return;
+            }
+            if (appData.users.find(u => u.email === email)) {
+                showToast('Email already registered.'); return;
+            }
+
+            const passwordHash = await hashPassword(password);
+            const isFirstUser = appData.users.length === 0;
+            appData.users.push({
+                email, passwordHash, name, age, cc,
+                points: 1000, wins: 0, losses: 0, rating: 1000,
+                isAdmin: isFirstUser,
+                subscription: makeSubscription('inactive')
+            });
+            await saveData(password);
+            currentUser = appData.users.find(u => u.email === email);
+            currentKey  = password;
+            showToast(isFirstUser
+                ? 'First account created as Admin! You start with 1000 points.'
+                : 'Account created! Subscribe to start playing.');
+            showMainScreen();
+        } else {
+            const user = appData.users.find(u => u.email === email);
+            if (!user) { showToast('No account found for this email.'); return; }
+            const passwordHash = await hashPassword(password);
+            if (user.passwordHash !== passwordHash) { showToast('Incorrect password.'); return; }
+            currentUser = user;
+            currentKey  = password;
+            showToast('Welcome back, ' + user.name + '!');
+            showMainScreen();
+        }
+    });
+}
+
+/* ============================================================
+   DEV MODE AUTO-LOGIN
+   ============================================================ */
+async function devAutoLogin() {
+    await loadData(DEV_PASSWORD);
+
+    let devUser = appData.users.find(u => u.email === DEV_USER_EMAIL);
+
+    if (!devUser) {
+        const devHash = await hashPassword(DEV_PASSWORD);
+
+        devUser = {
+            email: DEV_USER_EMAIL,
+            passwordHash: devHash,
+            name: DEV_USER_NAME,
+            age: DEV_USER_AGE,
+            cc: DEV_USER_CC,
+            points: DEV_USER_POINTS,
+            wins: DEV_USER_WINS,
+            losses: DEV_USER_LOSSES,
+            rating: DEV_USER_POINTS,
+            isAdmin: true,
+            subscription: makeSubscription('active', true, true)
+        };
+        appData.users.push(devUser);
+
+        for (const opp of SAMPLE_OPPONENTS) {
+            if (!appData.users.find(u => u.email === opp.email)) {
+                const sub = makeSubscription(opp.sub, opp.sub === 'active');
+                appData.users.push({
+                    email: opp.email,
+                    passwordHash: devHash,
+                    name: opp.name,
+                    age: opp.age,
+                    cc: opp.cc,
+                    points: opp.points,
+                    wins: opp.wins,
+                    losses: opp.losses,
+                    rating: opp.points,
+                    isAdmin: false,
+                    subscription: sub
+                });
+            }
+        }
+
+        const now = Date.now();
+        const day = 86400000;
+        appData.matches.push(
+            { id: 'seed-m1', playerA: DEV_USER_EMAIL,      playerB: 'alice@sgtt.local',
+              type: 'singles', cc: 'Fernvale Community Club', scoreA: 3, scoreB: 2,
+              winner: DEV_USER_EMAIL, timestamp: now - day * 2 },
+            { id: 'seed-m2', playerA: DEV_USER_EMAIL,      playerB: 'bob@sgtt.local',
+              type: 'singles', cc: 'Bishan Community Club',   scoreA: 1, scoreB: 3,
+              winner: 'bob@sgtt.local', timestamp: now - day * 5 },
+            { id: 'seed-m3', playerA: 'charlie@sgtt.local', playerB: DEV_USER_EMAIL,
+              type: 'doubles', cc: 'Fernvale Community Club', scoreA: 2, scoreB: 3,
+              winner: DEV_USER_EMAIL, timestamp: now - day * 8 }
+        );
+
+        appData.requests.push(
+            { id: 'seed-r1', from: 'alice@sgtt.local', to: DEV_USER_EMAIL,
+              type: 'singles', cc: 'Bishan Community Club',
+              scoreA: 3, scoreB: 1, status: 'pending', timestamp: now - day },
+            { id: 'seed-r2', from: DEV_USER_EMAIL,     to: 'bob@sgtt.local',
+              type: 'singles', cc: 'Fernvale Community Club',
+              scoreA: 3, scoreB: 0, status: 'pending', timestamp: now - day * 0.5 }
+        );
+
+        // Charlie already has a pending subscription request
+        // (set via makeSubscription('pending')) — nothing more to do.
+
+        await saveData(DEV_PASSWORD);
+    }
+
+    currentUser = appData.users.find(u => u.email === DEV_USER_EMAIL);
+    currentKey  = DEV_PASSWORD;
+    showMainScreen();
+}
+
+/* ---------- MAIN SCREEN ---------- */
+function showMainScreen() {
+    document.getElementById('auth-screen').classList.add('hidden');
+    document.getElementById('main-screen').classList.remove('hidden');
+    document.getElementById('user-name').textContent = currentUser.name;
+    document.getElementById('user-cc').textContent = currentUser.cc;
+    if (DEV_MODE) document.getElementById('dev-badge').classList.remove('hidden');
+
+    // Show admin tab only for admins
+    const adminBtn = document.getElementById('tab-admin-btn');
+    if (currentUser.isAdmin) {
+        adminBtn.classList.remove('hidden');
+    } else {
+        adminBtn.classList.add('hidden');
+    }
+
+    renderDashboard();
+    switchTab('dashboard');
+}
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    if (DEV_MODE) { showToast('Login is disabled in design mode.'); return; }
+    currentUser = null;
+    currentKey  = null;
+    adminUnlocked = false;
+    document.getElementById('main-screen').classList.add('hidden');
+    document.getElementById('auth-screen').classList.remove('hidden');
+    document.getElementById('auth-password').value = '';
+});
+
+/* ---------- DASHBOARD RENDER ---------- */
+function renderDashboard() {
+    if (!currentUser) return;
+
+    const u = appData.users.find(x => x.email === currentUser.email);
+    if (u) currentUser = u;
+
+    const wins   = currentUser.wins   || 0;
+    const losses = currentUser.losses || 0;
+    const total  = wins + losses;
+    const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
+
+    document.getElementById('stat-points').textContent   = currentUser.points;
+    document.getElementById('stat-wins').textContent     = wins;
+    document.getElementById('stat-losses').textContent   = losses;
+    document.getElementById('stat-winrate').textContent  = winRate + '%';
+
+    const sorted = [...appData.users].sort((a, b) => b.points - a.points);
+    const rank = sorted.findIndex(x => x.email === currentUser.email) + 1;
+    document.getElementById('stat-rank').textContent = '#' + rank;
+
+    const pts = currentUser.points;
+    let discount = 0;
+    if      (pts >= 2000) discount = 20;
+    else if (pts >= 1500) discount = 15;
+    else if (pts >= 1000) discount = 10;
+    else if (pts >= 500)  discount = 5;
+
+    document.getElementById('discount-info').innerHTML =
+        `<strong>${discount}% discount</strong> at partner shops!<br>
+         <small>Earn more points to increase your discount.</small>`;
+    document.getElementById('discount-bar').style.width = Math.min(100, (pts / 2000) * 100) + '%';
+
+    // Subscription banner on dashboard
+    const subLabel = subStatusLabel(currentUser);
+    const subCls = subLabel.cls === 'badge-green' ? 'dot-green'
+                 : subLabel.cls === 'badge-yellow' ? 'dot-yellow' : 'dot-red';
+    let subText = '';
+    if (currentUser.subscription.status === 'active' && currentUser.subscription.paidUntil > Date.now()) {
+        subText = `Valid until ${new Date(currentUser.subscription.paidUntil).toLocaleDateString()}`;
+    } else if (currentUser.subscription.status === 'pending') {
+        subText = 'Waiting for admin approval of your $2 payment.';
+    } else {
+        subText = 'Subscribe for $2/month to play matches.';
+    }
+    document.getElementById('dash-sub-status').innerHTML = `
+        <div class="sub-status">
+            <div class="dot ${subCls}"></div>
+            <div style="flex:1;">
+                <div style="font-weight:600;">${subLabel.text}</div>
+                <div style="font-size:0.78rem; color:#94a3b8;">${subText}</div>
+            </div>
+        </div>
+    `;
+
+    // Match history
+    const myMatches = appData.matches
+        .filter(m => m.playerA === currentUser.email || m.playerB === currentUser.email)
+        .sort((a, b) => b.timestamp - a.timestamp);
+
+    const historyEl = document.getElementById('match-history');
+    if (myMatches.length === 0) {
+        historyEl.innerHTML = '<p style="color:#94a3b8;">No matches yet. Request a match to get started!</p>';
+    } else {
+        historyEl.innerHTML = myMatches.slice(0, 20).map(m => {
+            const isA      = m.playerA === currentUser.email;
+            const opponent = isA ? m.playerB : m.playerA;
+            const myScore  = isA ? m.scoreA : m.scoreB;
+            const oppScore = isA ? m.scoreB : m.scoreA;
+            const won      = myScore > oppScore;
+            const badge    = won ? 'badge-green' : 'badge-red';
+            const result   = won ? 'WIN' : 'LOSS';
+            return `
+                <div class="match-item">
+                    <div class="info">
+                        <strong>vs ${opponent}</strong>
+                        <small>${m.type} • ${m.cc} • ${new Date(m.timestamp).toLocaleDateString()}</small>
+                    </div>
+                    <div style="text-align:right;">
+                        <span class="badge ${badge}">${result}</span>
+                        <div style="font-size:0.8rem; margin-top:4px;">${myScore} – ${oppScore}</div>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+}
+
+/* ---------- REQUEST MATCH ---------- */
+document.getElementById('req-submit').addEventListener('click', async () => {
+    if (!currentUser) return;
+
+    if (!isSubscriptionActive(currentUser)) {
+        showToast('Your subscription is not active. Please subscribe first.');
+        return;
+    }
+
+    const opponentEmail = document.getElementById('req-opponent').value.trim().toLowerCase();
+    const type          = document.getElementById('req-type').value;
+    const cc            = document.getElementById('req-cc').value;
+    const scoreA        = parseInt(document.getElementById('req-score').value, 10);
+    const scoreB        = parseInt(document.getElementById('req-opp-score').value, 10);
+
+    if (!opponentEmail || !cc || isNaN(scoreA) || isNaN(scoreB)) {
+        showToast('Please fill all fields correctly.'); return;
+    }
+    if (opponentEmail === currentUser.email) {
+        showToast('You cannot play against yourself.'); return;
+    }
+    const opponent = appData.users.find(u => u.email === opponentEmail);
+    if (!opponent) { showToast('Opponent not found. They must register first.'); return; }
+
+    appData.requests.push({
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        from: currentUser.email,
+        to: opponentEmail,
+        type, cc, scoreA, scoreB,
+        status: 'pending',
+        timestamp: Date.now()
+    });
+
+    await saveData(currentKey);
+    showToast('Match request sent to ' + opponent.name + '!');
+    document.getElementById('req-opponent').value  = '';
+    document.getElementById('req-score').value     = '';
+    document.getElementById('req-opp-score').value = '';
+    renderRequests();
+});
+
+/* ---------- RENDER REQUESTS ---------- */
+function renderRequests() {
+    if (!currentUser) return;
+
+    // Show/hide subscription warning
+    const warn = document.getElementById('req-sub-warning');
+    if (isSubscriptionActive(currentUser)) {
+        warn.classList.add('hidden');
+    } else {
+        warn.classList.remove('hidden');
+    }
+
+    const sent = appData.requests.filter(r => r.from === currentUser.email && r.status === 'pending');
+    const sentEl = document.getElementById('pending-sent');
+    if (sent.length === 0) {
+        sentEl.innerHTML = '<p style="color:#94a3b8;">No pending requests.</p>';
+    } else {
+        sentEl.innerHTML = sent.map(r => {
+            const opp = appData.users.find(u => u.email === r.to);
+            return `
+                <div class="match-item">
+                    <div class="info">
+                        <strong>To: ${opp ? opp.name : r.to}</strong>
+                        <small>${r.type} • ${r.cc} • ${new Date(r.timestamp).toLocaleDateString()}</small>
+                    </div>
+                    <span class="badge badge-yellow">PENDING</span>
+                </div>`;
+        }).join('');
+    }
+
+    const received = appData.requests.filter(r => r.to === currentUser.email && r.status === 'pending');
+    const receivedEl = document.getElementById('pending-received');
+    if (received.length === 0) {
+        receivedEl.innerHTML = '<p style="color:#94a3b8;">No requests to approve.</p>';
+    } else {
+        receivedEl.innerHTML = received.map(r => {
+            const from = appData.users.find(u => u.email === r.from);
+            return `
+                <div class="match-item">
+                    <div class="info">
+                        <strong>From: ${from ? from.name : r.from}</strong>
+                        <small>${r.type} • ${r.cc} • ${new Date(r.timestamp).toLocaleDateString()}</small>
+                        <div style="font-size:0.85rem; margin-top:4px;">Score: ${r.scoreA} – ${r.scoreB}</div>
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <button class="small" style="background:#22c55e; color:#0f172a;" onclick="approveRequest('${r.id}')">Approve</button>
+                        <button class="small danger" onclick="rejectRequest('${r.id}')">Reject</button>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+}
+
+/* ---------- APPROVE / REJECT ---------- */
+async function approveRequest(id) {
+    const req = appData.requests.find(r => r.id === id);
+    if (!req || req.status !== 'pending') return;
+
+    // Both players must have active subscriptions to record a match
+    const fromUser = appData.users.find(u => u.email === req.from);
+    const toUser   = appData.users.find(u => u.email === req.to);
+    if (!isSubscriptionActive(fromUser) || !isSubscriptionActive(toUser)) {
+        showToast('Both players need active subscriptions.');
+        return;
+    }
+
+    req.status = 'approved';
+
+    const winnerEmail = req.scoreA > req.scoreB ? req.from : req.to;
+    const loserEmail  = req.scoreA > req.scoreB ? req.to   : req.from;
+
+    appData.matches.push({
+        id: req.id,
+        playerA: req.from,
+        playerB: req.to,
+        type: req.type,
+        cc: req.cc,
+        scoreA: req.scoreA,
+        scoreB: req.scoreB,
+        winner: winnerEmail,
+        timestamp: Date.now()
+    });
+
+    await awardPoints(winnerEmail, loserEmail);
+    await saveData(currentKey);
+    showToast('Match approved! Points awarded.');
+    renderRequests();
+    renderDashboard();
+}
+
+async function rejectRequest(id) {
+    const req = appData.requests.find(r => r.id === id);
+    if (!req || req.status !== 'pending') return;
+    req.status = 'rejected';
+    await saveData(currentKey);
+    showToast('Match request rejected.');
+    renderRequests();
+}
+
+/* ---------- POINTS (ITTF simplified) ---------- */
+async function awardPoints(winnerEmail, loserEmail) {
+    const winner = appData.users.find(u => u.email === winnerEmail);
+    const loser  = appData.users.find(u => u.email === loserEmail);
+    if (!winner || !loser) return;
+
+    const wR = winner.rating || 1000;
+    const lR = loser.rating  || 1000;
+    const diff = Math.abs(wR - lR);
+    let points;
+
+    if (wR >= lR) {
+        if      (diff > 750) points = 1;
+        else if (diff > 500) points = 2;
+        else if (diff > 400) points = 3;
+        else if (diff > 300) points = 4;
+        else if (diff > 200) points = 5;
+        else if (diff > 150) points = 6;
+        else if (diff > 100) points = 7;
+        else if (diff > 50)  points = 8;
+        else if (diff > 25)  points = 9;
+        else                 points = 10;
+    } else {
+        if      (diff > 749) points = 40;
+        else if (diff > 499) points = 36;
+        else if (diff > 399) points = 32;
+        else if (diff > 299) points = 28;
+        else if (diff > 199) points = 24;
+        else if (diff > 149) points = 20;
+        else if (diff > 99)  points = 16;
+        else if (diff > 49)  points = 14;
+        else if (diff > 24)  points = 12;
+        else                 points = 10;
+    }
+
+    winner.rating = wR + points;
+    loser.rating  = Math.max(100, lR - points);
+    winner.points = winner.rating;
+    loser.points  = loser.rating;
+    winner.wins   = (winner.wins   || 0) + 1;
+    loser.losses  = (loser.losses  || 0) + 1;
+}
+
+/* ============================================================
+   SUBSCRIPTION TAB
+   ============================================================ */
+function renderSubscription() {
+    if (!currentUser) return;
+    const u = appData.users.find(x => x.email === currentUser.email);
+    if (u) currentUser = u;
+
+    const s = currentUser.subscription || makeSubscription();
+    const label = subStatusLabel(currentUser);
+    const cls = label.cls === 'badge-green' ? 'dot-green'
+              : label.cls === 'badge-yellow' ? 'dot-yellow' : 'dot-red';
+
+    let detail = '';
+    let extra  = '';
+    if (s.status === 'active' && s.paidUntil > Date.now()) {
+        const days = Math.ceil((s.paidUntil - Date.now()) / (24*60*60*1000));
+        detail = `Active until ${new Date(s.paidUntil).toLocaleDateString()}`;
+        extra  = `${days} day${days === 1 ? '' : 's'} remaining`;
+    } else if (s.status === 'pending') {
+        detail = 'Your request was sent. Waiting for admin to verify $2 payment.';
+        extra  = `Requested ${new Date(s.requestedAt).toLocaleDateString()}`;
+    } else if (s.status === 'active' && s.paidUntil > 0 && s.paidUntil <= Date.now()) {
+        detail = 'Your subscription has expired. Renew to continue playing.';
+    } else {
+        detail = 'No active subscription. Request activation below.';
+    }
+
+    document.getElementById('sub-current-status').innerHTML = `
+        <div class="sub-status">
+            <div class="dot ${cls}"></div>
+            <div style="flex:1;">
+                <div style="font-weight:600;">${label.text}</div>
+                <div style="font-size:0.8rem; color:#94a3b8;">${detail}</div>
+                ${extra ? `<div style="font-size:0.75rem; color:#64748b; margin-top:2px;">${extra}</div>` : ''}
+            </div>
+        </div>
+        <div style="font-size:0.8rem; color:#94a3b8;">
+            Paid: <strong>${s.paid ? 'Yes' : 'No'}</strong>
+            • Auto-renew: <strong>${s.autoRenew ? 'On' : 'Off'}</strong>
+        </div>
+    `;
+
+    const reqCard = document.getElementById('sub-request-card');
+    const reqBtn  = document.getElementById('sub-request-btn');
+
+    if (s.status === 'pending') {
+        reqBtn.disabled = true;
+        reqBtn.textContent = '⏳ Request Pending Approval';
+    } else if (s.status === 'active' && s.paidUntil > Date.now()) {
+        reqBtn.disabled = true;
+        reqBtn.textContent = '✅ Subscription Active';
+    } else {
+        reqBtn.disabled = false;
+        reqBtn.textContent = 'Request Subscription Activation ($2)';
+    }
+}
+
+document.getElementById('sub-request-btn').addEventListener('click', async () => {
+    if (!currentUser) return;
+    const u = appData.users.find(x => x.email === currentUser.email);
+    if (!u) return;
+    if (u.subscription.status === 'pending') { showToast('Request already pending.'); return; }
+    if (u.subscription.status === 'active' && u.subscription.paidUntil > Date.now()) {
+        showToast('Subscription already active.'); return;
+    }
+
+    u.subscription.status = 'pending';
+    u.subscription.requestedAt = Date.now();
+    await saveData(currentKey);
+    currentUser = u;
+    showToast('Request sent! Admin will verify your $2 payment.');
+    renderSubscription();
+    renderDashboard();
+});
+
+/* ============================================================
+   ADMIN TAB
+   ============================================================ */
+function renderAdminPanel() {
+    if (!currentUser) return;
+    if (!currentUser.isAdmin) {
+        showToast('Admin access required.');
+        switchTab('dashboard');
+        return;
+    }
+
+    const locked = document.getElementById('admin-locked');
+    const unlocked = document.getElementById('admin-unlocked');
+    const panel = document.getElementById('admin-panel');
+
+    if (adminUnlocked) {
+        locked.classList.add('hidden');
+        unlocked.classList.remove('hidden');
+        panel.classList.remove('hidden');
+        renderAdminPendingReqs();
+        renderAdminUserList();
+    } else {
+        locked.classList.remove('hidden');
+        unlocked.classList.add('hidden');
+        panel.classList.add('hidden');
+    }
+}
+
+document.getElementById('admin-pin-submit').addEventListener('click', () => {
+    const pin = document.getElementById('admin-pin-input').value.trim();
+    if (!pin) { showToast('Enter PIN.'); return; }
+    if (pin === appData.adminPin) {
+        adminUnlocked = true;
+        document.getElementById('admin-pin-input').value = '';
+        showToast('Admin panel unlocked.');
+        renderAdminPanel();
+    } else {
+        showToast('Incorrect PIN.');
+    }
+});
+
+document.getElementById('admin-lock-btn').addEventListener('click', () => {
+    adminUnlocked = false;
+    showToast('Admin panel locked.');
+    renderAdminPanel();
+});
+
+document.getElementById('admin-change-pin').addEventListener('click', async () => {
+    if (!currentUser || !currentUser.isAdmin || !adminUnlocked) return;
+    const np = document.getElementById('admin-new-pin').value.trim();
+    if (!/^\d{4,8}$/.test(np)) { showToast('PIN must be 4–8 digits.'); return; }
+    appData.adminPin = np;
+    await saveData(currentKey);
+    document.getElementById('admin-new-pin').value = '';
+    showToast('Admin PIN updated.');
+});
+
+/* ---------- ADMIN: pending subscription requests ---------- */
+function renderAdminPendingReqs() {
+    const el = document.getElementById('admin-pending-reqs');
+    const pending = appData.users.filter(u => u.subscription && u.subscription.status === 'pending');
+
+    if (pending.length === 0) {
+        el.innerHTML = '<p style="color:#94a3b8;">No pending requests.</p>';
+        return;
+    }
+
+    el.innerHTML = pending.map(u => {
+        return `
+            <div class="user-row">
+                <div class="name">${u.name}
+                    ${u.isAdmin ? '<span class="badge badge-admin">ADMIN</span>' : ''}
+                </div>
+                <div class="meta">${u.email} • ${u.cc}</div>
+                <div class="meta">Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}</div>
+                <div class="actions">
+                    <button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="adminApproveSub('${u.email}')">Approve ($2 received)</button>
+                    <button class="tiny danger" onclick="adminRejectSub('${u.email}')">Reject</button>
+                </div>
+            </div>`;
+    }).join('');
+}
+
+async function adminApproveSub(email) {
+    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
+    const u = appData.users.find(x => x.email === email);
+    if (!u || !u.subscription) return;
+    u.subscription.status = 'active';
+    u.subscription.paid = true;
+    u.subscription.paidUntil = Date.now() + SUB_DURATION_MS;
+    u.subscription.lastPayment = Date.now();
+    await saveData(currentKey);
+    showToast(`Subscription activated for ${u.name}.`);
+    renderAdminPanel();
+}
+
+async function adminRejectSub(email) {
+    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
+    const u = appData.users.find(x => x.email === email);
+    if (!u || !u.subscription) return;
+    u.subscription.status = 'inactive';
+    u.subscription.requestedAt = 0;
+    await saveData(currentKey);
+    showToast(`Subscription request rejected for ${u.name}.`);
+    renderAdminPanel();
+}
+
+/* ---------- ADMIN: user list ---------- */
+function renderAdminUserList() {
+    const el = document.getElementById('admin-user-list');
+    document.getElementById('admin-user-count').textContent = appData.users.length;
+
+    const sorted = [...appData.users].sort((a, b) => {
+        if (a.isAdmin !== b.isAdmin) return a.isAdmin ? -1 : 1;
+        return a.name.localeCompare(b.name);
+    });
+
+    el.innerHTML = sorted.map(u => {
+        const label = subStatusLabel(u);
+        const s = u.subscription || {};
+        const isSelf = u.email === currentUser.email;
+
+        // Subscription buttons
+        const activeNow = s.status === 'active' && s.paidUntil > Date.now();
+        const subBtn = activeNow
+            ? `<button class="tiny warn" onclick="adminToggleSub('${u.email}')">Disable for month</button>`
+            : `<button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="adminToggleSub('${u.email}')">Enable for month</button>`;
+
+        const paidBtn = s.paid
+            ? `<button class="tiny secondary" onclick="adminTogglePaid('${u.email}')">Mark Unpaid</button>`
+            : `<button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="adminTogglePaid('${u.email}')">Mark Paid</button>`;
+
+        const autoBtn = s.autoRenew
+            ? `<button class="tiny secondary" onclick="adminToggleAuto('${u.email}')">Auto-renew: ON</button>`
+            : `<button class="tiny secondary" onclick="adminToggleAuto('${u.email}')">Auto-renew: OFF</button>`;
+
+        const adminBtn = u.isAdmin
+            ? `<button class="tiny danger" onclick="adminToggleAdmin('${u.email}')">Remove Admin</button>`
+            : `<button class="tiny" style="background:#1e40af; color:#dbeafe;" onclick="adminToggleAdmin('${u.email}')">Make Admin</button>`;
+
+        // Prevent admin from removing their own admin rights (safety)
+        const adminBtnSafe = isSelf
+            ? `<button class="tiny secondary" disabled>You (Admin)</button>`
+            : adminBtn;
+
+        return `
+            <div class="user-row">
+                <div class="name">
+                    ${u.name}
+                    ${u.isAdmin ? '<span class="badge badge-admin">ADMIN</span>' : ''}
+                    ${isSelf ? '<span class="badge badge-blue">YOU</span>' : ''}
+                </div>
+                <div class="meta">${u.email}</div>
+                <div class="meta">${u.cc} • Age ${u.age} • ${u.points} pts</div>
+                <div class="meta" style="margin-top:4px;">
+                    <span class="badge ${label.cls}">${label.text}</span>
+                    <span class="badge ${s.paid ? 'badge-green' : 'badge-red'}">Paid: ${s.paid ? 'Yes' : 'No'}</span>
+                    <span class="badge ${s.autoRenew ? 'badge-green' : ''}">Auto-renew: ${s.autoRenew ? 'On' : 'Off'}</span>
+                </div>
+                <div class="actions">
+                    ${paidBtn}
+                    ${subBtn}
+                    ${autoBtn}
+                    ${adminBtnSafe}
+                </div>
+            </div>`;
+    }).join('');
+}
+
+/* ---------- ADMIN ACTIONS ---------- */
+async function adminTogglePaid(email) {
+    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
+    const u = appData.users.find(x => x.email === email);
+    if (!u || !u.subscription) return;
+    u.subscription.paid = !u.subscription.paid;
+    if (u.subscription.paid) u.subscription.lastPayment = Date.now();
+    await saveData(currentKey);
+    showToast(`${u.name} marked ${u.subscription.paid ? 'Paid' : 'Unpaid'}.`);
+    renderAdminPanel();
+}
+
+async function adminToggleSub(email) {
+    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
+    const u = appData.users.find(x => x.email === email);
+    if (!u || !u.subscription) return;
+    const activeNow = u.subscription.status === 'active' && u.subscription.paidUntil > Date.now();
+    if (activeNow) {
+        // Disable for the month
+        u.subscription.status = 'inactive';
+        u.subscription.paidUntil = 0;
+        showToast(`${u.name}'s subscription disabled.`);
+    } else {
+        // Enable for a month
+        u.subscription.status = 'active';
+        u.subscription.paid = true;
+        u.subscription.paidUntil = Date.now() + SUB_DURATION_MS;
+        u.subscription.lastPayment = Date.now();
+        showToast(`${u.name}'s subscription enabled for 30 days.`);
+    }
+    await saveData(currentKey);
+    renderAdminPanel();
+}
+
+async function adminToggleAuto(email) {
+    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
+    const u = appData.users.find(x => x.email === email);
+    if (!u || !u.subscription) return;
+    u.subscription.autoRenew = !u.subscription.autoRenew;
+    await saveData(currentKey);
+    showToast(`${u.name} auto-renew ${u.subscription.autoRenew ? 'ON' : 'OFF'}.`);
+    renderAdminPanel();
+}
+
+async function adminToggleAdmin(email) {
+    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
+    if (email === currentUser.email) { showToast('You cannot change your own admin rights.'); return; }
+    const u = appData.users.find(x => x.email === email);
+    if (!u) return;
+    u.isAdmin = !u.isAdmin;
+    await saveData(currentKey);
+    showToast(`${u.name} ${u.isAdmin ? 'is now an admin' : 'is no longer an admin'}.`);
+    renderAdminPanel();
+}
+
+/* ---------- INIT ---------- */
+(async function init() {
+    populateCCDropdowns();
+
+    if (DEV_MODE) {
+        try { await devAutoLogin(); }
+        catch (e) {
+            console.error(e);
+            showToast('Dev mode init failed: ' + e.message);
+        }
+    } else {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+            document.getElementById('auth-toggle').click();
+        }
+    }
+})();
+
+/* ---------- GLOBAL HANDLERS ---------- */
+window.approveRequest     = approveRequest;
+window.rejectRequest      = rejectRequest;
+window.switchTab          = switchTab;
+window.toggleCollapsible  = toggleCollapsible;
+window.adminApproveSub    = adminApproveSub;
+window.adminRejectSub     = adminRejectSub;
+window.adminTogglePaid    = adminTogglePaid;
+window.adminToggleSub     = adminToggleSub;
+window.adminToggleAuto    = adminToggleAuto;
+window.adminToggleAdmin   = adminToggleAdmin;
+</script>
+</body>
+</html>
