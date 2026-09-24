@@ -16,7 +16,7 @@
     --border:#1e4a72;
     --safe-bottom:env(safe-area-inset-bottom,0px);
     --safe-top:env(safe-area-inset-top,0px);
-    --header-h:140px;
+    --header-h:130px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;background:#0a1f38;overflow-x:hidden}
@@ -85,19 +85,8 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .stat-value{font-size:1.7rem;font-weight:800;color:var(--accent);line-height:1.1;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(34,197,94,.35)}
 .stat-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;font-weight:600}
 
-/* ============================================================
-   LEADERBOARD MINI (3 in a row)
-   ============================================================ */
 .leader-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.leader-mini{
-    background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.03));
-    border:1px solid rgba(34,197,94,.35);
-    border-radius:12px;
-    padding:10px 6px;
-    text-align:center;
-    min-width:0;overflow:hidden;
-    display:flex;flex-direction:column;align-items:center;gap:2px;
-}
+.leader-mini{background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.03));border:1px solid rgba(34,197,94,.35);border-radius:12px;padding:10px 6px;text-align:center;min-width:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:2px}
 .leader-mini.gold{background:linear-gradient(135deg,rgba(251,191,36,.2),rgba(217,119,6,.05));border-color:rgba(251,191,36,.5)}
 .leader-mini.blue{background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(59,130,246,.03));border-color:rgba(59,130,246,.5)}
 .leader-mini .lm-icon{font-size:1.6rem;line-height:1;margin-bottom:2px}
@@ -112,9 +101,6 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .leader-mini.blue .lm-stat{color:#60a5fa}
 .leader-mini .lm-stat.empty{color:var(--text-dim);font-weight:500;font-size:.62rem}
 
-/* ============================================================
-   RANK ROWS (singles & doubles)
-   ============================================================ */
 .rank-row{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg-dark);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:border-color .15s}
 .rank-row:last-child{margin-bottom:0}
 .rank-row.mine{border-color:var(--accent);background:linear-gradient(135deg,rgba(34,197,94,.08),var(--bg-dark))}
@@ -163,47 +149,26 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .header-wrap{max-width:720px;margin:0 auto;padding:10px 14px 12px;width:100%}
 .app-title-bar{font-size:.92rem;font-weight:800;color:var(--accent);letter-spacing:-.01em;margin-bottom:8px;display:flex;align-items:center;gap:8px;word-break:break-word}
 .app-title-bar .logo-mini{width:40px;height:30px;flex-shrink:0}
-.header-inner{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.header-inner{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .header-greeting{min-width:0;flex:1;overflow:hidden}
-.header-greeting .greet-name{font-size:1.05rem;font-weight:700;color:var(--text);word-break:break-word;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.header-greeting .greet-cc{font-size:.72rem;color:var(--text-muted);display:block;word-break:break-word;margin-top:2px}
-
-.header-sub-badge{
-    font-family:inherit;
-    font-size:.6rem;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    padding:6px 10px;
-    border-radius:20px;
-    cursor:pointer;
-    white-space:nowrap;
-    flex-shrink:0;
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-    margin:0;
-    min-height:30px;
-    width:auto;
-    box-shadow:none;
-    transition:transform .1s,filter .15s;
-    border:1px solid transparent;
-}
+.header-greeting .greet-name{font-size:1.02rem;font-weight:700;color:var(--text);word-break:break-word;line-height:1.2}
+.header-greeting .greet-cc{font-size:.7rem;color:var(--text-muted);display:block;word-break:break-word;margin-top:2px}
+.header-actions{flex-shrink:0;display:flex;align-items:center;gap:6px}
+.header-sub-badge{font-family:inherit;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:5px 9px;border-radius:16px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:3px;margin:0;min-height:32px;width:auto;max-width:90px;box-shadow:none;transition:transform .1s,filter .15s;border:1px solid transparent;overflow:hidden}
 .header-sub-badge:active{transform:scale(.95)}
 .header-sub-badge:hover{filter:brightness(1.15)}
+.header-sub-badge .hsb-icon{font-size:.85rem;line-height:1;flex-shrink:0}
+.header-sub-badge .hsb-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .header-sub-badge.active{background:rgba(34,197,94,.15);color:#86efac;border-color:rgba(34,197,94,.4)}
 .header-sub-badge.pending{background:rgba(245,158,11,.15);color:#fcd34d;border-color:rgba(245,158,11,.4)}
 .header-sub-badge.inactive{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.4)}
 .header-sub-badge.promo{background:linear-gradient(135deg,rgba(34,197,94,.3),rgba(34,197,94,.1));color:#86efac;border-color:#22c55e;box-shadow:0 0 10px rgba(34,197,94,.3)}
-.header-sub-badge .hsb-icon{font-size:.85rem;line-height:1}
-
-.header-actions{flex-shrink:0;display:flex;align-items:center;gap:6px}
 .header-actions .bell-btn{position:relative;width:38px;height:38px;min-height:38px;min-width:38px;border-radius:50%;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:1.1rem;padding:0;margin:0;box-shadow:none;cursor:pointer;transition:background .15s}
 .header-actions .bell-btn:hover{background:var(--bg-secondary)}
 .header-actions .bell-btn .bell-count{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 4px;border-radius:10px;background:var(--danger);color:#fff;font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(239,68,68,.7)}
 .header-actions .bell-btn.pulse{animation:bellPulse 1.4s ease-in-out infinite}
 @keyframes bellPulse{0%,100%{transform:rotate(0)}15%{transform:rotate(12deg)}30%{transform:rotate(-12deg)}45%{transform:rotate(10deg)}60%{transform:rotate(-10deg)}75%{transform:rotate(6deg)}}
-.header-actions .logout-btn{min-height:38px;padding:7px 12px;font-size:.72rem}
+.header-actions .logout-btn{min-height:36px;padding:7px 12px;font-size:.72rem;white-space:nowrap}
 
 .tt-logo{text-align:center;padding:24px 16px 16px}
 .tt-logo-svg{display:block;margin:0 auto 12px;width:180px;height:130px;max-width:100%}
@@ -290,7 +255,7 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .modal-overlay{position:fixed;inset:0;background:rgba(10,31,56,.88);display:flex;align-items:center;justify-content:center;z-index:9997;padding:16px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fadeIn .2s ease}
 .modal-overlay.hidden{display:none!important}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-card{background:var(--bg-card);border-radius:20px;max-width:min(480px,calc(100vw - 32px));width:100%;max-height:85vh;display:flex;flex-direction:column;border:2px solid var(--accent);box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 40px rgba(34,197,94,.2);overflow:hidden;animation:slideUp .25s cubic-bezier(.34,1.56,.64,1)}
+.modal-card{background:var(--bg-card);border-radius:20px;max-width:min(480px,calc(100vw - 32px));width:100%;max-height:88vh;display:flex;flex-direction:column;border:2px solid var(--accent);box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 40px rgba(34,197,94,.2);overflow:hidden;animation:slideUp .25s cubic-bezier(.34,1.56,.64,1)}
 @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(180deg,var(--bg-secondary),var(--bg-card))}
 .modal-header h2{margin:0;font-size:1.05rem;font-weight:800;color:var(--text);text-transform:none;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
@@ -323,8 +288,8 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .promo-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
 .promo-controls .switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-size:.85rem;color:var(--text)}
 .promo-controls .switch input{display:none}
-.promo-controls .switch .slider{width:44px;height:24px;background:var(--bg-dark);border-radius:12px;position:relative;transition:background .2s;border:1px solid var(--border)}
-.promo-controls .switch .slider::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--text-muted);border-radius:50%;transition:transform .2s,background .2s}
+.promo-controls .slider{width:44px;height:24px;background:var(--bg-dark);border-radius:12px;position:relative;transition:background .2s;border:1px solid var(--border)}
+.promo-controls .slider::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--text-muted);border-radius:50%;transition:transform .2s,background .2s}
 .promo-controls .switch input:checked + .slider{background:var(--accent-soft);border-color:var(--accent)}
 .promo-controls .switch input:checked + .slider::after{transform:translateX(20px);background:var(--accent)}
 .refresh-bar{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:8px 12px;background:var(--bg-dark);border-radius:10px;border:1px solid var(--border);font-size:.75rem;color:var(--text-muted)}
@@ -345,6 +310,23 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .inactivity-cta h3{font-size:1.15rem;color:var(--accent);margin-bottom:8px;font-weight:800}
 .inactivity-cta p{font-size:.9rem;color:#cbd5e1;line-height:1.6}
 .inactivity-cta .ic-days{display:inline-block;background:rgba(34,197,94,.2);color:#86efac;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.85rem;margin:6px 4px}
+.pwd-checklist{background:var(--bg-dark);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:.78rem;line-height:1.7}
+.pwd-check{color:var(--text-muted);transition:color .2s;display:flex;align-items:center;gap:6px}
+.pwd-check::before{content:'✗';color:var(--danger);font-weight:800;display:inline-block;width:14px;text-align:center;transition:color .2s}
+.pwd-check.ok{color:#86efac}
+.pwd-check.ok::before{content:'✓';color:var(--success)}
+.auth-tabs{display:flex;gap:4px;margin-bottom:14px;background:var(--bg-dark);padding:4px;border-radius:12px;border:1px solid var(--border)}
+.auth-tab{flex:1;background:transparent;color:var(--text-muted);border:none;border-radius:9px;padding:10px 8px;font-size:.82rem;font-weight:700;cursor:pointer;min-height:40px;margin:0;box-shadow:none;transition:all .15s}
+.auth-tab:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.auth-tab.active{background:var(--accent);color:#0a1f38;box-shadow:0 2px 8px rgba(34,197,94,.35)}
+.forgot-link{text-align:right;margin-top:-6px;margin-bottom:12px}
+.forgot-link button{font-size:.78rem;color:var(--text-muted);text-decoration:underline;padding:4px 2px;min-height:auto;background:none;border:none;box-shadow:none;font-weight:600;width:auto;margin:0}
+.forgot-link button:hover{color:var(--accent);background:none}
+.verified-banner{background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));border:2px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.verified-banner .vb-icon{font-size:1.6rem;line-height:1;flex-shrink:0}
+.verified-banner .vb-text{flex:1;min-width:0}
+.verified-banner .vb-text strong{display:block;color:var(--accent);font-size:.88rem;font-weight:800;margin-bottom:2px}
+.verified-banner .vb-text small{color:#bbf7d0;font-size:.74rem;line-height:1.4;display:block}
 img,svg,video,canvas{max-width:100%;height:auto}
 pre,code{max-width:100%;overflow-x:auto;word-break:break-word}
 table{max-width:100%}
@@ -353,6 +335,9 @@ table{max-width:100%}
     .leader-mini .lm-label{font-size:.5rem}
     .leader-mini .lm-icon{font-size:1.35rem}
     .leader-mini .lm-stat{font-size:.62rem}
+    .header-sub-badge{max-width:70px;font-size:.55rem;padding:4px 7px}
+    .header-greeting .greet-name{font-size:.95rem}
+    .header-actions .logout-btn{padding:6px 10px;font-size:.68rem}
 }
 </style>
 </head>
@@ -395,10 +380,10 @@ table{max-width:100%}
                 <div class="greet-name">Hi, <span id="user-name"></span></div>
                 <small class="greet-cc" id="user-cc"></small>
             </div>
-            <button id="header-sub-badge" class="header-sub-badge inactive" onclick="switchTab('subscribe')" title="Subscription status">
-                <span class="hsb-icon">💳</span><span class="hsb-text">—</span>
-            </button>
             <div class="header-actions">
+                <button id="header-sub-badge" class="header-sub-badge inactive" onclick="switchTab('subscribe')" title="Subscription status">
+                    <span class="hsb-icon">💳</span><span class="hsb-text">—</span>
+                </button>
                 <button id="bell-btn" class="bell-btn" title="Notifications" aria-label="Notifications">
                     🔔
                     <span id="bell-count" class="bell-count hidden">0</span>
@@ -411,6 +396,7 @@ table{max-width:100%}
 
 <div id="app">
 
+    <!-- AUTH SCREEN -->
     <div id="auth-screen" class="hidden">
         <div id="config-banner" class="config-banner hidden">
             <strong>⚠️ Supabase configuration problem</strong>
@@ -474,15 +460,24 @@ table{max-width:100%}
         </div>
 
         <div class="card">
-            <h2 id="auth-title">Login</h2>
-            <div id="auth-fields">
-                <label for="auth-email">Email</label>
-                <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" novalidate>
-                <div id="auth-email-error" class="field-error hidden"></div>
+            <div class="auth-tabs" id="auth-tabs">
+                <button class="auth-tab active" id="tab-auth-login" onclick="setAuthMode('login')">Login</button>
+                <button class="auth-tab" id="tab-auth-register" onclick="setAuthMode('register')">Register</button>
+            </div>
 
-                <label for="auth-password">Password</label>
-                <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
-                <div id="auth-password-error" class="field-error hidden"></div>
+            <!-- LOGIN / REGISTER FORM -->
+            <div id="auth-normal">
+                <div id="field-email">
+                    <label for="auth-email">Email</label>
+                    <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" novalidate>
+                    <div id="auth-email-error" class="field-error hidden"></div>
+                </div>
+
+                <div id="field-password">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+                    <div id="auth-password-error" class="field-error hidden"></div>
+                </div>
 
                 <div id="register-extra" class="hidden">
                     <label for="auth-name">Full Name</label>
@@ -499,12 +494,64 @@ table{max-width:100%}
                     <div id="auth-cc-error" class="field-error hidden"></div>
                 </div>
 
+                <div class="forgot-link" id="forgot-link-wrap">
+                    <button type="button" onclick="setAuthMode('forgot')">Forgot password?</button>
+                </div>
+
                 <button id="auth-submit" type="button">Login</button>
-                <button id="auth-toggle" class="secondary" type="button">Need an account? Register</button>
+            </div>
+
+            <!-- FORGOT PASSWORD STEP 1: Email + CC verification -->
+            <div id="forgot-step1" class="hidden">
+                <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px;line-height:1.5">
+                    Enter your registered email and select your community centre. If both match our records, you'll be able to set a new password immediately.
+                </p>
+
+                <label for="forgot-email">Email</label>
+                <input type="email" id="forgot-email" placeholder="you@example.com" autocomplete="email" novalidate>
+                <div id="forgot-email-error" class="field-error hidden"></div>
+
+                <label for="forgot-cc">Community Centre</label>
+                <select id="forgot-cc"></select>
+                <div id="forgot-cc-error" class="field-error hidden"></div>
+
+                <button id="forgot-verify-btn" type="button">Verify</button>
+                <button class="secondary" type="button" onclick="setAuthMode('login')">Back to Login</button>
+            </div>
+
+            <!-- FORGOT PASSWORD STEP 2: New password -->
+            <div id="forgot-step2" class="hidden">
+                <div class="verified-banner">
+                    <div class="vb-icon">✅</div>
+                    <div class="vb-text">
+                        <strong>Identity verified!</strong>
+                        <small>Now enter your new password below.</small>
+                    </div>
+                </div>
+
+                <label for="forgot-pwd-new">New Password</label>
+                <input type="password" id="forgot-pwd-new" placeholder="Enter new password" autocomplete="new-password">
+
+                <label for="forgot-pwd-confirm">Confirm Password</label>
+                <input type="password" id="forgot-pwd-confirm" placeholder="Re-enter password" autocomplete="new-password">
+
+                <div class="field-error hidden" id="forgot-pwd-error"></div>
+
+                <div class="pwd-checklist" id="forgot-pwd-checklist">
+                    <div class="pwd-check" data-req="length">At least 8 characters</div>
+                    <div class="pwd-check" data-req="upper">One uppercase letter (A–Z)</div>
+                    <div class="pwd-check" data-req="lower">One lowercase letter (a–z)</div>
+                    <div class="pwd-check" data-req="number">One number (0–9)</div>
+                    <div class="pwd-check" data-req="special">One special character (!@#$…)</div>
+                </div>
+
+                <button id="forgot-save-btn" type="button">Save New Password</button>
+                <button class="secondary" type="button" onclick="setAuthMode('login')">Cancel</button>
             </div>
         </div>
     </div>
 
+    <!-- MAIN APP -->
     <div id="main-screen" class="hidden">
 
         <!-- DASHBOARD -->
@@ -530,7 +577,6 @@ table{max-width:100%}
                 </div>
             </div>
 
-            <!-- 3 LEADERBOARD MINI CARDS IN A ROW -->
             <div class="card">
                 <h2>🏆 Leaderboards</h2>
                 <div class="leader-row">
@@ -555,13 +601,11 @@ table{max-width:100%}
                 </div>
             </div>
 
-            <!-- TOP SINGLES -->
             <div class="card">
                 <h2>🏅 Top Singles Players</h2>
                 <div id="top-singles-list" class="scroll-list"></div>
             </div>
 
-            <!-- TOP DOUBLES -->
             <div class="card">
                 <h2>👥 Top Doubles Pairs</h2>
                 <div id="top-doubles-list" class="scroll-list"></div>
@@ -823,19 +867,16 @@ table{max-width:100%}
 
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🌍 Inspired by ITTF</h3></div>
                 <div class="collapsible-content">
-                    <p>Our scoring system is <strong>inspired by the International Table Tennis Federation (ITTF)</strong> rating philosophy — where the amount of points you gain or lose depends on the strength of your opponent.</p>
+                    <p>Our scoring system is <strong>inspired by the International Table Tennis Federation (ITTF)</strong> rating philosophy.</p>
                     <p style="font-size:.85rem;color:var(--text-muted)">The ITTF uses an "Elo-like" system to keep competitions fair: beating a stronger player is rewarded far more than beating a weaker one.</p>
-                    <p style="font-size:.85rem;color:var(--text-muted)">Our implementation is a simplified version of that principle, tuned for community league play. It is <strong>not</strong> an official ITTF rating.</p>
                 </div>
 
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🧮 The Formula in Detail</h3></div>
                 <div class="collapsible-content">
-                    <p>Every time a match is approved, we calculate:</p>
                     <div class="formula-box">Rating Gap = |Loser Rating − Winner Rating|</div>
-                    <p>Then we look up the <strong>base points</strong> using the table below. Finally:</p>
                     <div class="formula-box">New Winner Rating = Old Winner Rating + Base Points
 New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin-top:10px"><strong>For doubles:</strong> we use the average rating of each pair:</p>
+                    <p style="font-size:.82rem;color:var(--text-muted)"><strong>For doubles:</strong></p>
                     <div class="formula-box">Team Rating = (Player 1 Rating + Player 2 Rating) ÷ 2</div>
                 </div>
 
@@ -858,20 +899,20 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
                     </table>
                 </div>
 
-                <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🏆 Leaderboards Explained</h3></div>
+                <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🔐 Password Security</h3></div>
                 <div class="collapsible-content">
                     <ul>
-                        <li><strong>🏆 Player of the Month</strong> — most wins in the current calendar month</li>
-                        <li><strong>👑 Overall Champion</strong> — highest total points across all time</li>
-                        <li><strong>🎾 Most Played</strong> — most matches played (all-time)</li>
-                        <li><strong>🏅 Top Singles Players</strong> — ordered by rating (top player first)</li>
-                        <li><strong>👥 Top Doubles Pairs</strong> — pairs ordered by combined average rating</li>
+                        <li>At least <strong>8 characters</strong></li>
+                        <li>Contains an <strong>uppercase</strong> letter</li>
+                        <li>Contains a <strong>lowercase</strong> letter</li>
+                        <li>Contains a <strong>number</strong></li>
+                        <li>Contains a <strong>special character</strong></li>
                     </ul>
+                    <p style="font-size:.85rem;color:var(--text-muted)">Passwords are hashed with <strong>bcrypt</strong> and transmitted over <strong>HTTPS/TLS</strong>.</p>
                 </div>
 
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🎁 Shop Discounts</h3></div>
                 <div class="collapsible-content">
-                    <p style="font-size:.85rem">Everyone starts with a <strong>5% discount</strong>. Earn points to unlock more, up to a <strong>maximum of 20%</strong>:</p>
                     <table class="points-table">
                         <thead><tr><th>Points</th><th>Discount</th></tr></thead>
                         <tbody>
@@ -888,8 +929,7 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
                     <ul>
                         <li><strong>$2/month</strong> to play</li>
                         <li>Valid for the <strong>current calendar month</strong></li>
-                        <li><strong>During a promotion month</strong>, everyone plays free</li>
-                        <li>Tap the subscription badge in the header to view details</li>
+                        <li>Free during promotion months</li>
                     </ul>
                 </div>
             </div>
@@ -933,6 +973,37 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
     </div>
 </div>
 
+<div id="password-modal" class="modal-overlay hidden">
+    <div class="modal-card" style="border-color:var(--warning)">
+        <div class="modal-header" style="background:linear-gradient(180deg,rgba(245,158,11,.15),var(--bg-card))">
+            <h2><span id="pwd-modal-icon">🔐</span> <span id="pwd-modal-title">Set New Password</span></h2>
+        </div>
+        <div class="modal-body">
+            <p id="pwd-modal-msg" style="font-size:.88rem;color:#cbd5e1;margin-bottom:14px;line-height:1.55"></p>
+
+            <label for="pwd-new">New Password</label>
+            <input type="password" id="pwd-new" placeholder="Enter new password" autocomplete="new-password">
+
+            <label for="pwd-confirm">Confirm Password</label>
+            <input type="password" id="pwd-confirm" placeholder="Re-enter password" autocomplete="new-password">
+
+            <div class="field-error hidden" id="pwd-error"></div>
+
+            <div class="pwd-checklist" id="pwd-checklist">
+                <div class="pwd-check" data-req="length">At least 8 characters</div>
+                <div class="pwd-check" data-req="upper">One uppercase letter (A–Z)</div>
+                <div class="pwd-check" data-req="lower">One lowercase letter (a–z)</div>
+                <div class="pwd-check" data-req="number">One number (0–9)</div>
+                <div class="pwd-check" data-req="special">One special character (!@#$…)</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="pwd-save">Save Password</button>
+            <button id="pwd-logout" class="secondary" style="margin-bottom:0">Logout</button>
+        </div>
+    </div>
+</div>
+
 <script>
 window.SGTT_CONFIG = {
     SUPABASE_URL:      "https://gdvbplbqehrtrgiwwcja.supabase.co",
@@ -969,17 +1040,25 @@ if (looksLikePlaceholder(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)) {
 
 <script>
 /* =============================================================
-   SINGAPORE TABLE TENNIS LEAGUE (v20)
+   SINGAPORE TABLE TENNIS LEAGUE (v23)
    Changes:
-   - 3 leaderboards (Player of Month, Champion, Most Played) in one row
-   - Top Singles Players ranking (top first)
-   - Top Doubles Pairs ranking
-   - Subscription badge moved to header
+   - Forgot password now goes DIRECT to password reset (no email)
+   - Uses SECURITY DEFINER RPC to update auth.users directly
    ============================================================= */
 
 const OTHER_CC_VALUE = '__OTHER__';
 const REFRESH_INTERVAL_MS = 30000;
 const INACTIVITY_THRESHOLD_DAYS = 10;
+const PASSWORD_POLICY_VERSION = 2;
+
+const PASSWORD_REQUIREMENTS = [
+    { key: 'length',  test: pw => pw.length >= 8 },
+    { key: 'upper',   test: pw => /[A-Z]/.test(pw) },
+    { key: 'lower',   test: pw => /[a-z]/.test(pw) },
+    { key: 'number',  test: pw => /[0-9]/.test(pw) },
+    { key: 'special', test: pw => /[^A-Za-z0-9]/.test(pw) }
+];
+function isPasswordCompliant(pw){return PASSWORD_REQUIREMENTS.every(r=>r.test(pw))}
 
 const BASE_COMMUNITY_CENTRES = [
     "Admiralty Community Club","ACE The Place Community Club","Aljunied Community Centre",
@@ -1028,6 +1107,10 @@ let adminUnlocked=false,adminSearchTerm='',editingUserId=null;
 let dbSettings={},settingsLoaded=false,bootCompleted=false;
 let refreshTimer=null,lastRefreshTime=null;
 let lastNotifSignature='',notifModalOpen=false;
+let pendingRedirectAfterPasswordChange=null;
+
+/* Forgot password flow state */
+let verifiedReset=null; // { email, cc }
 
 function showToast(msg,d=2800){const t=document.getElementById('toast');if(!t){console.log('TOAST:',msg);return}t.textContent=msg;t.classList.remove('hidden');clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.add('hidden'),d)}
 function showLoading(text='Loading…'){const el=document.getElementById('loading-text');if(el)el.textContent=text;document.getElementById('loading')?.classList.remove('hidden')}
@@ -1056,31 +1139,318 @@ function switchTab(tab){
 }
 function toggleCollapsible(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('show')}
 
-function populateCCSelect(sel,{includeOther=true,selectedValue=null}={}){
-    if(!sel)return;
-    sel.innerHTML='';
-    getAllCCs().forEach(cc=>{const o=document.createElement('option');o.value=cc;o.textContent=cc;sel.appendChild(o)});
-    if(includeOther){const o=document.createElement('option');o.value=OTHER_CC_VALUE;o.textContent='➕ Other (not in list)';sel.appendChild(o)}
-    if(selectedValue){const exists=Array.from(sel.options).some(o=>o.value===selectedValue);if(exists)sel.value=selectedValue}
-}
-function populateAllCCSelects(){['auth-cc','req-cc','ch-cc'].forEach(id=>populateCCSelect(document.getElementById(id)))}
-function attachCCOtherToggle(selectId,inputId){
-    const sel=document.getElementById(selectId),inp=document.getElementById(inputId);
-    if(!sel||!inp)return;
-    if(sel.dataset.otherToggleAttached==='1')return;
-    sel.dataset.otherToggleAttached='1';
-    sel.addEventListener('change',()=>{
-        if(sel.value===OTHER_CC_VALUE){inp.classList.remove('hidden');inp.focus()}
-        else inp.classList.add('hidden');
-    });
-}
-function getEffectiveCC(selectId,inputId){
-    const sel=document.getElementById(selectId);
-    if(!sel)return'';
-    if(sel.value===OTHER_CC_VALUE){const inp=document.getElementById(inputId);return(inp&&inp.value.trim())||''}
-    return sel.value;
+/* ============================================================
+   AUTH MODES
+   ============================================================ */
+let authMode='login'; // 'login' | 'register' | 'forgot' | 'reset-password'
+
+function setAuthMode(mode){
+    authMode=mode;
+
+    const loginTab=document.getElementById('tab-auth-login');
+    const registerTab=document.getElementById('tab-auth-register');
+    const tabs=document.getElementById('auth-tabs');
+    const authNormal=document.getElementById('auth-normal');
+    const forgotStep1=document.getElementById('forgot-step1');
+    const forgotStep2=document.getElementById('forgot-step2');
+
+    // Clear any previous session-verification
+    if (mode!=='reset-password') verifiedReset=null;
+
+    loginTab.classList.toggle('active', mode==='login');
+    registerTab.classList.toggle('active', mode==='register');
+    tabs.classList.toggle('hidden', mode==='forgot' || mode==='reset-password');
+
+    authNormal.classList.toggle('hidden', mode==='forgot' || mode==='reset-password');
+    forgotStep1.classList.toggle('hidden', mode!=='forgot');
+    forgotStep2.classList.toggle('hidden', mode!=='reset-password');
+
+    // Update submit button label for normal mode
+    const submitBtn=document.getElementById('auth-submit');
+    if (mode==='login') submitBtn.textContent='Login';
+    else if (mode==='register') submitBtn.textContent='Create Account';
+
+    // Reset fields when going to forgot
+    if (mode==='forgot') {
+        populateForgotCCSelect();
+        document.getElementById('forgot-email').value='';
+    }
+    if (mode==='reset-password') {
+        document.getElementById('forgot-pwd-new').value='';
+        document.getElementById('forgot-pwd-confirm').value='';
+        document.getElementById('forgot-pwd-error').classList.add('hidden');
+        updateForgotPwdChecklist('');
+    }
+
+    clearAllAuthErrors();
 }
 
+function populateForgotCCSelect(){
+    const sel=document.getElementById('forgot-cc');
+    if(!sel)return;
+    sel.innerHTML='';
+    getAllCCs().forEach(cc=>{
+        const o=document.createElement('option');
+        o.value=cc;o.textContent=cc;
+        sel.appendChild(o);
+    });
+}
+
+function clearAllAuthErrors(){
+    ['auth-email','auth-password','auth-name','auth-age','auth-cc','forgot-email','forgot-cc'].forEach(id=>{
+        const i=document.getElementById(id);if(i)i.classList.remove('input-error');
+        const e=document.getElementById(id+'-error');if(e)e.classList.add('hidden');
+    });
+    document.getElementById('auth-cc-other')?.classList.remove('input-error');
+}
+function markError(inputId,errorId,msg){const i=document.getElementById(inputId),e=document.getElementById(errorId);if(i)i.classList.add('input-error');if(e){e.textContent=msg;e.classList.remove('hidden')}}
+
+/* ============================================================
+   AUTH INIT
+   ============================================================ */
+function initAuthScreen(){
+    if(initAuthScreen._done)return;
+    initAuthScreen._done=true;
+
+    ['auth-email','auth-password','auth-name','auth-age','auth-cc','auth-cc-other','forgot-email','forgot-cc'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(!el)return;
+        el.addEventListener('input',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
+        el.addEventListener('change',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
+    });
+
+    document.getElementById('auth-submit').addEventListener('click',handleAuthSubmit);
+    document.getElementById('forgot-verify-btn').addEventListener('click',handleForgotVerify);
+    document.getElementById('forgot-save-btn').addEventListener('click',handleForgotSave);
+    document.getElementById('forgot-pwd-new').addEventListener('input',(e)=>updateForgotPwdChecklist(e.target.value));
+}
+
+/* Update the mini checklist inside the forgot-step2 */
+function updateForgotPwdChecklist(pw){
+    PASSWORD_REQUIREMENTS.forEach(req=>{
+        const el=document.querySelector(`#forgot-pwd-checklist .pwd-check[data-req="${req.key}"]`);
+        if(el)el.classList.toggle('ok',req.test(pw));
+    });
+}
+
+/* ============================================================
+   LOGIN / REGISTER SUBMIT
+   ============================================================ */
+async function handleAuthSubmit(){
+    supabase=window.supabase;
+    if(!isConfigValid()||!supabase){showToast('Supabase not ready. Check config.',5000);showConfigBannerIfNeeded();return}
+    clearAllAuthErrors();
+
+    const email=document.getElementById('auth-email').value.trim().toLowerCase();
+    const password=document.getElementById('auth-password').value;
+
+    let hasError=false;
+    if(!email){markError('auth-email','auth-email-error','Email is required');hasError=true}
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){markError('auth-email','auth-email-error','Enter a valid email address');hasError=true}
+    if(!password){markError('auth-password','auth-password-error','Password is required');hasError=true}
+    else if(authMode==='register'&&!isPasswordCompliant(password)){
+        markError('auth-password','auth-password-error','Password does not meet all requirements');
+        hasError=true;
+    }
+
+    let name,age,cc;
+    if(authMode==='register'){
+        name=document.getElementById('auth-name').value.trim();
+        age=parseInt(document.getElementById('auth-age').value,10);
+        cc=getEffectiveCC('auth-cc','auth-cc-other');
+        if(!name){markError('auth-name','auth-name-error','Name is required');hasError=true}
+        if(!age||age<8||age>120){markError('auth-age','auth-age-error','Enter a valid age (8–120)');hasError=true}
+        if(!cc){
+            const ci=document.getElementById('auth-cc');
+            if(ci&&ci.value===OTHER_CC_VALUE)document.getElementById('auth-cc-other')?.classList.add('input-error');
+            markError('auth-cc','auth-cc-error','Please select or enter a community centre');
+            hasError=true;
+        }
+    }
+    if(hasError){showToast('Please fix the highlighted fields',3000);return}
+
+    try{
+        if(authMode==='register'){
+            showLoading('Creating account…');
+            const redirectUrl=window.location.origin+window.location.pathname;
+            const{data,error}=await supabase.auth.signUp({
+                email,password,
+                options:{data:{name,age,community_centre:cc,password_policy_v:PASSWORD_POLICY_VERSION},emailRedirectTo:redirectUrl}
+            });
+            if(error){
+                if(/already registered|already exists/i.test(error.message||'')){
+                    hideLoading();
+                    markError('auth-email','auth-email-error','This email is already registered');
+                    showToast('Email already registered. Try login or use forgot password.',6500);
+                    return;
+                }
+                throw error;
+            }
+            if(!data.user)throw new Error('Sign up failed.');
+            if(!data.session){hideLoading();showToast('📧 Confirmation email sent! Click the link in your inbox.',8000);return}
+            hideLoading();showToast('Account created!');
+            await onLoggedIn(data.user,'SIGNUP');
+        }else{
+            showLoading('Signing in…');
+            const{data,error}=await supabase.auth.signInWithPassword({email,password});
+            if(error)throw error;
+            hideLoading();showToast('Welcome back!');
+            await onLoggedIn(data.user,'SIGNIN');
+        }
+    }catch(err){
+        hideLoading();console.error('[SGTT] Auth error:',err);
+        let msg=err.message||'Authentication failed.';
+        if(/invalid api key|invalid apikey/i.test(msg))msg='Invalid API key.';
+        else if(/user already registered/i.test(msg)){msg='Already registered — try Login.';markError('auth-email','auth-email-error','Already registered')}
+        else if(/email not confirmed/i.test(msg))msg='Check your inbox and click the confirmation link first.';
+        else if(/invalid login credentials/i.test(msg)){msg='Incorrect email or password.';markError('auth-password','auth-password-error','Incorrect credentials')}
+        else if(/password/i.test(msg)&&/6/i.test(msg)){msg='Password too short.';markError('auth-password','auth-password-error','Min 8 characters')}
+        showToast(msg,7000);
+    }
+}
+
+/* ============================================================
+   FORGOT PASSWORD — Step 1: Verify email + CC
+   ============================================================ */
+async function handleForgotVerify(){
+    supabase=window.supabase;
+    if(!isConfigValid()||!supabase){showToast('Supabase not ready.',5000);return}
+
+    // Clear previous errors
+    ['forgot-email','forgot-cc'].forEach(id=>{
+        document.getElementById(id)?.classList.remove('input-error');
+        document.getElementById(id+'-error')?.classList.add('hidden');
+    });
+
+    const email=document.getElementById('forgot-email').value.trim().toLowerCase();
+    const cc=document.getElementById('forgot-cc').value;
+
+    let hasError=false;
+    if(!email){markError('forgot-email','forgot-email-error','Email is required');hasError=true}
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){markError('forgot-email','forgot-email-error','Enter a valid email');hasError=true}
+    if(!cc){markError('forgot-cc','forgot-cc-error','Select your community centre');hasError=true}
+    if(hasError) return;
+
+    try{
+        showLoading('Verifying your details…');
+        const{data,error}=await supabase.rpc('verify_recovery_identity',{
+            p_email: email,
+            p_cc: cc
+        });
+        hideLoading();
+        if(error)throw error;
+        if(!data){
+            // Not a match
+            markError('forgot-cc','forgot-cc-error','Email and community centre don\'t match our records');
+            showToast('Verification failed. Please double-check your details.',5000);
+            return;
+        }
+        // Verified! Hold onto the credentials for step 2
+        verifiedReset = { email, cc };
+        showToast('✅ Verified! Enter your new password.',3500);
+        setAuthMode('reset-password');
+    }catch(err){
+        hideLoading();
+        console.error('[SGTT] Verify error:',err);
+        showToast('Verification failed: '+(err.message||'Unknown error'),6500);
+    }
+}
+
+/* ============================================================
+   FORGOT PASSWORD — Step 2: Save new password
+   ============================================================ */
+async function handleForgotSave(){
+    supabase=window.supabase;
+    if(!isConfigValid()||!supabase){showToast('Supabase not ready.',5000);return}
+    if(!verifiedReset){showToast('Session expired. Please verify again.',5000);setAuthMode('forgot');return}
+
+    const pw=document.getElementById('forgot-pwd-new').value;
+    const confirm=document.getElementById('forgot-pwd-confirm').value;
+    const errEl=document.getElementById('forgot-pwd-error');
+    errEl.classList.add('hidden');
+
+    if(!pw){errEl.textContent='Please enter a new password';errEl.classList.remove('hidden');return}
+    if(!isPasswordCompliant(pw)){errEl.textContent='Password does not meet all requirements';errEl.classList.remove('hidden');return}
+    if(pw!==confirm){errEl.textContent='Passwords do not match';errEl.classList.remove('hidden');return}
+
+    try{
+        showLoading('Updating your password…');
+        const{data,error}=await supabase.rpc('reset_password_verified',{
+            p_email: verifiedReset.email,
+            p_cc: verifiedReset.cc,
+            p_new_password: pw
+        });
+        if(error)throw error;
+        if(!data || !data.success){
+            hideLoading();
+            errEl.textContent=(data && data.error) || 'Failed to reset password';
+            errEl.classList.remove('hidden');
+            return;
+        }
+        hideLoading();
+        // Clear and go back to login
+        verifiedReset=null;
+        showToast('✅ Password updated! Please login with your new password.',6000);
+        setAuthMode('login');
+    }catch(err){
+        hideLoading();
+        console.error('[SGTT] Reset error:',err);
+        errEl.textContent=err.message||'Failed to reset password';
+        errEl.classList.remove('hidden');
+    }
+}
+
+/* ============================================================
+   PASSWORD MODAL (still used for policy upgrade on existing sessions)
+   ============================================================ */
+let passwordModalMode=null;
+function showPasswordModal(mode){
+    passwordModalMode=mode;
+    const title=document.getElementById('pwd-modal-title'),icon=document.getElementById('pwd-modal-icon'),msg=document.getElementById('pwd-modal-msg');
+    if (mode==='required') {
+        icon.textContent='🔐'; title.textContent='Update Your Password';
+        msg.innerHTML='For your security, we\'ve strengthened our password policy. Please set a new password before continuing.';
+    } else if (mode==='reset') {
+        icon.textContent='🔑'; title.textContent='Set New Password';
+        msg.innerHTML='Enter a new password for your account that meets all requirements below.';
+    }
+    document.getElementById('pwd-new').value='';
+    document.getElementById('pwd-confirm').value='';
+    document.getElementById('pwd-error').classList.add('hidden');
+    updatePasswordChecklist('');
+    document.getElementById('password-modal').classList.remove('hidden');
+    setTimeout(()=>document.getElementById('pwd-new').focus(),150);
+}
+function closePasswordModal(){document.getElementById('password-modal').classList.add('hidden');passwordModalMode=null}
+function updatePasswordChecklist(pw){
+    PASSWORD_REQUIREMENTS.forEach(req=>{
+        const el=document.querySelector(`#pwd-checklist .pwd-check[data-req="${req.key}"]`);
+        if(el)el.classList.toggle('ok',req.test(pw));
+    });
+}
+document.getElementById('pwd-new').addEventListener('input',(e)=>updatePasswordChecklist(e.target.value));
+document.getElementById('pwd-save').addEventListener('click',async()=>{
+    const pw=document.getElementById('pwd-new').value,confirm=document.getElementById('pwd-confirm').value;
+    const errEl=document.getElementById('pwd-error');
+    errEl.classList.add('hidden');
+    if(!pw){errEl.textContent='Please enter a new password';errEl.classList.remove('hidden');return}
+    if(!isPasswordCompliant(pw)){errEl.textContent='Password does not meet all requirements';errEl.classList.remove('hidden');return}
+    if(pw!==confirm){errEl.textContent='Passwords do not match';errEl.classList.remove('hidden');return}
+    try{
+        showLoading('Updating password…');
+        const{error}=await supabase.auth.updateUser({password:pw,data:{password_policy_v:PASSWORD_POLICY_VERSION}});
+        if(error)throw error;
+        const{data:{user}}=await supabase.auth.getUser();
+        if(user)currentUser=user;
+        hideLoading();closePasswordModal();showToast('✅ Password updated!',3500);
+        if(pendingRedirectAfterPasswordChange){const fn=pendingRedirectAfterPasswordChange;pendingRedirectAfterPasswordChange=null;await fn()}
+    }catch(err){hideLoading();console.error(err);errEl.textContent=err.message||'Failed to update password';errEl.classList.remove('hidden')}
+});
+document.getElementById('pwd-logout').addEventListener('click',async()=>{pendingRedirectAfterPasswordChange=null;closePasswordModal();await handleLogout()});
+
+/* ============================================================
+   CONFIG / HELPERS
+   ============================================================ */
 function isConfigValid(){
     const cfg=window.SGTT_CONFIG||{},url=cfg.SUPABASE_URL||'',key=cfg.SUPABASE_ANON_KEY||'';
     if(!url||!key)return false;
@@ -1100,7 +1470,6 @@ function showConfigBannerIfNeeded(){
 function endOfCurrentMonth(){const n=new Date();return new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59,999).getTime()}
 function currentMonthKey(){const n=new Date();return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`}
 function startOfCurrentMonth(){const n=new Date();return new Date(n.getFullYear(),n.getMonth(),1,0,0,0,0).getTime()}
-
 function getPromotion(){const raw=dbSettings&&dbSettings.promotion;if(!raw)return{enabled:false,month:'',message:''};try{const p=typeof raw==='string'?JSON.parse(raw):raw;return{enabled:!!p.enabled,month:p.month||'',message:p.message||''}}catch{return{enabled:false,month:'',message:''}}}
 function isPromotionActive(){const p=getPromotion();if(!p.enabled)return false;return p.month===currentMonthKey()}
 async function savePromotion(promo){await upsertSetting('promotion',JSON.stringify(promo))}
@@ -1117,7 +1486,6 @@ async function upsertSetting(key,value){
     }
     dbSettings[key]=value;
 }
-
 async function addCustomCC(cc){
     const t=cc.trim();
     if(!t)throw new Error('Community centre name cannot be empty.');
@@ -1135,22 +1503,13 @@ async function addCustomCC(cc){
 }
 async function deleteCC(cc){
     const isBase=BASE_COMMUNITY_CENTRES.includes(cc);
-    if(isBase){
-        const h=getHiddenCCs();
-        if(!h.includes(cc))await upsertSetting('hidden_ccs',JSON.stringify([...h,cc].sort()));
-        populateAllCCSelects();
-        return{action:'hidden',name:cc};
-    }
+    if(isBase){const h=getHiddenCCs();if(!h.includes(cc))await upsertSetting('hidden_ccs',JSON.stringify([...h,cc].sort()));populateAllCCSelects();return{action:'hidden',name:cc}}
     const l=getCustomCCs().filter(x=>x!==cc);
     await upsertSetting('custom_ccs',JSON.stringify(l));
     populateAllCCSelects();
     return{action:'removed',name:cc};
 }
-async function restoreCC(cc){
-    const h=getHiddenCCs();
-    if(h.includes(cc)){await upsertSetting('hidden_ccs',JSON.stringify(h.filter(x=>x!==cc)));populateAllCCSelects();return{action:'restored',name:cc}}
-    return{action:'noop',name:cc};
-}
+async function restoreCC(cc){const h=getHiddenCCs();if(h.includes(cc)){await upsertSetting('hidden_ccs',JSON.stringify(h.filter(x=>x!==cc)));populateAllCCSelects();return{action:'restored',name:cc}}return{action:'noop',name:cc}}
 
 function nameOf(idOrEmail){if(!idOrEmail)return'?';const u=allProfiles.find(x=>x.id===idOrEmail||x.email===idOrEmail);return u?u.name:idOrEmail}
 function profileOf(idOrEmail){return allProfiles.find(x=>x.id===idOrEmail||x.email===idOrEmail)}
@@ -1162,10 +1521,7 @@ function isSubscriptionActive(u){
     if(s.paidUntil>0&&s.paidUntil<Date.now())return false;
     return true;
 }
-function isPaidMember(u){
-    if(isPromotionActive())return true;
-    return u&&u.subscription&&u.subscription.paid===true&&isSubscriptionActive(u);
-}
+function isPaidMember(u){if(isPromotionActive())return true;return u&&u.subscription&&u.subscription.paid===true&&isSubscriptionActive(u)}
 function subStatusLabel(u){
     if(isPromotionActive())return{text:'🎉 Free month',cls:'badge-green'};
     if(!u||!u.subscription)return{text:'No subscription',cls:'badge-red'};
@@ -1175,12 +1531,7 @@ function subStatusLabel(u){
     if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now())return{text:'Expired',cls:'badge-red'};
     return{text:'Inactive',cls:'badge-red'};
 }
-function discountForPoints(pts){
-    if(pts>=1500)return 20;
-    if(pts>=1000)return 15;
-    if(pts>=500)return 10;
-    return 5;
-}
+function discountForPoints(pts){if(pts>=1500)return 20;if(pts>=1000)return 15;if(pts>=500)return 10;return 5}
 function subscriptionPaidLabel(u){
     if(isPromotionActive())return 'Free (promo)';
     if(!u||!u.subscription)return 'Not Paid';
@@ -1190,20 +1541,43 @@ function subscriptionPaidLabel(u){
     if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now())return 'Expired';
     return 'Not Paid';
 }
-
 function formatDate(ts){if(!ts)return'—';return new Date(ts).toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'})}
 function timeAgo(ts){
     if(!ts)return 'Never';
-    const diff=Date.now()-ts;
-    const days=Math.floor(diff/(24*60*60*1000));
-    if(days===0)return 'Today';
-    if(days===1)return 'Yesterday';
-    if(days<7)return days+' days ago';
-    if(days<30)return Math.floor(days/7)+' wks ago';
-    if(days<365)return Math.floor(days/30)+' mo ago';
-    return Math.floor(days/365)+' yr ago';
+    const diff=Date.now()-ts,days=Math.floor(diff/(24*60*60*1000));
+    if(days===0)return 'Today';if(days===1)return 'Yesterday';
+    if(days<7)return days+' days ago';if(days<30)return Math.floor(days/7)+' wks ago';
+    if(days<365)return Math.floor(days/30)+' mo ago';return Math.floor(days/365)+' yr ago';
 }
 function daysSince(ts){if(!ts)return null;return Math.floor((Date.now()-ts)/(24*60*60*1000))}
+
+function populateCCSelect(sel,{includeOther=true,selectedValue=null}={}){
+    if(!sel)return;
+    sel.innerHTML='';
+    getAllCCs().forEach(cc=>{const o=document.createElement('option');o.value=cc;o.textContent=cc;sel.appendChild(o)});
+    if(includeOther){const o=document.createElement('option');o.value=OTHER_CC_VALUE;o.textContent='➕ Other (not in list)';sel.appendChild(o)}
+    if(selectedValue){const exists=Array.from(sel.options).some(o=>o.value===selectedValue);if(exists)sel.value=selectedValue}
+}
+function populateAllCCSelects(){
+    ['auth-cc','req-cc','ch-cc'].forEach(id=>populateCCSelect(document.getElementById(id)));
+    populateForgotCCSelect();
+}
+function attachCCOtherToggle(selectId,inputId){
+    const sel=document.getElementById(selectId),inp=document.getElementById(inputId);
+    if(!sel||!inp)return;
+    if(sel.dataset.otherToggleAttached==='1')return;
+    sel.dataset.otherToggleAttached='1';
+    sel.addEventListener('change',()=>{
+        if(sel.value===OTHER_CC_VALUE){inp.classList.remove('hidden');inp.focus()}
+        else inp.classList.add('hidden');
+    });
+}
+function getEffectiveCC(selectId,inputId){
+    const sel=document.getElementById(selectId);
+    if(!sel)return'';
+    if(sel.value===OTHER_CC_VALUE){const inp=document.getElementById(inputId);return(inp&&inp.value.trim())||''}
+    return sel.value;
+}
 
 async function loadDbSettings(){
     if(!supabase||!currentUser)return;
@@ -1217,110 +1591,27 @@ async function loadDbSettings(){
 }
 function getAdminPin(){return(dbSettings&&dbSettings.admin_pin)||'0000'}
 
-function markError(inputId,errorId,msg){const i=document.getElementById(inputId),e=document.getElementById(errorId);if(i)i.classList.add('input-error');if(e){e.textContent=msg;e.classList.remove('hidden')}}
-function clearError(inputId,errorId){const i=document.getElementById(inputId),e=document.getElementById(errorId);if(i)i.classList.remove('input-error');if(e)e.classList.add('hidden')}
-function clearAllAuthErrors(){
-    clearError('auth-email','auth-email-error');clearError('auth-password','auth-password-error');
-    clearError('auth-name','auth-name-error');clearError('auth-age','auth-age-error');clearError('auth-cc','auth-cc-error');
-    document.getElementById('auth-cc-other')?.classList.remove('input-error');
-}
-
-let isRegisterMode=false,authScreenInitDone=false;
-function initAuthScreen(){
-    if(authScreenInitDone)return;
-    authScreenInitDone=true;
-    const toggleBtn=document.getElementById('auth-toggle'),submitBtn=document.getElementById('auth-submit');
-    ['auth-email','auth-password','auth-name','auth-age','auth-cc','auth-cc-other'].forEach(id=>{
-        const el=document.getElementById(id);
-        if(!el)return;
-        el.addEventListener('input',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
-        el.addEventListener('change',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
-    });
-    if(toggleBtn)toggleBtn.addEventListener('click',()=>{
-        isRegisterMode=!isRegisterMode;
-        document.getElementById('auth-title').textContent=isRegisterMode?'Register':'Login';
-        document.getElementById('register-extra').classList.toggle('hidden',!isRegisterMode);
-        submitBtn.textContent=isRegisterMode?'Create Account':'Login';
-        toggleBtn.textContent=isRegisterMode?'Already have an account? Login':'Need an account? Register';
-        clearAllAuthErrors();
-    });
-    if(submitBtn)submitBtn.addEventListener('click',handleAuthSubmit);
-}
-
-async function handleAuthSubmit(){
-    supabase=window.supabase;
-    if(!isConfigValid()||!supabase){showToast('Supabase not ready. Check config.',5000);showConfigBannerIfNeeded();return}
-    clearAllAuthErrors();
-    const email=document.getElementById('auth-email').value.trim().toLowerCase();
-    const password=document.getElementById('auth-password').value;
-    let hasError=false;
-    if(!email){markError('auth-email','auth-email-error','Email is required');hasError=true}
-    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){markError('auth-email','auth-email-error','Enter a valid email address');hasError=true}
-    if(!password){markError('auth-password','auth-password-error','Password is required');hasError=true}
-    else if(isRegisterMode&&password.length<6){markError('auth-password','auth-password-error','Password must be at least 6 characters');hasError=true}
-    let name,age,cc;
-    if(isRegisterMode){
-        name=document.getElementById('auth-name').value.trim();
-        age=parseInt(document.getElementById('auth-age').value,10);
-        cc=getEffectiveCC('auth-cc','auth-cc-other');
-        if(!name){markError('auth-name','auth-name-error','Name is required');hasError=true}
-        if(!age||age<8||age>120){markError('auth-age','auth-age-error','Enter a valid age (8–120)');hasError=true}
-        if(!cc){
-            const ci=document.getElementById('auth-cc');
-            if(ci&&ci.value===OTHER_CC_VALUE)document.getElementById('auth-cc-other')?.classList.add('input-error');
-            markError('auth-cc','auth-cc-error','Please select or enter a community centre');
-            hasError=true;
-        }
-    }
-    if(hasError){showToast('Please fix the highlighted fields',3000);return}
-    try{
-        if(isRegisterMode){
-            showLoading('Creating account…');
-            const redirectUrl=window.location.origin+window.location.pathname;
-            const{data,error}=await supabase.auth.signUp({email,password,options:{data:{name,age,community_centre:cc},emailRedirectTo:redirectUrl}});
-            if(error)throw error;
-            if(!data.user)throw new Error('Sign up failed.');
-            if(!data.session){hideLoading();showToast('📧 Confirmation email sent! Click the link in your inbox.',8000);return}
-            hideLoading();showToast('Account created!');
-            await onLoggedIn(data.user,'SIGNUP');
-        }else{
-            showLoading('Signing in…');
-            const{data,error}=await supabase.auth.signInWithPassword({email,password});
-            if(error)throw error;
-            hideLoading();showToast('Welcome back!');
-            await onLoggedIn(data.user,'SIGNIN');
-        }
-    }catch(err){
-        hideLoading();console.error('[SGTT] Auth error:',err);
-        let msg=err.message||'Authentication failed.';
-        if(/invalid api key|invalid apikey/i.test(msg))msg='Invalid API key.';
-        else if(/user already registered/i.test(msg)){msg='Already registered — try Login.';markError('auth-email','auth-email-error','Already registered')}
-        else if(/email not confirmed/i.test(msg))msg='Check your inbox and click the confirmation link first.';
-        else if(/invalid login credentials/i.test(msg)){msg='Incorrect email or password.';markError('auth-password','auth-password-error','Incorrect credentials')}
-        else if(/password/i.test(msg)&&/6/i.test(msg)){msg='Password must be at least 6 characters.';markError('auth-password','auth-password-error','Min 6 characters')}
-        showToast(msg,7000);
-    }
-}
-
+/* ============================================================
+   LOGIN FLOW
+   ============================================================ */
 async function onLoggedIn(authUser,eventType){
     if(!authUser)return;
     currentUser=authUser;supabase=window.supabase;
     showLoading('Loading your data…');
+
+    const userPolicyV=parseInt(authUser.user_metadata?.password_policy_v||0,10);
+    const needsPasswordUpdate=userPolicyV<PASSWORD_POLICY_VERSION;
+
     try{
-        const isConfirmed=!!authUser.email_confirmed_at;
         await loadAllProfiles();
         let profile=allProfiles.find(p=>p.id===authUser.id);
         if(!profile){
             const meta=authUser.user_metadata||{};
             const{error:insErr}=await supabase.from('profiles').insert({
                 id:authUser.id,email:authUser.email,name:meta.name||'Unknown',
-                age:meta.age||null,community_centre:meta.community_centre||null,email_confirmed:isConfirmed
+                age:meta.age||null,community_centre:meta.community_centre||null,email_confirmed:!!authUser.email_confirmed_at
             });
             if(insErr)console.warn('[SGTT] Profile insert:',insErr.message);
-            await loadAllProfiles();
-            profile=allProfiles.find(p=>p.id===authUser.id);
-        }else if(profile.email_confirmed!==isConfirmed){
-            await supabase.from('profiles').update({email_confirmed:isConfirmed}).eq('id',authUser.id);
             await loadAllProfiles();
             profile=allProfiles.find(p=>p.id===authUser.id);
         }
@@ -1330,34 +1621,44 @@ async function onLoggedIn(authUser,eventType){
             await loadAllProfiles();
             userProfile=allProfiles.find(p=>p.id===authUser.id);
         }
+
+        if (needsPasswordUpdate) {
+            hideLoading();showOnlyScreen('auth');
+            pendingRedirectAfterPasswordChange=async()=>{
+                await loadRequests();await loadMatches();await loadChallenges();await loadDbSettings();
+                await loadAllMatchesGlobal();populateAllCCSelects();
+                const adminBtn=document.getElementById('tab-admin-btn');
+                if(userProfile.is_admin)adminBtn?.classList.remove('hidden');else adminBtn?.classList.add('hidden');
+                document.getElementById('user-name').textContent=userProfile.name;
+                document.getElementById('user-cc').textContent=userProfile.community_centre||'';
+                renderHeaderSubscription();
+                showOnlyScreen('main');renderDashboard();switchTab('dashboard');
+                startAutoRefresh();updateNotifDots();
+                setTimeout(()=>{const items=buildNotifications();if(items.length>0)showNotifModal(items)},500);
+                setTimeout(()=>checkInactivity(),1500);
+            };
+            showPasswordModal('required');
+            return;
+        }
+
         await loadRequests();await loadMatches();await loadChallenges();await loadDbSettings();
-        await loadAllMatchesGlobal();
-        populateAllCCSelects();
+        await loadAllMatchesGlobal();populateAllCCSelects();
 
         const adminBtn=document.getElementById('tab-admin-btn');
-        if(userProfile.is_admin)adminBtn?.classList.remove('hidden');
-        else adminBtn?.classList.add('hidden');
+        if(userProfile.is_admin)adminBtn?.classList.remove('hidden');else adminBtn?.classList.add('hidden');
 
         document.getElementById('user-name').textContent=userProfile.name;
         document.getElementById('user-cc').textContent=userProfile.community_centre||'';
         renderHeaderSubscription();
 
-        hideLoading();
-        showOnlyScreen('main');
-        renderDashboard();
-        switchTab('dashboard');
-        startAutoRefresh();
-        updateNotifDots();
+        hideLoading();showOnlyScreen('main');renderDashboard();switchTab('dashboard');
+        startAutoRefresh();updateNotifDots();
 
         lastNotifSignature='';
-        setTimeout(()=>{
-            const items=buildNotifications();
-            if(items.length>0)showNotifModal(items);
-        },500);
+        setTimeout(()=>{const items=buildNotifications();if(items.length>0)showNotifModal(items)},500);
+        setTimeout(()=>checkInactivity(),1500);
 
-        setTimeout(()=>{checkInactivity()},1500);
-
-        if(eventType==='SIGNED_IN'&&isConfirmed&&window._arrivedFromEmail){
+        if(eventType==='SIGNED_IN'&&authUser.email_confirmed_at&&window._arrivedFromEmail){
             window._arrivedFromEmail=false;
             showToast('✅ Email validated successfully!',6000);
             try{history.replaceState(null,'',window.location.pathname)}catch(e){}
@@ -1374,12 +1675,13 @@ async function handleLogout(){
     currentUser=null;userProfile=null;
     allProfiles=[];allRequests=[];allMatches=[];allChallenges=[];allMatchesGlobal=[];
     adminUnlocked=false;settingsLoaded=false;dbSettings={};editingUserId=null;lastNotifSignature='';
+    verifiedReset=null;
     document.getElementById('auth-password').value='';
     document.getElementById('auth-email').value='';
     document.getElementById('admin-pin-input').value='';
     document.getElementById('admin-new-pin').value='';
-    clearAllAuthErrors();closeNotifModal();closeInactivityModal();
-    showOnlyScreen('auth');showToast('Logged out.',2000);
+    clearAllAuthErrors();closeNotifModal();closeInactivityModal();closePasswordModal();
+    setAuthMode('login');showOnlyScreen('auth');showToast('Logged out.',2000);
 }
 
 function startAutoRefresh(){
@@ -1400,21 +1702,17 @@ function startAutoRefresh(){
 }
 function stopAutoRefresh(){if(refreshTimer){clearInterval(refreshTimer);refreshTimer=null}}
 function updateRefreshStatus(){
-    const el=document.getElementById('refresh-status');
-    if(!el)return;
+    const el=document.getElementById('refresh-status');if(!el)return;
     if(!lastRefreshTime){el.textContent='Live — syncing every 30s';return}
     const secsAgo=Math.round((Date.now()-lastRefreshTime.getTime())/1000);
     el.textContent=`Live — synced ${secsAgo}s ago`;
 }
-
 document.getElementById('manual-refresh')?.addEventListener('click',async()=>{
     if(!currentUser||!userProfile?.is_admin)return;
     showLoading('Refreshing…');
     try{
-        await refreshAll();
-        await loadAllMatchesGlobal();
-        lastRefreshTime=new Date();
-        updateRefreshStatus();updateNotifDots();checkForNewNotifications();
+        await refreshAll();await loadAllMatchesGlobal();
+        lastRefreshTime=new Date();updateRefreshStatus();updateNotifDots();checkForNewNotifications();
         const activeTab=document.querySelector('.tab-bar button.active')?.dataset.tab;
         if(activeTab==='dashboard')renderDashboard();
         if(activeTab==='request')renderPlayTab();
@@ -1424,50 +1722,15 @@ document.getElementById('manual-refresh')?.addEventListener('click',async()=>{
     }catch(e){hideLoading();showToast('Refresh failed: '+e.message)}
 });
 
-async function loadAllProfiles(){
-    const{data,error}=await supabase.from('profiles').select('*');
-    if(error)throw error;
-    allProfiles=data||[];
-}
-async function loadRequests(){
-    if(!currentUser)return;
-    const{data,error}=await supabase.from('match_requests').select('*')
-        .or(`from_user.eq.${currentUser.id},to_user.eq.${currentUser.id},partner.eq.${currentUser.id},opponent2.eq.${currentUser.id}`);
-    if(error)throw error;
-    allRequests=data||[];
-}
-async function loadMatches(){
-    if(!currentUser)return;
-    const{data,error}=await supabase.from('matches').select('*')
-        .or(`player_a.eq.${currentUser.id},player_b.eq.${currentUser.id},partner_a.eq.${currentUser.id},partner_b.eq.${currentUser.id}`)
-        .order('played_at',{ascending:false});
-    if(error)throw error;
-    allMatches=data||[];
-}
-async function loadChallenges(){
-    if(!currentUser)return;
-    const{data,error}=await supabase.from('challenges').select('*')
-        .or(`challenger.eq.${currentUser.id},opponent.eq.${currentUser.id},challenger_partner.eq.${currentUser.id},opponent_partner.eq.${currentUser.id}`)
-        .order('created_at',{ascending:false});
-    if(error)throw error;
-    allChallenges=data||[];
-}
-async function loadAllMatchesGlobal(){
-    try{
-        const{data,error}=await supabase.from('matches').select('*').order('played_at',{ascending:false}).limit(5000);
-        if(error){console.warn('[SGTT] all matches load:',error.message);return}
-        allMatchesGlobal=data||[];
-    }catch(e){console.warn('[SGTT] all matches failed:',e.message)}
-}
+async function loadAllProfiles(){const{data,error}=await supabase.from('profiles').select('*');if(error)throw error;allProfiles=data||[]}
+async function loadRequests(){if(!currentUser)return;const{data,error}=await supabase.from('match_requests').select('*').or(`from_user.eq.${currentUser.id},to_user.eq.${currentUser.id},partner.eq.${currentUser.id},opponent2.eq.${currentUser.id}`);if(error)throw error;allRequests=data||[]}
+async function loadMatches(){if(!currentUser)return;const{data,error}=await supabase.from('matches').select('*').or(`player_a.eq.${currentUser.id},player_b.eq.${currentUser.id},partner_a.eq.${currentUser.id},partner_b.eq.${currentUser.id}`).order('played_at',{ascending:false});if(error)throw error;allMatches=data||[]}
+async function loadChallenges(){if(!currentUser)return;const{data,error}=await supabase.from('challenges').select('*').or(`challenger.eq.${currentUser.id},opponent.eq.${currentUser.id},challenger_partner.eq.${currentUser.id},opponent_partner.eq.${currentUser.id}`).order('created_at',{ascending:false});if(error)throw error;allChallenges=data||[]}
+async function loadAllMatchesGlobal(){try{const{data,error}=await supabase.from('matches').select('*').order('played_at',{ascending:false}).limit(5000);if(error){console.warn('[SGTT] all matches:',error.message);return}allMatchesGlobal=data||[]}catch(e){console.warn('[SGTT] all matches failed:',e.message)}}
 async function refreshAll(){
-    await loadAllProfiles();
-    await loadRequests();
-    await loadMatches();
-    await loadChallenges();
-    await loadDbSettings();
-    await loadAllMatchesGlobal();
-    const me=allProfiles.find(p=>p.id===currentUser.id);
-    if(me)userProfile=me;
+    await loadAllProfiles();await loadRequests();await loadMatches();await loadChallenges();
+    await loadDbSettings();await loadAllMatchesGlobal();
+    const me=allProfiles.find(p=>p.id===currentUser.id);if(me)userProfile=me;
     if(userProfile){
         document.getElementById('user-name').textContent=userProfile.name;
         document.getElementById('user-cc').textContent=userProfile.community_centre||'';
@@ -1475,127 +1738,34 @@ async function refreshAll(){
     }
 }
 
-/* ============================================================
-   HEADER SUBSCRIPTION BADGE
-   ============================================================ */
 function renderHeaderSubscription(){
-    const el=document.getElementById('header-sub-badge');
-    if(!el)return;
-    if(!userProfile){
-        el.className='header-sub-badge inactive';
-        el.innerHTML='<span class="hsb-icon">💳</span><span class="hsb-text">—</span>';
-        return;
-    }
+    const el=document.getElementById('header-sub-badge');if(!el)return;
+    if(!userProfile){el.className='header-sub-badge inactive';el.innerHTML='<span class="hsb-icon">💳</span><span class="hsb-text">—</span>';return}
     let icon='💳',text='Inactive',cls='inactive';
-    if(isPromotionActive()){
-        icon='🎉';text='Free';cls='promo';
-    }else{
+    if(isPromotionActive()){icon='🎉';text='Free';cls='promo'}
+    else{
         const s=userProfile.subscription||{};
-        if(s.status==='active'&&s.paidUntil>Date.now()){
-            icon='✅';text='Active';cls='active';
-        }else if(s.status==='pending'){
-            icon='⏳';text='Pending';cls='pending';
-        }else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now()){
-            icon='⏰';text='Expired';cls='inactive';
-        }else{
-            icon='❌';text='Inactive';cls='inactive';
-        }
+        if(s.status==='active'&&s.paidUntil>Date.now()){icon='✅';text='Active';cls='active'}
+        else if(s.status==='pending'){icon='⏳';text='Pending';cls='pending'}
+        else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now()){icon='⏰';text='Expired';cls='inactive'}
+        else{icon='❌';text='Inactive';cls='inactive'}
     }
     el.className='header-sub-badge '+cls;
     el.innerHTML=`<span class="hsb-icon">${icon}</span><span class="hsb-text">${text}</span>`;
     el.title='Subscription: '+text+' — tap to manage';
 }
 
-/* ============================================================
-   LEADERBOARD COMPUTATION
-   ============================================================ */
-function computePlayerOfMonth(){
-    const start=startOfCurrentMonth();
-    const winCounts={};
-    for(const m of allMatchesGlobal){
-        const ts=new Date(m.played_at).getTime();
-        if(ts<start)continue;
-        if(!m.winner)continue;
-        winCounts[m.winner]=(winCounts[m.winner]||0)+1;
-    }
-    let bestId=null,bestWins=0;
-    for(const[id,w]of Object.entries(winCounts)){
-        if(w>bestWins){bestWins=w;bestId=id}
-    }
-    if(!bestId)return null;
-    const u=profileOf(bestId);
-    if(!u)return null;
-    return{user:u,wins:bestWins};
-}
-function computeOverallChampion(){
-    if(allProfiles.length===0)return null;
-    let best=allProfiles[0];
-    for(const u of allProfiles){if((u.points||0)>(best.points||0))best=u}
-    if(!best)return null;
-    return{user:best,points:best.points||0};
-}
-function computeMostPlayed(){
-    const playCounts={};
-    for(const m of allMatchesGlobal){
-        const ids=[m.player_a,m.player_b,m.partner_a,m.partner_b].filter(Boolean);
-        for(const id of ids)playCounts[id]=(playCounts[id]||0)+1;
-    }
-    let bestId=null,bestCount=0;
-    for(const[id,c]of Object.entries(playCounts)){
-        if(c>bestCount){bestCount=c;bestId=id}
-    }
-    if(!bestId)return null;
-    const u=profileOf(bestId);
-    if(!u)return null;
-    return{user:u,matches:bestCount};
-}
-function computeTopSingles(){
-    return [...allProfiles]
-        .sort((a,b)=>(b.rating||1000)-(a.rating||1000))
-        .slice(0,10);
-}
-function computeTopDoubles(){
-    const pairs={};
-    for(const m of allMatchesGlobal){
-        if(m.type!=='doubles')continue;
-        if(m.player_a&&m.partner_a){
-            const key=[m.player_a,m.partner_a].sort().join('|');
-            if(!pairs[key])pairs[key]={p1:m.player_a,p2:m.partner_a,wins:0,losses:0,matches:0};
-            pairs[key].matches++;
-            if(m.winner===m.player_a)pairs[key].wins++;
-            else if(m.winner===m.player_b)pairs[key].losses++;
-        }
-        if(m.player_b&&m.partner_b){
-            const key=[m.player_b,m.partner_b].sort().join('|');
-            if(!pairs[key])pairs[key]={p1:m.player_b,p2:m.partner_b,wins:0,losses:0,matches:0};
-            pairs[key].matches++;
-            if(m.winner===m.player_b)pairs[key].wins++;
-            else if(m.winner===m.player_a)pairs[key].losses++;
-        }
-    }
-    const arr=Object.values(pairs).map(p=>{
-        const u1=profileOf(p.p1),u2=profileOf(p.p2);
-        const r1=(u1&&u1.rating)||1000,r2=(u2&&u2.rating)||1000;
-        return{...p,rating:Math.round((r1+r2)/2),name1:u1?u1.name:'?',name2:u2?u2.name:'?'};
-    });
-    arr.sort((a,b)=>b.rating-a.rating);
-    return arr.slice(0,10);
-}
+function computePlayerOfMonth(){const start=startOfCurrentMonth(),winCounts={};for(const m of allMatchesGlobal){const ts=new Date(m.played_at).getTime();if(ts<start)continue;if(!m.winner)continue;winCounts[m.winner]=(winCounts[m.winner]||0)+1}let bestId=null,bestWins=0;for(const[id,w]of Object.entries(winCounts)){if(w>bestWins){bestWins=w;bestId=id}}if(!bestId)return null;const u=profileOf(bestId);if(!u)return null;return{user:u,wins:bestWins}}
+function computeOverallChampion(){if(allProfiles.length===0)return null;let best=allProfiles[0];for(const u of allProfiles){if((u.points||0)>(best.points||0))best=u}if(!best)return null;return{user:best,points:best.points||0}}
+function computeMostPlayed(){const playCounts={};for(const m of allMatchesGlobal){const ids=[m.player_a,m.player_b,m.partner_a,m.partner_b].filter(Boolean);for(const id of ids)playCounts[id]=(playCounts[id]||0)+1}let bestId=null,bestCount=0;for(const[id,c]of Object.entries(playCounts)){if(c>bestCount){bestCount=c;bestId=id}}if(!bestId)return null;const u=profileOf(bestId);if(!u)return null;return{user:u,matches:bestCount}}
+function computeTopSingles(){return [...allProfiles].sort((a,b)=>(b.rating||1000)-(a.rating||1000)).slice(0,10)}
+function computeTopDoubles(){const pairs={};for(const m of allMatchesGlobal){if(m.type!=='doubles')continue;if(m.player_a&&m.partner_a){const key=[m.player_a,m.partner_a].sort().join('|');if(!pairs[key])pairs[key]={p1:m.player_a,p2:m.partner_a,wins:0,losses:0,matches:0};pairs[key].matches++;if(m.winner===m.player_a)pairs[key].wins++;else if(m.winner===m.player_b)pairs[key].losses++}if(m.player_b&&m.partner_b){const key=[m.player_b,m.partner_b].sort().join('|');if(!pairs[key])pairs[key]={p1:m.player_b,p2:m.partner_b,wins:0,losses:0,matches:0};pairs[key].matches++;if(m.winner===m.player_b)pairs[key].wins++;else if(m.winner===m.player_a)pairs[key].losses++}}const arr=Object.values(pairs).map(p=>{const u1=profileOf(p.p1),u2=profileOf(p.p2);const r1=(u1&&u1.rating)||1000,r2=(u2&&u2.rating)||1000;return{...p,rating:Math.round((r1+r2)/2),name1:u1?u1.name:'?',name2:u2?u2.name:'?'}});arr.sort((a,b)=>b.rating-a.rating);return arr.slice(0,10)}
 
-/* ============================================================
-   RENDER DASHBOARD
-   ============================================================ */
 function renderDashboard(){
     if(!userProfile)return;
     const promoBanner=document.getElementById('promo-banner');
-    if(isPromotionActive()){
-        const p=getPromotion();
-        document.getElementById('promo-title').textContent='🎉 Free Subscription Month!';
-        document.getElementById('promo-message').textContent=p.message||'All matches are free this month. Enjoy!';
-        promoBanner.classList.remove('hidden');
-    }else promoBanner.classList.add('hidden');
-    const wins=userProfile.wins||0,losses=userProfile.losses||0;
-    const total=wins+losses;
+    if(isPromotionActive()){const p=getPromotion();document.getElementById('promo-title').textContent='🎉 Free Subscription Month!';document.getElementById('promo-message').textContent=p.message||'All matches are free this month. Enjoy!';promoBanner.classList.remove('hidden')}else promoBanner.classList.add('hidden');
+    const wins=userProfile.wins||0,losses=userProfile.losses||0,total=wins+losses;
     const winRate=total>0?Math.round((wins/total)*100):0;
     document.getElementById('stat-points').textContent=userProfile.points||0;
     document.getElementById('stat-wins').textContent=wins;
@@ -1609,14 +1779,7 @@ function renderDashboard(){
     const isMaxDiscount=discount>=20;
     document.getElementById('discount-info').innerHTML=`<strong>${discount}% discount</strong> at Sin Ten Sports Trading!<br><small>${isMaxDiscount?'🎉 You have reached the maximum discount!':'Earn more points to increase your discount (max 20%).'}</small>`;
     document.getElementById('discount-bar').style.width=Math.min(100,(pts/1500)*100)+'%';
-
-    /* LEADERBOARD MINI */
-    renderLeaderboardMini();
-    /* TOP SINGLES */
-    renderTopSingles();
-    /* TOP DOUBLES */
-    renderTopDoubles();
-
+    renderLeaderboardMini();renderTopSingles();renderTopDoubles();
     const historyEl=document.getElementById('match-history');
     if(allMatches.length===0){historyEl.innerHTML='<p style="color:var(--text-muted)">No matches yet. Request a match to get started!</p>'}
     else{
@@ -1636,126 +1799,48 @@ function renderDashboard(){
             }
             const badge=won?'badge-green':'badge-red';
             const result=won?'WIN':'LOSS';
-            return `
-                <div class="match-item">
-                    <div class="info">
-                        <strong>${escapeHtml(myTeam)} vs ${escapeHtml(oppTeam)}</strong>
-                        <small>${m.type} • ${escapeHtml(m.community_centre)} • ${new Date(m.played_at).toLocaleDateString()}</small>
-                    </div>
-                    <div class="result">
-                        <span class="badge ${badge}">${result}</span>
-                        <div style="font-size:.8rem;margin-top:4px;font-weight:700;font-variant-numeric:tabular-nums">${myScore} – ${oppScore}</div>
-                    </div>
-                </div>`;
+            return `<div class="match-item"><div class="info"><strong>${escapeHtml(myTeam)} vs ${escapeHtml(oppTeam)}</strong><small>${m.type} • ${escapeHtml(m.community_centre)} • ${new Date(m.played_at).toLocaleDateString()}</small></div><div class="result"><span class="badge ${badge}">${result}</span><div style="font-size:.8rem;margin-top:4px;font-weight:700;font-variant-numeric:tabular-nums">${myScore} – ${oppScore}</div></div></div>`;
         }).join('');
     }
 }
-
 function renderLeaderboardMini(){
-    /* Player of Month */
     const potm=computePlayerOfMonth();
-    const monthNameEl=document.getElementById('lm-month-name');
-    const monthStatEl=document.getElementById('lm-month-stat');
-    if(potm){
-        monthNameEl.textContent=potm.user.name;
-        monthStatEl.textContent=potm.wins+(potm.wins===1?' win':' wins');
-        monthStatEl.classList.remove('empty');
-    }else{
-        monthNameEl.textContent='—';
-        monthStatEl.textContent='No games';
-        monthStatEl.classList.add('empty');
-    }
-    /* Overall Champion */
+    const monthNameEl=document.getElementById('lm-month-name'),monthStatEl=document.getElementById('lm-month-stat');
+    if(potm){monthNameEl.textContent=potm.user.name;monthStatEl.textContent=potm.wins+(potm.wins===1?' win':' wins');monthStatEl.classList.remove('empty')}
+    else{monthNameEl.textContent='—';monthStatEl.textContent='No games';monthStatEl.classList.add('empty')}
     const champ=computeOverallChampion();
-    const overallNameEl=document.getElementById('lm-overall-name');
-    const overallStatEl=document.getElementById('lm-overall-stat');
-    if(champ){
-        overallNameEl.textContent=champ.user.name;
-        overallStatEl.textContent=champ.points+' pts';
-        overallStatEl.classList.remove('empty');
-    }else{
-        overallNameEl.textContent='—';
-        overallStatEl.textContent='No players';
-        overallStatEl.classList.add('empty');
-    }
-    /* Most Played */
+    const overallNameEl=document.getElementById('lm-overall-name'),overallStatEl=document.getElementById('lm-overall-stat');
+    if(champ){overallNameEl.textContent=champ.user.name;overallStatEl.textContent=champ.points+' pts';overallStatEl.classList.remove('empty')}
+    else{overallNameEl.textContent='—';overallStatEl.textContent='No players';overallStatEl.classList.add('empty')}
     const mp=computeMostPlayed();
-    const mpNameEl=document.getElementById('lm-mostplayed-name');
-    const mpStatEl=document.getElementById('lm-mostplayed-stat');
-    if(mp){
-        mpNameEl.textContent=mp.user.name;
-        mpStatEl.textContent=mp.matches+(mp.matches===1?' match':' matches');
-        mpStatEl.classList.remove('empty');
-    }else{
-        mpNameEl.textContent='—';
-        mpStatEl.textContent='No games';
-        mpStatEl.classList.add('empty');
-    }
+    const mpNameEl=document.getElementById('lm-mostplayed-name'),mpStatEl=document.getElementById('lm-mostplayed-stat');
+    if(mp){mpNameEl.textContent=mp.user.name;mpStatEl.textContent=mp.matches+(mp.matches===1?' match':' matches');mpStatEl.classList.remove('empty')}
+    else{mpNameEl.textContent='—';mpStatEl.textContent='No games';mpStatEl.classList.add('empty')}
 }
-
 function renderTopSingles(){
-    const el=document.getElementById('top-singles-list');
-    if(!el)return;
+    const el=document.getElementById('top-singles-list');if(!el)return;
     const top=computeTopSingles();
-    if(top.length===0){
-        el.innerHTML='<p style="color:var(--text-muted);font-size:.85rem;text-align:center;padding:12px 0">No players yet.</p>';
-        return;
-    }
+    if(top.length===0){el.innerHTML='<p style="color:var(--text-muted);font-size:.85rem;text-align:center;padding:12px 0">No players yet.</p>';return}
     el.innerHTML=top.map((u,idx)=>{
-        const rank=idx+1;
-        let rankCls='';
-        if(rank===1)rankCls='gold';
-        else if(rank===2)rankCls='silver';
-        else if(rank===3)rankCls='bronze';
+        const rank=idx+1;let rankCls='';
+        if(rank===1)rankCls='gold';else if(rank===2)rankCls='silver';else if(rank===3)rankCls='bronze';
         const isMe=u.id===userProfile.id;
-        return `
-            <div class="rank-row ${isMe?'mine':''}">
-                <div class="rank-num ${rankCls}">${rank}</div>
-                <div class="rank-info">
-                    <div class="rank-name">${escapeHtml(u.name)}${isMe?' <span class="badge badge-blue">YOU</span>':''}</div>
-                    <div class="rank-sub">${escapeHtml(u.community_centre||'—')}</div>
-                </div>
-                <div class="rank-stat">
-                    <div class="rank-rating">${u.rating||1000}</div>
-                    <div class="rank-wl">W: ${u.wins||0} / L: ${u.losses||0}</div>
-                </div>
-            </div>`;
+        return `<div class="rank-row ${isMe?'mine':''}"><div class="rank-num ${rankCls}">${rank}</div><div class="rank-info"><div class="rank-name">${escapeHtml(u.name)}${isMe?' <span class="badge badge-blue">YOU</span>':''}</div><div class="rank-sub">${escapeHtml(u.community_centre||'—')}</div></div><div class="rank-stat"><div class="rank-rating">${u.rating||1000}</div><div class="rank-wl">W: ${u.wins||0} / L: ${u.losses||0}</div></div></div>`;
     }).join('');
 }
-
 function renderTopDoubles(){
-    const el=document.getElementById('top-doubles-list');
-    if(!el)return;
+    const el=document.getElementById('top-doubles-list');if(!el)return;
     const pairs=computeTopDoubles();
-    if(pairs.length===0){
-        el.innerHTML='<p style="color:var(--text-muted);font-size:.85rem;text-align:center;padding:12px 0">No doubles matches yet.</p>';
-        return;
-    }
+    if(pairs.length===0){el.innerHTML='<p style="color:var(--text-muted);font-size:.85rem;text-align:center;padding:12px 0">No doubles matches yet.</p>';return}
     el.innerHTML=pairs.map((p,idx)=>{
-        const rank=idx+1;
-        let rankCls='';
-        if(rank===1)rankCls='gold';
-        else if(rank===2)rankCls='silver';
-        else if(rank===3)rankCls='bronze';
+        const rank=idx+1;let rankCls='';
+        if(rank===1)rankCls='gold';else if(rank===2)rankCls='silver';else if(rank===3)rankCls='bronze';
         const isMine=p.p1===userProfile.id||p.p2===userProfile.id;
-        return `
-            <div class="rank-row ${isMine?'mine':''}">
-                <div class="rank-num ${rankCls}">${rank}</div>
-                <div class="rank-info">
-                    <div class="rank-name">${escapeHtml(p.name1)} & ${escapeHtml(p.name2)}${isMine?' <span class="badge badge-blue">YOU</span>':''}</div>
-                    <div class="rank-sub">${p.matches} match${p.matches===1?'':'es'} • W: ${p.wins} / L: ${p.losses}</div>
-                </div>
-                <div class="rank-stat">
-                    <div class="rank-rating">${p.rating}</div>
-                    <div class="rank-wl">avg rating</div>
-                </div>
-            </div>`;
+        return `<div class="rank-row ${isMine?'mine':''}"><div class="rank-num ${rankCls}">${rank}</div><div class="rank-info"><div class="rank-name">${escapeHtml(p.name1)} & ${escapeHtml(p.name2)}${isMine?' <span class="badge badge-blue">YOU</span>':''}</div><div class="rank-sub">${p.matches} match${p.matches===1?'':'es'} • W: ${p.wins} / L: ${p.losses}</div></div><div class="rank-stat"><div class="rank-rating">${p.rating}</div><div class="rank-wl">avg rating</div></div></div>`;
     }).join('');
 }
 
-function paidMembers(excludeIds=[]){
-    return allProfiles.filter(u=>u.id!==(userProfile&&userProfile.id)).filter(u=>!excludeIds.includes(u.id)).filter(u=>isPaidMember(u)).sort((a,b)=>a.name.localeCompare(b.name));
-}
+function paidMembers(excludeIds=[]){return allProfiles.filter(u=>u.id!==(userProfile&&userProfile.id)).filter(u=>!excludeIds.includes(u.id)).filter(u=>isPaidMember(u)).sort((a,b)=>a.name.localeCompare(b.name))}
 function fillSelect(sel,users,{includeEmpty=false,emptyLabel='— Select —'}={}){
     if(!sel)return;
     const prev=sel.value;sel.innerHTML='';
@@ -1764,7 +1849,6 @@ function fillSelect(sel,users,{includeEmpty=false,emptyLabel='— Select —'}={
     users.forEach(u=>{const o=document.createElement('option');o.value=u.id;o.textContent=`${u.name}  ·  ${u.community_centre||''}`;sel.appendChild(o)});
     if(prev&&users.some(u=>u.id===prev))sel.value=prev;
 }
-
 function refreshChallengeDropdowns(){
     const type=document.getElementById('ch-type').value;
     const isDoubles=type==='doubles';
@@ -1787,7 +1871,6 @@ function refreshRequestDropdowns(){
     fillSelect(opp1Sel,paidMembers([partner,opp2].filter(Boolean)));
     fillSelect(opp2Sel,paidMembers([partner,opp1].filter(Boolean)),{includeEmpty:true,emptyLabel:'— Optional —'});
 }
-
 document.getElementById('ch-type').addEventListener('change',refreshChallengeDropdowns);
 document.getElementById('ch-partner').addEventListener('change',refreshChallengeDropdowns);
 document.getElementById('ch-opponent1').addEventListener('change',refreshChallengeDropdowns);
@@ -1814,10 +1897,7 @@ document.getElementById('ch-submit').addEventListener('click',async()=>{
     const id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
     try{
         showLoading('Sending challenge…');
-        const{error}=await supabase.from('challenges').insert({
-            id,type,community_centre:cc,challenger:userProfile.id,challenger_partner:partner||null,
-            opponent:opponent1,opponent_partner:opponent2||null,status:'pending'
-        });
+        const{error}=await supabase.from('challenges').insert({id,type,community_centre:cc,challenger:userProfile.id,challenger_partner:partner||null,opponent:opponent1,opponent_partner:opponent2||null,status:'pending'});
         if(error)throw error;
         hideLoading();showToast('Challenge sent to '+nameOf(opponent1)+'!');
         document.getElementById('ch-cc-other').value='';
@@ -1845,10 +1925,7 @@ document.getElementById('req-submit').addEventListener('click',async()=>{
     const id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
     try{
         showLoading('Sending request…');
-        const{error}=await supabase.from('match_requests').insert({
-            id,type,community_centre:cc,from_user:userProfile.id,partner:partner||null,
-            to_user:opponent1,opponent2:opponent2||null,score_a:scoreA,score_b:scoreB,status:'pending'
-        });
+        const{error}=await supabase.from('match_requests').insert({id,type,community_centre:cc,from_user:userProfile.id,partner:partner||null,to_user:opponent1,opponent2:opponent2||null,score_a:scoreA,score_b:scoreB,status:'pending'});
         if(error)throw error;
         hideLoading();showToast('Match request submitted to '+nameOf(opponent1)+'!');
         document.getElementById('req-score').value='';
@@ -1861,27 +1938,18 @@ document.getElementById('req-submit').addEventListener('click',async()=>{
 function renderPlayTab(){
     if(!userProfile)return;
     const warn=document.getElementById('req-sub-warning');
-    if(isSubscriptionActive(userProfile))warn.classList.add('hidden');
-    else warn.classList.remove('hidden');
+    if(isSubscriptionActive(userProfile))warn.classList.add('hidden');else warn.classList.remove('hidden');
     refreshChallengeDropdowns();refreshRequestDropdowns();
     renderChallengesReceived();renderChallengesSent();renderRequestsSent();renderRequestsReceived();renderIncludedRequests();
 }
-
 function challengeChallengerTeam(c){if(c.type==='doubles'&&c.challenger_partner)return `${nameOf(c.challenger)} & ${nameOf(c.challenger_partner)}`;return nameOf(c.challenger)}
 function challengeOpponentTeam(c){if(c.type==='doubles'&&c.opponent_partner)return `${nameOf(c.opponent)} & ${nameOf(c.opponent_partner)}`;if(c.type==='doubles')return `${nameOf(c.opponent)} & ?`;return nameOf(c.opponent)}
 function statusBadge(status){
-    const map={
-        pending:{text:'PENDING',cls:'badge-yellow'},accepted:{text:'ACCEPTED',cls:'badge-green'},
-        score_submitted:{text:'SCORE SUBMITTED',cls:'badge-purple'},completed:{text:'COMPLETED',cls:'badge-green'},
-        rejected:{text:'DECLINED',cls:'badge-red'},cancelled:{text:'CANCELLED',cls:'badge-red'}
-    };
-    const v=map[status]||{text:status,cls:''};
-    return `<span class="badge ${v.cls}">${v.text}</span>`;
+    const map={pending:{text:'PENDING',cls:'badge-yellow'},accepted:{text:'ACCEPTED',cls:'badge-green'},score_submitted:{text:'SCORE SUBMITTED',cls:'badge-purple'},completed:{text:'COMPLETED',cls:'badge-green'},rejected:{text:'DECLINED',cls:'badge-red'},cancelled:{text:'CANCELLED',cls:'badge-red'}};
+    const v=map[status]||{text:status,cls:''};return `<span class="badge ${v.cls}">${v.text}</span>`;
 }
-
 function renderChallengesReceived(){
-    const el=document.getElementById('challenges-received');
-    const myId=userProfile.id;
+    const el=document.getElementById('challenges-received');const myId=userProfile.id;
     const incoming=allChallenges.filter(c=>(c.opponent===myId||c.opponent_partner===myId)&&!['rejected','cancelled','completed'].includes(c.status));
     if(incoming.length===0){el.innerHTML='<p style="color:var(--text-muted)">No challenges at the moment.</p>';return}
     el.innerHTML=incoming.map(c=>{
@@ -1890,34 +1958,18 @@ function renderChallengesReceived(){
         const canSubmit=c.status==='accepted'&&(iAmPrimary||iAmPartner);
         const canAck=c.status==='score_submitted'&&c.score_submitted_by!==myId;
         let actions='';
-        if(canAccept){
-            actions+=`<button class="small" style="background:var(--success);color:#0a1f38" onclick="acceptChallenge('${c.id}')">Accept</button>`;
-            actions+=`<button class="small danger" onclick="rejectChallenge('${c.id}')">Decline</button>`;
-        }
-        if(canSubmit){
-            actions+=`<div style="width:100%"><div class="score-inputs"><input type="number" id="sc-chal-${c.id}" placeholder="Our score" min="0" max="5"><input type="number" id="sc-opp-${c.id}" placeholder="Their score" min="0" max="5"></div><button class="small" style="background:var(--accent);color:#0a1f38" onclick="submitChallengeScore('${c.id}')">Submit Score</button></div>`;
-        }
-        if(canAck){
-            actions+=`<button class="small" style="background:var(--success);color:#0a1f38" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;
-            actions+=`<button class="small warn" onclick="disputeChallengeScore('${c.id}')">Dispute</button>`;
-        }
+        if(canAccept){actions+=`<button class="small" style="background:var(--success);color:#0a1f38" onclick="acceptChallenge('${c.id}')">Accept</button>`;actions+=`<button class="small danger" onclick="rejectChallenge('${c.id}')">Decline</button>`}
+        if(canSubmit){actions+=`<div style="width:100%"><div class="score-inputs"><input type="number" id="sc-chal-${c.id}" placeholder="Our score" min="0" max="5"><input type="number" id="sc-opp-${c.id}" placeholder="Their score" min="0" max="5"></div><button class="small" style="background:var(--accent);color:#0a1f38" onclick="submitChallengeScore('${c.id}')">Submit Score</button></div>`}
+        if(canAck){actions+=`<button class="small" style="background:var(--success);color:#0a1f38" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;actions+=`<button class="small warn" onclick="disputeChallengeScore('${c.id}')">Dispute</button>`}
         let scoreLine='';
         if(c.status==='score_submitted')scoreLine=`<div class="score-display">Score: ${c.score_challenger} – ${c.score_opponent}</div>`;
         else if(c.status==='completed'&&c.score_challenger!=null)scoreLine=`<div class="score-display">Final: ${c.score_challenger} – ${c.score_opponent}</div>`;
         const role=iAmPrimary?'You are the challenged opponent':'You are the opponent partner';
-        return `
-            <div class="challenge-item">
-                <div class="chead"><div class="ctitle">${escapeHtml(challengeChallengerTeam(c))} vs ${escapeHtml(challengeOpponentTeam(c))}</div>${statusBadge(c.status)}</div>
-                <div class="cmeta">${c.type} • ${escapeHtml(c.community_centre)} • ${new Date(c.created_at).toLocaleDateString()}</div>
-                <div class="cmeta">${role}</div>${scoreLine}
-                ${actions?`<div class="cactions">${actions}</div>`:''}
-            </div>`;
+        return `<div class="challenge-item"><div class="chead"><div class="ctitle">${escapeHtml(challengeChallengerTeam(c))} vs ${escapeHtml(challengeOpponentTeam(c))}</div>${statusBadge(c.status)}</div><div class="cmeta">${c.type} • ${escapeHtml(c.community_centre)} • ${new Date(c.created_at).toLocaleDateString()}</div><div class="cmeta">${role}</div>${scoreLine}${actions?`<div class="cactions">${actions}</div>`:''}</div>`;
     }).join('');
 }
-
 function renderChallengesSent(){
-    const el=document.getElementById('challenges-sent');
-    const myId=userProfile.id;
+    const el=document.getElementById('challenges-sent');const myId=userProfile.id;
     const sent=allChallenges.filter(c=>c.challenger===myId||c.challenger_partner===myId);
     if(sent.length===0){el.innerHTML='<p style="color:var(--text-muted)">You have not sent any challenges.</p>';return}
     el.innerHTML=sent.map(c=>{
@@ -1927,126 +1979,71 @@ function renderChallengesSent(){
         const canAck=c.status==='score_submitted'&&c.score_submitted_by!==myId;
         let actions='';
         if(canCancel)actions+=`<button class="small danger" onclick="cancelChallenge('${c.id}')">Cancel</button>`;
-        if(canSubmit){
-            actions+=`<div style="width:100%"><div class="score-inputs"><input type="number" id="sc-chal-${c.id}" placeholder="Our score" min="0" max="5"><input type="number" id="sc-opp-${c.id}" placeholder="Their score" min="0" max="5"></div><button class="small" style="background:var(--accent);color:#0a1f38" onclick="submitChallengeScore('${c.id}')">Submit Score</button></div>`;
-        }
-        if(canAck){
-            actions+=`<button class="small" style="background:var(--success);color:#0a1f38" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;
-            actions+=`<button class="small warn" onclick="disputeChallengeScore('${c.id}')">Dispute</button>`;
-        }
+        if(canSubmit){actions+=`<div style="width:100%"><div class="score-inputs"><input type="number" id="sc-chal-${c.id}" placeholder="Our score" min="0" max="5"><input type="number" id="sc-opp-${c.id}" placeholder="Their score" min="0" max="5"></div><button class="small" style="background:var(--accent);color:#0a1f38" onclick="submitChallengeScore('${c.id}')">Submit Score</button></div>`}
+        if(canAck){actions+=`<button class="small" style="background:var(--success);color:#0a1f38" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;actions+=`<button class="small warn" onclick="disputeChallengeScore('${c.id}')">Dispute</button>`}
         let scoreLine='';
         if(c.status==='score_submitted')scoreLine=`<div class="score-display">Score: ${c.score_challenger} – ${c.score_opponent}</div>`;
         else if(c.status==='completed'&&c.score_challenger!=null)scoreLine=`<div class="score-display">Final: ${c.score_challenger} – ${c.score_opponent}</div>`;
-        return `
-            <div class="challenge-item">
-                <div class="chead"><div class="ctitle">${escapeHtml(challengeChallengerTeam(c))} vs ${escapeHtml(challengeOpponentTeam(c))}</div>${statusBadge(c.status)}</div>
-                <div class="cmeta">${c.type} • ${escapeHtml(c.community_centre)} • ${new Date(c.created_at).toLocaleDateString()}</div>
-                ${scoreLine}
-                ${actions?`<div class="cactions">${actions}</div>`:''}
-            </div>`;
+        return `<div class="challenge-item"><div class="chead"><div class="ctitle">${escapeHtml(challengeChallengerTeam(c))} vs ${escapeHtml(challengeOpponentTeam(c))}</div>${statusBadge(c.status)}</div><div class="cmeta">${c.type} • ${escapeHtml(c.community_centre)} • ${new Date(c.created_at).toLocaleDateString()}</div>${scoreLine}${actions?`<div class="cactions">${actions}</div>`:''}</div>`;
     }).join('');
 }
-
 function requestTeamLabel(r){if(r.type==='doubles')return `${nameOf(r.from_user)} & ${nameOf(r.partner)}`;return nameOf(r.from_user)}
 function opponentTeamLabel(r){if(r.type==='doubles'&&r.opponent2)return `${nameOf(r.to_user)} & ${nameOf(r.opponent2)}`;if(r.type==='doubles')return `${nameOf(r.to_user)} & ?`;return nameOf(r.to_user)}
-
 function renderRequestsSent(){
     const myId=userProfile.id;
     const sent=allRequests.filter(r=>(r.from_user===myId||r.partner===myId)&&r.status==='pending');
     const sentEl=document.getElementById('pending-sent');
     if(sent.length===0){sentEl.innerHTML='<p style="color:var(--text-muted)">No pending requests.</p>';return}
-    sentEl.innerHTML=sent.map(r=>`
-        <div class="match-item">
-            <div class="info"><strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong><small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small></div>
-            <span class="badge badge-yellow">PENDING</span>
-        </div>`).join('');
+    sentEl.innerHTML=sent.map(r=>`<div class="match-item"><div class="info"><strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong><small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small></div><span class="badge badge-yellow">PENDING</span></div>`).join('');
 }
 function renderRequestsReceived(){
     const myId=userProfile.id;
     const received=allRequests.filter(r=>r.to_user===myId&&r.status==='pending');
     const recEl=document.getElementById('pending-received');
     if(received.length===0){recEl.innerHTML='<p style="color:var(--text-muted)">No requests to approve.</p>';return}
-    recEl.innerHTML=received.map(r=>`
-        <div class="match-item" style="flex-direction:column;align-items:stretch">
-            <div class="info" style="width:100%">
-                <strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong>
-                <small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small>
-                <div style="font-size:.82rem;margin-top:6px;color:#cbd5e1">Score: <strong>${r.score_a} – ${r.score_b}</strong></div>
-            </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
-                <button class="small" style="background:var(--success);color:#0a1f38" onclick="approveRequest('${r.id}')">Approve</button>
-                <button class="small danger" onclick="rejectRequest('${r.id}')">Reject</button>
-            </div>
-        </div>`).join('');
+    recEl.innerHTML=received.map(r=>`<div class="match-item" style="flex-direction:column;align-items:stretch"><div class="info" style="width:100%"><strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong><small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small><div style="font-size:.82rem;margin-top:6px;color:#cbd5e1">Score: <strong>${r.score_a} – ${r.score_b}</strong></div></div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="small" style="background:var(--success);color:#0a1f38" onclick="approveRequest('${r.id}')">Approve</button><button class="small danger" onclick="rejectRequest('${r.id}')">Reject</button></div></div>`).join('');
 }
 function renderIncludedRequests(){
     const myId=userProfile.id;
     const included=allRequests.filter(r=>r.status==='pending'&&r.to_user!==myId&&(r.partner===myId||r.opponent2===myId));
-    const incCard=document.getElementById('included-card');
-    const incEl=document.getElementById('included-list');
+    const incCard=document.getElementById('included-card'),incEl=document.getElementById('included-list');
     if(included.length===0){incCard.style.display='none';return}
     incCard.style.display='';
-    incEl.innerHTML=included.map(r=>{
-        const asPartner=r.partner===myId;
-        return `
-            <div class="match-item">
-                <div class="info">
-                    <strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong>
-                    <small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small>
-                    <div style="font-size:.76rem;margin-top:4px;color:var(--text-muted)">You are ${asPartner?'the partner':'opponent 2'}</div>
-                </div>
-                <span class="badge badge-blue">FYI</span>
-            </div>`;
-    }).join('');
+    incEl.innerHTML=included.map(r=>{const asPartner=r.partner===myId;return `<div class="match-item"><div class="info"><strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong><small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small><div style="font-size:.76rem;margin-top:4px;color:var(--text-muted)">You are ${asPartner?'the partner':'opponent 2'}</div></div><span class="badge badge-blue">FYI</span></div>`}).join('');
 }
 
 async function acceptChallenge(id){try{const{error}=await supabase.from('challenges').update({status:'accepted',accepted_at:new Date().toISOString()}).eq('id',id);if(error)throw error;showToast('Challenge accepted!');await loadChallenges();renderPlayTab();updateNotifDots()}catch(err){showToast('Failed: '+err.message)}}
 async function rejectChallenge(id){try{const{error}=await supabase.from('challenges').update({status:'rejected'}).eq('id',id);if(error)throw error;showToast('Challenge declined.');await loadChallenges();renderPlayTab();updateNotifDots()}catch(err){showToast('Failed: '+err.message)}}
 async function cancelChallenge(id){try{const{error}=await supabase.from('challenges').update({status:'cancelled'}).eq('id',id);if(error)throw error;showToast('Challenge cancelled.');await loadChallenges();renderPlayTab();updateNotifDots()}catch(err){showToast('Failed: '+err.message)}}
-
 async function submitChallengeScore(id){
-    const chalInput=document.getElementById('sc-chal-'+id);
-    const oppInput=document.getElementById('sc-opp-'+id);
+    const chalInput=document.getElementById('sc-chal-'+id),oppInput=document.getElementById('sc-opp-'+id);
     if(!chalInput||!oppInput)return;
     const cA=parseInt(chalInput.value,10),oA=parseInt(oppInput.value,10);
     if(isNaN(cA)||isNaN(oA)){showToast('Please enter both scores.');return}
     if(cA===oA){showToast('Scores cannot be tied.');return}
-    const c=allChallenges.find(x=>x.id===id);
-    if(!c)return;
+    const c=allChallenges.find(x=>x.id===id);if(!c)return;
     const iAmChallengerSide=(c.challenger===userProfile.id||c.challenger_partner===userProfile.id);
     const scoreChallenger=iAmChallengerSide?cA:oA;
     const scoreOpponent=iAmChallengerSide?oA:cA;
     try{
-        const{error}=await supabase.from('challenges').update({
-            status:'score_submitted',score_challenger:scoreChallenger,score_opponent:scoreOpponent,score_submitted_by:userProfile.id
-        }).eq('id',id);
+        const{error}=await supabase.from('challenges').update({status:'score_submitted',score_challenger:scoreChallenger,score_opponent:scoreOpponent,score_submitted_by:userProfile.id}).eq('id',id);
         if(error)throw error;
         showToast('Score submitted. Waiting for opponent.');
         await loadChallenges();renderPlayTab();
     }catch(err){showToast('Failed: '+err.message)}
 }
 async function disputeChallengeScore(id){try{const{error}=await supabase.from('challenges').update({status:'accepted',score_challenger:null,score_opponent:null,score_submitted_by:null}).eq('id',id);if(error)throw error;showToast('Score disputed.');await loadChallenges();renderPlayTab()}catch(err){showToast('Failed: '+err.message)}}
-
 async function acknowledgeChallengeScore(id){
     const c=allChallenges.find(x=>x.id===id);
     if(!c||c.status!=='score_submitted')return;
     const involvedIds=[c.challenger,c.challenger_partner,c.opponent,c.opponent_partner].filter(Boolean);
-    for(const uid of involvedIds){
-        const u=allProfiles.find(x=>x.id===uid);
-        if(!isSubscriptionActive(u)){showToast('All players need active subscriptions.');return}
-    }
+    for(const uid of involvedIds){const u=allProfiles.find(x=>x.id===uid);if(!isSubscriptionActive(u)){showToast('All players need active subscriptions.');return}}
     try{
         showLoading('Finalising match…');
         const{error:cErr}=await supabase.from('challenges').update({status:'completed',completed_at:new Date().toISOString()}).eq('id',id);
         if(cErr)throw cErr;
         const winnerIsChallenger=c.score_challenger>c.score_opponent;
-        const{error:mErr}=await supabase.from('matches').insert({
-            id:c.id,type:c.type,community_centre:c.community_centre,
-            player_a:c.challenger,partner_a:c.challenger_partner||null,
-            player_b:c.opponent,partner_b:c.opponent_partner||null,
-            score_a:c.score_challenger,score_b:c.score_opponent,
-            winner:winnerIsChallenger?c.challenger:c.opponent
-        });
+        const{error:mErr}=await supabase.from('matches').insert({id:c.id,type:c.type,community_centre:c.community_centre,player_a:c.challenger,partner_a:c.challenger_partner||null,player_b:c.opponent,partner_b:c.opponent_partner||null,score_a:c.score_challenger,score_b:c.score_opponent,winner:winnerIsChallenger?c.challenger:c.opponent});
         if(mErr)throw mErr;
         const teamA=[c.challenger,c.challenger_partner].filter(Boolean);
         const teamB=[c.opponent,c.opponent_partner].filter(Boolean);
@@ -2055,27 +2052,17 @@ async function acknowledgeChallengeScore(id){
         await refreshAll();renderPlayTab();renderDashboard();
     }catch(err){hideLoading();console.error(err);showToast('Failed: '+err.message)}
 }
-
 async function approveRequest(id){
     const req=allRequests.find(r=>r.id===id);
     if(!req||req.status!=='pending')return;
     const involvedIds=[req.from_user,req.partner,req.to_user,req.opponent2].filter(Boolean);
-    for(const uid of involvedIds){
-        const u=allProfiles.find(x=>x.id===uid);
-        if(!isSubscriptionActive(u)){showToast('All players need active subscriptions.');return}
-    }
+    for(const uid of involvedIds){const u=allProfiles.find(x=>x.id===uid);if(!isSubscriptionActive(u)){showToast('All players need active subscriptions.');return}}
     try{
         showLoading('Approving match…');
         const{error:reqErr}=await supabase.from('match_requests').update({status:'approved'}).eq('id',id);
         if(reqErr)throw reqErr;
         const winnerIsA=req.score_a>req.score_b;
-        const{error:matchErr}=await supabase.from('matches').insert({
-            id:req.id,type:req.type,community_centre:req.community_centre,
-            player_a:req.from_user,partner_a:req.partner||null,
-            player_b:req.to_user,partner_b:req.opponent2||null,
-            score_a:req.score_a,score_b:req.score_b,
-            winner:winnerIsA?req.from_user:req.to_user
-        });
+        const{error:matchErr}=await supabase.from('matches').insert({id:req.id,type:req.type,community_centre:req.community_centre,player_a:req.from_user,partner_a:req.partner||null,player_b:req.to_user,partner_b:req.opponent2||null,score_a:req.score_a,score_b:req.score_b,winner:winnerIsA?req.from_user:req.to_user});
         if(matchErr)throw matchErr;
         const teamA=[req.from_user,req.partner].filter(Boolean);
         const teamB=[req.to_user,req.opponent2].filter(Boolean);
@@ -2091,27 +2078,10 @@ async function awardPoints(winnerTeam,loserTeam){
     const wR=teamRating(winnerTeam),lR=teamRating(loserTeam);
     const diff=Math.abs(wR-lR);
     let points;
-    if(wR>=lR){
-        if(diff>750)points=1;else if(diff>500)points=2;else if(diff>400)points=3;else if(diff>300)points=4;
-        else if(diff>200)points=5;else if(diff>150)points=6;else if(diff>100)points=7;else if(diff>50)points=8;
-        else if(diff>25)points=9;else points=10;
-    }else{
-        if(diff>749)points=40;else if(diff>499)points=36;else if(diff>399)points=32;else if(diff>299)points=28;
-        else if(diff>199)points=24;else if(diff>149)points=20;else if(diff>99)points=16;else if(diff>49)points=14;
-        else if(diff>24)points=12;else points=10;
-    }
-    for(const id of winnerTeam){
-        const u=allProfiles.find(x=>x.id===id);
-        if(!u)continue;
-        const newRating=(u.rating||1000)+points;
-        await supabase.from('profiles').update({rating:newRating,points:newRating,wins:(u.wins||0)+1}).eq('id',id);
-    }
-    for(const id of loserTeam){
-        const u=allProfiles.find(x=>x.id===id);
-        if(!u)continue;
-        const newRating=Math.max(100,(u.rating||1000)-points);
-        await supabase.from('profiles').update({rating:newRating,points:newRating,losses:(u.losses||0)+1}).eq('id',id);
-    }
+    if(wR>=lR){if(diff>750)points=1;else if(diff>500)points=2;else if(diff>400)points=3;else if(diff>300)points=4;else if(diff>200)points=5;else if(diff>150)points=6;else if(diff>100)points=7;else if(diff>50)points=8;else if(diff>25)points=9;else points=10}
+    else{if(diff>749)points=40;else if(diff>499)points=36;else if(diff>399)points=32;else if(diff>299)points=28;else if(diff>199)points=24;else if(diff>149)points=20;else if(diff>99)points=16;else if(diff>49)points=14;else if(diff>24)points=12;else points=10}
+    for(const id of winnerTeam){const u=allProfiles.find(x=>x.id===id);if(!u)continue;const newRating=(u.rating||1000)+points;await supabase.from('profiles').update({rating:newRating,points:newRating,wins:(u.wins||0)+1}).eq('id',id)}
+    for(const id of loserTeam){const u=allProfiles.find(x=>x.id===id);if(!u)continue;const newRating=Math.max(100,(u.rating||1000)-points);await supabase.from('profiles').update({rating:newRating,points:newRating,losses:(u.losses||0)+1}).eq('id',id)}
 }
 
 function renderSubscription(){
@@ -2119,14 +2089,7 @@ function renderSubscription(){
     const promoCard=document.getElementById('sub-request-card'),statusEl=document.getElementById('sub-current-status');
     if(isPromotionActive()){
         const p=getPromotion();
-        statusEl.innerHTML=`
-            <div class="sub-status" style="border-color:var(--accent);background:rgba(34,197,94,.08)">
-                <div class="dot dot-green"></div>
-                <div style="flex:1;min-width:0">
-                    <div style="font-weight:700;color:var(--accent)">🎉 Free Month — No payment needed!</div>
-                    <div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${escapeHtml(p.message||'All matches are free this month. Enjoy!')}</div>
-                </div>
-            </div>`;
+        statusEl.innerHTML=`<div class="sub-status" style="border-color:var(--accent);background:rgba(34,197,94,.08)"><div class="dot dot-green"></div><div style="flex:1;min-width:0"><div style="font-weight:700;color:var(--accent)">🎉 Free Month — No payment needed!</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${escapeHtml(p.message||'All matches are free this month. Enjoy!')}</div></div></div>`;
         promoCard.classList.add('hidden');return;
     }
     promoCard.classList.remove('hidden');
@@ -2138,22 +2101,12 @@ function renderSubscription(){
     else if(s.status==='pending'){detail='Waiting for admin to verify $2 payment.';extra=`Requested ${new Date(s.requestedAt).toLocaleDateString()}`}
     else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now())detail='Subscription expired. Renew for this month to continue.';
     else detail='No active subscription for this month. Request activation below.';
-    statusEl.innerHTML=`
-        <div class="sub-status">
-            <div class="dot ${cls}"></div>
-            <div style="flex:1;min-width:0">
-                <div style="font-weight:600">${label.text}</div>
-                <div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${detail}</div>
-                ${extra?`<div style="font-size:.74rem;color:var(--text-dim);margin-top:2px">${extra}</div>`:''}
-            </div>
-        </div>
-        <div style="font-size:.78rem;color:var(--text-muted)">Paid: <strong>${s.paid?'Yes':'No'}</strong> • Auto-renew: <strong>${s.autoRenew?'On':'Off'}</strong></div>`;
+    statusEl.innerHTML=`<div class="sub-status"><div class="dot ${cls}"></div><div style="flex:1;min-width:0"><div style="font-weight:600">${label.text}</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${detail}</div>${extra?`<div style="font-size:.74rem;color:var(--text-dim);margin-top:2px">${extra}</div>`:''}</div></div><div style="font-size:.78rem;color:var(--text-muted)">Paid: <strong>${s.paid?'Yes':'No'}</strong> • Auto-renew: <strong>${s.autoRenew?'On':'Off'}</strong></div>`;
     const reqBtn=document.getElementById('sub-request-btn');
     if(s.status==='pending'){reqBtn.disabled=true;reqBtn.textContent='⏳ Request Pending Approval'}
     else if(s.status==='active'&&s.paidUntil>Date.now()){reqBtn.disabled=true;reqBtn.textContent='✅ Active This Month'}
     else{reqBtn.disabled=false;reqBtn.textContent='Request Subscription Activation ($2)'}
 }
-
 document.getElementById('sub-request-btn').addEventListener('click',async()=>{
     if(!userProfile)return;
     if(isPromotionActive()){showToast('🎉 You already have free play this month!');return}
@@ -2161,12 +2114,8 @@ document.getElementById('sub-request-btn').addEventListener('click',async()=>{
     if(s.status==='pending'){showToast('Request already pending.');return}
     if(s.status==='active'&&s.paidUntil>Date.now()){showToast('Already active.');return}
     const newSub={...s,status:'pending',requestedAt:Date.now()};
-    try{
-        const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',userProfile.id);
-        if(error)throw error;
-        await refreshAll();showToast('Request sent!');
-        renderSubscription();renderDashboard();
-    }catch(err){showToast('Failed: '+err.message)}
+    try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',userProfile.id);if(error)throw error;await refreshAll();showToast('Request sent!');renderSubscription();renderDashboard()}
+    catch(err){showToast('Failed: '+err.message)}
 });
 
 async function renderAdminPanel(){
@@ -2180,7 +2129,6 @@ async function renderAdminPanel(){
         locked.classList.remove('hidden');unlocked.classList.add('hidden');panel.classList.add('hidden');
     }
 }
-
 function renderPromotionUI(){
     const p=getPromotion();
     document.getElementById('promo-enabled').checked=p.enabled;
@@ -2203,19 +2151,15 @@ document.getElementById('promo-clear').addEventListener('click',async()=>{
     try{showLoading('Clearing promotion…');await savePromotion({enabled:false,month:'',message:''});hideLoading();showToast('Promotion cleared.');renderPromotionUI()}
     catch(err){hideLoading();showToast('Failed: '+err.message)}
 });
-
 function renderCCMgmtList(){
-    const el=document.getElementById('cc-mgmt-list');
-    if(!el)return;
+    const el=document.getElementById('cc-mgmt-list');if(!el)return;
     const all=getAllCCsIncludingHidden();
     document.getElementById('cc-mgmt-count').textContent=all.length+' total';
     if(all.length===0){el.innerHTML='<p style="color:var(--text-muted);font-size:.78rem">No community centres.</p>';return}
     el.innerHTML=all.map(item=>{
         const tag=item.isBase?'<span class="cc-mgmt-tag base">BASE</span>':'<span class="cc-mgmt-tag custom">CUSTOM</span>';
         const hiddenBadge=item.isHidden?'<span class="badge badge-red" style="font-size:.55rem">Hidden</span>':'';
-        const btn=item.isHidden
-            ?`<button class="tiny" style="background:var(--success);color:#0a1f38" onclick="restoreCCUI('${escapeHtml(item.name).replace(/'/g,"\\'")}')">Restore</button>`
-            :`<button class="tiny danger" onclick="deleteCCUI('${escapeHtml(item.name).replace(/'/g,"\\'")}')">🗑️</button>`;
+        const btn=item.isHidden?`<button class="tiny" style="background:var(--success);color:#0a1f38" onclick="restoreCCUI('${escapeHtml(item.name).replace(/'/g,"\\'")}')">Restore</button>`:`<button class="tiny danger" onclick="deleteCCUI('${escapeHtml(item.name).replace(/'/g,"\\'")}')">🗑️</button>`;
         return `<div class="cc-mgmt-row"><span class="cc-mgmt-name">${escapeHtml(item.name)}</span>${tag}${hiddenBadge}${btn}</div>`;
     }).join('');
 }
@@ -2238,17 +2182,12 @@ document.getElementById('add-cc-btn').addEventListener('click',async()=>{
     try{showLoading('Adding…');const r=await addCustomCC(cc);hideLoading();input.value='';showToast(r.action==='restored'?`"${cc}" restored.`:'Community centre added.');renderCCMgmtList()}
     catch(err){hideLoading();showToast(err.message)}
 });
-
 document.getElementById('admin-pin-submit').addEventListener('click',async()=>{
     const pin=document.getElementById('admin-pin-input').value.trim();
     if(!pin){showToast('Enter PIN.');return}
     if(!settingsLoaded)await loadDbSettings();
-    if(pin===getAdminPin()){
-        adminUnlocked=true;
-        document.getElementById('admin-pin-input').value='';
-        showToast('Admin panel unlocked.');
-        renderAdminPanel();
-    }else showToast('Incorrect PIN.');
+    if(pin===getAdminPin()){adminUnlocked=true;document.getElementById('admin-pin-input').value='';showToast('Admin panel unlocked.');renderAdminPanel()}
+    else showToast('Incorrect PIN.');
 });
 document.getElementById('admin-lock-btn').addEventListener('click',()=>{adminUnlocked=false;showToast('Admin panel locked.');renderAdminPanel()});
 document.getElementById('admin-change-pin').addEventListener('click',async()=>{
@@ -2258,23 +2197,12 @@ document.getElementById('admin-change-pin').addEventListener('click',async()=>{
     try{showLoading('Updating PIN…');await upsertSetting('admin_pin',np);hideLoading();document.getElementById('admin-new-pin').value='';showToast('Admin PIN updated. New PIN: '+np)}
     catch(err){hideLoading();showToast('Failed: '+err.message)}
 });
-
 function renderAdminPendingReqs(){
     const el=document.getElementById('admin-pending-reqs');
     const pending=allProfiles.filter(u=>u.subscription&&u.subscription.status==='pending');
     if(pending.length===0){el.innerHTML='<p style="color:var(--text-muted)">No pending requests.</p>';return}
-    el.innerHTML=pending.map(u=>`
-        <div style="background:var(--bg-dark);border-radius:12px;border:1px solid var(--border);padding:12px;margin-bottom:10px">
-            <div style="font-weight:700;font-size:.9rem">${escapeHtml(u.name)} ${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}</div>
-            <div style="font-size:.74rem;color:var(--text-muted);margin-top:3px;word-break:break-word">${escapeHtml(u.email)} • ${escapeHtml(u.community_centre||'')}</div>
-            <div style="font-size:.74rem;color:var(--text-muted);margin-top:3px">Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}</div>
-            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
-                <button class="tiny" style="background:var(--success);color:#0a1f38" onclick="adminApproveSub('${u.id}')">Approve ($2 received)</button>
-                <button class="tiny danger" onclick="adminRejectSub('${u.id}')">Reject</button>
-            </div>
-        </div>`).join('');
+    el.innerHTML=pending.map(u=>`<div style="background:var(--bg-dark);border-radius:12px;border:1px solid var(--border);padding:12px;margin-bottom:10px"><div style="font-weight:700;font-size:.9rem">${escapeHtml(u.name)} ${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}</div><div style="font-size:.74rem;color:var(--text-muted);margin-top:3px;word-break:break-word">${escapeHtml(u.email)} • ${escapeHtml(u.community_centre||'')}</div><div style="font-size:.74rem;color:var(--text-muted);margin-top:3px">Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><button class="tiny" style="background:var(--success);color:#0a1f38" onclick="adminApproveSub('${u.id}')">Approve ($2 received)</button><button class="tiny danger" onclick="adminRejectSub('${u.id}')">Reject</button></div></div>`).join('');
 }
-
 async function adminApproveSub(id){
     if(!userProfile.is_admin||!adminUnlocked){showToast('Admin access required.');return}
     const u=allProfiles.find(x=>x.id===id);
@@ -2284,15 +2212,9 @@ async function adminApproveSub(id){
         showLoading('Approving subscription…');
         const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);
         if(error)throw error;
-        await refreshAll();hideLoading();
-        showToast(`✅ Subscription approved for ${u.name}.`);
+        await refreshAll();hideLoading();showToast(`✅ Subscription approved for ${u.name}.`);
         renderAdminPendingReqs();renderAdminUserList();
-    }catch(err){
-        hideLoading();console.error(err);
-        let msg=err.message||'Update failed.';
-        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked this update. Run the admin SQL.';
-        showToast(msg,7000);
-    }
+    }catch(err){hideLoading();console.error(err);let msg=err.message||'Update failed.';if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked this update. Run the admin SQL.';showToast(msg,7000)}
 }
 async function adminRejectSub(id){
     if(!userProfile.is_admin||!adminUnlocked){showToast('Admin access required.');return}
@@ -2302,7 +2224,6 @@ async function adminRejectSub(id){
     try{showLoading('Rejecting…');const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();hideLoading();showToast(`Rejected for ${u.name}.`);renderAdminPendingReqs();renderAdminUserList()}
     catch(err){hideLoading();showToast('Failed: '+err.message)}
 }
-
 function lastPlayedFor(userId){
     if(!allMatchesGlobal||allMatchesGlobal.length===0)return null;
     let latest=null;
@@ -2314,36 +2235,19 @@ function lastPlayedFor(userId){
     }
     return latest;
 }
-
 function renderInactivityComments(){
-    const el=document.getElementById('inactivity-comments-list');
-    if(!el)return;
+    const el=document.getElementById('inactivity-comments-list');if(!el)return;
     const withReasons=allProfiles.filter(u=>u.inactivity_reason&&u.inactivity_reason.trim());
     if(withReasons.length===0){el.innerHTML='<p style="color:var(--text-muted)">No comments yet.</p>';return}
-    withReasons.sort((a,b)=>{
-        const ta=a.inactivity_reason_at?new Date(a.inactivity_reason_at).getTime():0;
-        const tb=b.inactivity_reason_at?new Date(b.inactivity_reason_at).getTime():0;
-        return tb-ta;
-    });
-    el.innerHTML=withReasons.map(u=>`
-        <div style="background:var(--bg-dark);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:10px;padding:12px;margin-bottom:10px">
-            <div style="font-weight:700;font-size:.88rem">${escapeHtml(u.name)}</div>
-            <div style="font-size:.7rem;color:var(--text-muted);margin-top:2px">${escapeHtml(u.email)} • ${escapeHtml(u.community_centre||'')}</div>
-            <div style="font-size:.7rem;color:var(--text-dim);margin-top:4px">Submitted: ${u.inactivity_reason_at?new Date(u.inactivity_reason_at).toLocaleString():'—'}</div>
-            <div style="font-size:.82rem;color:#fde68a;margin-top:8px;line-height:1.5;word-break:break-word">"${escapeHtml(u.inactivity_reason)}"</div>
-            <div style="margin-top:8px"><button class="tiny secondary" onclick="clearInactivityReason('${u.id}')">Clear</button></div>
-        </div>`).join('');
+    withReasons.sort((a,b)=>{const ta=a.inactivity_reason_at?new Date(a.inactivity_reason_at).getTime():0;const tb=b.inactivity_reason_at?new Date(b.inactivity_reason_at).getTime():0;return tb-ta});
+    el.innerHTML=withReasons.map(u=>`<div style="background:var(--bg-dark);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:10px;padding:12px;margin-bottom:10px"><div style="font-weight:700;font-size:.88rem">${escapeHtml(u.name)}</div><div style="font-size:.7rem;color:var(--text-muted);margin-top:2px">${escapeHtml(u.email)} • ${escapeHtml(u.community_centre||'')}</div><div style="font-size:.7rem;color:var(--text-dim);margin-top:4px">Submitted: ${u.inactivity_reason_at?new Date(u.inactivity_reason_at).toLocaleString():'—'}</div><div style="font-size:.82rem;color:#fde68a;margin-top:8px;line-height:1.5;word-break:break-word">"${escapeHtml(u.inactivity_reason)}"</div><div style="margin-top:8px"><button class="tiny secondary" onclick="clearInactivityReason('${u.id}')">Clear</button></div></div>`).join('');
 }
 window.clearInactivityReason=async function(userId){
     if(!userProfile.is_admin||!adminUnlocked)return;
     if(!confirm('Clear this comment?'))return;
-    try{
-        const{error}=await supabase.from('profiles').update({inactivity_reason:null,inactivity_reason_at:null}).eq('id',userId);
-        if(error)throw error;
-        await refreshAll();showToast('Comment cleared.');renderInactivityComments();
-    }catch(err){showToast('Failed: '+err.message)}
+    try{const{error}=await supabase.from('profiles').update({inactivity_reason:null,inactivity_reason_at:null}).eq('id',userId);if(error)throw error;await refreshAll();showToast('Comment cleared.');renderInactivityComments()}
+    catch(err){showToast('Failed: '+err.message)}
 };
-
 document.getElementById('admin-search').addEventListener('input',(e)=>{adminSearchTerm=e.target.value.trim().toLowerCase();renderAdminUserList()});
 function filteredAdminUsers(){
     const term=adminSearchTerm;
@@ -2352,7 +2256,6 @@ function filteredAdminUsers(){
     list.sort((a,b)=>{if(a.is_admin!==b.is_admin)return a.is_admin?-1:1;return(a.name||'').localeCompare(b.name||'')});
     return list;
 }
-
 function renderAdminUserList(){
     const el=document.getElementById('admin-user-list');
     const list=filteredAdminUsers();
@@ -2370,87 +2273,12 @@ function renderAdminUserList(){
         const isInactive=daysInactive===null||daysInactive>=INACTIVITY_THRESHOLD_DAYS;
         const paidLabel=subscriptionPaidLabel(u);
         const paidClass=paidLabel==='Paid'||paidLabel==='Free (promo)'?'badge-green':paidLabel==='Pending'?'badge-yellow':'badge-red';
-        const reasonBox=u.inactivity_reason?`
-            <div class="reason-box">
-                <span class="reason-title">💬 Reason for inactivity</span>
-                <div class="reason-text">${escapeHtml(u.inactivity_reason)}</div>
-            </div>`:'';
-        const editForm=isEditing?`
-            <div class="user-edit-form">
-                <div class="edit-row">
-                    <div><label>Name</label><input type="text" id="edit-name-${u.id}" value="${escapeHtml(u.name)}"></div>
-                    <div><label>Age</label><input type="number" id="edit-age-${u.id}" value="${u.age||''}" min="8" max="120"></div>
-                </div>
-                <label>Community Centre</label>
-                <select id="edit-cc-${u.id}"></select>
-                <div class="edit-actions">
-                    <button class="small" style="background:var(--success);color:#0a1f38" onclick="saveUserEdit('${u.id}')">💾 Save</button>
-                    <button class="small secondary" onclick="cancelUserEdit()">Cancel</button>
-                </div>
-            </div>`:'';
-        return `
-            <div class="user-card ${isEditing?'editing':''} ${isInactive&&!isSelf?'inactive':''}" id="row-${u.id}">
-                <div class="user-card-head">
-                    <div class="user-name">
-                        ${escapeHtml(u.name)}
-                        ${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}
-                        ${isSelf?'<span class="badge badge-blue">YOU</span>':''}
-                        ${isInactive&&!isSelf?'<span class="badge badge-yellow">INACTIVE</span>':''}
-                    </div>
-                    <div class="user-actions">
-                        <button class="tiny secondary" onclick="startUserEdit('${u.id}')" title="Edit">✏️</button>
-                        ${!isSelf?`<button class="tiny danger" onclick="adminDeleteUser('${u.id}')" title="Delete">🗑️</button>`:''}
-                    </div>
-                </div>
-                <div class="user-email">${escapeHtml(u.email)}</div>
-                <div class="user-fields">
-                    <div class="user-field">
-                        <span class="uf-label">Community Centre</span>
-                        <span class="uf-value">${escapeHtml(u.community_centre||'—')}</span>
-                    </div>
-                    <div class="user-field">
-                        <span class="uf-label">Age</span>
-                        <span class="uf-value">${u.age||'—'}</span>
-                    </div>
-                    <div class="user-field">
-                        <span class="uf-label">Subscription</span>
-                        <span class="badge ${paidClass}">${paidLabel}</span>
-                    </div>
-                    <div class="user-field">
-                        <span class="uf-label">Status</span>
-                        <span class="badge ${label.cls}">${label.text}</span>
-                    </div>
-                    <div class="user-field">
-                        <span class="uf-label">Created</span>
-                        <span class="uf-value muted">${formatDate(u.created_at)}</span>
-                    </div>
-                    <div class="user-field">
-                        <span class="uf-label">Last Played</span>
-                        <span class="uf-value ${!lastPlayed?'muted':''}">${timeAgo(lastPlayed)}</span>
-                    </div>
-                    <div class="user-field full">
-                        <span class="uf-label">Points • Record</span>
-                        <span class="uf-value">${u.points||0} pts • W: ${u.wins||0} / L: ${u.losses||0}</span>
-                    </div>
-                </div>
-                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
-                    <button class="tiny ${activeNow?'warn':''}" style="${!activeNow?'background:var(--success);color:#0a1f38':''}" onclick="adminToggleSub('${u.id}')">${activeNow?'Disable sub':'Enable this month'}</button>
-                    <button class="tiny secondary" onclick="adminTogglePaid('${u.id}')">${s.paid?'Mark Unpaid':'Mark Paid'}</button>
-                    <button class="tiny secondary" onclick="adminToggleAuto('${u.id}')">Auto-renew ${s.autoRenew?'✓':'✗'}</button>
-                    ${!isSelf?(u.is_admin?`<button class="tiny danger" onclick="adminToggleAdmin('${u.id}')">Remove Admin</button>`:`<button class="tiny" style="background:#1e40af;color:#dbeafe" onclick="adminToggleAdmin('${u.id}')">Make Admin</button>`):''}
-                </div>
-                ${reasonBox}
-                ${editForm}
-            </div>`;
+        const reasonBox=u.inactivity_reason?`<div class="reason-box"><span class="reason-title">💬 Reason for inactivity</span><div class="reason-text">${escapeHtml(u.inactivity_reason)}</div></div>`:'';
+        const editForm=isEditing?`<div class="user-edit-form"><div class="edit-row"><div><label>Name</label><input type="text" id="edit-name-${u.id}" value="${escapeHtml(u.name)}"></div><div><label>Age</label><input type="number" id="edit-age-${u.id}" value="${u.age||''}" min="8" max="120"></div></div><label>Community Centre</label><select id="edit-cc-${u.id}"></select><div class="edit-actions"><button class="small" style="background:var(--success);color:#0a1f38" onclick="saveUserEdit('${u.id}')">💾 Save</button><button class="small secondary" onclick="cancelUserEdit()">Cancel</button></div></div>`:'';
+        return `<div class="user-card ${isEditing?'editing':''} ${isInactive&&!isSelf?'inactive':''}" id="row-${u.id}"><div class="user-card-head"><div class="user-name">${escapeHtml(u.name)}${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}${isSelf?'<span class="badge badge-blue">YOU</span>':''}${isInactive&&!isSelf?'<span class="badge badge-yellow">INACTIVE</span>':''}</div><div class="user-actions"><button class="tiny secondary" onclick="startUserEdit('${u.id}')" title="Edit">✏️</button>${!isSelf?`<button class="tiny danger" onclick="adminDeleteUser('${u.id}')" title="Delete">🗑️</button>`:''}</div></div><div class="user-email">${escapeHtml(u.email)}</div><div class="user-fields"><div class="user-field"><span class="uf-label">Community Centre</span><span class="uf-value">${escapeHtml(u.community_centre||'—')}</span></div><div class="user-field"><span class="uf-label">Age</span><span class="uf-value">${u.age||'—'}</span></div><div class="user-field"><span class="uf-label">Subscription</span><span class="badge ${paidClass}">${paidLabel}</span></div><div class="user-field"><span class="uf-label">Status</span><span class="badge ${label.cls}">${label.text}</span></div><div class="user-field"><span class="uf-label">Created</span><span class="uf-value muted">${formatDate(u.created_at)}</span></div><div class="user-field"><span class="uf-label">Last Played</span><span class="uf-value ${!lastPlayed?'muted':''}">${timeAgo(lastPlayed)}</span></div><div class="user-field full"><span class="uf-label">Points • Record</span><span class="uf-value">${u.points||0} pts • W: ${u.wins||0} / L: ${u.losses||0}</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><button class="tiny ${activeNow?'warn':''}" style="${!activeNow?'background:var(--success);color:#0a1f38':''}" onclick="adminToggleSub('${u.id}')">${activeNow?'Disable sub':'Enable this month'}</button><button class="tiny secondary" onclick="adminTogglePaid('${u.id}')">${s.paid?'Mark Unpaid':'Mark Paid'}</button><button class="tiny secondary" onclick="adminToggleAuto('${u.id}')">Auto-renew ${s.autoRenew?'✓':'✗'}</button>${!isSelf?(u.is_admin?`<button class="tiny danger" onclick="adminToggleAdmin('${u.id}')">Remove Admin</button>`:`<button class="tiny" style="background:#1e40af;color:#dbeafe" onclick="adminToggleAdmin('${u.id}')">Make Admin</button>`):''}</div>${reasonBox}${editForm}</div>`;
     }).join('');
-    list.forEach(u=>{
-        if(editingUserId===u.id){
-            const sel=document.getElementById('edit-cc-'+u.id);
-            if(sel)populateCCSelect(sel,{includeOther:true,selectedValue:u.community_centre});
-        }
-    });
+    list.forEach(u=>{if(editingUserId===u.id){const sel=document.getElementById('edit-cc-'+u.id);if(sel)populateCCSelect(sel,{includeOther:true,selectedValue:u.community_centre})}});
 }
-
 window.startUserEdit=function(id){editingUserId=id;renderAdminUserList();document.getElementById('row-'+id)?.scrollIntoView({behavior:'smooth',block:'center'})};
 window.cancelUserEdit=function(){editingUserId=null;renderAdminUserList()};
 window.saveUserEdit=async function(id){
@@ -2459,22 +2287,12 @@ window.saveUserEdit=async function(id){
     const age=parseInt(document.getElementById('edit-age-'+id).value,10);
     const ccSel=document.getElementById('edit-cc-'+id);
     let cc=ccSel.value;
-    if(cc===OTHER_CC_VALUE){
-        const custom=prompt('Enter the new community centre name:');
-        if(!custom||!custom.trim()){showToast('Community centre is required.');return}
-        cc=custom.trim();
-    }
+    if(cc===OTHER_CC_VALUE){const custom=prompt('Enter the new community centre name:');if(!custom||!custom.trim()){showToast('Community centre is required.');return}cc=custom.trim()}
     if(!name){showToast('Name is required.');return}
     if(!age||age<8||age>120){showToast('Age must be 8–120.');return}
     if(!cc){showToast('Community centre is required.');return}
-    try{
-        showLoading('Saving…');
-        const{error,count}=await supabase.from('profiles').update({name,age,community_centre:cc},{count:'exact'}).eq('id',id);
-        if(error)throw error;
-        if(count===0)throw new Error('No rows updated. RLS may be blocking.');
-        await refreshAll();editingUserId=null;hideLoading();
-        showToast('✅ User updated successfully.');renderAdminUserList();
-    }catch(err){hideLoading();console.error(err);showToast('Failed: '+(err.message||'Unknown error'),7000)}
+    try{showLoading('Saving…');const{error,count}=await supabase.from('profiles').update({name,age,community_centre:cc},{count:'exact'}).eq('id',id);if(error)throw error;if(count===0)throw new Error('No rows updated.');await refreshAll();editingUserId=null;hideLoading();showToast('✅ User updated.');renderAdminUserList()}
+    catch(err){hideLoading();console.error(err);showToast('Failed: '+(err.message||'Unknown error'),7000)}
 };
 window.adminDeleteUser=async function(id){
     if(!userProfile.is_admin||!adminUnlocked){showToast('Admin access required.');return}
@@ -2489,18 +2307,11 @@ window.adminDeleteUser=async function(id){
         try{await supabase.from('matches').delete().or(`player_a.eq.${id},player_b.eq.${id},partner_a.eq.${id},partner_b.eq.${id}`)}catch(e){}
         const{error,count}=await supabase.from('profiles').delete({count:'exact'}).eq('id',id);
         if(error)throw error;
-        if(count===0)throw new Error('No profile row was deleted. RLS may be blocking.');
+        if(count===0)throw new Error('No profile row deleted.');
         allProfiles=allProfiles.filter(x=>x.id!==id);
-        await refreshAll();hideLoading();
-        showToast(`✅ ${u.name} deleted.`);renderAdminUserList();
-    }catch(err){
-        hideLoading();console.error(err);
-        let msg=err.message||'Unknown error';
-        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete.';
-        showToast('Delete failed: '+msg,8000);
-    }
+        await refreshAll();hideLoading();showToast(`✅ ${u.name} deleted.`);renderAdminUserList();
+    }catch(err){hideLoading();console.error(err);let msg=err.message||'Unknown error';if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete.';showToast('Delete failed: '+msg,8000)}
 };
-
 async function adminTogglePaid(id){if(!userProfile.is_admin||!adminUnlocked)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const newSub={...u.subscription,paid:!u.subscription.paid,lastPayment:!u.subscription.paid?Date.now():u.subscription.lastPayment};try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} marked ${newSub.paid?'Paid':'Unpaid'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
 async function adminToggleSub(id){if(!userProfile.is_admin||!adminUnlocked)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const activeNow=u.subscription.status==='active'&&u.subscription.paidUntil>Date.now();let newSub;if(activeNow){newSub={...u.subscription,status:'inactive',paidUntil:0};showToast(`${u.name}'s subscription disabled.`)}else{newSub={...u.subscription,status:'active',paid:true,paidUntil:endOfCurrentMonth(),lastPayment:Date.now()};showToast(`${u.name}'s subscription enabled.`)}try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
 async function adminToggleAuto(id){if(!userProfile.is_admin||!adminUnlocked)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const newSub={...u.subscription,autoRenew:!u.subscription.autoRenew};try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} auto-renew ${newSub.autoRenew?'ON':'OFF'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
@@ -2511,25 +2322,11 @@ function buildNotifications(){
     const myId=userProfile.id;
     const items=[];
     const incomingChallenges=allChallenges.filter(c=>(c.opponent===myId||c.opponent_partner===myId)&&c.status==='pending');
-    incomingChallenges.forEach(c=>{
-        const iAmPrimary=c.opponent===myId;
-        items.push({tab:'request',icon:'⚔️',
-            title:iAmPrimary?'New challenge to accept!':'You\'re in a pending challenge',
-            body:`${nameOf(c.challenger)}${c.challenger_partner?' & '+nameOf(c.challenger_partner):''} challenged you to a ${c.type} match at ${c.community_centre}.`,
-            action:iAmPrimary?'Tap to accept or decline →':'Tap to view →',severity:'info'});
-    });
+    incomingChallenges.forEach(c=>{const iAmPrimary=c.opponent===myId;items.push({tab:'request',icon:'⚔️',title:iAmPrimary?'New challenge to accept!':'You\'re in a pending challenge',body:`${nameOf(c.challenger)}${c.challenger_partner?' & '+nameOf(c.challenger_partner):''} challenged you to a ${c.type} match at ${c.community_centre}.`,action:iAmPrimary?'Tap to accept or decline →':'Tap to view →',severity:'info'})});
     const incomingRequests=allRequests.filter(r=>r.to_user===myId&&r.status==='pending');
-    incomingRequests.forEach(r=>{
-        items.push({tab:'request',icon:'🏓',title:'Match request awaiting your approval',
-            body:`${nameOf(r.from_user)}${r.partner?' & '+nameOf(r.partner):''} submitted a ${r.type} match score ${r.score_a}–${r.score_b} at ${r.community_centre}.`,
-            action:'Tap to approve or reject →',severity:'info'});
-    });
+    incomingRequests.forEach(r=>{items.push({tab:'request',icon:'🏓',title:'Match request awaiting your approval',body:`${nameOf(r.from_user)}${r.partner?' & '+nameOf(r.partner):''} submitted a ${r.type} match score ${r.score_a}–${r.score_b} at ${r.community_centre}.`,action:'Tap to approve or reject →',severity:'info'})});
     const awaitingAck=allChallenges.filter(c=>c.status==='score_submitted'&&c.score_submitted_by!==myId&&(c.opponent===myId||c.opponent_partner===myId||c.challenger===myId||c.challenger_partner===myId));
-    awaitingAck.forEach(c=>{
-        items.push({tab:'request',icon:'📝',title:'Score submitted — please acknowledge',
-            body:`${nameOf(c.score_submitted_by)} submitted the score ${c.score_challenger}–${c.score_opponent}.`,
-            action:'Tap to acknowledge →',severity:'info'});
-    });
+    awaitingAck.forEach(c=>{items.push({tab:'request',icon:'📝',title:'Score submitted — please acknowledge',body:`${nameOf(c.score_submitted_by)} submitted the score ${c.score_challenger}–${c.score_opponent}.`,action:'Tap to acknowledge →',severity:'info'})});
     if(isPromotionActive()){
         const sub=userProfile.subscription||{};
         const isActive=sub.status==='active'&&sub.paidUntil>Date.now();
@@ -2539,9 +2336,7 @@ function buildNotifications(){
         const isActive=sub.status==='active'&&sub.paidUntil>Date.now();
         if(!isActive&&sub.status!=='pending'){
             const isExpired=sub.status==='active'&&sub.paidUntil>0&&sub.paidUntil<=Date.now();
-            items.push({tab:'subscribe',icon:'💳',title:isExpired?'Your subscription has expired':'Subscription required',
-                body:isExpired?'Renew your $2 subscription to continue playing this month.':'You need an active $2/month subscription to challenge and play matches.',
-                action:'Tap to subscribe →',severity:'danger'});
+            items.push({tab:'subscribe',icon:'💳',title:isExpired?'Your subscription has expired':'Subscription required',body:isExpired?'Renew your $2 subscription to continue playing this month.':'You need an active $2/month subscription to challenge and play matches.',action:'Tap to subscribe →',severity:'danger'});
         }else if(sub.status==='pending'){
             items.push({tab:'subscribe',icon:'⏳',title:'Subscription pending admin approval',body:'Your request is being reviewed.',action:'Tap to view status →',severity:'warning'});
         }
@@ -2557,18 +2352,7 @@ function updateNotifDots(){
     document.getElementById('notif-dot-play')?.classList.toggle('hidden',!byTab.request);
     document.getElementById('notif-dot-sub')?.classList.toggle('hidden',!byTab.subscribe);
     const bell=document.getElementById('bell-btn'),count=document.getElementById('bell-count');
-    if(bell&&count){
-        if(items.length>0){count.textContent=items.length>9?'9+':String(items.length);count.classList.remove('hidden');bell.classList.add('pulse')}
-        else{count.classList.add('hidden');bell.classList.remove('pulse')}
-    }
-}
-function checkAndShowNotifications(force=false){
-    if(!userProfile)return;
-    const items=buildNotifications();
-    updateNotifDots();
-    if(items.length===0)return;
-    const sig=computeNotifSignature(items);
-    if(force||sig!==lastNotifSignature){lastNotifSignature=sig;showNotifModal(items)}
+    if(bell&&count){if(items.length>0){count.textContent=items.length>9?'9+':String(items.length);count.classList.remove('hidden');bell.classList.add('pulse')}else{count.classList.add('hidden');bell.classList.remove('pulse')}}
 }
 function checkForNewNotifications(){
     if(notifModalOpen)return;
@@ -2581,26 +2365,15 @@ function checkForNewNotifications(){
 }
 function showNotifModal(items){
     const modal=document.getElementById('notif-modal'),body=document.getElementById('notif-body');
-    body.innerHTML=items.map(it=>`
-        <div class="notif-item ${it.severity==='danger'?'danger':it.severity==='warning'?'warning':''}" onclick="jumpFromNotif('${it.tab}')">
-            <span class="n-icon">${it.icon}</span>
-            <div class="n-title">${escapeHtml(it.title)}</div>
-            <div class="n-body">${escapeHtml(it.body)}</div>
-            <span class="n-action">${escapeHtml(it.action)}</span>
-        </div>`).join('');
-    modal.classList.remove('hidden');
-    notifModalOpen=true;
+    body.innerHTML=items.map(it=>`<div class="notif-item ${it.severity==='danger'?'danger':it.severity==='warning'?'warning':''}" onclick="jumpFromNotif('${it.tab}')"><span class="n-icon">${it.icon}</span><div class="n-title">${escapeHtml(it.title)}</div><div class="n-body">${escapeHtml(it.body)}</div><span class="n-action">${escapeHtml(it.action)}</span></div>`).join('');
+    modal.classList.remove('hidden');notifModalOpen=true;
 }
 function closeNotifModal(){document.getElementById('notif-modal')?.classList.add('hidden');notifModalOpen=false}
 window.jumpFromNotif=function(tab){closeNotifModal();switchTab(tab)};
 document.getElementById('notif-modal-x').addEventListener('click',closeNotifModal);
 document.getElementById('notif-dismiss').addEventListener('click',closeNotifModal);
 document.getElementById('notif-modal').addEventListener('click',(e)=>{if(e.target.id==='notif-modal')closeNotifModal()});
-document.getElementById('bell-btn').addEventListener('click',()=>{
-    const items=buildNotifications();
-    if(items.length===0){showToast('No new notifications. 🎉',2500);return}
-    showNotifModal(items);
-});
+document.getElementById('bell-btn').addEventListener('click',()=>{const items=buildNotifications();if(items.length===0){showToast('No new notifications. 🎉',2500);return}showNotifModal(items)});
 
 let inactivityModalOpen=false;
 function checkInactivity(){
@@ -2612,58 +2385,23 @@ function checkInactivity(){
     const days=daysSince(lastPlayed);
     const isInactive=days===null||days>=INACTIVITY_THRESHOLD_DAYS;
     if(!isInactive)return;
-    if(userProfile.inactivity_reason_at){
-        const reasonAge=daysSince(new Date(userProfile.inactivity_reason_at).getTime());
-        if(reasonAge!==null&&reasonAge<7)return;
-    }
+    if(userProfile.inactivity_reason_at){const reasonAge=daysSince(new Date(userProfile.inactivity_reason_at).getTime());if(reasonAge!==null&&reasonAge<7)return}
     sessionStorage.setItem(sessionKey,'1');
     showInactivityModal(days);
 }
-
 function showInactivityModal(days){
-    const modal=document.getElementById('inactivity-modal');
-    const body=document.getElementById('inactivity-body');
-    const footer=document.getElementById('inactivity-footer');
+    const modal=document.getElementById('inactivity-modal'),body=document.getElementById('inactivity-body'),footer=document.getElementById('inactivity-footer');
     const daysText=days===null?'You haven\'t played a match yet':`It's been <span class="ic-days">${days} days</span> since your last match`;
-    body.innerHTML=`
-        <div class="inactivity-cta">
-            <span class="ic-icon">🏓</span>
-            <h3>We miss you at the table!</h3>
-            <p>${daysText}. Come back and play a match to keep your ranking and discount active!</p>
-        </div>
-        <p style="font-size:.85rem;color:var(--text-muted);text-align:center;margin-top:12px">Every match counts — even a friendly one keeps your streak alive.</p>
-    `;
-    footer.innerHTML=`
-        <button id="inactivity-play" style="margin-bottom:8px">🎾 I'll be back soon</button>
-        <button id="inactivity-reason" class="secondary" style="margin-bottom:0">💬 Share a reason</button>
-    `;
-    modal.classList.remove('hidden');
-    inactivityModalOpen=true;
-
-    document.getElementById('inactivity-play').addEventListener('click',()=>{
-        closeInactivityModal();
-        switchTab('request');
-    });
+    body.innerHTML=`<div class="inactivity-cta"><span class="ic-icon">🏓</span><h3>We miss you at the table!</h3><p>${daysText}. Come back and play a match to keep your ranking and discount active!</p></div><p style="font-size:.85rem;color:var(--text-muted);text-align:center;margin-top:12px">Every match counts — even a friendly one keeps your streak alive.</p>`;
+    footer.innerHTML=`<button id="inactivity-play" style="margin-bottom:8px">🎾 I'll be back soon</button><button id="inactivity-reason" class="secondary" style="margin-bottom:0">💬 Share a reason</button>`;
+    modal.classList.remove('hidden');inactivityModalOpen=true;
+    document.getElementById('inactivity-play').addEventListener('click',()=>{closeInactivityModal();switchTab('request')});
     document.getElementById('inactivity-reason').addEventListener('click',()=>showReasonForm());
 }
-
 function showReasonForm(){
-    const body=document.getElementById('inactivity-body');
-    const footer=document.getElementById('inactivity-footer');
-    body.innerHTML=`
-        <div class="inactivity-cta" style="background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.05));border-color:var(--warning)">
-            <span class="ic-icon">💬</span>
-            <h3 style="color:var(--warning)">Share your reason</h3>
-            <p>Help us understand. This will be visible only to admins.</p>
-        </div>
-        <label for="inactivity-reason-text" style="margin-top:12px">Your reason</label>
-        <textarea id="inactivity-reason-text" rows="4" placeholder="e.g. Travelling for work, injured, busy with exams…" maxlength="500" style="resize:vertical;min-height:100px;font-family:inherit"></textarea>
-        <div class="field-error hidden" id="inactivity-reason-error"></div>
-    `;
-    footer.innerHTML=`
-        <button id="inactivity-submit-reason" style="margin-bottom:8px">Submit</button>
-        <button id="inactivity-cancel" class="secondary" style="margin-bottom:0">Cancel</button>
-    `;
+    const body=document.getElementById('inactivity-body'),footer=document.getElementById('inactivity-footer');
+    body.innerHTML=`<div class="inactivity-cta" style="background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.05));border-color:var(--warning)"><span class="ic-icon">💬</span><h3 style="color:var(--warning)">Share your reason</h3><p>Help us understand. This will be visible only to admins.</p></div><label for="inactivity-reason-text" style="margin-top:12px">Your reason</label><textarea id="inactivity-reason-text" rows="4" placeholder="e.g. Travelling for work, injured, busy with exams…" maxlength="500" style="resize:vertical;min-height:100px;font-family:inherit"></textarea><div class="field-error hidden" id="inactivity-reason-error"></div>`;
+    footer.innerHTML=`<button id="inactivity-submit-reason" style="margin-bottom:8px">Submit</button><button id="inactivity-cancel" class="secondary" style="margin-bottom:0">Cancel</button>`;
     document.getElementById('inactivity-cancel').addEventListener('click',()=>closeInactivityModal());
     document.getElementById('inactivity-submit-reason').addEventListener('click',async()=>{
         const txt=document.getElementById('inactivity-reason-text').value.trim();
@@ -2671,33 +2409,26 @@ function showReasonForm(){
         if(!txt){err.textContent='Please enter a reason';err.classList.remove('hidden');return}
         try{
             showLoading('Saving…');
-            const{error}=await supabase.from('profiles').update({
-                inactivity_reason:txt,
-                inactivity_reason_at:new Date().toISOString()
-            }).eq('id',userProfile.id);
+            const{error}=await supabase.from('profiles').update({inactivity_reason:txt,inactivity_reason_at:new Date().toISOString()}).eq('id',userProfile.id);
             if(error)throw error;
             hideLoading();
             const me=allProfiles.find(p=>p.id===userProfile.id);
             if(me){me.inactivity_reason=txt;me.inactivity_reason_at=new Date().toISOString();userProfile=me}
-            closeInactivityModal();
-            showToast('✅ Thanks for sharing! Admin will review.',3500);
+            closeInactivityModal();showToast('✅ Thanks for sharing! Admin will review.',3500);
         }catch(e){hideLoading();showToast('Failed: '+e.message,5000)}
     });
 }
-
-function closeInactivityModal(){
-    document.getElementById('inactivity-modal')?.classList.add('hidden');
-    inactivityModalOpen=false;
-}
+function closeInactivityModal(){document.getElementById('inactivity-modal')?.classList.add('hidden');inactivityModalOpen=false}
 document.getElementById('inactivity-x').addEventListener('click',closeInactivityModal);
 document.getElementById('inactivity-modal').addEventListener('click',(e)=>{if(e.target.id==='inactivity-modal')closeInactivityModal()});
 
+/* ============================================================
+   INITIALISE
+   ============================================================ */
 (function immediateInit(){
     const hash=window.location.hash||'';
     const search=window.location.search||'';
-    if(hash.includes('access_token')||hash.includes('type=signup')||search.includes('type=signup')){
-        window._arrivedFromEmail=true;
-    }
+    if(hash.includes('access_token')||hash.includes('type=signup')||search.includes('type=signup')){window._arrivedFromEmail=true}
     try{populateAllCCSelects()}catch(e){console.error(e)}
     try{
         attachCCOtherToggle('auth-cc','auth-cc-other');
@@ -2707,6 +2438,7 @@ document.getElementById('inactivity-modal').addEventListener('click',(e)=>{if(e.
     try{initAuthScreen()}catch(e){console.error(e)}
     try{showConfigBannerIfNeeded()}catch(e){console.error(e)}
     try{const lb=document.getElementById('logout-btn');if(lb)lb.addEventListener('click',handleLogout)}catch(e){console.error(e)}
+    setAuthMode('login');
     setTimeout(()=>{hideLoading();if(!currentUser)showOnlyScreen('auth')},700);
     document.getElementById('tab-bar')?.classList.add('hidden');
     document.getElementById('app-header')?.classList.add('hidden');
@@ -2763,6 +2495,7 @@ window.adminDeleteUser=adminDeleteUser;
 window.deleteCCUI=deleteCCUI;
 window.restoreCCUI=restoreCCUI;
 window.clearInactivityReason=clearInactivityReason;
+window.setAuthMode=setAuthMode;
 </script>
 </body>
 </html>
