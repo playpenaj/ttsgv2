@@ -3,86 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="theme-color" content="#0f172a">
-    <title>SG Table Tennis Tracker</title>
+    <meta name="theme-color" content="#0a1f38">
+    <title>🏓 SG Table Tennis Tracker</title>
     <style>
+        /* ============================================================
+           TABLE TENNIS THEME
+           Navy blue (table) + Orange (ball) + White (court lines)
+           ============================================================ */
+        :root {
+            --bg-primary: #0a1f38;
+            --bg-secondary: #0f2942;
+            --bg-card: #12395c;
+            --bg-elevated: #0a1f38;
+            --bg-dark: #061526;
+            --accent: #f97316;
+            --accent-hover: #fb923c;
+            --accent-soft: rgba(249, 115, 22, 0.15);
+            --success: #22c55e;
+            --success-soft: rgba(34, 197, 94, 0.15);
+            --danger: #ef4444;
+            --danger-soft: rgba(239, 68, 68, 0.15);
+            --warning: #f59e0b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --border: #1e4a72;
+            --border-light: #2a5a85;
+            --court-line: rgba(255, 255, 255, 0.85);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-top: env(safe-area-inset-top, 0px);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        :root { --safe-bottom: env(safe-area-inset-bottom, 0px); }
-        html, body { background: #0f172a; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; overflow-x: hidden; min-height: 100%; }
-        body { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; font-size: 15px; }
-        #app { max-width: 720px; margin: 0 auto; padding: 14px; padding-bottom: calc(96px + var(--safe-bottom)); overflow-x: hidden; }
-        h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2px; }
-        h2 { font-size: 1.05rem; font-weight: 600; color: #94a3b8; margin-bottom: 12px; }
-        h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
 
-        .card { background: #1e293b; border-radius: 16px; padding: 16px; margin-bottom: 14px; border: 1px solid #334155; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3); }
-        .card-accent { border-left: 4px solid #22c55e; }
-        .card-warn   { border-left: 4px solid #f59e0b; }
-        .card-danger { border-left: 4px solid #ef4444; }
-        .card-purple { border-left: 4px solid #a855f7; }
-
-        button { font-family: inherit; font-size: 0.92rem; font-weight: 600; min-height: 44px; padding: 12px 18px; border: none; border-radius: 12px; cursor: pointer; transition: transform 0.1s, background 0.15s; width: 100%; background: #22c55e; color: #0f172a; margin-bottom: 8px; }
-        button:active { transform: scale(0.97); }
-        button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-        button.secondary { background: #334155; color: #e2e8f0; }
-        button.danger    { background: #ef4444; color: #fff; }
-        button.warn      { background: #f59e0b; color: #0f172a; }
-        button.purple    { background: #a855f7; color: #fff; }
-        button.small { width: auto; min-height: 34px; padding: 7px 12px; font-size: 0.78rem; display: inline-block; margin: 0 6px 6px 0; border-radius: 9px; }
-        button.tiny  { width: auto; min-height: 30px; padding: 5px 10px; font-size: 0.72rem; display: inline-block; margin: 0 4px 4px 0; border-radius: 8px; }
-
-        input, select, textarea { font-family: inherit; font-size: 16px; padding: 12px 14px; border-radius: 12px; border: 1px solid #475569; background: #0f172a; color: #e2e8f0; width: 100%; margin-bottom: 12px; min-height: 46px; -webkit-appearance: none; appearance: none; }
-        select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
-        input:focus, select:focus, textarea:focus { outline: 2px solid #22c55e; border-color: transparent; }
-        label { display: block; font-size: 0.82rem; font-weight: 500; color: #94a3b8; margin-bottom: 5px; }
-
-        .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.68rem; font-weight: 600; background: #334155; color: #94a3b8; white-space: nowrap; letter-spacing: 0.01em; }
-        .badge-green  { background: #166534; color: #bbf7d0; }
-        .badge-yellow { background: #854d0e; color: #fef08a; }
-        .badge-red    { background: #991b1b; color: #fecaca; }
-        .badge-admin  { background: #1e3a8a; color: #bfdbfe; }
-        .badge-blue   { background: #1e40af; color: #dbeafe; }
-        .badge-purple { background: #581c87; color: #e9d5ff; }
-        .badge-orange { background: #7c2d12; color: #fed7aa; }
-
-        .config-banner { background: #7f1d1d; border: 2px solid #ef4444; color: #fecaca; padding: 14px 16px; border-radius: 12px; margin-bottom: 14px; font-size: 0.85rem; line-height: 1.55; }
-        .config-banner strong { color: #fff; display: block; margin-bottom: 6px; font-size: 0.95rem; }
-        .config-banner code { background: #0f172a; padding: 1px 5px; border-radius: 4px; font-size: 0.78rem; color: #fef08a; word-break: break-all; }
-
-        .success-banner {
-            background: #14532d;
-            border: 2px solid #22c55e;
-            color: #bbf7d0;
-            padding: 14px 16px;
-            border-radius: 12px;
-            margin-bottom: 14px;
-            font-size: 0.9rem;
+        html, body {
+            background: var(--bg-primary);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.5;
-            animation: fadeInOut 8s ease-in-out forwards;
-        }
-        .success-banner strong { color: #fff; display: block; margin-bottom: 4px; font-size: 1rem; }
-        @keyframes fadeInOut {
-            0%   { opacity: 0; transform: translateY(-10px); }
-            10%  { opacity: 1; transform: translateY(0); }
-            90%  { opacity: 1; }
-            100% { opacity: 0; height: 0; padding: 0; margin: 0; overflow: hidden; }
+            min-height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+            font-size: 15px;
         }
 
-        .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
-        .stat-item { background: #0f172a; padding: 12px 8px; border-radius: 12px; text-align: center; }
-        .stat-value { font-size: 1.5rem; font-weight: 700; color: #22c55e; line-height: 1.1; }
-        .stat-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+        /* Court-line pattern background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--court-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--court-line) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-        .match-item { background: #0f172a; border-radius: 12px; padding: 12px; margin-bottom: 8px; border: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-        .match-item .info { flex: 1; min-width: 0; }
-        .match-item .info strong { display: block; font-size: 0.9rem; word-break: break-word; }
-        .match-item .info small { color: #94a3b8; font-size: 0.72rem; display: block; margin-top: 2px; word-break: break-word; }
+        #app {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 14px;
+            padding-top: calc(14px + var(--safe-top));
+            padding-bottom: calc(110px + var(--safe-bottom));
+            overflow-x: hidden;
+        }
+
+        /* ---------- TYPOGRAPHY ---------- */
+        h1 { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 2px; }
+        h2 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; letter-spacing: -0.01em; text-transform: uppercase; font-size: 0.72rem; color: var(--accent); }
+        h3 { font-size: 0.92rem; font-weight: 600; margin-bottom: 8px; }
+
+        /* ---------- CARDS ---------- */
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Court-line top accent */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent);
+            opacity: 0.6;
+        }
+
+        .card-accent { border-color: var(--accent); }
+        .card-accent::before { opacity: 1; background: var(--accent); }
+        .card-warn { border-color: var(--warning); }
+        .card-warn::before { background: var(--warning); opacity: 1; }
+        .card-danger { border-color: var(--danger); }
+        .card-danger::before { background: var(--danger); opacity: 1; }
+        .card-purple { border-color: #a855f7; }
+        .card-purple::before { background: #a855f7; opacity: 1; }
+
+        /* ---------- BUTTONS ---------- */
+        button {
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 700;
+            min-height: 46px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.15s, box-shadow 0.15s;
+            width: 100%;
+            background: var(--accent);
+            color: #0a1f38;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+            letter-spacing: 0.01em;
+        }
+        button:hover:not(:disabled) { background: var(--accent-hover); }
+        button:active:not(:disabled) { transform: scale(0.97); box-shadow: 0 1px 4px rgba(249, 115, 22, 0.4); }
+        button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+        button.secondary { background: var(--bg-elevated); color: var(--text); border: 1px solid var(--border); box-shadow: none; }
+        button.secondary:hover:not(:disabled) { background: var(--bg-secondary); }
+        button.danger { background: var(--danger); color: #fff; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3); }
+        button.warn { background: var(--warning); color: #0a1f38; }
+        button.purple { background: #a855f7; color: #fff; box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3); }
+        button.small { width: auto; min-height: 34px; padding: 7px 12px; font-size: 0.76rem; display: inline-block; margin: 0 6px 6px 0; border-radius: 9px; }
+        button.tiny { width: auto; min-height: 30px; padding: 5px 10px; font-size: 0.7rem; display: inline-block; margin: 0 4px 4px 0; border-radius: 8px; }
+
+        /* ---------- INPUTS ---------- */
+        input, select, textarea {
+            font-family: inherit;
+            font-size: 16px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            color: var(--text);
+            width: 100%;
+            margin-bottom: 12px;
+            min-height: 46px;
+            -webkit-appearance: none;
+            appearance: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        input::placeholder { color: var(--text-dim); }
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        /* [NEW] Error state for validation */
+        input.input-error, select.input-error {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px var(--danger-soft);
+            animation: shake 0.35s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .field-error {
+            color: var(--danger);
+            font-size: 0.75rem;
+            margin-top: -8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+        }
+        .field-error::before { content: '⚠'; }
+
+        label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* ---------- BADGES ---------- */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.66rem;
+            font-weight: 700;
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            white-space: nowrap;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+        }
+        .badge-green { background: var(--success-soft); color: #86efac; border-color: rgba(34, 197, 94, 0.3); }
+        .badge-yellow { background: rgba(245, 158, 11, 0.15); color: #fcd34d; border-color: rgba(245, 158, 11, 0.3); }
+        .badge-red { background: var(--danger-soft); color: #fca5a5; border-color: rgba(239, 68, 68, 0.3); }
+        .badge-admin { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); }
+        .badge-blue { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); }
+        .badge-purple { background: rgba(168, 85, 247, 0.15); color: #d8b4fe; border-color: rgba(168, 85, 247, 0.3); }
+        .badge-orange { background: var(--accent-soft); color: #fdba74; border-color: rgba(249, 115, 22, 0.3); }
+
+        /* ---------- STAT GRID (Scoreboard style) ---------- */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .stat-item {
+            background: var(--bg-dark);
+            padding: 14px 8px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 10%; right: 10%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.4;
+            border-radius: 2px;
+        }
+        .stat-value {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1.1;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 0 20px rgba(249, 115, 22, 0.35);
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        /* ---------- MATCH ITEM ---------- */
+        .match-item {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .match-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            opacity: 0.4;
+        }
+        .match-item .info { flex: 1; min-width: 0; padding-left: 6px; }
+        .match-item .info strong { display: block; font-size: 0.9rem; word-break: break-word; color: var(--text); font-weight: 700; }
+        .match-item .info small { color: var(--text-muted); font-size: 0.72rem; display: block; margin-top: 3px; word-break: break-word; }
         .match-item .result { text-align: right; flex-shrink: 0; }
 
-        .scroll-list { max-height: 340px; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; padding-right: 2px; }
+        /* ---------- SCROLL LIST ---------- */
+        .scroll-list {
+            max-height: 340px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding-right: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+        .scroll-list::-webkit-scrollbar { width: 6px; }
+        .scroll-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-        .collapsible { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .collapsible::after { content: "▸"; font-size: 1.2rem; color: #94a3b8; transition: transform 0.2s; }
+        /* ---------- COLLAPSIBLE ---------- */
+        .collapsible {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            user-select: none;
+        }
+        .collapsible::after { content: "▸"; font-size: 1.2rem; color: var(--accent); transition: transform 0.2s; }
         .collapsible.open::after { transform: rotate(90deg); }
         .collapsible-content { display: none; margin-top: 12px; font-size: 0.85rem; color: #cbd5e1; }
         .collapsible-content.show { display: block; }
@@ -90,80 +325,334 @@
         .collapsible-content ul { padding-left: 20px; margin-bottom: 8px; }
         .collapsible-content li { margin-bottom: 4px; }
 
-        .tab-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; border-top: 1px solid #334155; display: flex; justify-content: space-around; padding: 6px 0; padding-bottom: calc(6px + var(--safe-bottom)); z-index: 100; }
-        .tab-bar button { background: none; color: #94a3b8; width: auto; padding: 6px 4px; font-size: 0.62rem; margin: 0; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; min-width: 0; min-height: 0; font-weight: 500; }
-        .tab-bar button.active { color: #22c55e; }
-        .tab-bar button .icon { font-size: 1.25rem; line-height: 1; }
+        /* ---------- STICKY HEADER ---------- */
+        #app-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: linear-gradient(180deg, var(--bg-primary) 60%, transparent);
+            padding: 12px 0 10px;
+            margin: -14px -14px 0;
+            padding-left: 14px;
+            padding-right: 14px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
 
+        /* ---------- TAB BAR ---------- */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-top: 2px solid var(--accent);
+            display: flex;
+            justify-content: space-around;
+            padding: 6px 0;
+            padding-bottom: calc(6px + var(--safe-bottom));
+            z-index: 1000;
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+        }
+        /* Court-net stripe at the top of tab bar */
+        .tab-bar::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: 0; right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px);
+        }
+        .tab-bar button {
+            background: none;
+            color: var(--text-dim);
+            width: auto;
+            padding: 6px 4px;
+            font-size: 0.6rem;
+            margin: 0;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            flex: 1;
+            min-width: 0;
+            min-height: 0;
+            font-weight: 700;
+            box-shadow: none;
+            transition: color 0.15s, transform 0.1s;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .tab-bar button:hover:not(.active) { color: var(--text-muted); }
+        .tab-bar button:active { transform: scale(0.95); }
+        .tab-bar button.active { color: var(--accent); }
+        .tab-bar button.active .icon { filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.6)); }
+        .tab-bar button .icon { font-size: 1.3rem; line-height: 1; transition: filter 0.2s; }
+
+        /* ---------- UTILITIES ---------- */
         .hidden { display: none !important; }
 
-        #toast { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #e2e8f0; padding: 12px 20px; border-radius: 12px; border: 1px solid #334155; font-size: 0.88rem; z-index: 200; max-width: 92vw; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); transition: opacity 0.3s; word-break: break-word; }
+        /* ---------- TOAST ---------- */
+        #toast {
+            position: fixed;
+            top: calc(16px + var(--safe-top));
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            color: var(--text);
+            padding: 14px 22px;
+            border-radius: 12px;
+            border: 1px solid var(--accent);
+            font-size: 0.88rem;
+            z-index: 9999;
+            max-width: 92vw;
+            text-align: center;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(249, 115, 22, 0.15);
+            transition: opacity 0.3s, transform 0.3s;
+            word-break: break-word;
+        }
         #toast.hidden { display: none; }
 
-        .rank-display { font-size: 2.8rem; font-weight: 800; color: #22c55e; text-align: center; line-height: 1; }
+        /* ---------- RANK ---------- */
+        .rank-display {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-align: center;
+            line-height: 1;
+            text-shadow: 0 0 32px rgba(249, 115, 22, 0.5);
+            font-variant-numeric: tabular-nums;
+        }
 
-        .sub-price { font-size: 2.6rem; font-weight: 800; color: #22c55e; text-align: center; line-height: 1; }
-        .sub-price small { font-size: 0.9rem; color: #94a3b8; font-weight: 500; }
-        .sub-status { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 12px; background: #0f172a; margin-bottom: 12px; }
+        /* ---------- SUBSCRIPTION ---------- */
+        .sub-price {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-align: center;
+            line-height: 1;
+            text-shadow: 0 0 24px rgba(249, 115, 22, 0.4);
+        }
+        .sub-price small { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+        .sub-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--bg-dark);
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+        }
         .sub-status .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-        .dot-green  { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-        .dot-yellow { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
-        .dot-red    { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+        .dot-green { background: var(--success); box-shadow: 0 0 12px var(--success); }
+        .dot-yellow { background: var(--warning); box-shadow: 0 0 12px var(--warning); }
+        .dot-red { background: var(--danger); box-shadow: 0 0 12px var(--danger); }
 
+        /* ---------- USER TABLE ---------- */
         .user-table { width: 100%; }
-        .user-table-head, .user-table-main { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr) minmax(0, 1.2fr) 22px; gap: 6px; align-items: center; }
-        .user-table-head { padding: 6px 8px; font-size: 0.66rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; border-bottom: 1px solid #334155; }
-        .user-table-row { border-bottom: 1px solid #1e293b; }
+        .user-table-head, .user-table-main {
+            display: grid;
+            grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr) minmax(0, 1.2fr) 22px;
+            gap: 6px;
+            align-items: center;
+        }
+        .user-table-head {
+            padding: 6px 8px;
+            font-size: 0.62rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent);
+        }
+        .user-table-row { border-bottom: 1px solid var(--border); }
         .user-table-row:last-child { border-bottom: none; }
         .user-table-main { padding: 10px 8px; cursor: pointer; transition: background 0.15s; min-height: 52px; }
-        .user-table-main:hover { background: #0f172a; }
+        .user-table-main:hover { background: var(--bg-dark); }
         .cell-name { min-width: 0; }
-        .cell-name .name-line { font-weight: 600; font-size: 0.84rem; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
-        .cell-name .name-line .badge { font-size: 0.58rem; padding: 1px 6px; }
-        .cell-name .sub-line { font-size: 0.68rem; color: #94a3b8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px; }
-        .cell-cc { font-size: 0.72rem; color: #cbd5e1; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25; }
+        .cell-name .name-line { font-weight: 700; font-size: 0.84rem; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+        .cell-name .name-line .badge { font-size: 0.56rem; padding: 1px 6px; }
+        .cell-name .sub-line { font-size: 0.66rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px; }
+        .cell-cc { font-size: 0.7rem; color: #cbd5e1; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25; }
         .cell-status { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; min-width: 0; }
-        .cell-status .badge { font-size: 0.6rem; padding: 1px 6px; }
-        .cell-chevron { text-align: center; color: #64748b; font-size: 0.85rem; transition: transform 0.2s; }
+        .cell-status .badge { font-size: 0.56rem; padding: 1px 6px; }
+        .cell-chevron { text-align: center; color: var(--accent); font-size: 0.85rem; transition: transform 0.2s; }
         .user-table-row.open .cell-chevron { transform: rotate(180deg); }
-        .user-table-detail { padding: 10px 10px 14px; background: #0b1120; border-top: 1px dashed #334155; }
-        .user-table-detail .detail-meta { font-size: 0.72rem; color: #94a3b8; margin-bottom: 10px; line-height: 1.55; word-break: break-word; }
+        .user-table-detail { padding: 10px 10px 14px; background: var(--bg-dark); border-top: 1px dashed var(--border); }
+        .user-table-detail .detail-meta { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.55; word-break: break-word; }
         .user-table-detail .detail-actions { display: flex; flex-wrap: wrap; gap: 6px; }
 
+        /* ---------- SEARCH ---------- */
         .search-wrap { position: relative; margin-bottom: 10px; }
         .search-wrap input { margin-bottom: 0; padding-left: 40px; }
-        .search-wrap::before { content: "🔍"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+        .search-wrap::before {
+            content: "🔍";
+            position: absolute;
+            left: 12px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            pointer-events: none;
+        }
 
-        .team-block { background: #0f172a; border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid #334155; }
-        .team-block h3 { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+        /* ---------- TEAM BLOCK ---------- */
+        .team-block {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        .team-block h3 {
+            font-size: 0.72rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
 
-        .challenge-item { background: #0f172a; border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid #334155; border-left: 3px solid #a855f7; }
+        /* ---------- CHALLENGE ---------- */
+        .challenge-item {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
         .challenge-item .chead { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
-        .challenge-item .ctitle { font-weight: 600; font-size: 0.9rem; word-break: break-word; flex: 1; min-width: 0; }
-        .challenge-item .cmeta { font-size: 0.72rem; color: #94a3b8; margin-bottom: 6px; word-break: break-word; }
+        .challenge-item .ctitle { font-weight: 700; font-size: 0.9rem; word-break: break-word; flex: 1; min-width: 0; }
+        .challenge-item .cmeta { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 6px; word-break: break-word; }
         .challenge-item .cactions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .challenge-item .score-display { font-size: 0.95rem; font-weight: 700; color: #22c55e; margin-top: 4px; }
+        .challenge-item .score-display { font-size: 1rem; font-weight: 800; color: var(--accent); margin-top: 6px; font-variant-numeric: tabular-nums; }
         .score-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
 
-        .loading-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 500; color: #94a3b8; font-size: 0.9rem; }
-        .spinner { width: 40px; height: 40px; border: 3px solid #334155; border-top-color: #22c55e; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+        /* ---------- BANNERS ---------- */
+        .config-banner {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--danger);
+            color: #fecaca;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            font-size: 0.85rem;
+            line-height: 1.55;
+        }
+        .config-banner strong { color: #fff; display: block; margin-bottom: 6px; font-size: 0.95rem; }
+        .config-banner code {
+            background: var(--bg-dark);
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            color: #fde68a;
+            word-break: break-all;
+        }
+
+        .success-banner {
+            background: rgba(34, 197, 94, 0.12);
+            border: 2px solid var(--success);
+            color: #bbf7d0;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .success-banner strong { color: #fff; display: block; margin-bottom: 4px; font-size: 1rem; }
+
+        /* ---------- LOADING ---------- */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 31, 56, 0.92);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s;
+        }
+        .loading-overlay.hidden { display: none !important; pointer-events: none; }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        @media (min-width: 480px) { #app { padding: 20px; padding-bottom: calc(100px + var(--safe-bottom)); } .stat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-        @media (min-width: 720px) { #app { padding: 28px; } h1 { font-size: 1.6rem; } }
-        @media (max-width: 360px) { .user-table-head, .user-table-main { grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr) 20px; } .cell-cc { display: none; } }
+        /* Paddle ball animation for loading */
+        .loading-ball {
+            width: 20px; height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-bottom: 12px;
+            box-shadow: 0 0 20px var(--accent);
+            animation: bounce 1s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* ---------- AUTH HEADER ---------- */
+        .auth-logo {
+            text-align: center;
+            padding: 28px 16px 20px;
+            margin-bottom: 6px;
+        }
+        .auth-logo .paddle {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.5));
+        }
+        .auth-logo h1 { color: var(--accent); font-size: 1.5rem; letter-spacing: -0.02em; }
+        .auth-logo p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (min-width: 480px) {
+            #app { padding: 20px; padding-bottom: calc(120px + var(--safe-bottom)); }
+            .stat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+        @media (min-width: 720px) {
+            #app { padding: 28px; padding-bottom: calc(130px + var(--safe-bottom)); }
+            h1 { font-size: 1.5rem; }
+        }
+        @media (max-width: 360px) {
+            .user-table-head, .user-table-main { grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr) 20px; }
+            .cell-cc { display: none; }
+        }
     </style>
 </head>
 <body>
 
 <div id="loading" class="loading-overlay">
+    <div class="loading-ball"></div>
     <div class="spinner"></div>
     <div id="loading-text">Connecting to database…</div>
 </div>
 
 <div id="app">
 
-    <!-- AUTH SCREEN -->
+    <!-- ============================================================
+         AUTH SCREEN
+         ============================================================ -->
     <div id="auth-screen" class="hidden">
         <div id="config-banner" class="config-banner hidden">
             <strong>⚠️ Supabase configuration problem</strong>
@@ -175,45 +664,57 @@
             <span id="auth-success-msg">Logging you in…</span>
         </div>
 
-        <div class="card" style="text-align: center; margin-top: 40px;">
-            <h1>🏓 SG Table Tennis</h1>
-            <p style="color:#94a3b8; margin-bottom: 20px;">Track matches. Earn points. Get discounts.</p>
+        <div class="auth-logo">
+            <div class="paddle">🏓</div>
+            <h1>SG Table Tennis</h1>
+            <p>Track matches. Earn points. Get discounts.</p>
         </div>
+
         <div class="card">
             <h2 id="auth-title">Login</h2>
             <div id="auth-fields">
                 <label for="auth-email">Email</label>
-                <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email">
+                <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" novalidate>
+                <div id="auth-email-error" class="field-error hidden"></div>
+
                 <label for="auth-password">Password</label>
                 <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
+                <div id="auth-password-error" class="field-error hidden"></div>
+
                 <div id="register-extra" class="hidden">
                     <label for="auth-name">Full Name</label>
                     <input type="text" id="auth-name" placeholder="Your name">
+                    <div id="auth-name-error" class="field-error hidden"></div>
+
                     <label for="auth-age">Age</label>
                     <input type="number" id="auth-age" placeholder="25" min="8" max="120">
+                    <div id="auth-age-error" class="field-error hidden"></div>
+
                     <label for="auth-cc">Community Centre</label>
                     <select id="auth-cc"></select>
                     <input type="text" id="auth-cc-other" class="hidden" placeholder="Enter your community centre">
+                    <div id="auth-cc-error" class="field-error hidden"></div>
                 </div>
+
                 <button id="auth-submit" type="button">Login</button>
                 <button id="auth-toggle" class="secondary" type="button">Need an account? Register</button>
             </div>
         </div>
     </div>
 
-    <!-- MAIN APP -->
+    <!-- ============================================================
+         MAIN APP
+         ============================================================ -->
     <div id="main-screen" class="hidden">
-        <div id="main-success-banner" class="success-banner hidden" style="margin-bottom:14px;">
-            <strong>✅ Email validated successfully!</strong>
-            <span>Your account is now fully activated. Welcome to SG Table Tennis!</span>
-        </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 10px;">
-            <div style="min-width: 0; flex: 1;">
-                <h1 style="word-break: break-word;">🏓 Hi, <span id="user-name"></span></h1>
-                <small style="color:#94a3b8; display: block; word-break: break-word;" id="user-cc"></small>
+        <div id="app-header">
+            <div class="header-inner">
+                <div style="min-width: 0; flex: 1;">
+                    <h1 style="word-break: break-word; color: var(--text);">🏓 <span id="user-name"></span></h1>
+                    <small style="color: var(--text-muted); display: block; word-break: break-word; font-size: 0.78rem;" id="user-cc"></small>
+                </div>
+                <button id="logout-btn" class="danger small" style="width:auto; flex-shrink: 0; margin:0; min-height: 38px; padding: 8px 16px;">Logout</button>
             </div>
-            <button id="logout-btn" class="danger small" style="width:auto; flex-shrink: 0; margin:0;">Logout</button>
         </div>
 
         <!-- DASHBOARD -->
@@ -228,7 +729,7 @@
                 </div>
                 <div style="text-align: center; margin-top: 8px;">
                     <div class="rank-display" id="stat-rank">—</div>
-                    <div style="font-size: 0.75rem; color:#94a3b8;">Overall Position</div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Overall Position</div>
                 </div>
             </div>
 
@@ -237,9 +738,9 @@
             <div class="card">
                 <h2>Shop Discount</h2>
                 <p id="discount-info" style="font-size: 0.9rem;">Play matches to earn points and unlock discounts!</p>
-                <div style="margin-top: 8px;">
-                    <div style="background:#0f172a; border-radius:8px; height:10px; overflow:hidden;">
-                        <div id="discount-bar" style="height:100%; width:0%; background:#22c55e; transition: width 0.5s;"></div>
+                <div style="margin-top: 10px;">
+                    <div style="background: var(--bg-dark); border-radius:8px; height:12px; overflow:hidden; border: 1px solid var(--border);">
+                        <div id="discount-bar" style="height:100%; width:0%; background: linear-gradient(90deg, var(--accent), var(--accent-hover)); transition: width 0.5s; box-shadow: 0 0 12px rgba(249, 115, 22, 0.5);"></div>
                     </div>
                 </div>
             </div>
@@ -247,7 +748,7 @@
             <div class="card">
                 <h2>Recent Matches</h2>
                 <div id="match-history" class="scroll-list">
-                    <p style="color:#94a3b8;">No matches yet. Request a match to get started!</p>
+                    <p style="color: var(--text-muted);">No matches yet. Request a match to get started!</p>
                 </div>
             </div>
         </div>
@@ -261,7 +762,7 @@
 
             <div class="card card-purple">
                 <h2>⚔️ Challenge a Player</h2>
-                <p style="font-size:0.82rem; color:#94a3b8; margin-bottom:12px;">
+                <p style="font-size:0.82rem; color: var(--text-muted); margin-bottom:12px;">
                     Send a challenge. The opponent accepts, then you play. After the match, one side submits the score and the other acknowledges it to award points.
                 </p>
 
@@ -299,20 +800,20 @@
             <div class="card">
                 <h2>⚔️ Incoming Challenges</h2>
                 <div id="challenges-received" class="scroll-list">
-                    <p style="color:#94a3b8;">No challenges at the moment.</p>
+                    <p style="color: var(--text-muted);">No challenges at the moment.</p>
                 </div>
             </div>
 
             <div class="card">
                 <h2>My Challenges</h2>
                 <div id="challenges-sent" class="scroll-list">
-                    <p style="color:#94a3b8;">You have not sent any challenges.</p>
+                    <p style="color: var(--text-muted);">You have not sent any challenges.</p>
                 </div>
             </div>
 
             <div class="card">
                 <h2>Quick Match Entry (with score)</h2>
-                <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:10px;">
+                <p style="font-size:0.8rem; color: var(--text-muted); margin-bottom:10px;">
                     Already played? Log the score directly — opponent still has to approve.
                 </p>
 
@@ -354,12 +855,12 @@
 
             <div class="card">
                 <h2>Pending Match Requests Sent</h2>
-                <div id="pending-sent" class="scroll-list"><p style="color:#94a3b8;">No pending requests.</p></div>
+                <div id="pending-sent" class="scroll-list"><p style="color: var(--text-muted);">No pending requests.</p></div>
             </div>
 
             <div class="card">
                 <h2>Match Requests Awaiting Your Approval</h2>
-                <div id="pending-received" class="scroll-list"><p style="color:#94a3b8;">No requests to approve.</p></div>
+                <div id="pending-received" class="scroll-list"><p style="color: var(--text-muted);">No requests to approve.</p></div>
             </div>
 
             <div class="card" id="included-card" style="display:none;">
@@ -373,7 +874,7 @@
             <div class="card card-accent">
                 <h2>Monthly Subscription</h2>
                 <div class="sub-price">$2<small>/month</small></div>
-                <p style="text-align:center; color:#94a3b8; font-size:0.82rem; margin-top:6px;">
+                <p style="text-align:center; color: var(--text-muted); font-size:0.82rem; margin-top:8px;">
                     Pay $2 to play for the <strong>current calendar month</strong>.
                 </p>
             </div>
@@ -419,12 +920,12 @@
             <div id="admin-panel" class="hidden">
                 <div class="card">
                     <h2>Pending Subscription Requests</h2>
-                    <div id="admin-pending-reqs" class="scroll-list"><p style="color:#94a3b8;">No pending requests.</p></div>
+                    <div id="admin-pending-reqs" class="scroll-list"><p style="color: var(--text-muted);">No pending requests.</p></div>
                 </div>
 
                 <div class="card">
                     <h2>All Players</h2>
-                    <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:10px;">
+                    <p style="font-size:0.78rem; color: var(--text-muted); margin-bottom:10px;">
                         Total: <span id="admin-user-count">0</span> players • Showing: <span id="admin-user-shown">0</span>
                     </p>
                     <div class="search-wrap">
@@ -445,7 +946,7 @@
             </div>
         </div>
 
-        <!-- POINTS INFO -->
+        <!-- INFO -->
         <div id="tab-points" class="tab-content hidden">
             <div class="card">
                 <h2>📖 Pointing System</h2>
@@ -503,28 +1004,22 @@
                         <li>Admins can enable/disable/extend.</li>
                     </ul>
                 </div>
-
-                <div class="collapsible" style="margin-top:16px;" onclick="toggleCollapsible(this)"><h3>Email Validation</h3></div>
-                <div class="collapsible-content">
-                    <ul>
-                        <li>After registering, check your inbox for the confirmation email.</li>
-                        <li>Click the link in the email — you'll return to this app automatically.</li>
-                        <li>The database records <code>email_confirmed = true</code> on your profile.</li>
-                        <li>You are logged in and can start playing.</li>
-                    </ul>
-                </div>
             </div>
         </div>
 
-        <!-- TAB BAR -->
-        <div class="tab-bar">
-            <button data-tab="dashboard" class="active" onclick="switchTab('dashboard')"><span class="icon">📊</span> Home</button>
-            <button data-tab="request" onclick="switchTab('request')"><span class="icon">🏓</span> Play</button>
-            <button data-tab="subscribe" onclick="switchTab('subscribe')"><span class="icon">💳</span> Sub</button>
-            <button data-tab="admin" id="tab-admin-btn" class="hidden" onclick="switchTab('admin')"><span class="icon">⚙️</span> Admin</button>
-            <button data-tab="points" onclick="switchTab('points')"><span class="icon">📖</span> Info</button>
-        </div>
     </div>
+
+    <!-- ============================================================
+         TAB BAR (always visible at bottom)
+         ============================================================ -->
+    <div class="tab-bar" id="tab-bar">
+        <button data-tab="dashboard" class="active" onclick="switchTab('dashboard')"><span class="icon">📊</span> Home</button>
+        <button data-tab="request" onclick="switchTab('request')"><span class="icon">🏓</span> Play</button>
+        <button data-tab="subscribe" onclick="switchTab('subscribe')"><span class="icon">💳</span> Sub</button>
+        <button data-tab="admin" id="tab-admin-btn" class="hidden" onclick="switchTab('admin')"><span class="icon">⚙️</span> Admin</button>
+        <button data-tab="points" onclick="switchTab('points')"><span class="icon">📖</span> Info</button>
+    </div>
+
 </div>
 
 <div id="toast" class="hidden"></div>
@@ -562,7 +1057,7 @@ if (looksLikePlaceholder(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)) {
     try {
         const supabase = createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, {
             auth: {
-                detectSessionInUrl: true,  // [NEW] Auto-process email confirmation tokens
+                detectSessionInUrl: true,
                 persistSession: true,
                 autoRefreshToken: true
             }
@@ -581,13 +1076,9 @@ if (looksLikePlaceholder(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)) {
      ============================================================ -->
 <script>
 /* =============================================================
-   SG TABLE TENNIS TRACKER (Supabase, v8)
-   Changes:
-   - Email validation flow (link → auto-login → DB flag)
-   - Admin PIN stored in `settings` table (default 0000)
+   SG TABLE TENNIS TRACKER (Supabase, v9 — FIXED + THEMED)
    ============================================================= */
 
-const SUB_PRICE = 2;
 const OTHER_CC_VALUE = '__OTHER__';
 
 /* ---------- COMMUNITY CENTRES ---------- */
@@ -636,11 +1127,12 @@ let allMatches = [];
 let allChallenges = [];
 let adminUnlocked = false;
 let adminSearchTerm = '';
-let dbSettings = {};      // [NEW] loaded from `settings` table
+let dbSettings = {};
 let settingsLoaded = false;
+let bootCompleted = false;
 
 /* ---------- UI HELPERS ---------- */
-function showToast(msg, duration = 2500) {
+function showToast(msg, duration = 2800) {
     const t = document.getElementById('toast');
     if (!t) { console.log('TOAST:', msg); return; }
     t.textContent = msg;
@@ -653,10 +1145,31 @@ function showLoading(text = 'Loading…') {
     if (el) el.textContent = text;
     document.getElementById('loading')?.classList.remove('hidden');
 }
-function hideLoading() { document.getElementById('loading')?.classList.add('hidden'); }
+function hideLoading() {
+    document.getElementById('loading')?.classList.add('hidden');
+}
 function escapeHtml(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 }
+
+/* ============================================================
+   [FIX] SINGLE SCREEN VISIBILITY — prevents both screens showing
+   ============================================================ */
+function showOnlyScreen(name) {
+    const auth = document.getElementById('auth-screen');
+    const main = document.getElementById('main-screen');
+    const tabBar = document.getElementById('tab-bar');
+    if (name === 'auth') {
+        auth?.classList.remove('hidden');
+        main?.classList.add('hidden');
+        tabBar?.classList.add('hidden');
+    } else {
+        auth?.classList.add('hidden');
+        main?.classList.remove('hidden');
+        tabBar?.classList.remove('hidden');
+    }
+}
+
 function switchTab(tab) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
     const el = document.getElementById('tab-' + tab);
@@ -664,15 +1177,22 @@ function switchTab(tab) {
     document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
     const btn = document.querySelector(`.tab-bar button[data-tab="${tab}"]`);
     if (btn) btn.classList.add('active');
+
+    // Scroll to top when switching tabs
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     if (tab === 'dashboard') renderDashboard();
     if (tab === 'request')   renderPlayTab();
     if (tab === 'subscribe') renderSubscription();
     if (tab === 'admin')     renderAdminPanel();
 }
+
 function toggleCollapsible(el) {
     el.classList.toggle('open');
     el.nextElementSibling.classList.toggle('show');
 }
+
+/* ---------- CC DROPDOWNS ---------- */
 function populateCCSelect(sel, { includeOther = true } = {}) {
     if (!sel) return;
     sel.innerHTML = '';
@@ -744,7 +1264,7 @@ function showConfigBannerIfNeeded() {
     banner.classList.add('hidden');
 }
 
-/* ---------- CALENDAR MONTH HELPERS ---------- */
+/* ---------- CALENDAR ---------- */
 function endOfCurrentMonth() {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999).getTime();
@@ -779,7 +1299,7 @@ function subStatusLabel(u) {
 }
 
 /* ============================================================
-   [NEW] DB SETTINGS (admin PIN etc.)
+   DB SETTINGS
    ============================================================ */
 async function loadDbSettings() {
     if (!supabase || !currentUser) return;
@@ -799,8 +1319,34 @@ async function saveDbSetting(key, value) {
     if (error) throw error;
     dbSettings[key] = value;
 }
-function getAdminPin() {
-    return (dbSettings && dbSettings.admin_pin) || '0000';
+function getAdminPin() { return (dbSettings && dbSettings.admin_pin) || '0000'; }
+
+/* ============================================================
+   [FIX] FORM VALIDATION — highlight missing fields
+   ============================================================ */
+function markError(inputId, errorId, msg) {
+    const input = document.getElementById(inputId);
+    const err = document.getElementById(errorId);
+    if (input) input.classList.add('input-error');
+    if (err) {
+        err.textContent = msg;
+        err.classList.remove('hidden');
+    }
+}
+function clearError(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const err = document.getElementById(errorId);
+    if (input) input.classList.remove('input-error');
+    if (err) err.classList.add('hidden');
+}
+function clearAllAuthErrors() {
+    clearError('auth-email', 'auth-email-error');
+    clearError('auth-password', 'auth-password-error');
+    clearError('auth-name', 'auth-name-error');
+    clearError('auth-age', 'auth-age-error');
+    clearError('auth-cc', 'auth-cc-error');
+    const other = document.getElementById('auth-cc-other');
+    if (other) other.classList.remove('input-error');
 }
 
 /* ============================================================
@@ -816,6 +1362,22 @@ function initAuthScreen() {
     const toggleBtn = document.getElementById('auth-toggle');
     const submitBtn = document.getElementById('auth-submit');
 
+    // Live-clear errors on input
+    ['auth-email','auth-password','auth-name','auth-age','auth-cc','auth-cc-other'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input', () => {
+            el.classList.remove('input-error');
+            const errId = id + '-error';
+            document.getElementById(errId)?.classList.add('hidden');
+        });
+        el.addEventListener('change', () => {
+            el.classList.remove('input-error');
+            const errId = id + '-error';
+            document.getElementById(errId)?.classList.add('hidden');
+        });
+    });
+
     if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
             isRegisterMode = !isRegisterMode;
@@ -824,23 +1386,11 @@ function initAuthScreen() {
             submitBtn.textContent = isRegisterMode ? 'Create Account' : 'Login';
             toggleBtn.textContent = isRegisterMode
                 ? 'Already have an account? Login' : 'Need an account? Register';
+            clearAllAuthErrors();
         });
     }
 
     if (submitBtn) submitBtn.addEventListener('click', handleAuthSubmit);
-}
-
-function showSuccessBanner(where, msg) {
-    // where = 'auth' or 'main'
-    const banner = document.getElementById(where === 'auth' ? 'auth-success-banner' : 'main-success-banner');
-    if (!banner) return;
-    if (msg) {
-        const span = banner.querySelector('span');
-        if (span) span.textContent = msg;
-    }
-    banner.classList.remove('hidden');
-    // Auto-hide after animation completes
-    setTimeout(() => banner.classList.add('hidden'), 8500);
 }
 
 async function handleAuthSubmit() {
@@ -852,21 +1402,62 @@ async function handleAuthSubmit() {
         return;
     }
 
+    clearAllAuthErrors();
+
     const email    = document.getElementById('auth-email').value.trim().toLowerCase();
     const password = document.getElementById('auth-password').value;
-    if (!email || !password) { showToast('Please enter email and password.'); return; }
+
+    // [FIX] Validate and highlight missing fields
+    let hasError = false;
+
+    if (!email) {
+        markError('auth-email', 'auth-email-error', 'Email is required');
+        hasError = true;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        markError('auth-email', 'auth-email-error', 'Enter a valid email address');
+        hasError = true;
+    }
+
+    if (!password) {
+        markError('auth-password', 'auth-password-error', 'Password is required');
+        hasError = true;
+    } else if (isRegisterMode && password.length < 6) {
+        markError('auth-password', 'auth-password-error', 'Password must be at least 6 characters');
+        hasError = true;
+    }
+
+    let name, age, cc;
+    if (isRegisterMode) {
+        name = document.getElementById('auth-name').value.trim();
+        age  = parseInt(document.getElementById('auth-age').value, 10);
+        cc   = getEffectiveCC('auth-cc', 'auth-cc-other');
+
+        if (!name) {
+            markError('auth-name', 'auth-name-error', 'Name is required');
+            hasError = true;
+        }
+        if (!age || age < 8 || age > 120) {
+            markError('auth-age', 'auth-age-error', 'Enter a valid age (8–120)');
+            hasError = true;
+        }
+        if (!cc) {
+            const ccInput = document.getElementById('auth-cc');
+            if (ccInput && ccInput.value === OTHER_CC_VALUE) {
+                document.getElementById('auth-cc-other')?.classList.add('input-error');
+            }
+            markError('auth-cc', 'auth-cc-error', 'Please select or enter a community centre');
+            hasError = true;
+        }
+    }
+
+    if (hasError) {
+        showToast('Please fix the highlighted fields', 3000);
+        return;
+    }
 
     try {
         if (isRegisterMode) {
-            const name = document.getElementById('auth-name').value.trim();
-            const age  = parseInt(document.getElementById('auth-age').value, 10);
-            const cc   = getEffectiveCC('auth-cc', 'auth-cc-other');
-            if (!name || !age || age < 8 || age > 120 || !cc) {
-                showToast('Please fill all fields correctly (age 8–120).'); return;
-            }
             showLoading('Creating account…');
-
-            // [NEW] emailRedirectTo — returns user to this app after clicking the email link
             const redirectUrl = window.location.origin + window.location.pathname;
             const { data, error } = await supabase.auth.signUp({
                 email, password,
@@ -878,14 +1469,12 @@ async function handleAuthSubmit() {
             if (error) throw error;
             if (!data.user) throw new Error('Sign up failed.');
 
-            // If no session, email confirmation is required
             if (!data.session) {
                 hideLoading();
                 showToast('📧 Confirmation email sent! Click the link in your inbox to validate your account.', 8000);
                 return;
             }
 
-            // Email confirmation disabled — treated as already validated
             hideLoading();
             showToast('Account created!');
             await onLoggedIn(data.user, 'SIGNUP');
@@ -902,30 +1491,37 @@ async function handleAuthSubmit() {
         console.error('[SGTT] Auth error:', err);
         let msg = err.message || 'Authentication failed.';
         if (/invalid api key|invalid apikey/i.test(msg)) {
-            msg = 'Invalid API key. Verify the SUPABASE_ANON_KEY in the config block.';
+            msg = 'Invalid API key. Verify the SUPABASE_ANON_KEY.';
         } else if (/user already registered/i.test(msg)) {
             msg = 'This email is already registered. Try logging in instead.';
+            markError('auth-email', 'auth-email-error', 'Already registered — try Login');
         } else if (/email not confirmed/i.test(msg)) {
             msg = 'Please check your inbox and click the confirmation link first.';
+        } else if (/invalid login credentials/i.test(msg)) {
+            msg = 'Incorrect email or password.';
+            markError('auth-password', 'auth-password-error', 'Incorrect credentials');
         } else if (/password/i.test(msg) && /6/i.test(msg)) {
             msg = 'Password must be at least 6 characters.';
+            markError('auth-password', 'auth-password-error', 'Min 6 characters');
         }
         showToast(msg, 7000);
     }
 }
 
+/* ============================================================
+   ON LOGIN
+   ============================================================ */
 async function onLoggedIn(authUser, eventType) {
+    if (!authUser) return;
     currentUser = authUser;
     supabase = window.supabase;
     showLoading('Loading your data…');
     try {
         const isConfirmed = !!authUser.email_confirmed_at;
 
-        // 1. Load profiles
         await loadAllProfiles();
         let profile = allProfiles.find(p => p.id === authUser.id);
 
-        // 2. Create profile if missing
         if (!profile) {
             const meta = authUser.user_metadata || {};
             const { error: insErr } = await supabase.from('profiles').insert({
@@ -940,41 +1536,41 @@ async function onLoggedIn(authUser, eventType) {
             await loadAllProfiles();
             profile = allProfiles.find(p => p.id === authUser.id);
         } else if (profile.email_confirmed !== isConfirmed) {
-            // 3. [NEW] Sync email_confirmed flag from auth → DB
-            const { error: updErr } = await supabase
-                .from('profiles')
-                .update({ email_confirmed: isConfirmed })
-                .eq('id', authUser.id);
-            if (updErr) console.warn('[SGTT] email_confirmed update:', updErr.message);
+            await supabase.from('profiles').update({ email_confirmed: isConfirmed }).eq('id', authUser.id);
             await loadAllProfiles();
             profile = allProfiles.find(p => p.id === authUser.id);
         }
 
         userProfile = profile;
 
-        // 4. First user becomes admin
+        // First user becomes admin
         if (allProfiles.filter(p => p.is_admin).length === 0) {
             await supabase.from('profiles').update({ is_admin: true }).eq('id', authUser.id);
             await loadAllProfiles();
             userProfile = allProfiles.find(p => p.id === authUser.id);
         }
 
-        // 5. Load rest of data
         await loadRequests();
         await loadMatches();
         await loadChallenges();
-
-        // 6. [NEW] Load DB settings
         await loadDbSettings();
 
-        hideLoading();
-        showMainScreen();
+        // Show admin tab if applicable
+        const adminBtn = document.getElementById('tab-admin-btn');
+        if (userProfile.is_admin) adminBtn?.classList.remove('hidden');
+        else adminBtn?.classList.add('hidden');
 
-        // 7. [NEW] Show success message when user returns from email confirmation
-        const fromEmailConfirm = eventType === 'SIGNED_IN' && isConfirmed;
-        if (fromEmailConfirm) {
-            showSuccessBanner('main', 'Logging you in… You can start playing!');
+        hideLoading();
+        showOnlyScreen('main');
+        renderDashboard();
+        switchTab('dashboard');
+
+        // [FIX] Show email validation success banner ONLY when arriving from email link
+        if (eventType === 'SIGNED_IN' && isConfirmed && window._arrivedFromEmail) {
+            window._arrivedFromEmail = false;
             showToast('✅ Email validated successfully!', 6000);
+            // Clean the URL hash so it doesn't linger
+            try { history.replaceState(null, '', window.location.pathname); } catch (e) {}
         }
     } catch (err) {
         hideLoading();
@@ -983,32 +1579,31 @@ async function onLoggedIn(authUser, eventType) {
     }
 }
 
-function showMainScreen() {
-    document.getElementById('auth-screen').classList.add('hidden');
-    document.getElementById('main-screen').classList.remove('hidden');
-    document.getElementById('user-name').textContent = userProfile.name;
-    document.getElementById('user-cc').textContent = userProfile.community_centre || '';
+/* ============================================================
+   LOGOUT (fixed — no recursion)
+   ============================================================ */
+async function handleLogout() {
+    try {
+        if (supabase) await supabase.auth.signOut();
+    } catch (e) { console.warn('Sign out error:', e); }
 
-    const adminBtn = document.getElementById('tab-admin-btn');
-    if (userProfile.is_admin) adminBtn.classList.remove('hidden');
-    else adminBtn.classList.add('hidden');
-
-    renderDashboard();
-    switchTab('dashboard');
-}
-
-async function doLogout() {
-    try { if (supabase) await supabase.auth.signOut(); } catch (e) {}
-    currentUser = null; userProfile = null;
+    // Reset all state
+    currentUser = null;
+    userProfile = null;
     allProfiles = []; allRequests = []; allMatches = []; allChallenges = [];
     adminUnlocked = false;
     settingsLoaded = false;
     dbSettings = {};
-    document.getElementById('main-screen').classList.add('hidden');
-    document.getElementById('auth-screen').classList.remove('hidden');
+
+    // Reset UI
     document.getElementById('auth-password').value = '';
-    document.getElementById('admin-pin-input') && (document.getElementById('admin-pin-input').value = '');
-    document.getElementById('admin-new-pin') && (document.getElementById('admin-new-pin').value = '');
+    document.getElementById('auth-email').value = '';
+    document.getElementById('admin-pin-input').value = '';
+    document.getElementById('admin-new-pin').value = '';
+    clearAllAuthErrors();
+
+    showOnlyScreen('auth');
+    showToast('Logged out.', 2000);
 }
 
 /* ============================================================
@@ -1096,13 +1691,13 @@ function renderDashboard() {
             <div class="dot ${cls}"></div>
             <div style="flex:1; min-width:0;">
                 <div style="font-weight:600;">${label.text}</div>
-                <div style="font-size:0.76rem; color:#94a3b8; word-break:break-word;">${subText}</div>
+                <div style="font-size:0.76rem; color: var(--text-muted); word-break:break-word;">${subText}</div>
             </div>
         </div>`;
 
     const historyEl = document.getElementById('match-history');
     if (allMatches.length === 0) {
-        historyEl.innerHTML = '<p style="color:#94a3b8;">No matches yet. Request a match to get started!</p>';
+        historyEl.innerHTML = '<p style="color: var(--text-muted);">No matches yet. Request a match to get started!</p>';
     } else {
         historyEl.innerHTML = allMatches.slice(0, 20).map(m => {
             const myId = userProfile.id;
@@ -1128,7 +1723,7 @@ function renderDashboard() {
                     </div>
                     <div class="result">
                         <span class="badge ${badge}">${result}</span>
-                        <div style="font-size:0.78rem; margin-top:4px;">${myScore} – ${oppScore}</div>
+                        <div style="font-size:0.8rem; margin-top:4px; font-weight:700; font-variant-numeric: tabular-nums;">${myScore} – ${oppScore}</div>
                     </div>
                 </div>`;
         }).join('');
@@ -1367,7 +1962,7 @@ function renderChallengesReceived() {
     );
 
     if (incoming.length === 0) {
-        el.innerHTML = '<p style="color:#94a3b8;">No challenges at the moment.</p>';
+        el.innerHTML = '<p style="color: var(--text-muted);">No challenges at the moment.</p>';
         return;
     }
 
@@ -1380,7 +1975,7 @@ function renderChallengesReceived() {
 
         let actions = '';
         if (canAccept) {
-            actions += `<button class="small" style="background:#22c55e;color:#0f172a;" onclick="acceptChallenge('${c.id}')">Accept</button>`;
+            actions += `<button class="small" style="background: var(--success); color: #fff;" onclick="acceptChallenge('${c.id}')">Accept</button>`;
             actions += `<button class="small danger" onclick="rejectChallenge('${c.id}')">Decline</button>`;
         }
         if (canSubmit) {
@@ -1390,17 +1985,17 @@ function renderChallengesReceived() {
                         <input type="number" id="sc-chal-${c.id}" placeholder="Our score" min="0" max="5">
                         <input type="number" id="sc-opp-${c.id}" placeholder="Their score" min="0" max="5">
                     </div>
-                    <button class="small" style="background:#a855f7;color:#fff;" onclick="submitChallengeScore('${c.id}')">Submit Score</button>
+                    <button class="small purple" onclick="submitChallengeScore('${c.id}')">Submit Score</button>
                 </div>`;
         }
         if (canAck) {
-            actions += `<button class="small" style="background:#22c55e;color:#0f172a;" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;
+            actions += `<button class="small" style="background: var(--success); color: #fff;" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;
             actions += `<button class="small warn" onclick="disputeChallengeScore('${c.id}')">Dispute</button>`;
         }
 
         let scoreLine = '';
         if (c.status === 'score_submitted') {
-            scoreLine = `<div class="score-display">Score: ${c.score_challenger} – ${c.score_opponent} <small style="color:#94a3b8;font-weight:400;">(submitted by ${escapeHtml(nameOf(c.score_submitted_by))})</small></div>`;
+            scoreLine = `<div class="score-display">Score: ${c.score_challenger} – ${c.score_opponent} <small style="color: var(--text-muted); font-weight:400;">(submitted by ${escapeHtml(nameOf(c.score_submitted_by))})</small></div>`;
         } else if (c.status === 'completed' && c.score_challenger != null) {
             scoreLine = `<div class="score-display">Final: ${c.score_challenger} – ${c.score_opponent}</div>`;
         }
@@ -1426,7 +2021,7 @@ function renderChallengesSent() {
     const myId = userProfile.id;
     const sent = allChallenges.filter(c => c.challenger === myId || c.challenger_partner === myId);
     if (sent.length === 0) {
-        el.innerHTML = '<p style="color:#94a3b8;">You have not sent any challenges.</p>';
+        el.innerHTML = '<p style="color: var(--text-muted);">You have not sent any challenges.</p>';
         return;
     }
     el.innerHTML = sent.map(c => {
@@ -1444,17 +2039,17 @@ function renderChallengesSent() {
                         <input type="number" id="sc-chal-${c.id}" placeholder="Our score" min="0" max="5">
                         <input type="number" id="sc-opp-${c.id}" placeholder="Their score" min="0" max="5">
                     </div>
-                    <button class="small" style="background:#a855f7;color:#fff;" onclick="submitChallengeScore('${c.id}')">Submit Score</button>
+                    <button class="small purple" onclick="submitChallengeScore('${c.id}')">Submit Score</button>
                 </div>`;
         }
         if (canAck) {
-            actions += `<button class="small" style="background:#22c55e;color:#0f172a;" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;
+            actions += `<button class="small" style="background: var(--success); color: #fff;" onclick="acknowledgeChallengeScore('${c.id}')">Acknowledge Score</button>`;
             actions += `<button class="small warn" onclick="disputeChallengeScore('${c.id}')">Dispute</button>`;
         }
 
         let scoreLine = '';
         if (c.status === 'score_submitted') {
-            scoreLine = `<div class="score-display">Score: ${c.score_challenger} – ${c.score_opponent} <small style="color:#94a3b8;font-weight:400;">(submitted by ${escapeHtml(nameOf(c.score_submitted_by))})</small></div>`;
+            scoreLine = `<div class="score-display">Score: ${c.score_challenger} – ${c.score_opponent} <small style="color: var(--text-muted); font-weight:400;">(submitted by ${escapeHtml(nameOf(c.score_submitted_by))})</small></div>`;
         } else if (c.status === 'completed' && c.score_challenger != null) {
             scoreLine = `<div class="score-display">Final: ${c.score_challenger} – ${c.score_opponent}</div>`;
         }
@@ -1485,7 +2080,7 @@ function renderRequestsSent() {
     const myId = userProfile.id;
     const sent = allRequests.filter(r => (r.from_user === myId || r.partner === myId) && r.status === 'pending');
     const sentEl = document.getElementById('pending-sent');
-    if (sent.length === 0) { sentEl.innerHTML = '<p style="color:#94a3b8;">No pending requests.</p>'; return; }
+    if (sent.length === 0) { sentEl.innerHTML = '<p style="color: var(--text-muted);">No pending requests.</p>'; return; }
     sentEl.innerHTML = sent.map(r => `
         <div class="match-item">
             <div class="info">
@@ -1499,7 +2094,7 @@ function renderRequestsReceived() {
     const myId = userProfile.id;
     const received = allRequests.filter(r => r.to_user === myId && r.status === 'pending');
     const recEl = document.getElementById('pending-received');
-    if (received.length === 0) { recEl.innerHTML = '<p style="color:#94a3b8;">No requests to approve.</p>'; return; }
+    if (received.length === 0) { recEl.innerHTML = '<p style="color: var(--text-muted);">No requests to approve.</p>'; return; }
     recEl.innerHTML = received.map(r => `
         <div class="match-item" style="flex-direction: column; align-items: stretch;">
             <div class="info" style="width:100%;">
@@ -1508,7 +2103,7 @@ function renderRequestsReceived() {
                 <div style="font-size:0.82rem; margin-top:6px; color:#cbd5e1;">Score: <strong>${r.score_a} – ${r.score_b}</strong></div>
             </div>
             <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
-                <button class="small" style="background:#22c55e;color:#0f172a;" onclick="approveRequest('${r.id}')">Approve</button>
+                <button class="small" style="background: var(--success); color: #fff;" onclick="approveRequest('${r.id}')">Approve</button>
                 <button class="small danger" onclick="rejectRequest('${r.id}')">Reject</button>
             </div>
         </div>`).join('');
@@ -1527,7 +2122,7 @@ function renderIncludedRequests() {
                 <div class="info">
                     <strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong>
                     <small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small>
-                    <div style="font-size:0.76rem; margin-top:4px; color:#94a3b8;">
+                    <div style="font-size:0.76rem; margin-top:4px; color: var(--text-muted);">
                         You are ${asPartner ? 'the partner' : 'opponent 2'} • Waiting for ${escapeHtml(nameOf(r.to_user))} to approve
                     </div>
                 </div>
@@ -1801,11 +2396,11 @@ function renderSubscription() {
             <div class="dot ${cls}"></div>
             <div style="flex:1; min-width:0;">
                 <div style="font-weight:600;">${label.text}</div>
-                <div style="font-size:0.8rem; color:#94a3b8; word-break:break-word;">${detail}</div>
-                ${extra ? `<div style="font-size:0.74rem; color:#64748b; margin-top:2px;">${extra}</div>` : ''}
+                <div style="font-size:0.8rem; color: var(--text-muted); word-break:break-word;">${detail}</div>
+                ${extra ? `<div style="font-size:0.74rem; color: var(--text-dim); margin-top:2px;">${extra}</div>` : ''}
             </div>
         </div>
-        <div style="font-size:0.78rem; color:#94a3b8;">
+        <div style="font-size:0.78rem; color: var(--text-muted);">
             Paid: <strong>${s.paid ? 'Yes' : 'No'}</strong> • Auto-renew: <strong>${s.autoRenew ? 'On' : 'Off'}</strong>
         </div>`;
 
@@ -1840,11 +2435,7 @@ document.getElementById('sub-request-btn').addEventListener('click', async () =>
    ============================================================ */
 async function renderAdminPanel() {
     if (!userProfile || !userProfile.is_admin) { showToast('Admin access required.'); switchTab('dashboard'); return; }
-
-    // [NEW] Ensure settings (admin PIN) are loaded from DB
-    if (!settingsLoaded) {
-        await loadDbSettings();
-    }
+    if (!settingsLoaded) await loadDbSettings();
 
     const locked = document.getElementById('admin-locked');
     const unlocked = document.getElementById('admin-unlocked');
@@ -1860,11 +2451,8 @@ async function renderAdminPanel() {
 document.getElementById('admin-pin-submit').addEventListener('click', async () => {
     const pin = document.getElementById('admin-pin-input').value.trim();
     if (!pin) { showToast('Enter PIN.'); return; }
-
-    // [NEW] Reload from DB if not loaded
     if (!settingsLoaded) await loadDbSettings();
-
-    const expected = getAdminPin();  // [NEW] PIN from DB (default 0000)
+    const expected = getAdminPin();
     if (pin === expected) {
         adminUnlocked = true;
         document.getElementById('admin-pin-input').value = '';
@@ -1877,7 +2465,6 @@ document.getElementById('admin-lock-btn').addEventListener('click', () => {
     adminUnlocked = false; showToast('Admin panel locked.'); renderAdminPanel();
 });
 
-// [NEW] Save new PIN to DB (not localStorage)
 document.getElementById('admin-change-pin').addEventListener('click', async () => {
     if (!userProfile.is_admin || !adminUnlocked) return;
     const np = document.getElementById('admin-new-pin').value.trim();
@@ -1897,20 +2484,20 @@ document.getElementById('admin-change-pin').addEventListener('click', async () =
 function renderAdminPendingReqs() {
     const el = document.getElementById('admin-pending-reqs');
     const pending = allProfiles.filter(u => u.subscription && u.subscription.status === 'pending');
-    if (pending.length === 0) { el.innerHTML = '<p style="color:#94a3b8;">No pending requests.</p>'; return; }
+    if (pending.length === 0) { el.innerHTML = '<p style="color: var(--text-muted);">No pending requests.</p>'; return; }
     el.innerHTML = pending.map(u => `
-        <div class="user-table-detail" style="background:#0f172a; border-radius:12px; border:1px solid #334155; padding:12px; margin-bottom:10px;">
-            <div style="font-weight:600; font-size:0.9rem;">
+        <div class="user-table-detail" style="background: var(--bg-dark); border-radius:12px; border:1px solid var(--border); padding:12px; margin-bottom:10px;">
+            <div style="font-weight:700; font-size:0.9rem;">
                 ${escapeHtml(u.name)} ${u.is_admin ? '<span class="badge badge-admin">ADMIN</span>' : ''}
             </div>
-            <div style="font-size:0.74rem; color:#94a3b8; margin-top:3px; word-break:break-word;">
+            <div style="font-size:0.74rem; color: var(--text-muted); margin-top:3px; word-break:break-word;">
                 ${escapeHtml(u.email)} • ${escapeHtml(u.community_centre || '')}
             </div>
-            <div style="font-size:0.74rem; color:#94a3b8; margin-top:3px;">
+            <div style="font-size:0.74rem; color: var(--text-muted); margin-top:3px;">
                 Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-                <button class="tiny" style="background:#22c55e;color:#0f172a;" onclick="adminApproveSub('${u.id}')">Approve ($2 received)</button>
+                <button class="tiny" style="background: var(--success); color: #fff;" onclick="adminApproveSub('${u.id}')">Approve ($2 received)</button>
                 <button class="tiny danger" onclick="adminRejectSub('${u.id}')">Reject</button>
             </div>
         </div>`).join('');
@@ -1968,7 +2555,7 @@ function renderAdminUserList() {
     const list = filteredAdminUsers();
     document.getElementById('admin-user-count').textContent = allProfiles.length;
     document.getElementById('admin-user-shown').textContent = list.length;
-    if (list.length === 0) { el.innerHTML = '<p style="color:#94a3b8; padding:12px 0;">No users match your search.</p>'; return; }
+    if (list.length === 0) { el.innerHTML = '<p style="color: var(--text-muted); padding:12px 0;">No users match your search.</p>'; return; }
 
     el.innerHTML = list.map(u => {
         const label = subStatusLabel(u);
@@ -1977,10 +2564,10 @@ function renderAdminUserList() {
         const activeNow = s.status === 'active' && s.paidUntil > Date.now();
         const subBtn = activeNow
             ? `<button class="tiny warn" onclick="event.stopPropagation();adminToggleSub('${u.id}')">Disable</button>`
-            : `<button class="tiny" style="background:#22c55e;color:#0f172a;" onclick="event.stopPropagation();adminToggleSub('${u.id}')">Enable this month</button>`;
+            : `<button class="tiny" style="background: var(--success); color: #fff;" onclick="event.stopPropagation();adminToggleSub('${u.id}')">Enable this month</button>`;
         const paidBtn = s.paid
             ? `<button class="tiny secondary" onclick="event.stopPropagation();adminTogglePaid('${u.id}')">Unpaid</button>`
-            : `<button class="tiny" style="background:#22c55e;color:#0f172a;" onclick="event.stopPropagation();adminTogglePaid('${u.id}')">Paid</button>`;
+            : `<button class="tiny" style="background: var(--success); color: #fff;" onclick="event.stopPropagation();adminTogglePaid('${u.id}')">Paid</button>`;
         const autoBtn = s.autoRenew
             ? `<button class="tiny secondary" onclick="event.stopPropagation();adminToggleAuto('${u.id}')">Auto-renew ✓</button>`
             : `<button class="tiny secondary" onclick="event.stopPropagation();adminToggleAuto('${u.id}')">Auto-renew ✗</button>`;
@@ -1988,12 +2575,7 @@ function renderAdminUserList() {
             ? `<button class="tiny secondary" disabled>You</button>`
             : (u.is_admin
                 ? `<button class="tiny danger" onclick="event.stopPropagation();adminToggleAdmin('${u.id}')">Remove Admin</button>`
-                : `<button class="tiny" style="background:#1e40af;color:#dbeafe;" onclick="event.stopPropagation();adminToggleAdmin('${u.id}')">Make Admin</button>`);
-
-        // [NEW] email_confirmed badge
-        const emailBadge = u.email_confirmed
-            ? '<span class="badge badge-green">✓ Verified</span>'
-            : '<span class="badge badge-yellow">Unverified</span>';
+                : `<button class="tiny" style="background: #1e40af; color: #dbeafe;" onclick="event.stopPropagation();adminToggleAdmin('${u.id}')">Make Admin</button>`);
 
         return `
             <div class="user-table-row" id="row-${u.id}">
@@ -2015,7 +2597,7 @@ function renderAdminUserList() {
                 </div>
                 <div class="user-table-detail hidden" id="detail-${u.id}">
                     <div class="detail-meta">
-                        <div><strong>Email:</strong> ${escapeHtml(u.email)} ${emailBadge}</div>
+                        <div><strong>Email:</strong> ${escapeHtml(u.email)}</div>
                         <div><strong>CC:</strong> ${escapeHtml(u.community_centre || '')} • Age ${u.age || '—'}</div>
                         <div><strong>Points:</strong> ${u.points || 0} • W: ${u.wins || 0} / L: ${u.losses || 0}</div>
                         <div><strong>Paid until:</strong> ${s.paidUntil ? new Date(s.paidUntil).toLocaleDateString() : '—'} • <strong>Auto-renew:</strong> ${s.autoRenew ? 'On' : 'Off'}</div>
@@ -2090,9 +2672,16 @@ async function adminToggleAdmin(id) {
 }
 
 /* ============================================================
-   INIT
+   INITIALISE — runs immediately, independent of Supabase
    ============================================================ */
 (function immediateInit() {
+    // Detect email-link arrival BEFORE Supabase strips the URL hash
+    const hash = window.location.hash || '';
+    const search = window.location.search || '';
+    if (hash.includes('access_token') || hash.includes('type=signup') || search.includes('type=signup')) {
+        window._arrivedFromEmail = true;
+    }
+
     try { populateAllCCSelects(); } catch (e) { console.error('CC populate failed:', e); }
     try {
         attachCCOtherToggle('auth-cc', 'auth-cc-other');
@@ -2101,19 +2690,26 @@ async function adminToggleAdmin(id) {
     } catch (e) { console.error('CC toggle failed:', e); }
     try { initAuthScreen(); } catch (e) { console.error('Auth screen init failed:', e); }
     try { showConfigBannerIfNeeded(); } catch (e) { console.error(e); }
+
+    // [FIX] Logout button — direct handler, no recursion
     try {
         const lb = document.getElementById('logout-btn');
-        if (lb) lb.addEventListener('click', doLogout);
+        if (lb) lb.addEventListener('click', handleLogout);
     } catch (e) { console.error(e); }
 
+    // [FIX] Hide loading + show auth ONLY if no session was found
     setTimeout(() => {
         hideLoading();
-        document.getElementById('auth-screen')?.classList.remove('hidden');
-    }, 600);
+        if (!currentUser) showOnlyScreen('auth');
+    }, 700);
+
+    // Start with auth screen hidden but tab-bar hidden too (avoid flash)
+    document.getElementById('tab-bar')?.classList.add('hidden');
 })();
 
-/* ---- SUPABASE BOOT ---- */
-let bootCompleted = false;
+/* ============================================================
+   SUPABASE BOOT
+   ============================================================ */
 async function boot() {
     if (bootCompleted) return;
     supabase = window.supabase;
@@ -2122,34 +2718,34 @@ async function boot() {
         showConfigBannerIfNeeded();
         return;
     }
-
     bootCompleted = true;
 
-    // [NEW] Handle SIGNED_IN from email confirmation redirect
+    // [FIX] Only handle SIGNED_OUT to reset state (no recursion)
     supabase.auth.onAuthStateChange(async (event, session) => {
         console.log('[SGTT] Auth event:', event);
         if (event === 'SIGNED_OUT') {
-            if (currentUser) await doLogout();
-        } else if (event === 'SIGNED_IN' && session && session.user) {
-            if (!currentUser) {
-                // Came back from email confirmation (or magic link)
-                await onLoggedIn(session.user, 'SIGNED_IN');
-            }
+            // UI reset handled by handleLogout; just ensure screens are right
+            if (!currentUser) showOnlyScreen('auth');
+        } else if (event === 'SIGNED_IN' && session && session.user && !currentUser) {
+            // Only auto-process if not already logged in
+            const fromEmail = !!window._arrivedFromEmail;
+            await onLoggedIn(session.user, fromEmail ? 'SIGNED_IN' : 'INITIAL');
         }
     });
 
-    // Initial session check — also handles email confirmation on first page load
     try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session && session.user && !currentUser) {
-            // Detect if user just arrived from email link
-            const cameFromEmail = window.location.hash &&
-                (window.location.hash.includes('access_token') ||
-                 window.location.hash.includes('type=signup'));
-            await onLoggedIn(session.user, cameFromEmail ? 'SIGNED_IN' : 'INITIAL');
+            const fromEmail = !!window._arrivedFromEmail;
+            await onLoggedIn(session.user, fromEmail ? 'SIGNED_IN' : 'INITIAL');
+        } else if (!session) {
+            hideLoading();
+            showOnlyScreen('auth');
         }
     } catch (e) {
         console.error('Session check failed:', e);
+        hideLoading();
+        showOnlyScreen('auth');
     }
 }
 
@@ -2163,7 +2759,7 @@ const bootInterval = setInterval(() => {
     if (++tries > 60) {
         clearInterval(bootInterval);
         hideLoading();
-        document.getElementById('auth-screen')?.classList.remove('hidden');
+        if (!currentUser) showOnlyScreen('auth');
         showConfigBannerIfNeeded();
     }
 }, 100);
