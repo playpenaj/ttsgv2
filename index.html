@@ -2,106 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
     <title>SG Table Tennis Tracker</title>
     <style>
-        /* ---------- GLOBAL ---------- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        :root { --safe-bottom: env(safe-area-inset-bottom, 0px); }
+        html, body {
+            background: #0f172a; color: #e2e8f0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: #0f172a;
-            color: #e2e8f0;
-            line-height: 1.5;
-            overflow-x: hidden;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            min-height: 100vh;
+            line-height: 1.5; overflow-x: hidden; min-height: 100%;
         }
-
+        body { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; font-size: 15px; }
         #app {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 16px;
-            padding-bottom: 90px;
-            overflow-x: hidden;
+            max-width: 720px; margin: 0 auto; padding: 14px;
+            padding-bottom: calc(96px + var(--safe-bottom)); overflow-x: hidden;
         }
+        h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2px; }
+        h2 { font-size: 1.05rem; font-weight: 600; color: #94a3b8; margin-bottom: 12px; }
+        h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
 
-        h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
-        h1 { font-size: 1.5rem; margin-bottom: 4px; }
-        h2 { font-size: 1.15rem; margin-bottom: 12px; color: #94a3b8; }
-        h3 { font-size: 1rem; margin-bottom: 8px; }
-
-        /* ---------- CARDS ---------- */
         .card {
-            background: #1e293b;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border: 1px solid #334155;
+            background: #1e293b; border-radius: 16px; padding: 16px;
+            margin-bottom: 14px; border: 1px solid #334155;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
         }
         .card-accent { border-left: 4px solid #22c55e; }
         .card-warn   { border-left: 4px solid #f59e0b; }
         .card-danger { border-left: 4px solid #ef4444; }
 
-        /* ---------- BUTTONS ---------- */
         button {
-            font-family: inherit;
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 100%;
-            background: #22c55e;
-            color: #0f172a;
-            margin-bottom: 8px;
+            font-family: inherit; font-size: 0.92rem; font-weight: 600;
+            min-height: 44px; padding: 12px 18px; border: none;
+            border-radius: 12px; cursor: pointer; transition: transform 0.1s, background 0.15s;
+            width: 100%; background: #22c55e; color: #0f172a; margin-bottom: 8px;
         }
         button:active { transform: scale(0.97); }
+        button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
         button.secondary { background: #334155; color: #e2e8f0; }
-        button.danger { background: #ef4444; color: #fff; }
-        button.warn { background: #f59e0b; color: #0f172a; }
-        button.small {
-            width: auto; padding: 8px 14px; font-size: 0.8rem;
-            display: inline-block; margin-right: 6px; margin-bottom: 6px;
-            border-radius: 10px;
-        }
-        button.tiny {
-            width: auto; padding: 6px 10px; font-size: 0.72rem;
-            display: inline-block; margin-right: 6px; margin-bottom: 6px;
-            border-radius: 8px;
-        }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button.danger    { background: #ef4444; color: #fff; }
+        button.warn      { background: #f59e0b; color: #0f172a; }
+        button.small { width: auto; min-height: 34px; padding: 7px 12px; font-size: 0.78rem; display: inline-block; margin: 0 6px 6px 0; border-radius: 9px; }
+        button.tiny  { width: auto; min-height: 30px; padding: 5px 10px; font-size: 0.72rem; display: inline-block; margin: 0 4px 4px 0; border-radius: 8px; }
 
-        /* ---------- INPUTS ---------- */
-        input, select {
-            font-family: inherit;
-            font-size: 1rem;
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 1px solid #475569;
-            background: #0f172a;
-            color: #e2e8f0;
-            width: 100%;
-            margin-bottom: 12px;
-            -webkit-appearance: none;
-            appearance: none;
+        input, select, textarea {
+            font-family: inherit; font-size: 16px; padding: 12px 14px;
+            border-radius: 12px; border: 1px solid #475569; background: #0f172a; color: #e2e8f0;
+            width: 100%; margin-bottom: 12px; min-height: 46px;
+            -webkit-appearance: none; appearance: none;
         }
-        input:focus, select:focus { outline: 2px solid #22c55e; border-color: transparent; }
-        label {
-            display: block; font-size: 0.85rem; font-weight: 500;
-            color: #94a3b8; margin-bottom: 4px;
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
         }
+        input:focus, select:focus, textarea:focus { outline: 2px solid #22c55e; border-color: transparent; }
+        label { display: block; font-size: 0.82rem; font-weight: 500; color: #94a3b8; margin-bottom: 5px; }
 
-        /* ---------- BADGES ---------- */
         .badge {
-            display: inline-block; padding: 2px 10px; border-radius: 20px;
-            font-size: 0.72rem; font-weight: 600;
-            background: #334155; color: #94a3b8;
-            white-space: nowrap;
+            display: inline-block; padding: 2px 9px; border-radius: 20px;
+            font-size: 0.68rem; font-weight: 600; background: #334155; color: #94a3b8;
+            white-space: nowrap; letter-spacing: 0.01em;
         }
         .badge-green  { background: #166534; color: #bbf7d0; }
         .badge-yellow { background: #854d0e; color: #fef08a; }
@@ -109,180 +69,164 @@
         .badge-dev    { background: #78350f; color: #fde68a; }
         .badge-admin  { background: #1e3a8a; color: #bfdbfe; }
         .badge-blue   { background: #1e40af; color: #dbeafe; }
+        .badge-purple { background: #581c87; color: #e9d5ff; }
 
-        /* ---------- STAT GRID ---------- */
-        .stat-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 10px; margin-bottom: 12px;
-        }
-        .stat-item {
-            background: #0f172a; padding: 12px;
-            border-radius: 12px; text-align: center;
-        }
-        .stat-value { font-size: 1.5rem; font-weight: 700; color: #22c55e; }
-        .stat-label {
-            font-size: 0.75rem; color: #94a3b8;
-            text-transform: uppercase; letter-spacing: 0.05em;
-        }
+        .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+        .stat-item { background: #0f172a; padding: 12px 8px; border-radius: 12px; text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: #22c55e; line-height: 1.1; }
+        .stat-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
 
-        /* ---------- MATCH ITEM ---------- */
         .match-item {
-            background: #0f172a; border-radius: 12px; padding: 12px;
-            margin-bottom: 8px; border: 1px solid #334155;
-            display: flex; justify-content: space-between;
+            background: #0f172a; border-radius: 12px; padding: 12px; margin-bottom: 8px;
+            border: 1px solid #334155; display: flex; justify-content: space-between;
             align-items: center; flex-wrap: wrap; gap: 8px;
         }
-        .match-item .info { flex: 1; min-width: 140px; }
-        .match-item .info strong { display: block; font-size: 0.9rem; }
-        .match-item .info small { color: #94a3b8; font-size: 0.75rem; }
+        .match-item .info { flex: 1; min-width: 0; }
+        .match-item .info strong { display: block; font-size: 0.9rem; word-break: break-word; }
+        .match-item .info small { color: #94a3b8; font-size: 0.72rem; display: block; margin-top: 2px; word-break: break-word; }
+        .match-item .result { text-align: right; flex-shrink: 0; }
 
-        /* ---------- USER ROW (admin) ---------- */
-        .user-row {
-            background: #0f172a; border-radius: 12px;
-            padding: 12px; margin-bottom: 10px;
-            border: 1px solid #334155;
-        }
-        .user-row .name {
-            font-weight: 600; font-size: 0.95rem;
-            display: flex; align-items: center; gap: 6px;
-            flex-wrap: wrap;
-        }
-        .user-row .meta {
-            font-size: 0.75rem; color: #94a3b8;
-            margin-top: 3px; word-break: break-all;
-        }
-        .user-row .actions {
-            margin-top: 10px; display: flex; flex-wrap: wrap;
-        }
+        .scroll-list { max-height: 340px; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; padding-right: 2px; }
 
-        /* ---------- SCROLLABLE LIST ---------- */
-        .scroll-list {
-            max-height: 320px; overflow-y: auto; overflow-x: hidden;
-            -webkit-overflow-scrolling: touch; padding-right: 4px;
-        }
-
-        /* ---------- COLLAPSIBLE ---------- */
-        .collapsible {
-            cursor: pointer; display: flex;
-            justify-content: space-between; align-items: center;
-        }
-        .collapsible::after {
-            content: "▸"; font-size: 1.2rem; color: #94a3b8;
-            transition: transform 0.2s;
-        }
+        .collapsible { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .collapsible::after { content: "▸"; font-size: 1.2rem; color: #94a3b8; transition: transform 0.2s; }
         .collapsible.open::after { transform: rotate(90deg); }
-        .collapsible-content {
-            display: none; margin-top: 12px;
-            font-size: 0.85rem; color: #cbd5e1;
-        }
+        .collapsible-content { display: none; margin-top: 12px; font-size: 0.85rem; color: #cbd5e1; }
         .collapsible-content.show { display: block; }
         .collapsible-content p { margin-bottom: 8px; }
         .collapsible-content ul { padding-left: 20px; margin-bottom: 8px; }
         .collapsible-content li { margin-bottom: 4px; }
 
-        /* ---------- TAB BAR ---------- */
         .tab-bar {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: #1e293b; border-top: 1px solid #334155;
             display: flex; justify-content: space-around;
-            padding: 6px 0;
-            padding-bottom: max(6px, env(safe-area-inset-bottom));
-            z-index: 100;
+            padding: 6px 0; padding-bottom: calc(6px + var(--safe-bottom)); z-index: 100;
         }
         .tab-bar button {
-            background: none; color: #94a3b8;
-            width: auto; padding: 6px 8px;
-            font-size: 0.65rem; margin: 0; border-radius: 8px;
-            display: flex; flex-direction: column;
-            align-items: center; gap: 2px;
-            flex: 1;
+            background: none; color: #94a3b8; width: auto; padding: 6px 4px;
+            font-size: 0.62rem; margin: 0; border-radius: 8px;
+            display: flex; flex-direction: column; align-items: center; gap: 2px;
+            flex: 1; min-width: 0; min-height: 0; font-weight: 500;
         }
         .tab-bar button.active { color: #22c55e; }
-        .tab-bar button .icon { font-size: 1.25rem; }
+        .tab-bar button .icon { font-size: 1.25rem; line-height: 1; }
 
-        /* ---------- HIDDEN ---------- */
         .hidden { display: none !important; }
 
-        /* ---------- TOAST ---------- */
         #toast {
-            position: fixed; top: 16px; left: 50%;
-            transform: translateX(-50%);
-            background: #1e293b; color: #e2e8f0;
-            padding: 12px 24px; border-radius: 12px;
-            border: 1px solid #334155; font-size: 0.9rem;
-            z-index: 200; max-width: 90vw; text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            transition: opacity 0.3s;
+            position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+            background: #1e293b; color: #e2e8f0; padding: 12px 20px; border-radius: 12px;
+            border: 1px solid #334155; font-size: 0.88rem; z-index: 200;
+            max-width: 92vw; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            transition: opacity 0.3s; word-break: break-word;
         }
         #toast.hidden { display: none; }
 
-        /* ---------- RANK ---------- */
-        .rank-display {
-            font-size: 3rem; font-weight: 800;
-            color: #22c55e; text-align: center; line-height: 1;
-        }
+        .rank-display { font-size: 2.8rem; font-weight: 800; color: #22c55e; text-align: center; line-height: 1; }
 
-        /* ---------- SUBSCRIPTION ---------- */
-        .sub-price {
-            font-size: 2.8rem; font-weight: 800;
-            color: #22c55e; text-align: center; line-height: 1;
-        }
-        .sub-price small {
-            font-size: 0.9rem; color: #94a3b8; font-weight: 500;
-        }
-        .sub-status {
-            display: flex; align-items: center; gap: 10px;
-            padding: 12px; border-radius: 12px;
-            background: #0f172a; margin-bottom: 12px;
-        }
-        .sub-status .dot {
-            width: 10px; height: 10px; border-radius: 50%;
-            flex-shrink: 0;
-        }
+        .sub-price { font-size: 2.6rem; font-weight: 800; color: #22c55e; text-align: center; line-height: 1; }
+        .sub-price small { font-size: 0.9rem; color: #94a3b8; font-weight: 500; }
+        .sub-status { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 12px; background: #0f172a; margin-bottom: 12px; }
+        .sub-status .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
         .dot-green  { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
         .dot-yellow { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
         .dot-red    { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
-        /* ---------- RESPONSIVE ---------- */
+        .user-table { width: 100%; }
+        .user-table-head, .user-table-main {
+            display: grid;
+            grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr) minmax(0, 1.2fr) 22px;
+            gap: 6px; align-items: center;
+        }
+        .user-table-head {
+            padding: 6px 8px; font-size: 0.66rem; color: #64748b;
+            text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+            border-bottom: 1px solid #334155;
+        }
+        .user-table-row { border-bottom: 1px solid #1e293b; }
+        .user-table-row:last-child { border-bottom: none; }
+        .user-table-main { padding: 10px 8px; cursor: pointer; transition: background 0.15s; min-height: 52px; }
+        .user-table-main:hover { background: #0f172a; }
+        .cell-name { min-width: 0; }
+        .cell-name .name-line { font-weight: 600; font-size: 0.84rem; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+        .cell-name .name-line .badge { font-size: 0.58rem; padding: 1px 6px; }
+        .cell-name .sub-line { font-size: 0.68rem; color: #94a3b8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px; }
+        .cell-cc { font-size: 0.72rem; color: #cbd5e1; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.25; }
+        .cell-status { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; min-width: 0; }
+        .cell-status .badge { font-size: 0.6rem; padding: 1px 6px; }
+        .cell-chevron { text-align: center; color: #64748b; font-size: 0.85rem; transition: transform 0.2s; }
+        .user-table-row.open .cell-chevron { transform: rotate(180deg); }
+        .user-table-detail { padding: 10px 10px 14px; background: #0b1120; border-top: 1px dashed #334155; }
+        .user-table-detail .detail-meta { font-size: 0.72rem; color: #94a3b8; margin-bottom: 10px; line-height: 1.55; word-break: break-word; }
+        .user-table-detail .detail-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .search-wrap { position: relative; margin-bottom: 10px; }
+        .search-wrap input { margin-bottom: 0; padding-left: 40px; }
+        .search-wrap::before { content: "🔍"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 1rem; pointer-events: none; }
+
+        .team-block { background: #0f172a; border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid #334155; }
+        .team-block h3 { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+        .team-block .vs-divider { text-align: center; font-weight: 700; color: #64748b; font-size: 0.75rem; margin: 6px 0; }
+
+        .loading-overlay {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 500; color: #94a3b8; font-size: 0.9rem;
+        }
+        .spinner {
+            width: 40px; height: 40px; border: 3px solid #334155;
+            border-top-color: #22c55e; border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin-bottom: 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         @media (min-width: 480px) {
-            #app { padding: 24px; }
-            .stat-grid { grid-template-columns: repeat(4, 1fr); }
+            #app { padding: 20px; padding-bottom: calc(100px + var(--safe-bottom)); }
+            .stat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+        @media (min-width: 720px) { #app { padding: 28px; } h1 { font-size: 1.6rem; } }
+        @media (max-width: 360px) {
+            .user-table-head, .user-table-main { grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr) 20px; }
+            .cell-cc { display: none; }
         }
     </style>
 </head>
 <body>
 
+<!-- ============================================================
+     LOADING OVERLAY
+     ============================================================ -->
+<div id="loading" class="loading-overlay">
+    <div class="spinner"></div>
+    <div id="loading-text">Connecting to database…</div>
+</div>
+
 <div id="app">
 
     <!-- ============================================================
-         AUTH SCREEN (hidden in DEV_MODE — re-enable when finalised)
+         AUTH SCREEN
          ============================================================ -->
     <div id="auth-screen" class="hidden">
         <div class="card" style="text-align: center; margin-top: 40px;">
             <h1>🏓 SG Table Tennis</h1>
             <p style="color:#94a3b8; margin-bottom: 20px;">Track matches. Earn points. Get discounts.</p>
         </div>
-
         <div class="card">
             <h2 id="auth-title">Login</h2>
             <div id="auth-fields">
                 <label for="auth-email">Email</label>
                 <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email">
-
                 <label for="auth-password">Password</label>
                 <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
-
                 <div id="register-extra" class="hidden">
                     <label for="auth-name">Full Name</label>
                     <input type="text" id="auth-name" placeholder="Your name">
-
                     <label for="auth-age">Age</label>
                     <input type="number" id="auth-age" placeholder="25" min="8" max="120">
-
                     <label for="auth-cc">Community Centre</label>
                     <select id="auth-cc"></select>
                 </div>
-
                 <button id="auth-submit">Login</button>
                 <button id="auth-toggle" class="secondary">Need an account? Register</button>
             </div>
@@ -291,51 +235,31 @@
 
     <!-- ==================== MAIN APP ==================== -->
     <div id="main-screen" class="hidden">
-
-        <!-- Header -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <div>
-                <h1 style="margin-bottom: 0;">🏓 Hi, <span id="user-name"></span></h1>
-                <small style="color:#94a3b8;" id="user-cc"></small>
-                <div id="dev-badge" class="hidden" style="margin-top:4px;">
-                    <span class="badge badge-dev">DESIGN MODE • login disabled</span>
-                </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 10px;">
+            <div style="min-width: 0; flex: 1;">
+                <h1 style="word-break: break-word;">🏓 Hi, <span id="user-name"></span></h1>
+                <small style="color:#94a3b8; display: block; word-break: break-word;" id="user-cc"></small>
             </div>
-            <button id="logout-btn" class="danger small" style="width:auto;">Logout</button>
+            <button id="logout-btn" class="danger small" style="width:auto; flex-shrink: 0; margin:0;">Logout</button>
         </div>
 
-        <!-- ========== DASHBOARD TAB ========== -->
+        <!-- DASHBOARD -->
         <div id="tab-dashboard" class="tab-content">
             <div class="card card-accent">
                 <h2>Your Summary</h2>
                 <div class="stat-grid">
-                    <div class="stat-item">
-                        <div class="stat-value" id="stat-points">0</div>
-                        <div class="stat-label">Points</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="stat-wins">0</div>
-                        <div class="stat-label">Wins</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="stat-losses">0</div>
-                        <div class="stat-label">Losses</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="stat-winrate">0%</div>
-                        <div class="stat-label">Win Rate</div>
-                    </div>
+                    <div class="stat-item"><div class="stat-value" id="stat-points">0</div><div class="stat-label">Points</div></div>
+                    <div class="stat-item"><div class="stat-value" id="stat-wins">0</div><div class="stat-label">Wins</div></div>
+                    <div class="stat-item"><div class="stat-value" id="stat-losses">0</div><div class="stat-label">Losses</div></div>
+                    <div class="stat-item"><div class="stat-value" id="stat-winrate">0%</div><div class="stat-label">Win Rate</div></div>
                 </div>
                 <div style="text-align: center; margin-top: 8px;">
                     <div class="rank-display" id="stat-rank">—</div>
-                    <div style="font-size: 0.8rem; color:#94a3b8;">Overall Position</div>
+                    <div style="font-size: 0.75rem; color:#94a3b8;">Overall Position</div>
                 </div>
             </div>
 
-            <div class="card" id="sub-banner-dash">
-                <h2>Subscription</h2>
-                <div id="dash-sub-status"></div>
-            </div>
+            <div class="card"><h2>Subscription</h2><div id="dash-sub-status"></div></div>
 
             <div class="card">
                 <h2>Shop Discount</h2>
@@ -355,17 +279,15 @@
             </div>
         </div>
 
-        <!-- ========== REQUEST MATCH TAB ========== -->
+        <!-- REQUEST MATCH -->
         <div id="tab-request" class="tab-content hidden">
             <div id="req-sub-warning" class="card card-danger hidden">
                 <h2>⚠️ Subscription Required</h2>
-                <p style="font-size: 0.9rem;">You need an active subscription to play matches. Go to the <strong>Subscribe</strong> tab to request one ($2/month).</p>
+                <p style="font-size: 0.9rem;">You need an active subscription to play matches. Go to the <strong>Subscribe</strong> tab.</p>
             </div>
 
             <div class="card">
                 <h2>Request a Match</h2>
-                <label for="req-opponent">Opponent Email</label>
-                <input type="email" id="req-opponent" placeholder="opponent@example.com">
 
                 <label for="req-type">Match Type</label>
                 <select id="req-type">
@@ -373,54 +295,69 @@
                     <option value="doubles">Doubles</option>
                 </select>
 
+                <div id="req-doubles-fields" class="hidden">
+                    <div class="team-block">
+                        <h3>👥 Your Team</h3>
+                        <label for="req-partner">Your Partner</label>
+                        <select id="req-partner"></select>
+                    </div>
+                </div>
+
+                <div class="team-block">
+                    <h3>🎯 Opponent</h3>
+                    <label for="req-opponent1">Opponent Player 1</label>
+                    <select id="req-opponent1"></select>
+                    <div id="req-opp2-wrap" class="hidden">
+                        <label for="req-opponent2">Opponent Player 2 (optional)</label>
+                        <select id="req-opponent2"></select>
+                    </div>
+                </div>
+
                 <label for="req-cc">Community Centre</label>
                 <select id="req-cc"></select>
 
-                <label for="req-score">Your Score (sets won)</label>
-                <input type="number" id="req-score" placeholder="e.g. 3" min="0" max="5">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div><label for="req-score">Your Score</label><input type="number" id="req-score" placeholder="3" min="0" max="5"></div>
+                    <div><label for="req-opp-score">Opp. Score</label><input type="number" id="req-opp-score" placeholder="1" min="0" max="5"></div>
+                </div>
 
-                <label for="req-opp-score">Opponent Score (sets won)</label>
-                <input type="number" id="req-opp-score" placeholder="e.g. 1" min="0" max="5">
-
-                <button id="req-submit">Send Match Request</button>
+                <button id="req-submit" style="margin-top:6px;">Send Match Request</button>
             </div>
 
             <div class="card">
                 <h2>Pending Requests Sent</h2>
-                <div id="pending-sent" class="scroll-list">
-                    <p style="color:#94a3b8;">No pending requests.</p>
-                </div>
+                <div id="pending-sent" class="scroll-list"><p style="color:#94a3b8;">No pending requests.</p></div>
             </div>
 
             <div class="card">
                 <h2>Requests Awaiting Your Approval</h2>
-                <div id="pending-received" class="scroll-list">
-                    <p style="color:#94a3b8;">No requests to approve.</p>
-                </div>
+                <div id="pending-received" class="scroll-list"><p style="color:#94a3b8;">No requests to approve.</p></div>
+            </div>
+
+            <div class="card" id="included-card" style="display:none;">
+                <h2>Matches You're Included In</h2>
+                <div id="included-list" class="scroll-list"></div>
             </div>
         </div>
 
-        <!-- ========== SUBSCRIPTION TAB ========== -->
+        <!-- SUBSCRIPTION -->
         <div id="tab-subscribe" class="tab-content hidden">
             <div class="card card-accent">
                 <h2>Monthly Subscription</h2>
                 <div class="sub-price">$2<small>/month</small></div>
-                <p style="text-align:center; color:#94a3b8; font-size:0.85rem; margin-top:6px;">
+                <p style="text-align:center; color:#94a3b8; font-size:0.82rem; margin-top:6px;">
                     Pay $2 to play unlimited matches for 30 days.
                 </p>
             </div>
 
-            <div class="card">
-                <h2>Your Status</h2>
-                <div id="sub-current-status"></div>
-            </div>
+            <div class="card"><h2>Your Status</h2><div id="sub-current-status"></div></div>
 
             <div class="card" id="sub-request-card">
                 <h2>Request Subscription</h2>
-                <p style="font-size:0.9rem; margin-bottom:12px; color:#cbd5e1;">
-                    Step 1: Pay <strong>$2</strong> to the club account (PayNow / cash to admin).<br>
-                    Step 2: Tap the button below to request activation.<br>
-                    Step 3: Admin will verify payment and activate your subscription.
+                <p style="font-size:0.88rem; margin-bottom:12px; color:#cbd5e1;">
+                    <strong>Step 1:</strong> Pay <strong>$2</strong> to the club account.<br>
+                    <strong>Step 2:</strong> Tap the button below.<br>
+                    <strong>Step 3:</strong> Admin verifies payment and activates your subscription.
                 </p>
                 <button id="sub-request-btn">Request Subscription Activation</button>
             </div>
@@ -435,20 +372,18 @@
             </div>
         </div>
 
-        <!-- ========== ADMIN TAB ========== -->
+        <!-- ADMIN -->
         <div id="tab-admin" class="tab-content hidden">
             <div class="card card-warn">
                 <h2>🔒 Admin Access</h2>
                 <div id="admin-locked">
-                    <p style="font-size:0.9rem; margin-bottom:12px; color:#cbd5e1;">
-                        Enter admin PIN to unlock the admin controls.
-                    </p>
+                    <p style="font-size:0.88rem; margin-bottom:12px; color:#cbd5e1;">Enter admin PIN to unlock the admin controls.</p>
                     <label for="admin-pin-input">Admin PIN</label>
-                    <input type="password" id="admin-pin-input" placeholder="••••" maxlength="8" inputmode="numeric">
+                    <input type="password" id="admin-pin-input" placeholder="••••" maxlength="8" inputmode="numeric" autocomplete="off">
                     <button id="admin-pin-submit">Unlock Admin Panel</button>
                 </div>
                 <div id="admin-unlocked" class="hidden">
-                    <p style="font-size:0.9rem; color:#bbf7d0;">✅ Admin panel unlocked</p>
+                    <p style="font-size:0.88rem; color:#bbf7d0;">✅ Admin panel unlocked</p>
                     <button id="admin-lock-btn" class="secondary small" style="margin-top:8px;">Lock Panel</button>
                 </div>
             </div>
@@ -456,68 +391,61 @@
             <div id="admin-panel" class="hidden">
                 <div class="card">
                     <h2>Pending Subscription Requests</h2>
-                    <div id="admin-pending-reqs" class="scroll-list">
-                        <p style="color:#94a3b8;">No pending requests.</p>
-                    </div>
+                    <div id="admin-pending-reqs" class="scroll-list"><p style="color:#94a3b8;">No pending requests.</p></div>
                 </div>
 
                 <div class="card">
                     <h2>All Players</h2>
-                    <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:10px;">
-                        Total: <span id="admin-user-count">0</span> players
+                    <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:10px;">
+                        Total: <span id="admin-user-count">0</span> players • Showing: <span id="admin-user-shown">0</span>
                     </p>
-                    <div id="admin-user-list" class="scroll-list"></div>
+                    <div class="search-wrap">
+                        <input type="text" id="admin-search" placeholder="Search by name, email, or community centre" autocomplete="off">
+                    </div>
+                    <div class="user-table">
+                        <div class="user-table-head">
+                            <div>Player</div><div>CC</div><div>Status</div><div></div>
+                        </div>
+                        <div id="admin-user-list"></div>
+                    </div>
                 </div>
 
                 <div class="card">
                     <h2>Admin Settings</h2>
                     <label for="admin-new-pin">Change Admin PIN</label>
-                    <input type="password" id="admin-new-pin" placeholder="New 4–8 digit PIN" maxlength="8" inputmode="numeric">
+                    <input type="password" id="admin-new-pin" placeholder="New 4–8 digit PIN" maxlength="8" inputmode="numeric" autocomplete="off">
                     <button id="admin-change-pin" class="secondary small">Update PIN</button>
                 </div>
             </div>
         </div>
 
-        <!-- ========== POINTS SYSTEM TAB ========== -->
+        <!-- POINTS INFO -->
         <div id="tab-points" class="tab-content hidden">
             <div class="card">
                 <h2>📖 Pointing System</h2>
-                <p style="font-size:0.9rem; margin-bottom:12px;">
-                    This app uses a simplified version of the <strong>ITTF Rating Points System</strong> for singles and doubles.
-                </p>
+                <p style="font-size:0.88rem; margin-bottom:12px;">Simplified <strong>ITTF Rating Points System</strong>.</p>
 
-                <div class="collapsible" onclick="toggleCollapsible(this)">
-                    <h3>How Points Are Calculated</h3>
-                </div>
+                <div class="collapsible" onclick="toggleCollapsible(this)"><h3>How Points Are Calculated</h3></div>
                 <div class="collapsible-content">
                     <p><strong>1. Base Rating:</strong> Every player starts with <strong>1000 points</strong>.</p>
-                    <p><strong>2. Match Result:</strong> When a match is approved, the winner gains points and the loser loses points.</p>
-                    <p><strong>3. Point Difference:</strong> The number of points exchanged depends on the rating difference between the two players:</p>
+                    <p><strong>2. Match Result:</strong> Winner gains, loser loses.</p>
+                    <p><strong>3. Point Difference:</strong></p>
                     <ul>
-                        <li><strong>If the higher-rated player wins (expected):</strong> Small point gain (1–9 points).</li>
-                        <li><strong>If the lower-rated player wins (upset):</strong> Large point gain (10–40 points).</li>
+                        <li>Higher-rated wins (expected): small gain (1–9 pts).</li>
+                        <li>Lower-rated wins (upset): large gain (10–40 pts).</li>
                     </ul>
-                    <p><strong>4. ITTF Rating Table (simplified):</strong></p>
+                    <p><strong>4. ITTF Table (simplified):</strong></p>
                     <ul>
-                        <li>Rating diff 0–24: Winner +10, Loser −10</li>
-                        <li>Rating diff 25–49: Winner +12, Loser −12</li>
-                        <li>Rating diff 50–99: Winner +14, Loser −14</li>
-                        <li>Rating diff 100–149: Winner +16, Loser −16</li>
-                        <li>Rating diff 150–199: Winner +20, Loser −20</li>
-                        <li>Rating diff 200–299: Winner +24, Loser −24</li>
-                        <li>Rating diff 300–399: Winner +28, Loser −28</li>
-                        <li>Rating diff 400–499: Winner +32, Loser −32</li>
-                        <li>Rating diff 500–749: Winner +36, Loser −36</li>
-                        <li>Rating diff 750+: Winner +40, Loser −40</li>
+                        <li>Diff 0–24: ±10</li><li>Diff 25–49: ±12</li><li>Diff 50–99: ±14</li>
+                        <li>Diff 100–149: ±16</li><li>Diff 150–199: ±20</li><li>Diff 200–299: ±24</li>
+                        <li>Diff 300–399: ±28</li><li>Diff 400–499: ±32</li><li>Diff 500–749: ±36</li>
+                        <li>Diff 750+: ±40</li>
                     </ul>
-                    <p><strong>5. Upset Bonus:</strong> If the lower-rated player wins, they gain the upset points shown above, and the higher-rated player loses the same amount.</p>
-                    <p><strong>6. Doubles:</strong> Points are calculated using the average rating of each pair.</p>
-                    <p><strong>7. No points are awarded until both players confirm the match result.</strong></p>
+                    <p><strong>5. Doubles:</strong> Uses average rating of each pair.</p>
+                    <p><strong>6. No points until both sides confirm.</strong></p>
                 </div>
 
-                <div class="collapsible" style="margin-top:16px;" onclick="toggleCollapsible(this)">
-                    <h3>Discount Tiers</h3>
-                </div>
+                <div class="collapsible" style="margin-top:16px;" onclick="toggleCollapsible(this)"><h3>Discount Tiers</h3></div>
                 <div class="collapsible-content">
                     <ul>
                         <li><strong>0–499 points:</strong> 0% discount</li>
@@ -528,84 +456,66 @@
                     </ul>
                 </div>
 
-                <div class="collapsible" style="margin-top:16px;" onclick="toggleCollapsible(this)">
-                    <h3>Subscription Rules</h3>
-                </div>
+                <div class="collapsible" style="margin-top:16px;" onclick="toggleCollapsible(this)"><h3>Subscription Rules</h3></div>
                 <div class="collapsible-content">
                     <ul>
-                        <li>Monthly subscription: <strong>$2</strong></li>
-                        <li>Required to request and confirm matches.</li>
-                        <li>Valid for <strong>30 days</strong> from admin approval.</li>
-                        <li>Admins can enable / disable / extend subscriptions for any player.</li>
-                        <li>Only admins can approve payment and manage subscriptions.</li>
+                        <li>Monthly: <strong>$2</strong></li>
+                        <li>Required to request/confirm matches.</li>
+                        <li>Valid <strong>30 days</strong> from admin approval.</li>
+                        <li>Admins can enable/disable/extend.</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Tab Bar -->
-        <div class="tab-bar" id="tab-bar">
-            <button data-tab="dashboard" class="active" onclick="switchTab('dashboard')">
-                <span class="icon">📊</span> Home
-            </button>
-            <button data-tab="request" onclick="switchTab('request')">
-                <span class="icon">🏓</span> Play
-            </button>
-            <button data-tab="subscribe" onclick="switchTab('subscribe')">
-                <span class="icon">💳</span> Subscribe
-            </button>
-            <button data-tab="admin" id="tab-admin-btn" class="hidden" onclick="switchTab('admin')">
-                <span class="icon">⚙️</span> Admin
-            </button>
-            <button data-tab="points" onclick="switchTab('points')">
-                <span class="icon">📖</span> Points
-            </button>
+        <!-- TAB BAR -->
+        <div class="tab-bar">
+            <button data-tab="dashboard" class="active" onclick="switchTab('dashboard')"><span class="icon">📊</span> Home</button>
+            <button data-tab="request" onclick="switchTab('request')"><span class="icon">🏓</span> Play</button>
+            <button data-tab="subscribe" onclick="switchTab('subscribe')"><span class="icon">💳</span> Sub</button>
+            <button data-tab="admin" id="tab-admin-btn" class="hidden" onclick="switchTab('admin')"><span class="icon">⚙️</span> Admin</button>
+            <button data-tab="points" onclick="switchTab('points')"><span class="icon">📖</span> Info</button>
         </div>
     </div>
 </div>
 
 <div id="toast" class="hidden"></div>
 
+<!-- ============================================================
+     SUPABASE CLIENT (ES MODULE)
+     ============================================================ -->
+<script type="module">
+// ============================================================
+// 🔴 UPDATE THESE TWO LINES WITH YOUR SUPABASE CREDENTIALS 🔴
+// ============================================================
+const SUPABASE_URL      = "https://gdvbplbqehrtrgiwwcja.supabase.co";        // ⬅️ UPDATE THIS
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkdmJwbGJxZWhydHJnaXd3Y2phIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyMzExOTEsImV4cCI6MjEwNTgwNzE5MX0";             // ⬅️ UPDATE THIS
+// ============================================================
+// Get these from: Supabase Dashboard → Project Settings → API
+// ============================================================
+
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+window.supabase = supabase;
+
+// Boot the rest of the app
+window.dispatchEvent(new Event('supabase-ready'));
+</script>
+
+<!-- ============================================================
+     MAIN APP SCRIPT
+     ============================================================ -->
 <script>
 /* =============================================================
-   SG TABLE TENNIS TRACKER  (v2 — subscriptions + admin)
+   SG TABLE TENNIS TRACKER (Supabase edition)
    ============================================================= */
 
-/* ============================================================
-   >>> DEV MODE TOGGLE <<<
-   true  = skip login, auto-login as dev admin (design review)
-   false = normal email/password login + registration
-   ============================================================ */
-const DEV_MODE = true;
-
-/* ---------- CONSTANTS ---------- */
-const STORAGE_KEY = DEV_MODE ? 'sgtt_dev_data_v2' : 'sgtt_data_v2';
-const SALT = new Uint8Array([83, 71, 84, 84, 45, 83, 65, 76, 84, 0, 0, 0, 0, 0, 0, 0]);
-const ITERATIONS = 100000;
 const SUB_PRICE = 2;
-const SUB_DURATION_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const SUB_DURATION_MS = 30 * 24 * 60 * 60 * 1000;
 const DEFAULT_ADMIN_PIN = '2468';
 
-/* ---------- DEV MODE SEED ---------- */
-const DEV_PASSWORD    = 'sgtt-dev-mode-key-2024';
-const DEV_USER_EMAIL  = 'dev@sgtt.local';
-const DEV_USER_NAME   = 'Dev Player';
-const DEV_USER_CC     = 'Fernvale Community Club';
-const DEV_USER_AGE    = 25;
-const DEV_USER_POINTS = 1250;
-const DEV_USER_WINS   = 8;
-const DEV_USER_LOSSES = 4;
-
-const SAMPLE_OPPONENTS = [
-    { email: 'alice@sgtt.local',   name: 'Alice Tan',    age: 28, cc: 'Bishan Community Club',
-      points: 1350, wins: 12, losses: 5, sub: 'active' },
-    { email: 'bob@sgtt.local',     name: 'Bob Lim',      age: 34, cc: 'Toa Payoh Central Community Club',
-      points: 900,  wins: 4,  losses: 9, sub: 'inactive' },
-    { email: 'charlie@sgtt.local', name: 'Charlie Wong', age: 22, cc: 'Fernvale Community Club',
-      points: 1100, wins: 7,  losses: 6, sub: 'pending' }
-];
-
-/* ---------- COMMUNITY CENTRE LIST (Singapore) ---------- */
+/* ---------- COMMUNITY CENTRES ---------- */
 const COMMUNITY_CENTRES = [
     "Admiralty Community Club","ACE The Place Community Club","Aljunied Community Centre",
     "Ang Mo Kio Community Centre","Ang Mo Kio-Hougang Community Club","Ayer Rajah Community Club",
@@ -641,116 +551,15 @@ const COMMUNITY_CENTRES = [
     "Zhenghua Community Club"
 ].sort();
 
-/* ---------- CRYPTO HELPERS ---------- */
-async function deriveKey(password, salt = SALT) {
-    const enc = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-        'raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']
-    );
-    return crypto.subtle.deriveKey(
-        { name: 'PBKDF2', salt: salt, iterations: ITERATIONS, hash: 'SHA-256' },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['encrypt', 'decrypt']
-    );
-}
-
-async function encryptData(plainText, key) {
-    const enc = new TextEncoder();
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const cipher = await crypto.subtle.encrypt(
-        { name: 'AES-GCM', iv: iv }, key, enc.encode(plainText)
-    );
-    const combined = new Uint8Array(iv.length + cipher.byteLength);
-    combined.set(iv, 0);
-    combined.set(new Uint8Array(cipher), iv.length);
-    return btoa(String.fromCharCode(...combined));
-}
-
-async function decryptData(base64Cipher, key) {
-    const raw = Uint8Array.from(atob(base64Cipher), c => c.charCodeAt(0));
-    const iv = raw.slice(0, 12);
-    const cipher = raw.slice(12);
-    const plain = await crypto.subtle.decrypt(
-        { name: 'AES-GCM', iv: iv }, key, cipher
-    );
-    return new TextDecoder().decode(plain);
-}
-
-async function hashPassword(password) {
-    const enc = new TextEncoder();
-    const hash = await crypto.subtle.digest('SHA-256', enc.encode(password));
-    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-/* ---------- DATA LAYER ---------- */
-let appData = { users: [], matches: [], requests: [], adminPin: DEFAULT_ADMIN_PIN };
-let currentUser = null;
-let currentKey  = null;
-let adminUnlocked = false; // session-only
-
-async function loadData(password) {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-        appData = { users: [], matches: [], requests: [], adminPin: DEFAULT_ADMIN_PIN };
-        await saveData(password);
-        return;
-    }
-    try {
-        const key = await deriveKey(password);
-        const plain = await decryptData(stored, key);
-        appData = JSON.parse(plain);
-        if (!appData.users)     appData.users = [];
-        if (!appData.matches)   appData.matches = [];
-        if (!appData.requests)  appData.requests = [];
-        if (!appData.adminPin)  appData.adminPin = DEFAULT_ADMIN_PIN;
-    } catch (e) {
-        console.error('Failed to decrypt data:', e);
-        throw new Error('Invalid password or corrupted data.');
-    }
-}
-
-async function saveData(password) {
-    const key = await deriveKey(password);
-    const plain = JSON.stringify(appData);
-    const encrypted = await encryptData(plain, key);
-    localStorage.setItem(STORAGE_KEY, encrypted);
-}
-
-/* ---------- SUBSCRIPTION HELPERS ---------- */
-function makeSubscription(status = 'inactive', paid = false, autoRenew = false) {
-    return {
-        status,               // 'active' | 'inactive' | 'pending'
-        paidUntil: status === 'active' ? Date.now() + SUB_DURATION_MS : 0,
-        paid,
-        autoRenew,
-        requestedAt: status === 'pending' ? Date.now() : 0,
-        lastPayment: 0
-    };
-}
-
-function isSubscriptionActive(user) {
-    if (!user || !user.subscription) return false;
-    const s = user.subscription;
-    if (s.status !== 'active') return false;
-    if (s.paidUntil > 0 && s.paidUntil < Date.now()) return false;
-    return true;
-}
-
-function subStatusLabel(user) {
-    if (!user || !user.subscription) return { text: 'No subscription', cls: 'badge-red' };
-    const s = user.subscription;
-    if (s.status === 'pending')  return { text: 'Pending approval', cls: 'badge-yellow' };
-    if (s.status === 'active' && s.paidUntil > Date.now()) {
-        const days = Math.ceil((s.paidUntil - Date.now()) / (24*60*60*1000));
-        return { text: `Active • ${days}d left`, cls: 'badge-green' };
-    }
-    if (s.status === 'active' && s.paidUntil > 0 && s.paidUntil <= Date.now()) {
-        return { text: 'Expired', cls: 'badge-red' };
-    }
-    return { text: 'Inactive', cls: 'badge-red' };
-}
+/* ---------- STATE ---------- */
+let supabase = null;
+let currentUser = null;   // auth user (id, email)
+let userProfile = null;   // profile row from DB
+let allProfiles = [];     // cached profiles for lookups
+let allRequests = [];
+let allMatches = [];
+let adminUnlocked = false;
+let adminSearchTerm = '';
 
 /* ---------- UI HELPERS ---------- */
 function showToast(msg, duration = 2500) {
@@ -760,7 +569,16 @@ function showToast(msg, duration = 2500) {
     clearTimeout(t._timer);
     t._timer = setTimeout(() => t.classList.add('hidden'), duration);
 }
-
+function showLoading(text = 'Loading…') {
+    document.getElementById('loading-text').textContent = text;
+    document.getElementById('loading').classList.remove('hidden');
+}
+function hideLoading() {
+    document.getElementById('loading').classList.add('hidden');
+}
+function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
 function switchTab(tab) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
     const el = document.getElementById('tab-' + tab);
@@ -768,17 +586,15 @@ function switchTab(tab) {
     document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
     const btn = document.querySelector(`.tab-bar button[data-tab="${tab}"]`);
     if (btn) btn.classList.add('active');
-    if (tab === 'dashboard')   renderDashboard();
-    if (tab === 'request')     renderRequests();
-    if (tab === 'subscribe')   renderSubscription();
-    if (tab === 'admin')       renderAdminPanel();
+    if (tab === 'dashboard') renderDashboard();
+    if (tab === 'request')   renderRequests();
+    if (tab === 'subscribe') renderSubscription();
+    if (tab === 'admin')     renderAdminPanel();
 }
-
 function toggleCollapsible(el) {
     el.classList.toggle('open');
     el.nextElementSibling.classList.toggle('show');
 }
-
 function populateCCDropdowns() {
     ['auth-cc', 'req-cc'].forEach(id => {
         const sel = document.getElementById(id);
@@ -786,209 +602,227 @@ function populateCCDropdowns() {
         sel.innerHTML = '';
         COMMUNITY_CENTRES.forEach(cc => {
             const opt = document.createElement('option');
-            opt.value = cc;
-            opt.textContent = cc;
+            opt.value = cc; opt.textContent = cc;
             sel.appendChild(opt);
         });
     });
 }
 
-/* ============================================================
-   AUTH (login / register) — only runs when DEV_MODE = false
-   ============================================================ */
-if (!DEV_MODE) {
-    let isRegisterMode = false;
+/* ---------- HELPERS ---------- */
+function nameOf(emailOrId) {
+    if (!emailOrId) return '?';
+    const u = allProfiles.find(x => x.email === emailOrId || x.id === emailOrId);
+    return u ? u.name : emailOrId;
+}
+function profileByEmail(email) {
+    return allProfiles.find(x => x.email === email);
+}
+function isSubscriptionActive(u) {
+    if (!u || !u.subscription) return false;
+    const s = u.subscription;
+    if (s.status !== 'active') return false;
+    if (s.paidUntil > 0 && s.paidUntil < Date.now()) return false;
+    return true;
+}
+function isPaidMember(u) {
+    return u && u.subscription && u.subscription.paid === true && isSubscriptionActive(u);
+}
+function subStatusLabel(u) {
+    if (!u || !u.subscription) return { text: 'No subscription', cls: 'badge-red' };
+    const s = u.subscription;
+    if (s.status === 'pending') return { text: 'Pending', cls: 'badge-yellow' };
+    if (s.status === 'active' && s.paidUntil > Date.now()) {
+        const days = Math.ceil((s.paidUntil - Date.now()) / (24*60*60*1000));
+        return { text: `Active • ${days}d`, cls: 'badge-green' };
+    }
+    if (s.status === 'active' && s.paidUntil > 0 && s.paidUntil <= Date.now()) return { text: 'Expired', cls: 'badge-red' };
+    return { text: 'Inactive', cls: 'badge-red' };
+}
 
+/* ============================================================
+   LOAD ALL DATA FROM SUPABASE
+   ============================================================ */
+async function loadAllProfiles() {
+    const { data, error } = await supabase.from('profiles').select('*');
+    if (error) throw error;
+    allProfiles = data || [];
+    return allProfiles;
+}
+
+async function loadRequests() {
+    if (!currentUser) return [];
+    // Load requests where the current user is involved in any role
+    const { data, error } = await supabase
+        .from('match_requests')
+        .select('*')
+        .or(`from_user.eq.${currentUser.id},to_user.eq.${currentUser.id},partner.eq.${currentUser.id},opponent2.eq.${currentUser.id}`);
+    if (error) throw error;
+    allRequests = data || [];
+    return allRequests;
+}
+
+async function loadMatches() {
+    if (!currentUser) return [];
+    const { data, error } = await supabase
+        .from('matches')
+        .select('*')
+        .or(`player_a.eq.${currentUser.id},player_b.eq.${currentUser.id},partner_a.eq.${currentUser.id},partner_b.eq.${currentUser.id}`)
+        .order('played_at', { ascending: false });
+    if (error) throw error;
+    allMatches = data || [];
+    return allMatches;
+}
+
+async function refreshAll() {
+    await loadAllProfiles();
+    await loadRequests();
+    await loadMatches();
+    const me = allProfiles.find(p => p.id === currentUser.id);
+    if (me) userProfile = me;
+}
+
+/* ============================================================
+   AUTH
+   ============================================================ */
+let isRegisterMode = false;
+
+function initAuthScreen() {
     document.getElementById('auth-toggle').addEventListener('click', () => {
         isRegisterMode = !isRegisterMode;
         document.getElementById('auth-title').textContent = isRegisterMode ? 'Register' : 'Login';
         document.getElementById('register-extra').classList.toggle('hidden', !isRegisterMode);
         document.getElementById('auth-submit').textContent = isRegisterMode ? 'Create Account' : 'Login';
         document.getElementById('auth-toggle').textContent = isRegisterMode
-            ? 'Already have an account? Login'
-            : 'Need an account? Register';
+            ? 'Already have an account? Login' : 'Need an account? Register';
     });
 
     document.getElementById('auth-submit').addEventListener('click', async () => {
         const email    = document.getElementById('auth-email').value.trim().toLowerCase();
         const password = document.getElementById('auth-password').value;
-
         if (!email || !password) { showToast('Please enter email and password.'); return; }
 
-        try { await loadData(password); }
-        catch (e) { showToast(e.message); return; }
-
-        if (isRegisterMode) {
-            const name = document.getElementById('auth-name').value.trim();
-            const age  = parseInt(document.getElementById('auth-age').value, 10);
-            const cc   = document.getElementById('auth-cc').value;
-
-            if (!name || !age || age < 8 || age > 120 || !cc) {
-                showToast('Please fill all fields correctly (age 8–120).'); return;
+        try {
+            if (isRegisterMode) {
+                const name = document.getElementById('auth-name').value.trim();
+                const age  = parseInt(document.getElementById('auth-age').value, 10);
+                const cc   = document.getElementById('auth-cc').value;
+                if (!name || !age || age < 8 || age > 120 || !cc) {
+                    showToast('Please fill all fields correctly (age 8–120).');
+                    return;
+                }
+                showLoading('Creating account…');
+                const { data, error } = await supabase.auth.signUp({
+                    email, password,
+                    options: { data: { name, age, community_centre: cc } }
+                });
+                if (error) throw error;
+                if (!data.user) throw new Error('Sign up failed. Check if email confirmation is required.');
+                // Check if email confirmation is required
+                if (!data.session) {
+                    showToast('Account created! Please confirm your email, then log in.', 6000);
+                    hideLoading();
+                    return;
+                }
+                hideLoading();
+                showToast('Account created!');
+                await onLoggedIn(data.user);
+            } else {
+                showLoading('Signing in…');
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                hideLoading();
+                showToast('Welcome back!');
+                await onLoggedIn(data.user);
             }
-            if (appData.users.find(u => u.email === email)) {
-                showToast('Email already registered.'); return;
-            }
-
-            const passwordHash = await hashPassword(password);
-            const isFirstUser = appData.users.length === 0;
-            appData.users.push({
-                email, passwordHash, name, age, cc,
-                points: 1000, wins: 0, losses: 0, rating: 1000,
-                isAdmin: isFirstUser,
-                subscription: makeSubscription('inactive')
-            });
-            await saveData(password);
-            currentUser = appData.users.find(u => u.email === email);
-            currentKey  = password;
-            showToast(isFirstUser
-                ? 'First account created as Admin! You start with 1000 points.'
-                : 'Account created! Subscribe to start playing.');
-            showMainScreen();
-        } else {
-            const user = appData.users.find(u => u.email === email);
-            if (!user) { showToast('No account found for this email.'); return; }
-            const passwordHash = await hashPassword(password);
-            if (user.passwordHash !== passwordHash) { showToast('Incorrect password.'); return; }
-            currentUser = user;
-            currentKey  = password;
-            showToast('Welcome back, ' + user.name + '!');
-            showMainScreen();
+        } catch (err) {
+            hideLoading();
+            console.error(err);
+            showToast(err.message || 'Authentication failed.');
         }
     });
 }
 
-/* ============================================================
-   DEV MODE AUTO-LOGIN
-   ============================================================ */
-async function devAutoLogin() {
-    await loadData(DEV_PASSWORD);
+async function onLoggedIn(authUser) {
+    currentUser = authUser;
+    showLoading('Loading your data…');
+    try {
+        await refreshAll();
 
-    let devUser = appData.users.find(u => u.email === DEV_USER_EMAIL);
-
-    if (!devUser) {
-        const devHash = await hashPassword(DEV_PASSWORD);
-
-        devUser = {
-            email: DEV_USER_EMAIL,
-            passwordHash: devHash,
-            name: DEV_USER_NAME,
-            age: DEV_USER_AGE,
-            cc: DEV_USER_CC,
-            points: DEV_USER_POINTS,
-            wins: DEV_USER_WINS,
-            losses: DEV_USER_LOSSES,
-            rating: DEV_USER_POINTS,
-            isAdmin: true,
-            subscription: makeSubscription('active', true, true)
-        };
-        appData.users.push(devUser);
-
-        for (const opp of SAMPLE_OPPONENTS) {
-            if (!appData.users.find(u => u.email === opp.email)) {
-                const sub = makeSubscription(opp.sub, opp.sub === 'active');
-                appData.users.push({
-                    email: opp.email,
-                    passwordHash: devHash,
-                    name: opp.name,
-                    age: opp.age,
-                    cc: opp.cc,
-                    points: opp.points,
-                    wins: opp.wins,
-                    losses: opp.losses,
-                    rating: opp.points,
-                    isAdmin: false,
-                    subscription: sub
-                });
-            }
+        // If profile row missing (shouldn't happen due to trigger), create it
+        if (!userProfile) {
+            const meta = authUser.user_metadata || {};
+            await supabase.from('profiles').insert({
+                id: authUser.id,
+                email: authUser.email,
+                name: meta.name || 'Unknown',
+                age: meta.age || null,
+                community_centre: meta.community_centre || null
+            });
+            await refreshAll();
         }
 
-        const now = Date.now();
-        const day = 86400000;
-        appData.matches.push(
-            { id: 'seed-m1', playerA: DEV_USER_EMAIL,      playerB: 'alice@sgtt.local',
-              type: 'singles', cc: 'Fernvale Community Club', scoreA: 3, scoreB: 2,
-              winner: DEV_USER_EMAIL, timestamp: now - day * 2 },
-            { id: 'seed-m2', playerA: DEV_USER_EMAIL,      playerB: 'bob@sgtt.local',
-              type: 'singles', cc: 'Bishan Community Club',   scoreA: 1, scoreB: 3,
-              winner: 'bob@sgtt.local', timestamp: now - day * 5 },
-            { id: 'seed-m3', playerA: 'charlie@sgtt.local', playerB: DEV_USER_EMAIL,
-              type: 'doubles', cc: 'Fernvale Community Club', scoreA: 2, scoreB: 3,
-              winner: DEV_USER_EMAIL, timestamp: now - day * 8 }
-        );
+        // Make the first registered user an admin automatically
+        if (allProfiles.filter(p => p.is_admin).length === 0) {
+            await supabase.from('profiles').update({ is_admin: true }).eq('id', authUser.id);
+            await refreshAll();
+        }
 
-        appData.requests.push(
-            { id: 'seed-r1', from: 'alice@sgtt.local', to: DEV_USER_EMAIL,
-              type: 'singles', cc: 'Bishan Community Club',
-              scoreA: 3, scoreB: 1, status: 'pending', timestamp: now - day },
-            { id: 'seed-r2', from: DEV_USER_EMAIL,     to: 'bob@sgtt.local',
-              type: 'singles', cc: 'Fernvale Community Club',
-              scoreA: 3, scoreB: 0, status: 'pending', timestamp: now - day * 0.5 }
-        );
-
-        // Charlie already has a pending subscription request
-        // (set via makeSubscription('pending')) — nothing more to do.
-
-        await saveData(DEV_PASSWORD);
+        hideLoading();
+        showMainScreen();
+    } catch (err) {
+        hideLoading();
+        console.error(err);
+        showToast('Failed to load data: ' + err.message);
     }
-
-    currentUser = appData.users.find(u => u.email === DEV_USER_EMAIL);
-    currentKey  = DEV_PASSWORD;
-    showMainScreen();
 }
 
-/* ---------- MAIN SCREEN ---------- */
 function showMainScreen() {
     document.getElementById('auth-screen').classList.add('hidden');
     document.getElementById('main-screen').classList.remove('hidden');
-    document.getElementById('user-name').textContent = currentUser.name;
-    document.getElementById('user-cc').textContent = currentUser.cc;
-    if (DEV_MODE) document.getElementById('dev-badge').classList.remove('hidden');
+    document.getElementById('user-name').textContent = userProfile.name;
+    document.getElementById('user-cc').textContent = userProfile.community_centre || '';
 
-    // Show admin tab only for admins
     const adminBtn = document.getElementById('tab-admin-btn');
-    if (currentUser.isAdmin) {
-        adminBtn.classList.remove('hidden');
-    } else {
-        adminBtn.classList.add('hidden');
-    }
+    if (userProfile.is_admin) adminBtn.classList.remove('hidden');
+    else adminBtn.classList.add('hidden');
 
     renderDashboard();
     switchTab('dashboard');
 }
 
-document.getElementById('logout-btn').addEventListener('click', () => {
-    if (DEV_MODE) { showToast('Login is disabled in design mode.'); return; }
+async function doLogout() {
+    await supabase.auth.signOut();
     currentUser = null;
-    currentKey  = null;
+    userProfile = null;
+    allProfiles = [];
+    allRequests = [];
+    allMatches = [];
     adminUnlocked = false;
     document.getElementById('main-screen').classList.add('hidden');
     document.getElementById('auth-screen').classList.remove('hidden');
     document.getElementById('auth-password').value = '';
-});
+}
 
-/* ---------- DASHBOARD RENDER ---------- */
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
 function renderDashboard() {
-    if (!currentUser) return;
+    if (!userProfile) return;
 
-    const u = appData.users.find(x => x.email === currentUser.email);
-    if (u) currentUser = u;
-
-    const wins   = currentUser.wins   || 0;
-    const losses = currentUser.losses || 0;
-    const total  = wins + losses;
+    const wins = userProfile.wins || 0, losses = userProfile.losses || 0;
+    const total = wins + losses;
     const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
 
-    document.getElementById('stat-points').textContent   = currentUser.points;
-    document.getElementById('stat-wins').textContent     = wins;
-    document.getElementById('stat-losses').textContent   = losses;
-    document.getElementById('stat-winrate').textContent  = winRate + '%';
+    document.getElementById('stat-points').textContent  = userProfile.points || 0;
+    document.getElementById('stat-wins').textContent    = wins;
+    document.getElementById('stat-losses').textContent  = losses;
+    document.getElementById('stat-winrate').textContent = winRate + '%';
 
-    const sorted = [...appData.users].sort((a, b) => b.points - a.points);
-    const rank = sorted.findIndex(x => x.email === currentUser.email) + 1;
-    document.getElementById('stat-rank').textContent = '#' + rank;
+    const sorted = [...allProfiles].sort((a, b) => (b.points || 0) - (a.points || 0));
+    const rank = sorted.findIndex(x => x.id === userProfile.id) + 1;
+    document.getElementById('stat-rank').textContent = '#' + (rank || '—');
 
-    const pts = currentUser.points;
+    const pts = userProfile.points || 0;
     let discount = 0;
     if      (pts >= 2000) discount = 20;
     else if (pts >= 1500) discount = 15;
@@ -996,215 +830,357 @@ function renderDashboard() {
     else if (pts >= 500)  discount = 5;
 
     document.getElementById('discount-info').innerHTML =
-        `<strong>${discount}% discount</strong> at partner shops!<br>
-         <small>Earn more points to increase your discount.</small>`;
+        `<strong>${discount}% discount</strong> at partner shops!<br><small>Earn more points to increase your discount.</small>`;
     document.getElementById('discount-bar').style.width = Math.min(100, (pts / 2000) * 100) + '%';
 
-    // Subscription banner on dashboard
-    const subLabel = subStatusLabel(currentUser);
-    const subCls = subLabel.cls === 'badge-green' ? 'dot-green'
-                 : subLabel.cls === 'badge-yellow' ? 'dot-yellow' : 'dot-red';
+    const label = subStatusLabel(userProfile);
+    const cls = label.cls === 'badge-green' ? 'dot-green' : label.cls === 'badge-yellow' ? 'dot-yellow' : 'dot-red';
     let subText = '';
-    if (currentUser.subscription.status === 'active' && currentUser.subscription.paidUntil > Date.now()) {
-        subText = `Valid until ${new Date(currentUser.subscription.paidUntil).toLocaleDateString()}`;
-    } else if (currentUser.subscription.status === 'pending') {
+    const sub = userProfile.subscription || {};
+    if (sub.status === 'active' && sub.paidUntil > Date.now()) {
+        subText = `Valid until ${new Date(sub.paidUntil).toLocaleDateString()}`;
+    } else if (sub.status === 'pending') {
         subText = 'Waiting for admin approval of your $2 payment.';
     } else {
         subText = 'Subscribe for $2/month to play matches.';
     }
     document.getElementById('dash-sub-status').innerHTML = `
         <div class="sub-status">
-            <div class="dot ${subCls}"></div>
-            <div style="flex:1;">
-                <div style="font-weight:600;">${subLabel.text}</div>
-                <div style="font-size:0.78rem; color:#94a3b8;">${subText}</div>
+            <div class="dot ${cls}"></div>
+            <div style="flex:1; min-width:0;">
+                <div style="font-weight:600;">${label.text}</div>
+                <div style="font-size:0.76rem; color:#94a3b8; word-break:break-word;">${subText}</div>
             </div>
-        </div>
-    `;
-
-    // Match history
-    const myMatches = appData.matches
-        .filter(m => m.playerA === currentUser.email || m.playerB === currentUser.email)
-        .sort((a, b) => b.timestamp - a.timestamp);
+        </div>`;
 
     const historyEl = document.getElementById('match-history');
-    if (myMatches.length === 0) {
+    if (allMatches.length === 0) {
         historyEl.innerHTML = '<p style="color:#94a3b8;">No matches yet. Request a match to get started!</p>';
     } else {
-        historyEl.innerHTML = myMatches.slice(0, 20).map(m => {
-            const isA      = m.playerA === currentUser.email;
-            const opponent = isA ? m.playerB : m.playerA;
-            const myScore  = isA ? m.scoreA : m.scoreB;
-            const oppScore = isA ? m.scoreB : m.scoreA;
-            const won      = myScore > oppScore;
-            const badge    = won ? 'badge-green' : 'badge-red';
-            const result   = won ? 'WIN' : 'LOSS';
+        historyEl.innerHTML = allMatches.slice(0, 20).map(m => {
+            const myId = userProfile.id;
+            const iAmTeamA = m.player_a === myId || m.partner_a === myId;
+            const myScore  = iAmTeamA ? m.score_a : m.score_b;
+            const oppScore = iAmTeamA ? m.score_b : m.score_a;
+            const won = myScore > oppScore;
+
+            let myTeam, oppTeam;
+            if (m.type === 'doubles') {
+                myTeam  = iAmTeamA
+                    ? `${nameOf(m.player_a)} & ${nameOf(m.partner_a)}`
+                    : `${nameOf(m.player_b)} & ${nameOf(m.partner_b)}`;
+                oppTeam = iAmTeamA
+                    ? `${nameOf(m.player_b)} & ${nameOf(m.partner_b)}`
+                    : `${nameOf(m.player_a)} & ${nameOf(m.partner_a)}`;
+            } else {
+                myTeam  = iAmTeamA ? nameOf(m.player_a) : nameOf(m.player_b);
+                oppTeam = iAmTeamA ? nameOf(m.player_b) : nameOf(m.player_a);
+            }
+            const badge = won ? 'badge-green' : 'badge-red';
+            const result = won ? 'WIN' : 'LOSS';
             return `
                 <div class="match-item">
                     <div class="info">
-                        <strong>vs ${opponent}</strong>
-                        <small>${m.type} • ${m.cc} • ${new Date(m.timestamp).toLocaleDateString()}</small>
+                        <strong>${escapeHtml(myTeam)} vs ${escapeHtml(oppTeam)}</strong>
+                        <small>${m.type} • ${escapeHtml(m.community_centre)} • ${new Date(m.played_at).toLocaleDateString()}</small>
                     </div>
-                    <div style="text-align:right;">
+                    <div class="result">
                         <span class="badge ${badge}">${result}</span>
-                        <div style="font-size:0.8rem; margin-top:4px;">${myScore} – ${oppScore}</div>
+                        <div style="font-size:0.78rem; margin-top:4px;">${myScore} – ${oppScore}</div>
                     </div>
                 </div>`;
         }).join('');
     }
 }
 
-/* ---------- REQUEST MATCH ---------- */
-document.getElementById('req-submit').addEventListener('click', async () => {
-    if (!currentUser) return;
+/* ============================================================
+   REQUEST MATCH
+   ============================================================ */
+function paidMembers(excludeIds = []) {
+    return allProfiles
+        .filter(u => u.id !== userProfile.id)
+        .filter(u => !excludeIds.includes(u.id))
+        .filter(u => isPaidMember(u))
+        .sort((a, b) => a.name.localeCompare(b.name));
+}
 
-    if (!isSubscriptionActive(currentUser)) {
-        showToast('Your subscription is not active. Please subscribe first.');
+function fillSelect(sel, users, { includeEmpty = false, emptyLabel = '— Select —' } = {}) {
+    const prev = sel.value;
+    sel.innerHTML = '';
+    if (includeEmpty) {
+        const opt = document.createElement('option');
+        opt.value = ''; opt.textContent = emptyLabel;
+        sel.appendChild(opt);
+    }
+    if (users.length === 0) {
+        const opt = document.createElement('option');
+        opt.value = ''; opt.textContent = '(no paid members available)';
+        opt.disabled = true; opt.selected = true;
+        sel.appendChild(opt);
         return;
     }
-
-    const opponentEmail = document.getElementById('req-opponent').value.trim().toLowerCase();
-    const type          = document.getElementById('req-type').value;
-    const cc            = document.getElementById('req-cc').value;
-    const scoreA        = parseInt(document.getElementById('req-score').value, 10);
-    const scoreB        = parseInt(document.getElementById('req-opp-score').value, 10);
-
-    if (!opponentEmail || !cc || isNaN(scoreA) || isNaN(scoreB)) {
-        showToast('Please fill all fields correctly.'); return;
-    }
-    if (opponentEmail === currentUser.email) {
-        showToast('You cannot play against yourself.'); return;
-    }
-    const opponent = appData.users.find(u => u.email === opponentEmail);
-    if (!opponent) { showToast('Opponent not found. They must register first.'); return; }
-
-    appData.requests.push({
-        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-        from: currentUser.email,
-        to: opponentEmail,
-        type, cc, scoreA, scoreB,
-        status: 'pending',
-        timestamp: Date.now()
+    users.forEach(u => {
+        const opt = document.createElement('option');
+        opt.value = u.id;
+        opt.textContent = `${u.name}  ·  ${u.community_centre || ''}`;
+        sel.appendChild(opt);
     });
+    if (prev && users.some(u => u.id === prev)) sel.value = prev;
+}
 
-    await saveData(currentKey);
-    showToast('Match request sent to ' + opponent.name + '!');
-    document.getElementById('req-opponent').value  = '';
-    document.getElementById('req-score').value     = '';
-    document.getElementById('req-opp-score').value = '';
-    renderRequests();
+function refreshRequestDropdowns() {
+    const type = document.getElementById('req-type').value;
+    const isDoubles = type === 'doubles';
+
+    document.getElementById('req-doubles-fields').classList.toggle('hidden', !isDoubles);
+    document.getElementById('req-opp2-wrap').classList.toggle('hidden', !isDoubles);
+
+    const partnerSel = document.getElementById('req-partner');
+    const opp1Sel    = document.getElementById('req-opponent1');
+    const opp2Sel    = document.getElementById('req-opponent2');
+
+    const partner = isDoubles ? partnerSel.value : null;
+    const opp1    = opp1Sel.value;
+    const opp2    = isDoubles ? opp2Sel.value : null;
+
+    fillSelect(partnerSel, paidMembers([opp1, opp2].filter(Boolean)));
+    fillSelect(opp1Sel,    paidMembers([partner, opp2].filter(Boolean)));
+    fillSelect(opp2Sel,    paidMembers([partner, opp1].filter(Boolean)), { includeEmpty: true, emptyLabel: '— Optional —' });
+}
+
+document.getElementById('req-type').addEventListener('change', refreshRequestDropdowns);
+document.getElementById('req-partner').addEventListener('change', refreshRequestDropdowns);
+document.getElementById('req-opponent1').addEventListener('change', refreshRequestDropdowns);
+document.getElementById('req-opponent2').addEventListener('change', refreshRequestDropdowns);
+
+document.getElementById('req-submit').addEventListener('click', async () => {
+    if (!userProfile) return;
+    if (!isSubscriptionActive(userProfile)) { showToast('Your subscription is not active.'); return; }
+
+    const type      = document.getElementById('req-type').value;
+    const isDoubles = type === 'doubles';
+    const cc        = document.getElementById('req-cc').value;
+    const scoreA    = parseInt(document.getElementById('req-score').value, 10);
+    const scoreB    = parseInt(document.getElementById('req-opp-score').value, 10);
+
+    const partner   = isDoubles ? document.getElementById('req-partner').value : null;
+    const opponent1 = document.getElementById('req-opponent1').value;
+    const opponent2 = isDoubles ? (document.getElementById('req-opponent2').value || null) : null;
+
+    if (!cc || isNaN(scoreA) || isNaN(scoreB)) { showToast('Please fill scores and CC.'); return; }
+    if (scoreA === scoreB) { showToast('Scores cannot be tied.'); return; }
+    if (!opponent1) { showToast('Please select an opponent.'); return; }
+    if (isDoubles && !partner) { showToast('Doubles requires a partner.'); return; }
+
+    const chosen = [userProfile.id, partner, opponent1, opponent2].filter(Boolean);
+    if (new Set(chosen).size !== chosen.length) { showToast('Players must be distinct.'); return; }
+
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+
+    try {
+        showLoading('Sending request…');
+        const { error } = await supabase.from('match_requests').insert({
+            id, type,
+            community_centre: cc,
+            from_user: userProfile.id,
+            partner: partner || null,
+            to_user: opponent1,
+            opponent2: opponent2 || null,
+            score_a: scoreA,
+            score_b: scoreB,
+            status: 'pending'
+        });
+        if (error) throw error;
+        hideLoading();
+        showToast('Match request sent to ' + nameOf(opponent1) + '!');
+        document.getElementById('req-score').value = '';
+        document.getElementById('req-opp-score').value = '';
+        await loadRequests();
+        renderRequests();
+    } catch (err) {
+        hideLoading();
+        console.error(err);
+        showToast('Failed: ' + err.message);
+    }
 });
 
-/* ---------- RENDER REQUESTS ---------- */
+/* ============================================================
+   RENDER REQUESTS
+   ============================================================ */
+function requestTeamLabel(r) {
+    if (r.type === 'doubles') return `${nameOf(r.from_user)} & ${nameOf(r.partner)}`;
+    return nameOf(r.from_user);
+}
+function opponentTeamLabel(r) {
+    if (r.type === 'doubles' && r.opponent2) return `${nameOf(r.to_user)} & ${nameOf(r.opponent2)}`;
+    if (r.type === 'doubles') return `${nameOf(r.to_user)} & ?`;
+    return nameOf(r.to_user);
+}
+
 function renderRequests() {
-    if (!currentUser) return;
+    if (!userProfile) return;
 
-    // Show/hide subscription warning
     const warn = document.getElementById('req-sub-warning');
-    if (isSubscriptionActive(currentUser)) {
-        warn.classList.add('hidden');
-    } else {
-        warn.classList.remove('hidden');
-    }
+    if (isSubscriptionActive(userProfile)) warn.classList.add('hidden');
+    else warn.classList.remove('hidden');
 
-    const sent = appData.requests.filter(r => r.from === currentUser.email && r.status === 'pending');
+    refreshRequestDropdowns();
+
+    const myId = userProfile.id;
+
+    const sent = allRequests.filter(r =>
+        (r.from_user === myId || r.partner === myId) && r.status === 'pending');
     const sentEl = document.getElementById('pending-sent');
     if (sent.length === 0) {
         sentEl.innerHTML = '<p style="color:#94a3b8;">No pending requests.</p>';
     } else {
         sentEl.innerHTML = sent.map(r => {
-            const opp = appData.users.find(u => u.email === r.to);
+            const iAmPartner = r.partner === myId;
             return `
                 <div class="match-item">
                     <div class="info">
-                        <strong>To: ${opp ? opp.name : r.to}</strong>
-                        <small>${r.type} • ${r.cc} • ${new Date(r.timestamp).toLocaleDateString()}</small>
+                        <strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong>
+                        <small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}${iAmPartner ? ' • You\'re the partner' : ''}</small>
                     </div>
                     <span class="badge badge-yellow">PENDING</span>
                 </div>`;
         }).join('');
     }
 
-    const received = appData.requests.filter(r => r.to === currentUser.email && r.status === 'pending');
-    const receivedEl = document.getElementById('pending-received');
+    const received = allRequests.filter(r => r.to_user === myId && r.status === 'pending');
+    const recEl = document.getElementById('pending-received');
     if (received.length === 0) {
-        receivedEl.innerHTML = '<p style="color:#94a3b8;">No requests to approve.</p>';
+        recEl.innerHTML = '<p style="color:#94a3b8;">No requests to approve.</p>';
     } else {
-        receivedEl.innerHTML = received.map(r => {
-            const from = appData.users.find(u => u.email === r.from);
+        recEl.innerHTML = received.map(r => `
+            <div class="match-item" style="flex-direction: column; align-items: stretch;">
+                <div class="info" style="width:100%;">
+                    <strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong>
+                    <small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small>
+                    <div style="font-size:0.82rem; margin-top:6px; color:#cbd5e1;">Score: <strong>${r.score_a} – ${r.score_b}</strong></div>
+                </div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+                    <button class="small" style="background:#22c55e; color:#0f172a;" onclick="approveRequest('${r.id}')">Approve</button>
+                    <button class="small danger" onclick="rejectRequest('${r.id}')">Reject</button>
+                </div>
+            </div>`).join('');
+    }
+
+    const included = allRequests.filter(r =>
+        r.status === 'pending' && r.to_user !== myId &&
+        (r.partner === myId || r.opponent2 === myId));
+    const incCard = document.getElementById('included-card');
+    const incEl = document.getElementById('included-list');
+    if (included.length === 0) {
+        incCard.style.display = 'none';
+    } else {
+        incCard.style.display = '';
+        incEl.innerHTML = included.map(r => {
+            const asPartner = r.partner === myId;
             return `
                 <div class="match-item">
                     <div class="info">
-                        <strong>From: ${from ? from.name : r.from}</strong>
-                        <small>${r.type} • ${r.cc} • ${new Date(r.timestamp).toLocaleDateString()}</small>
-                        <div style="font-size:0.85rem; margin-top:4px;">Score: ${r.scoreA} – ${r.scoreB}</div>
+                        <strong>${escapeHtml(requestTeamLabel(r))} vs ${escapeHtml(opponentTeamLabel(r))}</strong>
+                        <small>${r.type} • ${escapeHtml(r.community_centre)} • ${new Date(r.created_at).toLocaleDateString()}</small>
+                        <div style="font-size:0.76rem; margin-top:4px; color:#94a3b8;">
+                            You are ${asPartner ? 'the partner' : 'opponent 2'} • Waiting for ${escapeHtml(nameOf(r.to_user))} to approve
+                        </div>
                     </div>
-                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                        <button class="small" style="background:#22c55e; color:#0f172a;" onclick="approveRequest('${r.id}')">Approve</button>
-                        <button class="small danger" onclick="rejectRequest('${r.id}')">Reject</button>
-                    </div>
+                    <span class="badge badge-blue">FYI</span>
                 </div>`;
         }).join('');
     }
 }
 
-/* ---------- APPROVE / REJECT ---------- */
+/* ============================================================
+   APPROVE / REJECT
+   ============================================================ */
 async function approveRequest(id) {
-    const req = appData.requests.find(r => r.id === id);
+    const req = allRequests.find(r => r.id === id);
     if (!req || req.status !== 'pending') return;
 
-    // Both players must have active subscriptions to record a match
-    const fromUser = appData.users.find(u => u.email === req.from);
-    const toUser   = appData.users.find(u => u.email === req.to);
-    if (!isSubscriptionActive(fromUser) || !isSubscriptionActive(toUser)) {
-        showToast('Both players need active subscriptions.');
-        return;
+    const involvedIds = [req.from_user, req.partner, req.to_user, req.opponent2].filter(Boolean);
+    for (const uid of involvedIds) {
+        const u = allProfiles.find(x => x.id === uid);
+        if (!isSubscriptionActive(u)) { showToast('All players need active subscriptions.'); return; }
     }
 
-    req.status = 'approved';
+    try {
+        showLoading('Approving match…');
 
-    const winnerEmail = req.scoreA > req.scoreB ? req.from : req.to;
-    const loserEmail  = req.scoreA > req.scoreB ? req.to   : req.from;
+        // 1. Mark request approved
+        const { error: reqErr } = await supabase
+            .from('match_requests')
+            .update({ status: 'approved' })
+            .eq('id', id);
+        if (reqErr) throw reqErr;
 
-    appData.matches.push({
-        id: req.id,
-        playerA: req.from,
-        playerB: req.to,
-        type: req.type,
-        cc: req.cc,
-        scoreA: req.scoreA,
-        scoreB: req.scoreB,
-        winner: winnerEmail,
-        timestamp: Date.now()
-    });
+        // 2. Create match row
+        const winnerIsA = req.score_a > req.score_b;
+        const { error: matchErr } = await supabase.from('matches').insert({
+            id: req.id,
+            type: req.type,
+            community_centre: req.community_centre,
+            player_a: req.from_user,
+            partner_a: req.partner || null,
+            player_b: req.to_user,
+            partner_b: req.opponent2 || null,
+            score_a: req.score_a,
+            score_b: req.score_b,
+            winner: winnerIsA ? req.from_user : req.to_user
+        });
+        if (matchErr) throw matchErr;
 
-    await awardPoints(winnerEmail, loserEmail);
-    await saveData(currentKey);
-    showToast('Match approved! Points awarded.');
-    renderRequests();
-    renderDashboard();
+        // 3. Award points
+        const teamA = [req.from_user, req.partner].filter(Boolean);
+        const teamB = [req.to_user, req.opponent2].filter(Boolean);
+        const winnerTeam = winnerIsA ? teamA : teamB;
+        const loserTeam  = winnerIsA ? teamB : teamA;
+        await awardPoints(winnerTeam, loserTeam);
+
+        hideLoading();
+        showToast('Match approved! Points awarded.');
+        await refreshAll();
+        renderRequests();
+        renderDashboard();
+    } catch (err) {
+        hideLoading();
+        console.error(err);
+        showToast('Failed: ' + err.message);
+    }
 }
 
 async function rejectRequest(id) {
-    const req = appData.requests.find(r => r.id === id);
-    if (!req || req.status !== 'pending') return;
-    req.status = 'rejected';
-    await saveData(currentKey);
-    showToast('Match request rejected.');
-    renderRequests();
+    try {
+        const { error } = await supabase
+            .from('match_requests')
+            .update({ status: 'rejected' })
+            .eq('id', id);
+        if (error) throw error;
+        showToast('Match request rejected.');
+        await loadRequests();
+        renderRequests();
+    } catch (err) {
+        showToast('Failed: ' + err.message);
+    }
 }
 
-/* ---------- POINTS (ITTF simplified) ---------- */
-async function awardPoints(winnerEmail, loserEmail) {
-    const winner = appData.users.find(u => u.email === winnerEmail);
-    const loser  = appData.users.find(u => u.email === loserEmail);
-    if (!winner || !loser) return;
+/* ============================================================
+   POINTS (ITTF simplified)
+   ============================================================ */
+function teamRating(ids) {
+    const ratings = ids.map(id => {
+        const u = allProfiles.find(x => x.id === id);
+        return (u && u.rating) || 1000;
+    });
+    return ratings.reduce((s, r) => s + r, 0) / ratings.length;
+}
 
-    const wR = winner.rating || 1000;
-    const lR = loser.rating  || 1000;
+async function awardPoints(winnerTeam, loserTeam) {
+    const wR = teamRating(winnerTeam);
+    const lR = teamRating(loserTeam);
     const diff = Math.abs(wR - lR);
     let points;
-
     if (wR >= lR) {
         if      (diff > 750) points = 1;
         else if (diff > 500) points = 2;
@@ -1229,38 +1205,47 @@ async function awardPoints(winnerEmail, loserEmail) {
         else                 points = 10;
     }
 
-    winner.rating = wR + points;
-    loser.rating  = Math.max(100, lR - points);
-    winner.points = winner.rating;
-    loser.points  = loser.rating;
-    winner.wins   = (winner.wins   || 0) + 1;
-    loser.losses  = (loser.losses  || 0) + 1;
+    for (const id of winnerTeam) {
+        const u = allProfiles.find(x => x.id === id);
+        if (!u) continue;
+        const newRating = (u.rating || 1000) + points;
+        await supabase.from('profiles').update({
+            rating: newRating,
+            points: newRating,
+            wins: (u.wins || 0) + 1
+        }).eq('id', id);
+    }
+    for (const id of loserTeam) {
+        const u = allProfiles.find(x => x.id === id);
+        if (!u) continue;
+        const newRating = Math.max(100, (u.rating || 1000) - points);
+        await supabase.from('profiles').update({
+            rating: newRating,
+            points: newRating,
+            losses: (u.losses || 0) + 1
+        }).eq('id', id);
+    }
 }
 
 /* ============================================================
    SUBSCRIPTION TAB
    ============================================================ */
 function renderSubscription() {
-    if (!currentUser) return;
-    const u = appData.users.find(x => x.email === currentUser.email);
-    if (u) currentUser = u;
+    if (!userProfile) return;
+    const s = userProfile.subscription || {};
+    const label = subStatusLabel(userProfile);
+    const cls = label.cls === 'badge-green' ? 'dot-green' : label.cls === 'badge-yellow' ? 'dot-yellow' : 'dot-red';
 
-    const s = currentUser.subscription || makeSubscription();
-    const label = subStatusLabel(currentUser);
-    const cls = label.cls === 'badge-green' ? 'dot-green'
-              : label.cls === 'badge-yellow' ? 'dot-yellow' : 'dot-red';
-
-    let detail = '';
-    let extra  = '';
+    let detail = '', extra = '';
     if (s.status === 'active' && s.paidUntil > Date.now()) {
         const days = Math.ceil((s.paidUntil - Date.now()) / (24*60*60*1000));
         detail = `Active until ${new Date(s.paidUntil).toLocaleDateString()}`;
-        extra  = `${days} day${days === 1 ? '' : 's'} remaining`;
+        extra = `${days} day${days === 1 ? '' : 's'} remaining`;
     } else if (s.status === 'pending') {
-        detail = 'Your request was sent. Waiting for admin to verify $2 payment.';
-        extra  = `Requested ${new Date(s.requestedAt).toLocaleDateString()}`;
+        detail = 'Waiting for admin to verify $2 payment.';
+        extra = `Requested ${new Date(s.requestedAt).toLocaleDateString()}`;
     } else if (s.status === 'active' && s.paidUntil > 0 && s.paidUntil <= Date.now()) {
-        detail = 'Your subscription has expired. Renew to continue playing.';
+        detail = 'Subscription expired. Renew to continue playing.';
     } else {
         detail = 'No active subscription. Request activation below.';
     }
@@ -1268,61 +1253,50 @@ function renderSubscription() {
     document.getElementById('sub-current-status').innerHTML = `
         <div class="sub-status">
             <div class="dot ${cls}"></div>
-            <div style="flex:1;">
+            <div style="flex:1; min-width:0;">
                 <div style="font-weight:600;">${label.text}</div>
-                <div style="font-size:0.8rem; color:#94a3b8;">${detail}</div>
-                ${extra ? `<div style="font-size:0.75rem; color:#64748b; margin-top:2px;">${extra}</div>` : ''}
+                <div style="font-size:0.8rem; color:#94a3b8; word-break:break-word;">${detail}</div>
+                ${extra ? `<div style="font-size:0.74rem; color:#64748b; margin-top:2px;">${extra}</div>` : ''}
             </div>
         </div>
-        <div style="font-size:0.8rem; color:#94a3b8;">
-            Paid: <strong>${s.paid ? 'Yes' : 'No'}</strong>
-            • Auto-renew: <strong>${s.autoRenew ? 'On' : 'Off'}</strong>
-        </div>
-    `;
+        <div style="font-size:0.78rem; color:#94a3b8;">
+            Paid: <strong>${s.paid ? 'Yes' : 'No'}</strong> • Auto-renew: <strong>${s.autoRenew ? 'On' : 'Off'}</strong>
+        </div>`;
 
-    const reqCard = document.getElementById('sub-request-card');
-    const reqBtn  = document.getElementById('sub-request-btn');
-
+    const reqBtn = document.getElementById('sub-request-btn');
     if (s.status === 'pending') {
-        reqBtn.disabled = true;
-        reqBtn.textContent = '⏳ Request Pending Approval';
+        reqBtn.disabled = true; reqBtn.textContent = '⏳ Request Pending Approval';
     } else if (s.status === 'active' && s.paidUntil > Date.now()) {
-        reqBtn.disabled = true;
-        reqBtn.textContent = '✅ Subscription Active';
+        reqBtn.disabled = true; reqBtn.textContent = '✅ Subscription Active';
     } else {
-        reqBtn.disabled = false;
-        reqBtn.textContent = 'Request Subscription Activation ($2)';
+        reqBtn.disabled = false; reqBtn.textContent = 'Request Subscription Activation ($2)';
     }
 }
 
 document.getElementById('sub-request-btn').addEventListener('click', async () => {
-    if (!currentUser) return;
-    const u = appData.users.find(x => x.email === currentUser.email);
-    if (!u) return;
-    if (u.subscription.status === 'pending') { showToast('Request already pending.'); return; }
-    if (u.subscription.status === 'active' && u.subscription.paidUntil > Date.now()) {
-        showToast('Subscription already active.'); return;
-    }
+    if (!userProfile) return;
+    const s = userProfile.subscription || {};
+    if (s.status === 'pending') { showToast('Request already pending.'); return; }
+    if (s.status === 'active' && s.paidUntil > Date.now()) { showToast('Already active.'); return; }
 
-    u.subscription.status = 'pending';
-    u.subscription.requestedAt = Date.now();
-    await saveData(currentKey);
-    currentUser = u;
-    showToast('Request sent! Admin will verify your $2 payment.');
-    renderSubscription();
-    renderDashboard();
+    const newSub = { ...s, status: 'pending', requestedAt: Date.now() };
+    try {
+        const { error } = await supabase.from('profiles').update({ subscription: newSub }).eq('id', userProfile.id);
+        if (error) throw error;
+        await refreshAll();
+        showToast('Request sent! Admin will verify your $2 payment.');
+        renderSubscription();
+        renderDashboard();
+    } catch (err) {
+        showToast('Failed: ' + err.message);
+    }
 });
 
 /* ============================================================
    ADMIN TAB
    ============================================================ */
 function renderAdminPanel() {
-    if (!currentUser) return;
-    if (!currentUser.isAdmin) {
-        showToast('Admin access required.');
-        switchTab('dashboard');
-        return;
-    }
+    if (!userProfile || !userProfile.is_admin) { showToast('Admin access required.'); switchTab('dashboard'); return; }
 
     const locked = document.getElementById('admin-locked');
     const unlocked = document.getElementById('admin-unlocked');
@@ -1344,14 +1318,14 @@ function renderAdminPanel() {
 document.getElementById('admin-pin-submit').addEventListener('click', () => {
     const pin = document.getElementById('admin-pin-input').value.trim();
     if (!pin) { showToast('Enter PIN.'); return; }
-    if (pin === appData.adminPin) {
+    // PIN is stored locally per-browser for simplicity; change as needed
+    const storedPin = localStorage.getItem('sgtt_admin_pin') || DEFAULT_ADMIN_PIN;
+    if (pin === storedPin) {
         adminUnlocked = true;
         document.getElementById('admin-pin-input').value = '';
         showToast('Admin panel unlocked.');
         renderAdminPanel();
-    } else {
-        showToast('Incorrect PIN.');
-    }
+    } else showToast('Incorrect PIN.');
 });
 
 document.getElementById('admin-lock-btn').addEventListener('click', () => {
@@ -1360,212 +1334,295 @@ document.getElementById('admin-lock-btn').addEventListener('click', () => {
     renderAdminPanel();
 });
 
-document.getElementById('admin-change-pin').addEventListener('click', async () => {
-    if (!currentUser || !currentUser.isAdmin || !adminUnlocked) return;
+document.getElementById('admin-change-pin').addEventListener('click', () => {
+    if (!userProfile.is_admin || !adminUnlocked) return;
     const np = document.getElementById('admin-new-pin').value.trim();
     if (!/^\d{4,8}$/.test(np)) { showToast('PIN must be 4–8 digits.'); return; }
-    appData.adminPin = np;
-    await saveData(currentKey);
+    localStorage.setItem('sgtt_admin_pin', np);
     document.getElementById('admin-new-pin').value = '';
     showToast('Admin PIN updated.');
 });
 
-/* ---------- ADMIN: pending subscription requests ---------- */
+/* ---------- Admin: pending subscription requests ---------- */
 function renderAdminPendingReqs() {
     const el = document.getElementById('admin-pending-reqs');
-    const pending = appData.users.filter(u => u.subscription && u.subscription.status === 'pending');
-
+    const pending = allProfiles.filter(u => u.subscription && u.subscription.status === 'pending');
     if (pending.length === 0) {
-        el.innerHTML = '<p style="color:#94a3b8;">No pending requests.</p>';
+        el.innerHTML = '<p style="color:#94a3b8;">No pending requests.</p>'; return;
+    }
+    el.innerHTML = pending.map(u => `
+        <div class="user-table-detail" style="background:#0f172a; border-radius:12px; border:1px solid #334155; padding:12px; margin-bottom:10px;">
+            <div style="font-weight:600; font-size:0.9rem;">
+                ${escapeHtml(u.name)} ${u.is_admin ? '<span class="badge badge-admin">ADMIN</span>' : ''}
+            </div>
+            <div style="font-size:0.74rem; color:#94a3b8; margin-top:3px; word-break:break-word;">
+                ${escapeHtml(u.email)} • ${escapeHtml(u.community_centre || '')}
+            </div>
+            <div style="font-size:0.74rem; color:#94a3b8; margin-top:3px;">
+                Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
+                <button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="adminApproveSub('${u.id}')">Approve ($2 received)</button>
+                <button class="tiny danger" onclick="adminRejectSub('${u.id}')">Reject</button>
+            </div>
+        </div>`).join('');
+}
+
+async function adminApproveSub(id) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    const u = allProfiles.find(x => x.id === id);
+    if (!u || !u.subscription) return;
+    const newSub = {
+        ...u.subscription,
+        status: 'active',
+        paid: true,
+        paidUntil: Date.now() + SUB_DURATION_MS,
+        lastPayment: Date.now()
+    };
+    try {
+        const { error } = await supabase.from('profiles').update({ subscription: newSub }).eq('id', id);
+        if (error) throw error;
+        await refreshAll();
+        showToast(`Subscription activated for ${u.name}.`);
+        renderAdminPanel();
+    } catch (err) { showToast('Failed: ' + err.message); }
+}
+async function adminRejectSub(id) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    const u = allProfiles.find(x => x.id === id);
+    if (!u || !u.subscription) return;
+    const newSub = { ...u.subscription, status: 'inactive', requestedAt: 0 };
+    try {
+        const { error } = await supabase.from('profiles').update({ subscription: newSub }).eq('id', id);
+        if (error) throw error;
+        await refreshAll();
+        showToast(`Rejected for ${u.name}.`);
+        renderAdminPanel();
+    } catch (err) { showToast('Failed: ' + err.message); }
+}
+
+/* ---------- Admin: search + user table ---------- */
+document.getElementById('admin-search').addEventListener('input', (e) => {
+    adminSearchTerm = e.target.value.trim().toLowerCase();
+    renderAdminUserList();
+});
+
+function filteredAdminUsers() {
+    const term = adminSearchTerm;
+    let list = [...allProfiles];
+    if (term) {
+        list = list.filter(u =>
+            (u.name || '').toLowerCase().includes(term) ||
+            (u.email || '').toLowerCase().includes(term) ||
+            (u.community_centre || '').toLowerCase().includes(term)
+        );
+    }
+    list.sort((a, b) => {
+        if (a.is_admin !== b.is_admin) return a.is_admin ? -1 : 1;
+        return (a.name || '').localeCompare(b.name || '');
+    });
+    return list;
+}
+
+function renderAdminUserList() {
+    const el = document.getElementById('admin-user-list');
+    const list = filteredAdminUsers();
+    document.getElementById('admin-user-count').textContent = allProfiles.length;
+    document.getElementById('admin-user-shown').textContent = list.length;
+
+    if (list.length === 0) {
+        el.innerHTML = '<p style="color:#94a3b8; padding:12px 0;">No users match your search.</p>';
         return;
     }
 
-    el.innerHTML = pending.map(u => {
-        return `
-            <div class="user-row">
-                <div class="name">${u.name}
-                    ${u.isAdmin ? '<span class="badge badge-admin">ADMIN</span>' : ''}
-                </div>
-                <div class="meta">${u.email} • ${u.cc}</div>
-                <div class="meta">Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}</div>
-                <div class="actions">
-                    <button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="adminApproveSub('${u.email}')">Approve ($2 received)</button>
-                    <button class="tiny danger" onclick="adminRejectSub('${u.email}')">Reject</button>
-                </div>
-            </div>`;
-    }).join('');
-}
-
-async function adminApproveSub(email) {
-    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
-    const u = appData.users.find(x => x.email === email);
-    if (!u || !u.subscription) return;
-    u.subscription.status = 'active';
-    u.subscription.paid = true;
-    u.subscription.paidUntil = Date.now() + SUB_DURATION_MS;
-    u.subscription.lastPayment = Date.now();
-    await saveData(currentKey);
-    showToast(`Subscription activated for ${u.name}.`);
-    renderAdminPanel();
-}
-
-async function adminRejectSub(email) {
-    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
-    const u = appData.users.find(x => x.email === email);
-    if (!u || !u.subscription) return;
-    u.subscription.status = 'inactive';
-    u.subscription.requestedAt = 0;
-    await saveData(currentKey);
-    showToast(`Subscription request rejected for ${u.name}.`);
-    renderAdminPanel();
-}
-
-/* ---------- ADMIN: user list ---------- */
-function renderAdminUserList() {
-    const el = document.getElementById('admin-user-list');
-    document.getElementById('admin-user-count').textContent = appData.users.length;
-
-    const sorted = [...appData.users].sort((a, b) => {
-        if (a.isAdmin !== b.isAdmin) return a.isAdmin ? -1 : 1;
-        return a.name.localeCompare(b.name);
-    });
-
-    el.innerHTML = sorted.map(u => {
+    el.innerHTML = list.map(u => {
         const label = subStatusLabel(u);
         const s = u.subscription || {};
-        const isSelf = u.email === currentUser.email;
-
-        // Subscription buttons
+        const isSelf = u.id === userProfile.id;
         const activeNow = s.status === 'active' && s.paidUntil > Date.now();
+
         const subBtn = activeNow
-            ? `<button class="tiny warn" onclick="adminToggleSub('${u.email}')">Disable for month</button>`
-            : `<button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="adminToggleSub('${u.email}')">Enable for month</button>`;
-
+            ? `<button class="tiny warn" onclick="event.stopPropagation();adminToggleSub('${u.id}')">Disable</button>`
+            : `<button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="event.stopPropagation();adminToggleSub('${u.id}')">Enable 1 mo</button>`;
         const paidBtn = s.paid
-            ? `<button class="tiny secondary" onclick="adminTogglePaid('${u.email}')">Mark Unpaid</button>`
-            : `<button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="adminTogglePaid('${u.email}')">Mark Paid</button>`;
-
+            ? `<button class="tiny secondary" onclick="event.stopPropagation();adminTogglePaid('${u.id}')">Unpaid</button>`
+            : `<button class="tiny" style="background:#22c55e; color:#0f172a;" onclick="event.stopPropagation();adminTogglePaid('${u.id}')">Paid</button>`;
         const autoBtn = s.autoRenew
-            ? `<button class="tiny secondary" onclick="adminToggleAuto('${u.email}')">Auto-renew: ON</button>`
-            : `<button class="tiny secondary" onclick="adminToggleAuto('${u.email}')">Auto-renew: OFF</button>`;
-
-        const adminBtn = u.isAdmin
-            ? `<button class="tiny danger" onclick="adminToggleAdmin('${u.email}')">Remove Admin</button>`
-            : `<button class="tiny" style="background:#1e40af; color:#dbeafe;" onclick="adminToggleAdmin('${u.email}')">Make Admin</button>`;
-
-        // Prevent admin from removing their own admin rights (safety)
-        const adminBtnSafe = isSelf
-            ? `<button class="tiny secondary" disabled>You (Admin)</button>`
-            : adminBtn;
+            ? `<button class="tiny secondary" onclick="event.stopPropagation();adminToggleAuto('${u.id}')">Auto-renew ✓</button>`
+            : `<button class="tiny secondary" onclick="event.stopPropagation();adminToggleAuto('${u.id}')">Auto-renew ✗</button>`;
+        const adminBtn = isSelf
+            ? `<button class="tiny secondary" disabled>You</button>`
+            : (u.is_admin
+                ? `<button class="tiny danger" onclick="event.stopPropagation();adminToggleAdmin('${u.id}')">Remove Admin</button>`
+                : `<button class="tiny" style="background:#1e40af; color:#dbeafe;" onclick="event.stopPropagation();adminToggleAdmin('${u.id}')">Make Admin</button>`);
 
         return `
-            <div class="user-row">
-                <div class="name">
-                    ${u.name}
-                    ${u.isAdmin ? '<span class="badge badge-admin">ADMIN</span>' : ''}
-                    ${isSelf ? '<span class="badge badge-blue">YOU</span>' : ''}
+            <div class="user-table-row" id="row-${u.id}">
+                <div class="user-table-main" onclick="toggleUserRow('${u.id}')">
+                    <div class="cell-name">
+                        <div class="name-line">
+                            ${escapeHtml(u.name)}
+                            ${u.is_admin ? '<span class="badge badge-admin">ADMIN</span>' : ''}
+                            ${isSelf ? '<span class="badge badge-blue">YOU</span>' : ''}
+                        </div>
+                        <div class="sub-line">${escapeHtml(u.email)}</div>
+                    </div>
+                    <div class="cell-cc">${escapeHtml(u.community_centre || '')}</div>
+                    <div class="cell-status">
+                        <span class="badge ${label.cls}">${label.text}</span>
+                        <span class="badge ${s.paid ? 'badge-green' : 'badge-red'}">${s.paid ? 'Paid' : 'Unpaid'}</span>
+                    </div>
+                    <div class="cell-chevron">▾</div>
                 </div>
-                <div class="meta">${u.email}</div>
-                <div class="meta">${u.cc} • Age ${u.age} • ${u.points} pts</div>
-                <div class="meta" style="margin-top:4px;">
-                    <span class="badge ${label.cls}">${label.text}</span>
-                    <span class="badge ${s.paid ? 'badge-green' : 'badge-red'}">Paid: ${s.paid ? 'Yes' : 'No'}</span>
-                    <span class="badge ${s.autoRenew ? 'badge-green' : ''}">Auto-renew: ${s.autoRenew ? 'On' : 'Off'}</span>
-                </div>
-                <div class="actions">
-                    ${paidBtn}
-                    ${subBtn}
-                    ${autoBtn}
-                    ${adminBtnSafe}
+                <div class="user-table-detail hidden" id="detail-${u.id}">
+                    <div class="detail-meta">
+                        <div><strong>Email:</strong> ${escapeHtml(u.email)}</div>
+                        <div><strong>CC:</strong> ${escapeHtml(u.community_centre || '')} • Age ${u.age || '—'}</div>
+                        <div><strong>Points:</strong> ${u.points || 0} • W: ${u.wins || 0} / L: ${u.losses || 0}</div>
+                        <div><strong>Paid until:</strong> ${s.paidUntil ? new Date(s.paidUntil).toLocaleDateString() : '—'} • <strong>Auto-renew:</strong> ${s.autoRenew ? 'On' : 'Off'}</div>
+                    </div>
+                    <div class="detail-actions">
+                        ${paidBtn}${subBtn}${autoBtn}${adminBtn}
+                    </div>
                 </div>
             </div>`;
     }).join('');
 }
 
-/* ---------- ADMIN ACTIONS ---------- */
-async function adminTogglePaid(email) {
-    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
-    const u = appData.users.find(x => x.email === email);
-    if (!u || !u.subscription) return;
-    u.subscription.paid = !u.subscription.paid;
-    if (u.subscription.paid) u.subscription.lastPayment = Date.now();
-    await saveData(currentKey);
-    showToast(`${u.name} marked ${u.subscription.paid ? 'Paid' : 'Unpaid'}.`);
-    renderAdminPanel();
-}
+window.toggleUserRow = function(id) {
+    const detail = document.getElementById('detail-' + id);
+    const row = document.getElementById('row-' + id);
+    if (!detail || !row) return;
+    detail.classList.toggle('hidden');
+    row.classList.toggle('open');
+};
 
-async function adminToggleSub(email) {
-    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
-    const u = appData.users.find(x => x.email === email);
+/* ---------- Admin actions ---------- */
+async function adminTogglePaid(id) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    const u = allProfiles.find(x => x.id === id);
+    if (!u || !u.subscription) return;
+    const newSub = {
+        ...u.subscription,
+        paid: !u.subscription.paid,
+        lastPayment: !u.subscription.paid ? Date.now() : u.subscription.lastPayment
+    };
+    try {
+        await supabase.from('profiles').update({ subscription: newSub }).eq('id', id);
+        await refreshAll();
+        showToast(`${u.name} marked ${newSub.paid ? 'Paid' : 'Unpaid'}.`);
+        renderAdminUserList();
+    } catch (err) { showToast('Failed: ' + err.message); }
+}
+async function adminToggleSub(id) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    const u = allProfiles.find(x => x.id === id);
     if (!u || !u.subscription) return;
     const activeNow = u.subscription.status === 'active' && u.subscription.paidUntil > Date.now();
+    let newSub;
     if (activeNow) {
-        // Disable for the month
-        u.subscription.status = 'inactive';
-        u.subscription.paidUntil = 0;
+        newSub = { ...u.subscription, status: 'inactive', paidUntil: 0 };
         showToast(`${u.name}'s subscription disabled.`);
     } else {
-        // Enable for a month
-        u.subscription.status = 'active';
-        u.subscription.paid = true;
-        u.subscription.paidUntil = Date.now() + SUB_DURATION_MS;
-        u.subscription.lastPayment = Date.now();
+        newSub = {
+            ...u.subscription,
+            status: 'active',
+            paid: true,
+            paidUntil: Date.now() + SUB_DURATION_MS,
+            lastPayment: Date.now()
+        };
         showToast(`${u.name}'s subscription enabled for 30 days.`);
     }
-    await saveData(currentKey);
-    renderAdminPanel();
+    try {
+        await supabase.from('profiles').update({ subscription: newSub }).eq('id', id);
+        await refreshAll();
+        renderAdminUserList();
+    } catch (err) { showToast('Failed: ' + err.message); }
 }
-
-async function adminToggleAuto(email) {
-    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
-    const u = appData.users.find(x => x.email === email);
+async function adminToggleAuto(id) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    const u = allProfiles.find(x => x.id === id);
     if (!u || !u.subscription) return;
-    u.subscription.autoRenew = !u.subscription.autoRenew;
-    await saveData(currentKey);
-    showToast(`${u.name} auto-renew ${u.subscription.autoRenew ? 'ON' : 'OFF'}.`);
-    renderAdminPanel();
+    const newSub = { ...u.subscription, autoRenew: !u.subscription.autoRenew };
+    try {
+        await supabase.from('profiles').update({ subscription: newSub }).eq('id', id);
+        await refreshAll();
+        showToast(`${u.name} auto-renew ${newSub.autoRenew ? 'ON' : 'OFF'}.`);
+        renderAdminUserList();
+    } catch (err) { showToast('Failed: ' + err.message); }
 }
-
-async function adminToggleAdmin(email) {
-    if (!currentUser.isAdmin || !adminUnlocked) { showToast('Admin only.'); return; }
-    if (email === currentUser.email) { showToast('You cannot change your own admin rights.'); return; }
-    const u = appData.users.find(x => x.email === email);
+async function adminToggleAdmin(id) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    if (id === userProfile.id) { showToast('You cannot change your own admin rights.'); return; }
+    const u = allProfiles.find(x => x.id === id);
     if (!u) return;
-    u.isAdmin = !u.isAdmin;
-    await saveData(currentKey);
-    showToast(`${u.name} ${u.isAdmin ? 'is now an admin' : 'is no longer an admin'}.`);
-    renderAdminPanel();
+    try {
+        await supabase.from('profiles').update({ is_admin: !u.is_admin }).eq('id', id);
+        await refreshAll();
+        showToast(`${u.name} ${!u.is_admin ? 'is now an admin' : 'is no longer an admin'}.`);
+        renderAdminUserList();
+    } catch (err) { showToast('Failed: ' + err.message); }
 }
 
-/* ---------- INIT ---------- */
-(async function init() {
+/* ============================================================
+   INIT
+   ============================================================ */
+async function boot() {
     populateCCDropdowns();
+    initAuthScreen();
 
-    if (DEV_MODE) {
-        try { await devAutoLogin(); }
-        catch (e) {
-            console.error(e);
-            showToast('Dev mode init failed: ' + e.message);
-        }
-    } else {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) {
-            document.getElementById('auth-toggle').click();
-        }
+    supabase = window.supabase;
+    if (!supabase) {
+        document.getElementById('loading-text').textContent = 'Supabase failed to load. Check console.';
+        return;
     }
-})();
+
+    // Listen for auth changes
+    supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'SIGNED_OUT') {
+            if (currentUser) await doLogout();
+        }
+    });
+
+    // Check existing session
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session && session.user) {
+        await onLoggedIn(session.user);
+    } else {
+        hideLoading();
+        document.getElementById('auth-screen').classList.remove('hidden');
+    }
+}
+
+document.getElementById('logout-btn').addEventListener('click', doLogout);
+
+// Wait for the module script to set window.supabase
+if (window.supabase) {
+    boot();
+} else {
+    window.addEventListener('supabase-ready', boot, { once: true });
+    // Fallback: poll briefly in case the event was already dispatched
+    let tries = 0;
+    const iv = setInterval(() => {
+        if (window.supabase) { clearInterval(iv); boot(); }
+        if (++tries > 40) {
+            clearInterval(iv);
+            document.getElementById('loading-text').textContent = 'Could not load Supabase. Check your URL/key.';
+        }
+    }, 100);
+}
 
 /* ---------- GLOBAL HANDLERS ---------- */
-window.approveRequest     = approveRequest;
-window.rejectRequest      = rejectRequest;
-window.switchTab          = switchTab;
-window.toggleCollapsible  = toggleCollapsible;
-window.adminApproveSub    = adminApproveSub;
-window.adminRejectSub     = adminRejectSub;
-window.adminTogglePaid    = adminTogglePaid;
-window.adminToggleSub     = adminToggleSub;
-window.adminToggleAuto    = adminToggleAuto;
-window.adminToggleAdmin   = adminToggleAdmin;
+window.approveRequest    = approveRequest;
+window.rejectRequest     = rejectRequest;
+window.switchTab         = switchTab;
+window.toggleCollapsible = toggleCollapsible;
+window.adminApproveSub   = adminApproveSub;
+window.adminRejectSub    = adminRejectSub;
+window.adminTogglePaid   = adminTogglePaid;
+window.adminToggleSub    = adminToggleSub;
+window.adminToggleAuto   = adminToggleAuto;
+window.adminToggleAdmin  = adminToggleAdmin;
 </script>
 </body>
 </html>
