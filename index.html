@@ -7,25 +7,15 @@
     <title>🏓 SG Table Tennis League</title>
     <style>
         :root {
-            --bg-primary: #0a1f38;
-            --bg-secondary: #0f2942;
-            --bg-card: #12395c;
-            --bg-elevated: #0a1f38;
-            --bg-dark: #061526;
-            --accent: #22c55e;
-            --accent-hover: #16a34a;
-            --accent-dark: #15803d;
+            --bg-primary: #0a1f38; --bg-secondary: #0f2942; --bg-card: #12395c;
+            --bg-elevated: #0a1f38; --bg-dark: #061526;
+            --accent: #22c55e; --accent-hover: #16a34a; --accent-dark: #15803d;
             --accent-soft: rgba(34, 197, 94, 0.15);
-            --success: #22c55e;
-            --success-soft: rgba(34, 197, 94, 0.15);
-            --danger: #ef4444;
-            --danger-soft: rgba(239, 68, 68, 0.15);
+            --success: #22c55e; --success-soft: rgba(34, 197, 94, 0.15);
+            --danger: #ef4444; --danger-soft: rgba(239, 68, 68, 0.15);
             --warning: #f59e0b;
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
-            --text-dim: #64748b;
-            --border: #1e4a72;
-            --border-light: #2a5a85;
+            --text: #f1f5f9; --text-muted: #94a3b8; --text-dim: #64748b;
+            --border: #1e4a72; --border-light: #2a5a85;
             --safe-bottom: env(safe-area-inset-bottom, 0px);
             --safe-top: env(safe-area-inset-top, 0px);
         }
@@ -84,7 +74,6 @@
         .badge-red { background: var(--danger-soft); color: #fca5a5; border-color: rgba(239, 68, 68, 0.3); }
         .badge-admin { background: rgba(34, 197, 94, 0.15); color: #86efac; border-color: rgba(34, 197, 94, 0.3); }
         .badge-blue { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3); }
-        .badge-orange { background: var(--accent-soft); color: #86efac; border-color: rgba(34, 197, 94, 0.3); }
 
         .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
         .stat-item { background: var(--bg-dark); padding: 14px 8px; border-radius: 12px; text-align: center; border: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -122,9 +111,103 @@
         .points-table .win-cell { color: #86efac; font-weight: 700; }
         .points-table .lose-cell { color: #fca5a5; font-weight: 700; }
 
-        #app-header { position: sticky; top: 0; z-index: 50; background: linear-gradient(180deg, var(--bg-primary) 60%, transparent); padding: 12px 0 10px; margin: -14px -14px 0; padding-left: 14px; padding-right: 14px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-        .header-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        #app-header {
+            position: sticky; top: 0; z-index: 50;
+            background: linear-gradient(180deg, var(--bg-primary) 85%, rgba(10, 31, 56, 0.95));
+            padding: 10px 0 12px;
+            margin: -14px -14px 12px;
+            padding-left: 14px; padding-right: 14px;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+        .app-title-bar {
+            font-size: 0.95rem; font-weight: 800; color: var(--accent);
+            letter-spacing: -0.01em; margin-bottom: 8px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .app-title-bar .logo-mini { width: 32px; height: 26px; flex-shrink: 0; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .header-greeting { min-width: 0; flex: 1; }
+        .header-greeting .greet-name { font-size: 1.05rem; font-weight: 700; color: var(--text); word-break: break-word; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .header-greeting .greet-cc { font-size: 0.72rem; color: var(--text-muted); display: block; word-break: break-word; margin-top: 2px; }
+        .header-actions { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+        .header-actions .bell-btn {
+            position: relative;
+            width: 40px; height: 40px; min-height: 40px; min-width: 40px;
+            border-radius: 50%;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.15rem;
+            padding: 0; margin: 0;
+            box-shadow: none;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .header-actions .bell-btn:hover { background: var(--bg-secondary); }
+        .header-actions .bell-btn .bell-count {
+            position: absolute; top: -2px; right: -2px;
+            min-width: 18px; height: 18px; padding: 0 4px;
+            border-radius: 10px;
+            background: var(--danger); color: #fff;
+            font-size: 0.65rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+        }
+        .header-actions .bell-btn.pulse { animation: bellPulse 1.4s ease-in-out infinite; }
+        @keyframes bellPulse {
+            0%, 100% { transform: rotate(0); }
+            15% { transform: rotate(12deg); }
+            30% { transform: rotate(-12deg); }
+            45% { transform: rotate(10deg); }
+            60% { transform: rotate(-10deg); }
+            75% { transform: rotate(6deg); }
+        }
+        .header-actions .logout-btn { min-height: 40px; padding: 8px 14px; }
 
+        /* ============================================================
+           LOGO (paddle + animated ball)
+           ============================================================ */
+        .tt-logo { text-align: center; padding: 24px 16px 16px; }
+        .tt-logo-svg { display: block; margin: 0 auto 12px; width: 140px; height: 100px; }
+        .tt-logo .tt-ball {
+            transform-origin: center;
+            animation: ttBallAnim 2.4s ease-in-out infinite;
+        }
+        @keyframes ttBallAnim {
+            0%   { transform: translate(0, 0) scale(1); }
+            20%  { transform: translate(-22px, 20px) scale(0.95); }
+            45%  { transform: translate(-42px, 6px) scale(1.05); }
+            70%  { transform: translate(-28px, 25px) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .tt-logo .tt-shadow {
+            animation: ttShadowAnim 2.4s ease-in-out infinite;
+        }
+        @keyframes ttShadowAnim {
+            0%, 100% { opacity: 0.35; transform: scaleX(1); }
+            50% { opacity: 0.55; transform: scaleX(0.85); }
+        }
+        .tt-logo h1 { color: var(--accent); font-size: 1.5rem; letter-spacing: -0.02em; }
+        .tt-logo p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
+
+        /* Small logo in header */
+        .logo-mini-svg { display: block; }
+        .logo-mini .mini-ball {
+            animation: miniBallAnim 2.4s ease-in-out infinite;
+        }
+        @keyframes miniBallAnim {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-4px, 4px); }
+        }
+
+        /* ============================================================
+           TAB BAR
+           ============================================================ */
         .tab-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-card); border-top: 2px solid var(--accent); display: flex; justify-content: space-around; padding: 6px 0; padding-bottom: calc(6px + var(--safe-bottom)); z-index: 1000; box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5); }
         .tab-bar::before { content: ''; position: absolute; top: -2px; left: 0; right: 0; height: 2px; background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 12px); }
         .tab-bar button { background: none; color: var(--text-dim); width: auto; padding: 6px 4px; font-size: 0.6rem; margin: 0; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; min-width: 0; min-height: 0; font-weight: 700; box-shadow: none; transition: color 0.15s, transform 0.1s; text-transform: uppercase; letter-spacing: 0.03em; position: relative; }
@@ -150,7 +233,7 @@
         .dot-red { background: var(--danger); box-shadow: 0 0 12px var(--danger); }
 
         .user-table { width: 100%; }
-        .user-table-head, .user-table-main { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr) minmax(0, 0.8fr) minmax(0, 1fr) 60px; gap: 6px; align-items: center; }
+        .user-table-head, .user-table-main { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr) minmax(0, 0.8fr) minmax(0, 1fr) 70px; gap: 6px; align-items: center; }
         .user-table-head { padding: 6px 8px; font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; border-bottom: 2px solid var(--accent); }
         .user-table-row { border-bottom: 1px solid var(--border); transition: background 0.15s; }
         .user-table-row:last-child { border-bottom: none; }
@@ -199,11 +282,6 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .loading-ball { width: 20px; height: 20px; background: var(--accent); border-radius: 50%; margin-bottom: 12px; box-shadow: 0 0 20px var(--accent); animation: bounce 1s ease-in-out infinite; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-
-        .auth-logo { text-align: center; padding: 28px 16px 20px; margin-bottom: 6px; }
-        .auth-logo .paddle { font-size: 3rem; line-height: 1; margin-bottom: 8px; filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.5)); }
-        .auth-logo h1 { color: var(--accent); font-size: 1.5rem; letter-spacing: -0.02em; }
-        .auth-logo p { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(10, 31, 56, 0.88); display: flex; align-items: center; justify-content: center; z-index: 9997; padding: 16px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: fadeIn 0.2s ease; }
         .modal-overlay.hidden { display: none !important; }
@@ -255,10 +333,15 @@
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         .refresh-bar button { margin: 0 0 0 auto; min-height: 28px; padding: 4px 10px; font-size: 0.7rem; width: auto; }
 
-        .cc-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .cc-chip { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; font-size: 0.78rem; color: var(--text); display: inline-flex; align-items: center; gap: 8px; }
-        .cc-chip button { width: auto; min-height: 22px; padding: 2px 6px; font-size: 0.7rem; margin: 0; border-radius: 6px; background: transparent; color: var(--danger); box-shadow: none; border: 1px solid var(--danger); }
-        .cc-chip button:hover { background: var(--danger); color: #fff; }
+        .cc-mgmt-list { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; max-height: 320px; overflow-y: auto; padding-right: 4px; }
+        .cc-mgmt-list::-webkit-scrollbar { width: 6px; }
+        .cc-mgmt-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        .cc-mgmt-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; }
+        .cc-mgmt-row .cc-mgmt-name { flex: 1; min-width: 0; font-size: 0.85rem; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .cc-mgmt-row .cc-mgmt-tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; flex-shrink: 0; }
+        .cc-mgmt-row .cc-mgmt-tag.base { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .cc-mgmt-row .cc-mgmt-tag.custom { background: var(--accent-soft); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); }
+        .cc-mgmt-row button { margin: 0; min-height: 30px; min-width: 30px; padding: 4px 8px; font-size: 0.75rem; border-radius: 8px; width: auto; }
 
         @media (min-width: 480px) {
             #app { padding: 20px; padding-bottom: calc(120px + var(--safe-bottom)); }
@@ -266,10 +349,10 @@
         }
         @media (min-width: 720px) {
             #app { padding: 28px; padding-bottom: calc(130px + var(--safe-bottom)); }
-            h1 { font-size: 1.5rem; }
+            .app-title-bar { font-size: 1.05rem; }
         }
         @media (max-width: 400px) {
-            .user-table-head, .user-table-main { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 0.6fr minmax(0, 0.9fr) 55px; gap: 4px; }
+            .user-table-head, .user-table-main { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 0.6fr minmax(0, 0.9fr) 62px; gap: 4px; }
             .cell-age { display: none; }
             .user-table-head div:nth-child(3) { display: none; }
         }
@@ -285,14 +368,37 @@
 
 <div id="app">
 
+    <!-- AUTH SCREEN -->
     <div id="auth-screen" class="hidden">
         <div id="config-banner" class="config-banner hidden">
             <strong>⚠️ Supabase configuration problem</strong>
             <span id="config-banner-msg">Please update the config block.</span>
         </div>
 
-        <div class="auth-logo">
-            <div class="paddle">🏓</div>
+        <div class="tt-logo">
+            <svg class="tt-logo-svg" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Paddle (rotated) -->
+                <g transform="rotate(-15 55 55)">
+                    <ellipse cx="55" cy="45" rx="30" ry="34" fill="#7f1d1d"/>
+                    <ellipse cx="55" cy="44" rx="28" ry="32" fill="#dc2626"/>
+                    <ellipse cx="55" cy="43" rx="26" ry="30" fill="#ef4444"/>
+                    <ellipse cx="48" cy="33" rx="10" ry="7" fill="#fca5a5" opacity="0.55"/>
+                    <rect x="51" y="76" width="8" height="20" rx="3" fill="#78350f"/>
+                    <rect x="52" y="78" width="6" height="16" rx="2" fill="#92400e"/>
+                </g>
+                <!-- Ball shadow -->
+                <ellipse class="tt-shadow" cx="105" cy="66" rx="10" ry="3" fill="#000" opacity="0.35"/>
+                <!-- Ball (animated) -->
+                <circle class="tt-ball" cx="105" cy="45" r="11" fill="url(#ballGrad)" stroke="#a16207" stroke-width="0.5"/>
+                <circle class="tt-ball" cx="102" cy="42" r="3" fill="#fff" opacity="0.7"/>
+                <defs>
+                    <radialGradient id="ballGrad" cx="35%" cy="35%" r="70%">
+                        <stop offset="0%" stop-color="#fef9c3"/>
+                        <stop offset="55%" stop-color="#fbbf24"/>
+                        <stop offset="100%" stop-color="#d97706"/>
+                    </radialGradient>
+                </defs>
+            </svg>
             <h1>SG Table Tennis League</h1>
             <p>Track matches. Earn points. Get discounts.</p>
             <p style="font-size:0.75rem; color:var(--text-dim); margin-top:8px;">Sponsored by <a href="https://www.sintensports.com.sg/" target="_blank" rel="noopener" style="color:var(--warning); font-weight:700; text-decoration:none;">Sin Ten Sports Trading</a></p>
@@ -330,15 +436,34 @@
         </div>
     </div>
 
+    <!-- MAIN APP -->
     <div id="main-screen" class="hidden">
 
         <div id="app-header">
+            <div class="app-title-bar">
+                <svg class="logo-mini" viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g transform="rotate(-15 14 15)">
+                        <ellipse cx="14" cy="12" rx="10" ry="11.5" fill="#dc2626"/>
+                        <ellipse cx="14" cy="11.5" rx="9" ry="10.5" fill="#ef4444"/>
+                        <rect x="12.5" y="22" width="3" height="6" rx="1" fill="#78350f"/>
+                    </g>
+                    <circle class="mini-ball" cx="30" cy="12" r="4" fill="#fbbf24" stroke="#a16207" stroke-width="0.4"/>
+                    <circle class="mini-ball" cx="29" cy="11" r="1" fill="#fff" opacity="0.75"/>
+                </svg>
+                SG Table Tennis League
+            </div>
             <div class="header-inner">
-                <div style="min-width: 0; flex: 1;">
-                    <h1 style="word-break: break-word; color: var(--text);">🏓 <span id="user-name"></span></h1>
-                    <small style="color: var(--text-muted); display: block; word-break: break-word; font-size: 0.78rem;" id="user-cc"></small>
+                <div class="header-greeting">
+                    <div class="greet-name">Hi, <span id="user-name"></span></div>
+                    <small class="greet-cc" id="user-cc"></small>
                 </div>
-                <button id="logout-btn" class="danger small" style="width:auto; flex-shrink: 0; margin:0; min-height: 38px; padding: 8px 16px;">Logout</button>
+                <div class="header-actions">
+                    <button id="bell-btn" class="bell-btn" title="Notifications" aria-label="Notifications">
+                        🔔
+                        <span id="bell-count" class="bell-count hidden">0</span>
+                    </button>
+                    <button id="logout-btn" class="danger small logout-btn" style="width:auto; margin:0;">Logout</button>
+                </div>
             </div>
         </div>
 
@@ -572,14 +697,19 @@
                     <button id="promo-clear" class="danger small" style="margin-top:6px;">Clear Promotion</button>
                 </div>
 
-                <!-- NEW: Community Centre management -->
                 <div class="card">
                     <h2>🏟️ Manage Community Centres</h2>
-                    <p style="font-size:0.82rem; color: var(--text-muted); margin-bottom:12px;">Add missing community centres below. They will appear in all dropdowns.</p>
+                    <p style="font-size:0.82rem; color: var(--text-muted); margin-bottom:12px;">Add missing centres or delete existing ones. Deleted base centres can be restored.</p>
+
                     <label for="new-cc-input">Add Community Centre</label>
                     <input type="text" id="new-cc-input" placeholder="e.g. Punggol Community Club">
                     <button id="add-cc-btn" class="secondary small">➕ Add Community Centre</button>
-                    <div id="custom-cc-list" class="cc-list"></div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; margin-bottom:6px;">
+                        <strong style="font-size:0.85rem; color:var(--text);">All Community Centres</strong>
+                        <small style="color:var(--text-muted); font-size:0.72rem;" id="cc-mgmt-count">0 total</small>
+                    </div>
+                    <div class="cc-mgmt-list" id="cc-mgmt-list"></div>
                 </div>
 
                 <div class="card">
@@ -620,7 +750,7 @@
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🌍 Inspired by ITTF</h3></div>
                 <div class="collapsible-content">
                     <p>Our scoring system is <strong>inspired by the International Table Tennis Federation (ITTF)</strong> rating philosophy — where the amount of points you gain or lose depends on the strength of your opponent.</p>
-                    <p style="font-size:0.85rem; color: var(--text-muted);">The ITTF uses an "Elo-like" system to keep competitions fair: beating a stronger player is rewarded far more than beating a weaker one. This encourages players to challenge up and keeps rankings meaningful.</p>
+                    <p style="font-size:0.85rem; color: var(--text-muted);">The ITTF uses an "Elo-like" system to keep competitions fair: beating a stronger player is rewarded far more than beating a weaker one.</p>
                     <p style="font-size:0.85rem; color: var(--text-muted);">Our implementation is a simplified version of that principle, tuned for community league play. It is <strong>not</strong> an official ITTF rating.</p>
                 </div>
 
@@ -676,15 +806,14 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
 
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🎁 Shop Discounts</h3></div>
                 <div class="collapsible-content">
-                    <p style="font-size:0.85rem;">Everyone starts with a <strong>5% discount</strong>. Earn points to unlock more:</p>
+                    <p style="font-size:0.85rem;">Everyone starts with a <strong>5% discount</strong>. Earn points to unlock more, up to a <strong>maximum of 20%</strong>:</p>
                     <table class="points-table">
                         <thead><tr><th>Points</th><th>Discount</th></tr></thead>
                         <tbody>
                             <tr><td>0–499</td><td class="win-cell">5%</td></tr>
                             <tr><td>500–999</td><td class="win-cell">10%</td></tr>
                             <tr><td>1000–1499</td><td class="win-cell">15%</td></tr>
-                            <tr><td>1500–1999</td><td class="win-cell">20%</td></tr>
-                            <tr><td>2000+</td><td class="win-cell">25%</td></tr>
+                            <tr><td>1500+</td><td class="win-cell">20% (Max)</td></tr>
                         </tbody>
                     </table>
                     <p style="font-size:0.85rem; color: var(--text-muted);">Redeem at <a href="https://www.sintensports.com.sg/" target="_blank" rel="noopener" style="color:var(--accent); font-weight:700;">Sin Ten Sports Trading</a></p>
@@ -713,6 +842,7 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
 
     </div>
 
+    <!-- TAB BAR -->
     <div class="tab-bar" id="tab-bar">
         <button data-tab="dashboard" class="active" onclick="switchTab('dashboard')"><span class="icon">📊</span> Home<span class="notif-dot hidden" id="notif-dot-home"></span></button>
         <button data-tab="request" onclick="switchTab('request')"><span class="icon">🏓</span> Play<span class="notif-dot hidden" id="notif-dot-play"></span></button>
@@ -773,16 +903,14 @@ if (looksLikePlaceholder(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)) {
 </script>
 
 <script>
-/* =============================================================
-   SG TABLE TENNIS LEAGUE (v13)
+/* ============================================================
+   SG TABLE TENNIS LEAGUE (v15)
    Fixes:
-   - Admin can update other users (RLS fix is in SQL)
-   - Edit user uses CC dropdown
-   - Admin can add custom community centres
-   - App renamed to "SG Table Tennis League"
-   - Discount starts at 5%
-   - ITTF info + formula section
-   ============================================================= */
+   - Notification popup on every login + re-shows on new items
+   - Bell icon in header for manual access
+   - Max 20% discount (was 25%)
+   - Animated SVG TT logo
+   ============================================================ */
 
 const OTHER_CC_VALUE = '__OTHER__';
 const REFRESH_INTERVAL_MS = 30000;
@@ -822,18 +950,33 @@ const BASE_COMMUNITY_CENTRES = [
     "Zhenghua Community Club"
 ].sort();
 
-// All CCs (base + custom from DB)
-function getAllCCs() {
-    const custom = getCustomCCs();
-    return [...new Set([...BASE_COMMUNITY_CENTRES, ...custom])].sort();
+function getHiddenCCs() {
+    const raw = dbSettings && dbSettings.hidden_ccs;
+    if (!raw) return [];
+    try { const arr = typeof raw === 'string' ? JSON.parse(raw) : raw; return Array.isArray(arr) ? arr : []; }
+    catch { return []; }
 }
 function getCustomCCs() {
     const raw = dbSettings && dbSettings.custom_ccs;
     if (!raw) return [];
-    try {
-        const arr = typeof raw === 'string' ? JSON.parse(raw) : raw;
-        return Array.isArray(arr) ? arr : [];
-    } catch { return []; }
+    try { const arr = typeof raw === 'string' ? JSON.parse(raw) : raw; return Array.isArray(arr) ? arr : []; }
+    catch { return []; }
+}
+function getAllCCs() {
+    const hidden = getHiddenCCs();
+    const custom = getCustomCCs();
+    const baseVisible = BASE_COMMUNITY_CENTRES.filter(cc => !hidden.includes(cc));
+    return [...new Set([...baseVisible, ...custom])].sort();
+}
+function getAllCCsIncludingHidden() {
+    const custom = getCustomCCs();
+    const hidden = getHiddenCCs();
+    const all = [...BASE_COMMUNITY_CENTRES, ...custom];
+    return all.map(cc => ({
+        name: cc,
+        isBase: BASE_COMMUNITY_CENTRES.includes(cc),
+        isHidden: hidden.includes(cc)
+    })).sort((a, b) => a.name.localeCompare(b.name));
 }
 
 let supabase = null;
@@ -851,8 +994,9 @@ let settingsLoaded = false;
 let bootCompleted = false;
 let refreshTimer = null;
 let lastRefreshTime = null;
+let lastNotifSignature = '';     // Track seen notifications to re-show on new items
+let notifModalOpen = false;
 
-/* ---------- HELPERS ---------- */
 function showToast(msg, duration = 2800) {
     const t = document.getElementById('toast');
     if (!t) { console.log('TOAST:', msg); return; }
@@ -902,7 +1046,6 @@ function toggleCollapsible(el) {
     el.nextElementSibling.classList.toggle('show');
 }
 
-/* ---------- CC DROPDOWNS ---------- */
 function populateCCSelect(sel, { includeOther = true, selectedValue = null } = {}) {
     if (!sel) return;
     sel.innerHTML = '';
@@ -946,7 +1089,6 @@ function getEffectiveCC(selectId, inputId) {
     return sel.value;
 }
 
-/* ---------- CONFIG ---------- */
 function isConfigValid() {
     const cfg = window.SGTT_CONFIG || {};
     const url = cfg.SUPABASE_URL || '';
@@ -974,7 +1116,6 @@ function showConfigBannerIfNeeded() {
     banner.classList.add('hidden');
 }
 
-/* ---------- CALENDAR ---------- */
 function endOfCurrentMonth() {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999).getTime();
@@ -984,7 +1125,6 @@ function currentMonthKey() {
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 }
 
-/* ---------- PROMOTION ---------- */
 function getPromotion() {
     const raw = dbSettings && dbSettings.promotion;
     if (!raw) return { enabled: false, month: '', message: '' };
@@ -998,10 +1138,7 @@ function isPromotionActive() {
     if (!p.enabled) return false;
     return p.month === currentMonthKey();
 }
-async function savePromotion(promo) {
-    await upsertSetting('promotion', JSON.stringify(promo));
-    dbSettings.promotion = JSON.stringify(promo);
-}
+async function savePromotion(promo) { await upsertSetting('promotion', JSON.stringify(promo)); }
 async function upsertSetting(key, value) {
     if (!supabase) throw new Error('Supabase not ready.');
     const { data: existing, error: selErr } = await supabase
@@ -1016,26 +1153,52 @@ async function upsertSetting(key, value) {
     }
     dbSettings[key] = value;
 }
-async function saveDbSetting(key, value) { await upsertSetting(key, value); }
 
-/* ---------- CUSTOM CCs ---------- */
 async function addCustomCC(cc) {
-    const list = getCustomCCs();
     const trimmed = cc.trim();
     if (!trimmed) throw new Error('Community centre name cannot be empty.');
-    if (BASE_COMMUNITY_CENTRES.includes(trimmed)) throw new Error('Already in the default list.');
+    if (BASE_COMMUNITY_CENTRES.includes(trimmed)) {
+        const hidden = getHiddenCCs();
+        if (hidden.includes(trimmed)) {
+            await upsertSetting('hidden_ccs', JSON.stringify(hidden.filter(x => x !== trimmed)));
+            populateAllCCSelects();
+            return { action: 'restored', name: trimmed };
+        }
+        throw new Error('Already in the default list.');
+    }
+    const list = getCustomCCs();
     if (list.includes(trimmed)) throw new Error('Already added.');
     const next = [...list, trimmed].sort();
     await upsertSetting('custom_ccs', JSON.stringify(next));
     populateAllCCSelects();
+    return { action: 'added', name: trimmed };
 }
-async function removeCustomCC(cc) {
-    const list = getCustomCCs().filter(x => x !== cc);
-    await upsertSetting('custom_ccs', JSON.stringify(list));
-    populateAllCCSelects();
+async function deleteCC(cc) {
+    const isBase = BASE_COMMUNITY_CENTRES.includes(cc);
+    if (isBase) {
+        const hidden = getHiddenCCs();
+        if (!hidden.includes(cc)) {
+            await upsertSetting('hidden_ccs', JSON.stringify([...hidden, cc].sort()));
+        }
+        populateAllCCSelects();
+        return { action: 'hidden', name: cc };
+    } else {
+        const list = getCustomCCs().filter(x => x !== cc);
+        await upsertSetting('custom_ccs', JSON.stringify(list));
+        populateAllCCSelects();
+        return { action: 'removed', name: cc };
+    }
+}
+async function restoreCC(cc) {
+    const hidden = getHiddenCCs();
+    if (hidden.includes(cc)) {
+        await upsertSetting('hidden_ccs', JSON.stringify(hidden.filter(x => x !== cc)));
+        populateAllCCSelects();
+        return { action: 'restored', name: cc };
+    }
+    return { action: 'noop', name: cc };
 }
 
-/* ---------- DATA HELPERS ---------- */
 function nameOf(idOrEmail) {
     if (!idOrEmail) return '?';
     const u = allProfiles.find(x => x.id === idOrEmail || x.email === idOrEmail);
@@ -1066,18 +1229,14 @@ function subStatusLabel(u) {
     return { text: 'Inactive', cls: 'badge-red' };
 }
 
-/* ---------- DISCOUNT TIERS (starts at 5%) ---------- */
+/* [FIX] Discount capped at 20% */
 function discountForPoints(pts) {
-    if (pts >= 2000) return 25;
     if (pts >= 1500) return 20;
     if (pts >= 1000) return 15;
     if (pts >= 500)  return 10;
     return 5;
 }
 
-/* ============================================================
-   DB SETTINGS
-   ============================================================ */
 async function loadDbSettings() {
     if (!supabase || !currentUser) return;
     try {
@@ -1090,9 +1249,6 @@ async function loadDbSettings() {
 }
 function getAdminPin() { return (dbSettings && dbSettings.admin_pin) || '0000'; }
 
-/* ============================================================
-   FORM VALIDATION
-   ============================================================ */
 function markError(inputId, errorId, msg) {
     const input = document.getElementById(inputId);
     const err = document.getElementById(errorId);
@@ -1114,9 +1270,6 @@ function clearAllAuthErrors() {
     document.getElementById('auth-cc-other')?.classList.remove('input-error');
 }
 
-/* ============================================================
-   AUTH SCREEN
-   ============================================================ */
 let isRegisterMode = false;
 let authScreenInitDone = false;
 
@@ -1210,9 +1363,6 @@ async function handleAuthSubmit() {
     }
 }
 
-/* ============================================================
-   ON LOGIN
-   ============================================================ */
 async function onLoggedIn(authUser, eventType) {
     if (!authUser) return;
     currentUser = authUser;
@@ -1257,13 +1407,25 @@ async function onLoggedIn(authUser, eventType) {
         if (userProfile.is_admin) adminBtn?.classList.remove('hidden');
         else adminBtn?.classList.add('hidden');
 
+        document.getElementById('user-name').textContent = userProfile.name;
+        document.getElementById('user-cc').textContent = userProfile.community_centre || '';
+
         hideLoading();
         showOnlyScreen('main');
         renderDashboard();
         switchTab('dashboard');
         startAutoRefresh();
+        updateNotifDots();
 
-        setTimeout(() => checkAndShowNotifications(), 400);
+        // [FIX] Always show notification popup on login if there are items
+        // Reset signature so popup shows on this fresh login
+        lastNotifSignature = '';
+        setTimeout(() => {
+            const items = buildNotifications();
+            if (items.length > 0) {
+                showNotifModal(items);
+            }
+        }, 500);
 
         if (eventType === 'SIGNED_IN' && isConfirmed && window._arrivedFromEmail) {
             window._arrivedFromEmail = false;
@@ -1277,15 +1439,13 @@ async function onLoggedIn(authUser, eventType) {
     }
 }
 
-/* ============================================================
-   LOGOUT
-   ============================================================ */
 async function handleLogout() {
     try { if (supabase) await supabase.auth.signOut(); } catch (e) {}
     stopAutoRefresh();
     currentUser = null; userProfile = null;
     allProfiles = []; allRequests = []; allMatches = []; allChallenges = [];
     adminUnlocked = false; settingsLoaded = false; dbSettings = {}; editingUserId = null;
+    lastNotifSignature = '';
     document.getElementById('auth-password').value = '';
     document.getElementById('auth-email').value = '';
     document.getElementById('admin-pin-input').value = '';
@@ -1296,9 +1456,6 @@ async function handleLogout() {
     showToast('Logged out.', 2000);
 }
 
-/* ============================================================
-   AUTO REFRESH
-   ============================================================ */
 function startAutoRefresh() {
     stopAutoRefresh();
     refreshTimer = setInterval(async () => {
@@ -1308,11 +1465,13 @@ function startAutoRefresh() {
             lastRefreshTime = new Date();
             updateRefreshStatus();
             updateNotifDots();
+            // [FIX] Re-check for new notifications every refresh cycle
+            checkForNewNotifications();
             const activeTab = document.querySelector('.tab-bar button.active')?.dataset.tab;
             if (activeTab === 'dashboard') renderDashboard();
             if (activeTab === 'request') renderPlayTab();
             if (activeTab === 'subscribe') renderSubscription();
-            if (activeTab === 'admin' && adminUnlocked) { renderAdminPendingReqs(); renderAdminUserList(); renderCustomCCList(); }
+            if (activeTab === 'admin' && adminUnlocked) { renderAdminPendingReqs(); renderAdminUserList(); renderCCMgmtList(); }
         } catch (e) { console.warn('[SGTT] auto-refresh failed:', e.message); }
     }, REFRESH_INTERVAL_MS);
 }
@@ -1333,19 +1492,17 @@ document.getElementById('manual-refresh')?.addEventListener('click', async () =>
         lastRefreshTime = new Date();
         updateRefreshStatus();
         updateNotifDots();
+        checkForNewNotifications();
         const activeTab = document.querySelector('.tab-bar button.active')?.dataset.tab;
         if (activeTab === 'dashboard') renderDashboard();
         if (activeTab === 'request') renderPlayTab();
         if (activeTab === 'subscribe') renderSubscription();
-        if (activeTab === 'admin' && adminUnlocked) { renderAdminPendingReqs(); renderAdminUserList(); renderCustomCCList(); }
+        if (activeTab === 'admin' && adminUnlocked) { renderAdminPendingReqs(); renderAdminUserList(); renderCCMgmtList(); }
         hideLoading();
         showToast('Data refreshed.');
     } catch (e) { hideLoading(); showToast('Refresh failed: ' + e.message); }
 });
 
-/* ============================================================
-   SUPABASE LOAD
-   ============================================================ */
 async function loadAllProfiles() {
     const { data, error } = await supabase.from('profiles').select('*');
     if (error) throw error;
@@ -1382,11 +1539,12 @@ async function refreshAll() {
     await loadDbSettings();
     const me = allProfiles.find(p => p.id === currentUser.id);
     if (me) userProfile = me;
+    if (userProfile) {
+        document.getElementById('user-name').textContent = userProfile.name;
+        document.getElementById('user-cc').textContent = userProfile.community_centre || '';
+    }
 }
 
-/* ============================================================
-   DASHBOARD
-   ============================================================ */
 function renderDashboard() {
     if (!userProfile) return;
     const promoBanner = document.getElementById('promo-banner');
@@ -1412,10 +1570,11 @@ function renderDashboard() {
 
     const pts = userProfile.points || 0;
     const discount = discountForPoints(pts);
+    const isMaxDiscount = discount >= 20;
 
     document.getElementById('discount-info').innerHTML =
-        `<strong>${discount}% discount</strong> at Sin Ten Sports Trading!<br><small>Earn more points to increase your discount.</small>`;
-    document.getElementById('discount-bar').style.width = Math.min(100, (pts / 2000) * 100) + '%';
+        `<strong>${discount}% discount</strong> at Sin Ten Sports Trading!<br><small>${isMaxDiscount ? '🎉 You have reached the maximum discount!' : 'Earn more points to increase your discount (max 20%).'}</small>`;
+    document.getElementById('discount-bar').style.width = Math.min(100, (pts / 1500) * 100) + '%';
 
     const label = subStatusLabel(userProfile);
     const cls = label.cls === 'badge-green' ? 'dot-green' : label.cls === 'badge-yellow' ? 'dot-yellow' : 'dot-red';
@@ -1475,9 +1634,6 @@ function renderDashboard() {
     }
 }
 
-/* ============================================================
-   PAID MEMBERS
-   ============================================================ */
 function paidMembers(excludeIds = []) {
     return allProfiles
         .filter(u => u.id !== (userProfile && userProfile.id))
@@ -1510,9 +1666,6 @@ function fillSelect(sel, users, { includeEmpty = false, emptyLabel = '— Select
     if (prev && users.some(u => u.id === prev)) sel.value = prev;
 }
 
-/* ============================================================
-   PLAY TAB
-   ============================================================ */
 function refreshChallengeDropdowns() {
     const type = document.getElementById('ch-type').value;
     const isDoubles = type === 'doubles';
@@ -1622,9 +1775,6 @@ document.getElementById('req-submit').addEventListener('click', async () => {
     } catch (err) { hideLoading(); console.error(err); showToast('Failed: ' + err.message); }
 });
 
-/* ============================================================
-   RENDER PLAY TAB
-   ============================================================ */
 function renderPlayTab() {
     if (!userProfile) return;
     const warn = document.getElementById('req-sub-warning');
@@ -1815,17 +1965,14 @@ function renderIncludedRequests() {
     }).join('');
 }
 
-/* ============================================================
-   CHALLENGE ACTIONS
-   ============================================================ */
 async function acceptChallenge(id) {
-    try { const { error } = await supabase.from('challenges').update({ status: 'accepted', accepted_at: new Date().toISOString() }).eq('id', id); if (error) throw error; showToast('Challenge accepted!'); await loadChallenges(); renderPlayTab(); } catch (err) { showToast('Failed: ' + err.message); }
+    try { const { error } = await supabase.from('challenges').update({ status: 'accepted', accepted_at: new Date().toISOString() }).eq('id', id); if (error) throw error; showToast('Challenge accepted!'); await loadChallenges(); renderPlayTab(); updateNotifDots(); } catch (err) { showToast('Failed: ' + err.message); }
 }
 async function rejectChallenge(id) {
-    try { const { error } = await supabase.from('challenges').update({ status: 'rejected' }).eq('id', id); if (error) throw error; showToast('Challenge declined.'); await loadChallenges(); renderPlayTab(); } catch (err) { showToast('Failed: ' + err.message); }
+    try { const { error } = await supabase.from('challenges').update({ status: 'rejected' }).eq('id', id); if (error) throw error; showToast('Challenge declined.'); await loadChallenges(); renderPlayTab(); updateNotifDots(); } catch (err) { showToast('Failed: ' + err.message); }
 }
 async function cancelChallenge(id) {
-    try { const { error } = await supabase.from('challenges').update({ status: 'cancelled' }).eq('id', id); if (error) throw error; showToast('Challenge cancelled.'); await loadChallenges(); renderPlayTab(); } catch (err) { showToast('Failed: ' + err.message); }
+    try { const { error } = await supabase.from('challenges').update({ status: 'cancelled' }).eq('id', id); if (error) throw error; showToast('Challenge cancelled.'); await loadChallenges(); renderPlayTab(); updateNotifDots(); } catch (err) { showToast('Failed: ' + err.message); }
 }
 async function submitChallengeScore(id) {
     const chalInput = document.getElementById('sc-chal-' + id);
@@ -1892,9 +2039,6 @@ async function acknowledgeChallengeScore(id) {
     } catch (err) { hideLoading(); console.error(err); showToast('Failed: ' + err.message); }
 }
 
-/* ============================================================
-   APPROVE / REJECT
-   ============================================================ */
 async function approveRequest(id) {
     const req = allRequests.find(r => r.id === id);
     if (!req || req.status !== 'pending') return;
@@ -1930,9 +2074,6 @@ async function rejectRequest(id) {
     try { const { error } = await supabase.from('match_requests').update({ status: 'rejected' }).eq('id', id); if (error) throw error; showToast('Match request rejected.'); await loadRequests(); renderPlayTab(); } catch (err) { showToast('Failed: ' + err.message); }
 }
 
-/* ============================================================
-   POINTS
-   ============================================================ */
 function teamRating(ids) {
     const ratings = ids.map(id => { const u = allProfiles.find(x => x.id === id); return (u && u.rating) || 1000; });
     return ratings.reduce((s, r) => s + r, 0) / ratings.length;
@@ -1969,9 +2110,6 @@ async function awardPoints(winnerTeam, loserTeam) {
     }
 }
 
-/* ============================================================
-   SUBSCRIPTION TAB
-   ============================================================ */
 function renderSubscription() {
     if (!userProfile) return;
     const promoCard = document.getElementById('sub-request-card');
@@ -2044,9 +2182,6 @@ document.getElementById('sub-request-btn').addEventListener('click', async () =>
     } catch (err) { showToast('Failed: ' + err.message); }
 });
 
-/* ============================================================
-   ADMIN TAB
-   ============================================================ */
 async function renderAdminPanel() {
     if (!userProfile || !userProfile.is_admin) { showToast('Admin access required.'); switchTab('dashboard'); return; }
     if (!settingsLoaded) await loadDbSettings();
@@ -2055,7 +2190,7 @@ async function renderAdminPanel() {
     const panel = document.getElementById('admin-panel');
     if (adminUnlocked) {
         locked.classList.add('hidden'); unlocked.classList.remove('hidden'); panel.classList.remove('hidden');
-        renderAdminPendingReqs(); renderAdminUserList(); renderPromotionUI(); renderCustomCCList();
+        renderAdminPendingReqs(); renderAdminUserList(); renderPromotionUI(); renderCCMgmtList();
     } else {
         locked.classList.remove('hidden'); unlocked.classList.add('hidden'); panel.classList.add('hidden');
     }
@@ -2099,29 +2234,52 @@ document.getElementById('promo-clear').addEventListener('click', async () => {
     } catch (err) { hideLoading(); showToast('Failed: ' + err.message); }
 });
 
-/* Community Centre management */
-function renderCustomCCList() {
-    const el = document.getElementById('custom-cc-list');
+function renderCCMgmtList() {
+    const el = document.getElementById('cc-mgmt-list');
     if (!el) return;
-    const list = getCustomCCs();
-    if (list.length === 0) {
-        el.innerHTML = '<p style="color:var(--text-muted); font-size:0.78rem; margin-top:8px;">No custom community centres added yet.</p>';
+    const all = getAllCCsIncludingHidden();
+    document.getElementById('cc-mgmt-count').textContent = all.length + ' total';
+    if (all.length === 0) {
+        el.innerHTML = '<p style="color:var(--text-muted); font-size:0.78rem;">No community centres.</p>';
         return;
     }
-    el.innerHTML = list.map(cc => `
-        <span class="cc-chip">
-            ${escapeHtml(cc)}
-            <button onclick="removeCustomCCUI('${escapeHtml(cc).replace(/'/g, "\\'")}')" title="Remove">✕</button>
-        </span>
-    `).join('');
+    el.innerHTML = all.map(item => {
+        const tag = item.isBase ? '<span class="cc-mgmt-tag base">BASE</span>' : '<span class="cc-mgmt-tag custom">CUSTOM</span>';
+        const hiddenBadge = item.isHidden ? '<span class="badge badge-red" style="font-size:0.55rem;">Hidden</span>' : '';
+        const btn = item.isHidden
+            ? `<button class="tiny" style="background: var(--success); color: #0a1f38;" onclick="restoreCCUI('${escapeHtml(item.name).replace(/'/g, "\\'")}')">Restore</button>`
+            : `<button class="tiny danger" onclick="deleteCCUI('${escapeHtml(item.name).replace(/'/g, "\\'")}')">🗑️</button>`;
+        return `
+            <div class="cc-mgmt-row">
+                <span class="cc-mgmt-name">${escapeHtml(item.name)}</span>
+                ${tag}
+                ${hiddenBadge}
+                ${btn}
+            </div>
+        `;
+    }).join('');
 }
-window.removeCustomCCUI = async function(cc) {
-    if (!confirm(`Remove "${cc}" from custom community centres?`)) return;
+window.deleteCCUI = async function(cc) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    if (!confirm(`Remove "${cc}" from the dropdown?\n\n(It won't be permanently deleted for base centres — you can restore it later.)`)) return;
     try {
-        await removeCustomCC(cc);
-        showToast('Removed.');
-        renderCustomCCList();
-    } catch (err) { showToast('Failed: ' + err.message); }
+        showLoading('Removing…');
+        const r = await deleteCC(cc);
+        hideLoading();
+        if (r.action === 'hidden') showToast(`"${cc}" hidden from dropdowns.`);
+        else showToast(`"${cc}" deleted.`);
+        renderCCMgmtList();
+    } catch (err) { hideLoading(); showToast('Failed: ' + err.message); }
+};
+window.restoreCCUI = async function(cc) {
+    if (!userProfile.is_admin || !adminUnlocked) return;
+    try {
+        showLoading('Restoring…');
+        await restoreCC(cc);
+        hideLoading();
+        showToast(`"${cc}" restored.`);
+        renderCCMgmtList();
+    } catch (err) { hideLoading(); showToast('Failed: ' + err.message); }
 };
 
 document.getElementById('add-cc-btn').addEventListener('click', async () => {
@@ -2131,11 +2289,11 @@ document.getElementById('add-cc-btn').addEventListener('click', async () => {
     if (!cc) { showToast('Please enter a community centre name.'); return; }
     try {
         showLoading('Adding…');
-        await addCustomCC(cc);
+        const r = await addCustomCC(cc);
         hideLoading();
         input.value = '';
-        showToast('Community centre added.');
-        renderCustomCCList();
+        showToast(r.action === 'restored' ? `"${cc}" restored.` : 'Community centre added.');
+        renderCCMgmtList();
     } catch (err) { hideLoading(); showToast(err.message); }
 });
 
@@ -2158,7 +2316,7 @@ document.getElementById('admin-change-pin').addEventListener('click', async () =
     if (!/^\d{4,8}$/.test(np)) { showToast('PIN must be 4–8 digits.'); return; }
     try {
         showLoading('Updating PIN…');
-        await saveDbSetting('admin_pin', np);
+        await upsertSetting('admin_pin', np);
         hideLoading();
         document.getElementById('admin-new-pin').value = '';
         showToast('Admin PIN updated. New PIN: ' + np);
@@ -2200,7 +2358,7 @@ async function adminApproveSub(id) {
         console.error(err);
         let msg = err.message || 'Update failed.';
         if (/row-level security|RLS|permission/i.test(msg)) {
-            msg = 'RLS blocked this update. Make sure you ran the admin SQL (is_admin_user policy).';
+            msg = 'RLS blocked this update. Run the admin SQL.';
         }
         showToast(msg, 7000);
     }
@@ -2245,7 +2403,6 @@ function renderAdminUserList() {
         const isEditing = editingUserId === u.id;
         const activeNow = s.status === 'active' && s.paidUntil > Date.now();
 
-        // Edit form with CC dropdown
         const editForm = isEditing ? `
             <div class="user-edit-form">
                 <div class="edit-row">
@@ -2306,7 +2463,6 @@ function renderAdminUserList() {
             </div>`;
     }).join('');
 
-    // Populate CC dropdowns inside edit forms
     list.forEach(u => {
         if (editingUserId === u.id) {
             const sel = document.getElementById('edit-cc-' + u.id);
@@ -2318,10 +2474,8 @@ function renderAdminUserList() {
 window.startUserEdit = function(id) {
     editingUserId = id;
     renderAdminUserList();
-    // Open the detail panel
     const detail = document.getElementById('detail-' + id);
     if (detail) detail.classList.remove('hidden');
-    // Scroll to row
     document.getElementById('row-' + id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 };
 window.cancelUserEdit = function() {
@@ -2335,7 +2489,6 @@ window.saveUserEdit = async function(id) {
     const ccSel = document.getElementById('edit-cc-' + id);
     let cc = ccSel.value;
     if (cc === OTHER_CC_VALUE) {
-        // Show a prompt for custom entry
         const custom = prompt('Enter the new community centre name:');
         if (!custom || !custom.trim()) { showToast('Community centre is required.'); return; }
         cc = custom.trim();
@@ -2345,9 +2498,12 @@ window.saveUserEdit = async function(id) {
     if (!cc) { showToast('Community centre is required.'); return; }
     try {
         showLoading('Saving…');
-        const { error, data } = await supabase.from('profiles').update({ name, age, community_centre: cc }).eq('id', id).select();
+        const { error, count } = await supabase
+            .from('profiles')
+            .update({ name, age, community_centre: cc }, { count: 'exact' })
+            .eq('id', id);
         if (error) throw error;
-        if (!data || data.length === 0) throw new Error('No rows updated. RLS may be blocking this action — make sure you ran the admin SQL.');
+        if (count === 0) throw new Error('No rows updated. RLS may be blocking — make sure you ran the admin SQL.');
         await refreshAll();
         editingUserId = null;
         hideLoading();
@@ -2363,21 +2519,30 @@ window.adminDeleteUser = async function(id) {
     if (!userProfile.is_admin || !adminUnlocked) { showToast('Admin access required.'); return; }
     if (id === userProfile.id) { showToast('You cannot delete yourself.'); return; }
     const u = allProfiles.find(x => x.id === id);
-    if (!u) return;
-    if (!confirm(`Delete "${u.name}" (${u.email})?`)) return;
+    if (!u) { showToast('User not found.'); return; }
+    if (!confirm(`Delete "${u.name}" (${u.email})?\n\nThis removes their profile and all their matches/challenges. This cannot be undone.`)) return;
     try {
         showLoading('Deleting…');
-        await supabase.from('match_requests').delete().or(`from_user.eq.${id},to_user.eq.${id},partner.eq.${id},opponent2.eq.${id}`);
-        await supabase.from('challenges').delete().or(`challenger.eq.${id},opponent.eq.${id},challenger_partner.eq.${id},opponent_partner.eq.${id}`);
-        await supabase.from('matches').delete().or(`player_a.eq.${id},player_b.eq.${id},partner_a.eq.${id},partner_b.eq.${id}`);
-        const { error, data } = await supabase.from('profiles').delete().eq('id', id).select();
+        try { await supabase.from('match_requests').delete().or(`from_user.eq.${id},to_user.eq.${id},partner.eq.${id},opponent2.eq.${id}`); } catch (e) { console.warn('match_requests delete:', e); }
+        try { await supabase.from('challenges').delete().or(`challenger.eq.${id},opponent.eq.${id},challenger_partner.eq.${id},opponent_partner.eq.${id}`); } catch (e) { console.warn('challenges delete:', e); }
+        try { await supabase.from('matches').delete().or(`player_a.eq.${id},player_b.eq.${id},partner_a.eq.${id},partner_b.eq.${id}`); } catch (e) { console.warn('matches delete:', e); }
+        const { error, count } = await supabase.from('profiles').delete({ count: 'exact' }).eq('id', id);
         if (error) throw error;
-        if (!data || data.length === 0) throw new Error('No rows deleted. RLS may be blocking.');
+        if (count === 0) throw new Error('No profile row was deleted. This usually means RLS is blocking the delete. Run the admin SQL.');
+        allProfiles = allProfiles.filter(x => x.id !== id);
         await refreshAll();
         hideLoading();
         showToast(`✅ ${u.name} deleted.`);
         renderAdminUserList();
-    } catch (err) { hideLoading(); console.error(err); showToast('Failed: ' + (err.message || 'Unknown error'), 7000); }
+    } catch (err) {
+        hideLoading();
+        console.error('[SGTT] Delete failed:', err);
+        let msg = err.message || 'Unknown error';
+        if (/row-level security|RLS|permission/i.test(msg)) {
+            msg = 'RLS blocked the delete. Run the admin SQL to allow admins to delete profiles.';
+        }
+        showToast('Delete failed: ' + msg, 8000);
+    }
 };
 
 async function adminTogglePaid(id) {
@@ -2413,9 +2578,10 @@ async function adminToggleAdmin(id) {
 }
 
 /* ============================================================
-   NOTIFICATIONS POPUP
+   NOTIFICATIONS
    ============================================================ */
 function buildNotifications() {
+    if (!userProfile) return [];
     const myId = userProfile.id;
     const items = [];
 
@@ -2454,7 +2620,19 @@ function buildNotifications() {
         });
     });
 
-    if (!isPromotionActive()) {
+    if (isPromotionActive()) {
+        // Show free subscription info only if not already active
+        const sub = userProfile.subscription || {};
+        const isActive = sub.status === 'active' && sub.paidUntil > Date.now();
+        if (!isActive) {
+            items.push({
+                tab: 'subscribe', icon: '🎉',
+                title: 'Free subscription active this month!',
+                body: 'You have free play this month — no payment needed. Enjoy!',
+                action: 'Tap to view →', severity: 'info'
+            });
+        }
+    } else {
         const sub = userProfile.subscription || {};
         const isActive = sub.status === 'active' && sub.paidUntil > Date.now();
         if (!isActive && sub.status !== 'pending') {
@@ -2477,6 +2655,11 @@ function buildNotifications() {
     return items;
 }
 
+function computeNotifSignature(items) {
+    // Simple signature: sort keys of important fields
+    return items.map(it => `${it.tab}|${it.title}|${it.body.substring(0, 40)}`).sort().join('::');
+}
+
 function updateNotifDots() {
     const items = buildNotifications();
     const byTab = { dashboard: false, request: false, subscribe: false };
@@ -2484,16 +2667,48 @@ function updateNotifDots() {
     document.getElementById('notif-dot-home')?.classList.toggle('hidden', !byTab.dashboard);
     document.getElementById('notif-dot-play')?.classList.toggle('hidden', !byTab.request);
     document.getElementById('notif-dot-sub')?.classList.toggle('hidden', !byTab.subscribe);
+
+    // Update bell
+    const bell = document.getElementById('bell-btn');
+    const count = document.getElementById('bell-count');
+    if (bell && count) {
+        if (items.length > 0) {
+            count.textContent = items.length > 9 ? '9+' : String(items.length);
+            count.classList.remove('hidden');
+            bell.classList.add('pulse');
+        } else {
+            count.classList.add('hidden');
+            bell.classList.remove('pulse');
+        }
+    }
 }
 
-function checkAndShowNotifications() {
+/* [FIX] Show popup on demand (login + bell + auto-detect new items) */
+function checkAndShowNotifications(force = false) {
     if (!userProfile) return;
     const items = buildNotifications();
     updateNotifDots();
     if (items.length === 0) return;
-    if (sessionStorage.getItem('sgtt_notif_shown') === '1') return;
-    sessionStorage.setItem('sgtt_notif_shown', '1');
-    showNotifModal(items);
+    const sig = computeNotifSignature(items);
+    // Show if: forced, or new content since last shown
+    if (force || sig !== lastNotifSignature) {
+        lastNotifSignature = sig;
+        showNotifModal(items);
+    }
+}
+
+/* [FIX] Called on every auto-refresh — shows modal only when new items appear */
+function checkForNewNotifications() {
+    if (notifModalOpen) return; // don't interrupt user
+    if (!userProfile) return;
+    const items = buildNotifications();
+    updateNotifDots();
+    if (items.length === 0) return;
+    const sig = computeNotifSignature(items);
+    if (sig !== lastNotifSignature) {
+        lastNotifSignature = sig;
+        showNotifModal(items);
+    }
 }
 
 function showNotifModal(items) {
@@ -2508,13 +2723,27 @@ function showNotifModal(items) {
         </div>
     `).join('');
     modal.classList.remove('hidden');
+    notifModalOpen = true;
 }
-function closeNotifModal() { document.getElementById('notif-modal')?.classList.add('hidden'); }
+function closeNotifModal() {
+    document.getElementById('notif-modal')?.classList.add('hidden');
+    notifModalOpen = false;
+}
 window.jumpFromNotif = function(tab) { closeNotifModal(); switchTab(tab); };
 
 document.getElementById('notif-modal-x').addEventListener('click', closeNotifModal);
 document.getElementById('notif-dismiss').addEventListener('click', closeNotifModal);
 document.getElementById('notif-modal').addEventListener('click', (e) => { if (e.target.id === 'notif-modal') closeNotifModal(); });
+
+/* Bell button opens notifications manually */
+document.getElementById('bell-btn').addEventListener('click', () => {
+    const items = buildNotifications();
+    if (items.length === 0) {
+        showToast('No new notifications. 🎉', 2500);
+        return;
+    }
+    showNotifModal(items);
+});
 
 /* ============================================================
    INITIALISE
@@ -2566,7 +2795,6 @@ const bootInterval = setInterval(() => {
     if (++tries > 60) { clearInterval(bootInterval); hideLoading(); if (!currentUser) showOnlyScreen('auth'); showConfigBannerIfNeeded(); }
 }, 100);
 
-/* ---------- GLOBAL HANDLERS ---------- */
 window.approveRequest = approveRequest;
 window.rejectRequest = rejectRequest;
 window.switchTab = switchTab;
@@ -2587,7 +2815,8 @@ window.startUserEdit = startUserEdit;
 window.cancelUserEdit = cancelUserEdit;
 window.saveUserEdit = saveUserEdit;
 window.adminDeleteUser = adminDeleteUser;
-window.removeCustomCCUI = removeCustomCCUI;
+window.deleteCCUI = deleteCCUI;
+window.restoreCCUI = restoreCCUI;
 </script>
 </body>
 </html>
