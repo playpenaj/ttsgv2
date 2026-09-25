@@ -78,6 +78,7 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .badge-red{background:var(--danger-soft);color:#fca5a5;border-color:rgba(239,68,68,.3)}
 .badge-admin{background:rgba(34,197,94,.15);color:#86efac;border-color:rgba(34,197,94,.3)}
 .badge-blue{background:rgba(59,130,246,.15);color:#93c5fd;border-color:rgba(59,130,246,.3)}
+.badge-purple{background:rgba(168,85,247,.15);color:#d8b4fe;border-color:rgba(168,85,247,.3)}
 
 .stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .stat-item{background:var(--bg-dark);padding:14px 8px;border-radius:12px;text-align:center;border:1px solid var(--border);position:relative;overflow:hidden}
@@ -193,6 +194,8 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .tab-bar button.active .icon{filter:drop-shadow(0 0 8px rgba(34,197,94,.6))}
 .tab-bar button .icon{font-size:1.3rem;line-height:1;transition:filter .2s}
 .tab-bar button .notif-dot{position:absolute;top:4px;right:calc(50% - 18px);width:8px;height:8px;border-radius:50%;background:var(--danger);box-shadow:0 0 8px var(--danger)}
+.tab-bar button.tab-disabled{opacity:.45}
+.tab-bar button.tab-disabled::after{content:'🔒';position:absolute;top:2px;left:calc(50% + 8px);font-size:.6rem;line-height:1}
 
 .hidden{display:none!important}
 #toast{position:fixed;top:calc(16px + var(--safe-top));left:50%;transform:translateX(-50%);background:var(--bg-card);color:var(--text);padding:14px 22px;border-radius:12px;border:1px solid var(--accent);font-size:.88rem;z-index:9999;max-width:92vw;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.6),0 0 24px rgba(34,197,94,.2);transition:opacity .3s,transform .3s;word-break:break-word}
@@ -206,17 +209,33 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .dot-yellow{background:var(--warning);box-shadow:0 0 12px var(--warning)}
 .dot-red{background:var(--danger);box-shadow:0 0 12px var(--danger)}
 
+.free-month-banner{background:linear-gradient(135deg,rgba(34,197,94,.22),rgba(34,197,94,.06));border:2px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.free-month-banner .fm-icon{font-size:1.7rem;line-height:1;flex-shrink:0;filter:drop-shadow(0 0 10px rgba(34,197,94,.55))}
+.free-month-banner .fm-text{flex:1;min-width:0}
+.free-month-banner .fm-text strong{display:block;color:var(--accent);font-size:.88rem;font-weight:800;margin-bottom:2px}
+.free-month-banner .fm-text small{color:#bbf7d0;font-size:.74rem;line-height:1.4;display:block}
+
+.play-locked-hero{text-align:center;padding:28px 16px}
+.play-locked-hero .plh-icon{font-size:4rem;line-height:1;margin-bottom:14px;filter:drop-shadow(0 0 20px rgba(245,158,11,.55));animation:plhBob 2.4s ease-in-out infinite}
+@keyframes plhBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.play-locked-hero h2{color:var(--warning);font-size:1.25rem;font-weight:800;text-transform:none;letter-spacing:-.01em;margin-bottom:10px}
+.play-locked-hero p{font-size:.9rem;color:#cbd5e1;line-height:1.6;margin-bottom:8px}
+.play-locked-hero .plh-steps{background:var(--bg-dark);border-radius:12px;padding:14px 16px;margin-top:16px;text-align:left;border:1px solid var(--border)}
+.play-locked-hero .plh-steps .plh-step{display:flex;gap:10px;font-size:.85rem;color:#cbd5e1;line-height:1.5;margin-bottom:10px}
+.play-locked-hero .plh-steps .plh-step:last-child{margin-bottom:0}
+.play-locked-hero .plh-steps .plh-step .num{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--warning);color:#0a1f38;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem}
+
 .user-cards-list{display:flex;flex-direction:column;gap:10px}
 .user-card{background:var(--bg-dark);border:1px solid var(--border);border-radius:12px;padding:12px;transition:border-color .15s;min-width:0}
 .user-card.editing{border-color:var(--accent);border-left-width:3px}
 .user-card.inactive{border-color:var(--warning);border-left:3px solid var(--warning)}
+.user-card.pending-new{border-color:var(--warning);border-left:3px solid var(--warning);background:linear-gradient(135deg,rgba(245,158,11,.08),var(--bg-dark))}
 .user-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;flex-wrap:wrap}
 .user-card-head .user-name{font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap;word-break:break-word;flex:1;min-width:0}
 .user-card-head .user-name .badge{font-size:.55rem;padding:2px 6px}
-.user-card-head .user-actions{display:flex;gap:4px;flex-shrink:0}
-.user-card-head .user-actions button{margin:0;min-height:30px;min-width:30px;padding:5px 8px;font-size:.75rem;border-radius:8px;width:auto}
-.user-card .user-email{font-size:.78rem;color:var(--text-muted);word-break:break-word;margin-bottom:10px}
-.user-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;font-size:.78rem}
+.user-card-head .user-actions{display:flex;gap:4px;flex-shrink:0;position:relative;z-index:2}
+.user-card-head .user-actions button{margin:0;min-height:32px;min-width:34px;padding:6px 10px;font-size:.85rem;border-radius:8px;width:auto;cursor:pointer;position:relative;z-index:3}
+.user-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;font-size:.78rem;margin-top:6px}
 .user-field{display:flex;flex-direction:column;gap:2px;min-width:0}
 .user-field .uf-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:700}
 .user-field .uf-value{color:var(--text);font-weight:600;word-break:break-word}
@@ -327,6 +346,11 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .verified-banner .vb-text{flex:1;min-width:0}
 .verified-banner .vb-text strong{display:block;color:var(--accent);font-size:.88rem;font-weight:800;margin-bottom:2px}
 .verified-banner .vb-text small{color:#bbf7d0;font-size:.74rem;line-height:1.4;display:block}
+.info-banner{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.05));border:2px solid var(--warning);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.info-banner .ib-icon{font-size:1.6rem;line-height:1;flex-shrink:0}
+.info-banner .ib-text{flex:1;min-width:0}
+.info-banner .ib-text strong{display:block;color:var(--warning);font-size:.88rem;font-weight:800;margin-bottom:2px}
+.info-banner .ib-text small{color:#fde68a;font-size:.74rem;line-height:1.4;display:block}
 img,svg,video,canvas{max-width:100%;height:auto}
 pre,code{max-width:100%;overflow-x:auto;word-break:break-word}
 table{max-width:100%}
@@ -396,7 +420,6 @@ table{max-width:100%}
 
 <div id="app">
 
-    <!-- AUTH SCREEN -->
     <div id="auth-screen" class="hidden">
         <div id="config-banner" class="config-banner hidden">
             <strong>⚠️ Supabase configuration problem</strong>
@@ -465,10 +488,9 @@ table{max-width:100%}
                 <button class="auth-tab" id="tab-auth-register" onclick="setAuthMode('register')">Register</button>
             </div>
 
-            <!-- LOGIN / REGISTER FORM -->
             <div id="auth-normal">
                 <div id="field-email">
-                    <label for="auth-email">Email</label>
+                    <label for="auth-email">Login ID</label>
                     <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" novalidate>
                     <div id="auth-email-error" class="field-error hidden"></div>
                 </div>
@@ -477,15 +499,30 @@ table{max-width:100%}
                     <label for="auth-password">Password</label>
                     <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password">
                     <div id="auth-password-error" class="field-error hidden"></div>
+                    <div class="pwd-checklist hidden" id="register-pwd-checklist">
+                        <div class="pwd-check" data-req="length">At least 8 characters</div>
+                        <div class="pwd-check" data-req="upper">One uppercase letter (A–Z)</div>
+                        <div class="pwd-check" data-req="lower">One lowercase letter (a–z)</div>
+                        <div class="pwd-check" data-req="number">One number (0–9)</div>
+                        <div class="pwd-check" data-req="special">One special character (!@#$…)</div>
+                    </div>
                 </div>
 
                 <div id="register-extra" class="hidden">
+                    <div class="free-month-banner">
+                        <span class="fm-icon">🎁</span>
+                        <div class="fm-text">
+                            <strong>Your first month is FREE!</strong>
+                            <small>New players play free for the rest of this calendar month. The $2/month fee only starts the following month.</small>
+                        </div>
+                    </div>
+
                     <label for="auth-name">Full Name</label>
-                    <input type="text" id="auth-name" placeholder="Your name">
+                    <input type="text" id="auth-name" placeholder="Your name" autocomplete="name">
                     <div id="auth-name-error" class="field-error hidden"></div>
 
                     <label for="auth-age">Age</label>
-                    <input type="number" id="auth-age" placeholder="25" min="8" max="120">
+                    <input type="number" id="auth-age" placeholder="25" min="8" max="120" inputmode="numeric">
                     <div id="auth-age-error" class="field-error hidden"></div>
 
                     <label for="auth-cc">Community Centre</label>
@@ -501,65 +538,63 @@ table{max-width:100%}
                 <button id="auth-submit" type="button">Login</button>
             </div>
 
-            <!-- FORGOT PASSWORD STEP 1: Email + CC verification -->
-            <div id="forgot-step1" class="hidden">
-                <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:14px;line-height:1.5">
-                    Enter your registered email and select your community centre. If both match our records, you'll be able to set a new password immediately.
-                </p>
-
-                <label for="forgot-email">Email</label>
-                <input type="email" id="forgot-email" placeholder="you@example.com" autocomplete="email" novalidate>
-                <div id="forgot-email-error" class="field-error hidden"></div>
-
-                <label for="forgot-cc">Community Centre</label>
-                <select id="forgot-cc"></select>
-                <div id="forgot-cc-error" class="field-error hidden"></div>
-
-                <button id="forgot-verify-btn" type="button">Verify</button>
-                <button class="secondary" type="button" onclick="setAuthMode('login')">Back to Login</button>
-            </div>
-
-            <!-- FORGOT PASSWORD STEP 2: New password -->
-            <div id="forgot-step2" class="hidden">
+            <div id="register-success" class="hidden">
                 <div class="verified-banner">
-                    <div class="vb-icon">✅</div>
+                    <div class="vb-icon">🎉</div>
                     <div class="vb-text">
-                        <strong>Identity verified!</strong>
-                        <small>Now enter your new password below.</small>
+                        <strong>Account created successfully!</strong>
+                        <small>You can log in right away. The Play tab will be locked until an admin activates your account.</small>
                     </div>
                 </div>
 
-                <label for="forgot-pwd-new">New Password</label>
-                <input type="password" id="forgot-pwd-new" placeholder="Enter new password" autocomplete="new-password">
-
-                <label for="forgot-pwd-confirm">Confirm Password</label>
-                <input type="password" id="forgot-pwd-confirm" placeholder="Re-enter password" autocomplete="new-password">
-
-                <div class="field-error hidden" id="forgot-pwd-error"></div>
-
-                <div class="pwd-checklist" id="forgot-pwd-checklist">
-                    <div class="pwd-check" data-req="length">At least 8 characters</div>
-                    <div class="pwd-check" data-req="upper">One uppercase letter (A–Z)</div>
-                    <div class="pwd-check" data-req="lower">One lowercase letter (a–z)</div>
-                    <div class="pwd-check" data-req="number">One number (0–9)</div>
-                    <div class="pwd-check" data-req="special">One special character (!@#$…)</div>
+                <div class="free-month-banner" style="margin-bottom:16px">
+                    <span class="fm-icon">🎁</span>
+                    <div class="fm-text">
+                        <strong>Your first month is FREE!</strong>
+                        <small>Once your account is activated by an admin, you'll play free for the rest of this calendar month. The $2/month subscription begins next month.</small>
+                    </div>
                 </div>
 
-                <button id="forgot-save-btn" type="button">Save New Password</button>
-                <button class="secondary" type="button" onclick="setAuthMode('login')">Cancel</button>
+                <button id="register-success-login-btn" type="button">Proceed to Login</button>
+            </div>
+
+            <div id="forgot-info" class="hidden">
+                <div class="info-banner">
+                    <div class="ib-icon">🔑</div>
+                    <div class="ib-text">
+                        <strong>Password Reset</strong>
+                        <small>Password resets are handled by club admins to keep your account secure.</small>
+                    </div>
+                </div>
+
+                <p style="font-size:.88rem;color:#cbd5e1;margin-bottom:14px;line-height:1.6">
+                    Please contact your club admin with your <strong>name</strong>, <strong>Login ID</strong>, and <strong>community centre</strong>. They will verify your identity and help you reset your password.
+                </p>
+
+                <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:14px;line-height:1.6">
+                    You can find the admin's contact details on the club notice board or in person at your community centre.
+                </p>
+
+                <button class="secondary" type="button" onclick="setAuthMode('login')">Back to Login</button>
             </div>
         </div>
     </div>
 
-    <!-- MAIN APP -->
     <div id="main-screen" class="hidden">
 
-        <!-- DASHBOARD -->
         <div id="tab-dashboard" class="tab-content">
             <div id="promo-banner" class="promo-banner hidden">
                 <div class="promo-text">
                     <strong id="promo-title">🎉 Free Subscription Month!</strong>
                     <small id="promo-message">All matches are free this month. Enjoy!</small>
+                </div>
+            </div>
+
+            <div id="dashboard-account-locked" class="card card-warn hidden">
+                <div class="play-locked-hero" style="padding:14px 8px">
+                    <div class="plh-icon" style="font-size:2.4rem;margin-bottom:6px">🔒</div>
+                    <h2 style="font-size:1rem;margin-bottom:6px">Account Pending Activation</h2>
+                    <p style="font-size:.85rem">An admin needs to activate your account before you can play. You can still browse the leaderboards and info while you wait.</p>
                 </div>
             </div>
 
@@ -642,114 +677,135 @@ table{max-width:100%}
             </div>
         </div>
 
-        <!-- PLAY TAB -->
         <div id="tab-request" class="tab-content hidden">
-            <div id="req-sub-warning" class="card card-danger hidden">
-                <h2>⚠️ Subscription Required</h2>
-                <p style="font-size:.9rem">You need an active subscription to play. Tap the badge in the header to subscribe.</p>
+
+            <div id="play-locked-card" class="card card-warn hidden">
+                <div class="play-locked-hero">
+                    <div class="plh-icon">🔒</div>
+                    <h2>Play Tab Locked</h2>
+                    <p>Your account is created but not yet activated by an admin. Once activated, you'll be able to send challenges, log scores, and join matches.</p>
+                    <div class="plh-steps">
+                        <div class="plh-step"><span class="num">1</span><span>Your registration is complete.</span></div>
+                        <div class="plh-step"><span class="num">2</span><span>An admin needs to activate your account.</span></div>
+                        <div class="plh-step"><span class="num">3</span><span>Once activated, log out and log back in to unlock the Play tab.</span></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card card-accent">
-                <h2>⚔️ Challenge a Player</h2>
-                <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Send a challenge. The opponent accepts, then you play. After the match, one side submits the score and the other acknowledges it to award points.</p>
+            <div id="play-normal-content">
+                <div id="req-sub-warning" class="card card-danger hidden">
+                    <h2>⚠️ Subscription Required</h2>
+                    <p style="font-size:.9rem">You need an active subscription to play. Tap the badge in the header to subscribe.</p>
+                </div>
 
-                <label for="ch-type">Match Type</label>
-                <select id="ch-type"><option value="singles">Singles</option><option value="doubles">Doubles</option></select>
+                <div class="card card-accent">
+                    <h2>⚔️ Challenge a Player</h2>
+                    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Send a challenge. The opponent accepts, then you play. After the match, one side submits the score and the other acknowledges it to award points.</p>
 
-                <div id="ch-doubles-fields" class="hidden">
+                    <label for="ch-type">Match Type</label>
+                    <select id="ch-type"><option value="singles">Singles</option><option value="doubles">Doubles</option></select>
+
+                    <div id="ch-doubles-fields" class="hidden">
+                        <div class="team-block">
+                            <h3>👥 Your Team</h3>
+                            <label for="ch-partner">Your Partner</label>
+                            <select id="ch-partner"></select>
+                        </div>
+                    </div>
+
                     <div class="team-block">
-                        <h3>👥 Your Team</h3>
-                        <label for="ch-partner">Your Partner</label>
-                        <select id="ch-partner"></select>
+                        <h3>🎯 Opponent</h3>
+                        <label for="ch-opponent1">Opponent Player 1</label>
+                        <select id="ch-opponent1"></select>
+                        <div id="ch-opp2-wrap" class="hidden">
+                            <label for="ch-opponent2">Opponent Player 2 (optional)</label>
+                            <select id="ch-opponent2"></select>
+                        </div>
                     </div>
+
+                    <label for="ch-cc">Community Centre</label>
+                    <select id="ch-cc"></select>
+                    <input type="text" id="ch-cc-other" class="hidden" placeholder="Enter community centre name">
+
+                    <button id="ch-submit" style="margin-top:6px">Submit Challenge</button>
                 </div>
 
-                <div class="team-block">
-                    <h3>🎯 Opponent</h3>
-                    <label for="ch-opponent1">Opponent Player 1</label>
-                    <select id="ch-opponent1"></select>
-                    <div id="ch-opp2-wrap" class="hidden">
-                        <label for="ch-opponent2">Opponent Player 2 (optional)</label>
-                        <select id="ch-opponent2"></select>
-                    </div>
+                <div class="card">
+                    <h2>⚔️ Incoming Challenges</h2>
+                    <div id="challenges-received" class="scroll-list"><p style="color:var(--text-muted)">No challenges at the moment.</p></div>
                 </div>
 
-                <label for="ch-cc">Community Centre</label>
-                <select id="ch-cc"></select>
-                <input type="text" id="ch-cc-other" class="hidden" placeholder="Enter community centre name">
+                <div class="card">
+                    <h2>My Challenges</h2>
+                    <div id="challenges-sent" class="scroll-list"><p style="color:var(--text-muted)">You have not sent any challenges.</p></div>
+                </div>
 
-                <button id="ch-submit" style="margin-top:6px">Submit Challenge</button>
-            </div>
+                <div class="card">
+                    <h2>Quick Match Entry (with score)</h2>
+                    <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px">Already played? Log the score directly — opponent still has to approve.</p>
 
-            <div class="card">
-                <h2>⚔️ Incoming Challenges</h2>
-                <div id="challenges-received" class="scroll-list"><p style="color:var(--text-muted)">No challenges at the moment.</p></div>
-            </div>
+                    <label for="req-type">Match Type</label>
+                    <select id="req-type"><option value="singles">Singles</option><option value="doubles">Doubles</option></select>
 
-            <div class="card">
-                <h2>My Challenges</h2>
-                <div id="challenges-sent" class="scroll-list"><p style="color:var(--text-muted)">You have not sent any challenges.</p></div>
-            </div>
+                    <div id="req-doubles-fields" class="hidden">
+                        <div class="team-block">
+                            <h3>👥 Your Team</h3>
+                            <label for="req-partner">Your Partner</label>
+                            <select id="req-partner"></select>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <h2>Quick Match Entry (with score)</h2>
-                <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px">Already played? Log the score directly — opponent still has to approve.</p>
-
-                <label for="req-type">Match Type</label>
-                <select id="req-type"><option value="singles">Singles</option><option value="doubles">Doubles</option></select>
-
-                <div id="req-doubles-fields" class="hidden">
                     <div class="team-block">
-                        <h3>👥 Your Team</h3>
-                        <label for="req-partner">Your Partner</label>
-                        <select id="req-partner"></select>
+                        <h3>🎯 Opponent</h3>
+                        <label for="req-opponent1">Opponent Player 1</label>
+                        <select id="req-opponent1"></select>
+                        <div id="req-opp2-wrap" class="hidden">
+                            <label for="req-opponent2">Opponent Player 2 (optional)</label>
+                            <select id="req-opponent2"></select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="team-block">
-                    <h3>🎯 Opponent</h3>
-                    <label for="req-opponent1">Opponent Player 1</label>
-                    <select id="req-opponent1"></select>
-                    <div id="req-opp2-wrap" class="hidden">
-                        <label for="req-opponent2">Opponent Player 2 (optional)</label>
-                        <select id="req-opponent2"></select>
+                    <label for="req-cc">Community Centre</label>
+                    <select id="req-cc"></select>
+                    <input type="text" id="req-cc-other" class="hidden" placeholder="Enter community centre name">
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                        <div><label for="req-score">Your Score</label><input type="number" id="req-score" placeholder="3" min="0" max="5"></div>
+                        <div><label for="req-opp-score">Opp. Score</label><input type="number" id="req-opp-score" placeholder="1" min="0" max="5"></div>
                     </div>
+
+                    <button id="req-submit" style="margin-top:6px">Submit Match request</button>
                 </div>
 
-                <label for="req-cc">Community Centre</label>
-                <select id="req-cc"></select>
-                <input type="text" id="req-cc-other" class="hidden" placeholder="Enter community centre name">
-
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                    <div><label for="req-score">Your Score</label><input type="number" id="req-score" placeholder="3" min="0" max="5"></div>
-                    <div><label for="req-opp-score">Opp. Score</label><input type="number" id="req-opp-score" placeholder="1" min="0" max="5"></div>
+                <div class="card">
+                    <h2>Pending Match Requests Sent</h2>
+                    <div id="pending-sent" class="scroll-list"><p style="color:var(--text-muted)">No pending requests.</p></div>
                 </div>
 
-                <button id="req-submit" style="margin-top:6px">Submit Match request</button>
-            </div>
+                <div class="card">
+                    <h2>Match Requests Awaiting Your Approval</h2>
+                    <div id="pending-received" class="scroll-list"><p style="color:var(--text-muted)">No requests to approve.</p></div>
+                </div>
 
-            <div class="card">
-                <h2>Pending Match Requests Sent</h2>
-                <div id="pending-sent" class="scroll-list"><p style="color:var(--text-muted)">No pending requests.</p></div>
-            </div>
-
-            <div class="card">
-                <h2>Match Requests Awaiting Your Approval</h2>
-                <div id="pending-received" class="scroll-list"><p style="color:var(--text-muted)">No requests to approve.</p></div>
-            </div>
-
-            <div class="card" id="included-card" style="display:none">
-                <h2>Matches You're Included In</h2>
-                <div id="included-list" class="scroll-list"></div>
+                <div class="card" id="included-card" style="display:none">
+                    <h2>Matches You're Included In</h2>
+                    <div id="included-list" class="scroll-list"></div>
+                </div>
             </div>
         </div>
 
-        <!-- SUBSCRIPTION -->
         <div id="tab-subscribe" class="tab-content hidden">
             <div class="card card-accent">
                 <h2>Monthly Subscription</h2>
                 <div class="sub-price">$2<small>/month</small></div>
                 <p style="text-align:center;color:var(--text-muted);font-size:.82rem;margin-top:8px">Pay $2 to play for the <strong>current calendar month</strong>.</p>
+                <div class="free-month-banner" style="margin-top:14px;margin-bottom:0">
+                    <span class="fm-icon">🎁</span>
+                    <div class="fm-text">
+                        <strong>New players: first month free</strong>
+                        <small>Every new account plays free for the rest of the month it was created. The $2/month fee begins the following month.</small>
+                    </div>
+                </div>
             </div>
 
             <div class="card"><h2>Your Status</h2><div id="sub-current-status"></div></div>
@@ -766,31 +822,27 @@ table{max-width:100%}
 
             <div class="card">
                 <h2>Payment Info</h2>
-                <p style="font-size:.85rem;color:#cbd5e1"><strong>PayNow:</strong> 9123 4567 (Singapore Table Tennis League)<br><strong>Reference:</strong> Your registered email<br><strong>Amount:</strong> $2.00 per month</p>
+                <p style="font-size:.85rem;color:#cbd5e1"><strong>PayNow:</strong> 9123 4567 (Singapore Table Tennis League)<br><strong>Reference:</strong> Your registered name<br><strong>Amount:</strong> $2.00 per month</p>
             </div>
         </div>
 
-        <!-- ADMIN -->
         <div id="tab-admin" class="tab-content hidden">
-            <div class="card card-warn">
-                <h2>🔒 Admin Access</h2>
-                <div id="admin-locked">
-                    <p style="font-size:.88rem;margin-bottom:12px;color:#cbd5e1">Enter admin PIN to unlock the admin controls.</p>
-                    <label for="admin-pin-input">Admin PIN</label>
-                    <input type="password" id="admin-pin-input" placeholder="••••" maxlength="8" inputmode="numeric" autocomplete="off">
-                    <button id="admin-pin-submit">Unlock Admin Panel</button>
-                </div>
-                <div id="admin-unlocked" class="hidden">
-                    <p style="font-size:.88rem;color:#bbf7d0">✅ Admin panel unlocked</p>
-                    <button id="admin-lock-btn" class="secondary small" style="margin-top:8px">Lock Panel</button>
-                </div>
+            <div class="card card-accent">
+                <h2>⚙️ Admin Panel</h2>
+                <p style="font-size:.85rem;color:#bbf7d0">✅ You have admin access. All controls are available below.</p>
             </div>
 
-            <div id="admin-panel" class="hidden">
+            <div id="admin-panel">
                 <div class="refresh-bar" id="refresh-bar-admin">
                     <span class="dot-live"></span>
                     <span id="refresh-status">Live — syncing every 30s</span>
-                    <button id="manual-refresh" class="secondary small" type="button">🔄 Refresh</button>
+                    <button id="manual-refresh" class="secondary small" type="button">🔄 Refresh Now</button>
+                </div>
+
+                <div class="card card-warn" id="pending-users-card">
+                    <h2>👋 New User Approvals</h2>
+                    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Newly registered users who need activation before they can play.</p>
+                    <div id="admin-pending-users" class="scroll-list"><p style="color:var(--text-muted)">No pending users. 🎉</p></div>
                 </div>
 
                 <div class="card">
@@ -839,21 +891,13 @@ table{max-width:100%}
                     <h2>All Players</h2>
                     <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:10px">Total: <span id="admin-user-count">0</span> players • Showing: <span id="admin-user-shown">0</span></p>
                     <div class="search-wrap">
-                        <input type="text" id="admin-search" placeholder="Search by name, email, or community centre" autocomplete="off">
+                        <input type="text" id="admin-search" placeholder="Search by name, Login ID, or community centre" autocomplete="off">
                     </div>
                     <div class="user-cards-list" id="admin-user-list"></div>
-                </div>
-
-                <div class="card">
-                    <h2>Admin Settings</h2>
-                    <label for="admin-new-pin">Change Admin PIN (stored in database)</label>
-                    <input type="password" id="admin-new-pin" placeholder="New 4–8 digit PIN" maxlength="8" inputmode="numeric" autocomplete="off">
-                    <button id="admin-change-pin" class="secondary small">Update PIN in Database</button>
                 </div>
             </div>
         </div>
 
-        <!-- INFO -->
         <div id="tab-points" class="tab-content hidden">
             <div class="card card-accent">
                 <h2>📖 How Points Work</h2>
@@ -929,6 +973,8 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
                     <ul>
                         <li><strong>$2/month</strong> to play</li>
                         <li>Valid for the <strong>current calendar month</strong></li>
+                        <li><strong>New players get their first month FREE</strong> (the month they register)</li>
+                        <li>From the <strong>following month</strong>, the usual $2/month fee applies</li>
                         <li>Free during promotion months</li>
                     </ul>
                 </div>
@@ -939,7 +985,7 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
 
     <div class="tab-bar" id="tab-bar">
         <button data-tab="dashboard" class="active" onclick="switchTab('dashboard')"><span class="icon">📊</span> Home<span class="notif-dot hidden" id="notif-dot-home"></span></button>
-        <button data-tab="request" onclick="switchTab('request')"><span class="icon">🏓</span> Play<span class="notif-dot hidden" id="notif-dot-play"></span></button>
+        <button data-tab="request" id="tab-play-btn" onclick="switchTab('request')"><span class="icon">🏓</span> Play<span class="notif-dot hidden" id="notif-dot-play"></span></button>
         <button data-tab="subscribe" onclick="switchTab('subscribe')"><span class="icon">💳</span> Sub<span class="notif-dot hidden" id="notif-dot-sub"></span></button>
         <button data-tab="admin" id="tab-admin-btn" class="hidden" onclick="switchTab('admin')"><span class="icon">⚙️</span> Admin</button>
         <button data-tab="points" onclick="switchTab('points')"><span class="icon">📖</span> Info</button>
@@ -948,6 +994,22 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
 </div>
 
 <div id="toast" class="hidden"></div>
+
+<div id="confirm-modal" class="modal-overlay hidden">
+    <div class="modal-card" id="confirm-card" style="border-color:var(--danger)">
+        <div class="modal-header" id="confirm-header" style="background:linear-gradient(180deg,rgba(239,68,68,.15),var(--bg-card))">
+            <h2><span id="confirm-icon">⚠️</span> <span id="confirm-title">Confirm</span></h2>
+            <button class="modal-close" id="confirm-x" aria-label="Close">×</button>
+        </div>
+        <div class="modal-body">
+            <p id="confirm-message" style="font-size:.9rem;color:#cbd5e1;line-height:1.6;word-break:break-word"></p>
+        </div>
+        <div class="modal-footer">
+            <button id="confirm-yes" class="danger" style="margin-bottom:8px">Yes, Confirm</button>
+            <button id="confirm-no" class="secondary" style="margin-bottom:0">Cancel</button>
+        </div>
+    </div>
+</div>
 
 <div id="notif-modal" class="modal-overlay hidden">
     <div class="modal-card">
@@ -959,6 +1021,17 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
         <div class="modal-footer">
             <button id="notif-dismiss">Got it</button>
         </div>
+    </div>
+</div>
+
+<div id="admin-welcome-modal" class="modal-overlay hidden">
+    <div class="modal-card" style="border-color:var(--warning)">
+        <div class="modal-header" style="background:linear-gradient(180deg,rgba(245,158,11,.15),var(--bg-card))">
+            <h2><span>👋</span> <span id="admin-welcome-title">Welcome back, Admin!</span></h2>
+            <button class="modal-close" id="admin-welcome-x" aria-label="Close">×</button>
+        </div>
+        <div class="modal-body" id="admin-welcome-body"></div>
+        <div class="modal-footer" id="admin-welcome-footer"></div>
     </div>
 </div>
 
@@ -1027,7 +1100,7 @@ if (looksLikePlaceholder(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)) {
 } else {
     try {
         const supabase = createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, {
-            auth: { detectSessionInUrl: true, persistSession: true, autoRefreshToken: true }
+            auth: { detectSessionInUrl: false, persistSession: true, autoRefreshToken: true }
         });
         window.supabase = supabase;
         window.dispatchEvent(new Event('supabase-ready'));
@@ -1040,10 +1113,23 @@ if (looksLikePlaceholder(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)) {
 
 <script>
 /* =============================================================
-   SINGAPORE TABLE TENNIS LEAGUE (v23)
+   SINGAPORE TABLE TENNIS LEAGUE (v32)
    Changes:
-   - Forgot password now goes DIRECT to password reset (no email)
-   - Uses SECURITY DEFINER RPC to update auth.users directly
+   - NEW USER REGISTRATION PROFILE SAVE — ROBUST VERSION
+     The bug: Supabase INSERT with RLS enabled returns 0 rows
+     (NOT an error) when RLS silently blocks it. The old code
+     only checked for `error`, so it thought the insert succeeded
+     even when zero rows were written → no user appeared in admin.
+
+     The fix:
+       1. After INSERT, we READ BACK the row via .select().eq()
+          and verify the count is exactly 1.
+       2. If the read-back is 0, we try UPSERT.
+       3. If upsert also fails to produce a row, we retry the
+          whole insert one more time after a short delay.
+       4. If it STILL fails, we surface the exact RLS error to the
+          user so the admin knows to fix policies.
+   - UPDATED login error message (shortened).
    ============================================================= */
 
 const OTHER_CC_VALUE = '__OTHER__';
@@ -1103,14 +1189,13 @@ function getAllCCsIncludingHidden(){const c=getCustomCCs(),h=getHiddenCCs();retu
 let supabase=null,currentUser=null,userProfile=null;
 let allProfiles=[],allRequests=[],allMatches=[],allChallenges=[];
 let allMatchesGlobal=[];
-let adminUnlocked=false,adminSearchTerm='',editingUserId=null;
+let adminSearchTerm='',editingUserId=null;
 let dbSettings={},settingsLoaded=false,bootCompleted=false;
 let refreshTimer=null,lastRefreshTime=null;
 let lastNotifSignature='',notifModalOpen=false;
 let pendingRedirectAfterPasswordChange=null;
-
-/* Forgot password flow state */
-let verifiedReset=null; // { email, cc }
+let suppressAutoLogin=false;
+let adminWelcomeShown=false;
 
 function showToast(msg,d=2800){const t=document.getElementById('toast');if(!t){console.log('TOAST:',msg);return}t.textContent=msg;t.classList.remove('hidden');clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.add('hidden'),d)}
 function showLoading(text='Loading…'){const el=document.getElementById('loading-text');if(el)el.textContent=text;document.getElementById('loading')?.classList.remove('hidden')}
@@ -1135,14 +1220,60 @@ function switchTab(tab){
     if(tab==='dashboard')renderDashboard();
     if(tab==='request')renderPlayTab();
     if(tab==='subscribe')renderSubscription();
-    if(tab==='admin')renderAdminPanel();
+    if(tab==='admin'){
+        (async()=>{
+            try{await loadAllProfiles();}catch(e){}
+            renderAdminPanel();
+        })();
+    }
 }
 function toggleCollapsible(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('show')}
 
-/* ============================================================
-   AUTH MODES
-   ============================================================ */
-let authMode='login'; // 'login' | 'register' | 'forgot' | 'reset-password'
+function showConfirm({title='Confirm', message='', yesLabel='Yes, Confirm', danger=false, icon='⚠️'}={}){
+    return new Promise(resolve=>{
+        const modal=document.getElementById('confirm-modal');
+        const card=document.getElementById('confirm-card');
+        const header=document.getElementById('confirm-header');
+        const iconEl=document.getElementById('confirm-icon');
+        const titleEl=document.getElementById('confirm-title');
+        const msgEl=document.getElementById('confirm-message');
+        const yes=document.getElementById('confirm-yes');
+        const no=document.getElementById('confirm-no');
+        const x=document.getElementById('confirm-x');
+
+        titleEl.textContent=title;
+        msgEl.textContent=message;
+        yes.textContent=yesLabel;
+        iconEl.textContent=icon;
+
+        if(danger){
+            card.style.borderColor='var(--danger)';
+            header.style.background='linear-gradient(180deg,rgba(239,68,68,.15),var(--bg-card))';
+            yes.className='danger';
+        }else{
+            card.style.borderColor='var(--accent)';
+            header.style.background='linear-gradient(180deg,rgba(34,197,94,.15),var(--bg-card))';
+            yes.className='';
+        }
+
+        function cleanup(){
+            modal.classList.add('hidden');
+            yes.onclick=null;
+            no.onclick=null;
+            x.onclick=null;
+            modal.onclick=null;
+        }
+        yes.onclick=()=>{cleanup();resolve(true);};
+        no.onclick=()=>{cleanup();resolve(false);};
+        x.onclick=()=>{cleanup();resolve(false);};
+        modal.onclick=(e)=>{if(e.target===modal){cleanup();resolve(false);}};
+
+        modal.classList.remove('hidden');
+        setTimeout(()=>yes.focus(),150);
+    });
+}
+
+let authMode='login';
 
 function setAuthMode(mode){
     authMode=mode;
@@ -1151,53 +1282,61 @@ function setAuthMode(mode){
     const registerTab=document.getElementById('tab-auth-register');
     const tabs=document.getElementById('auth-tabs');
     const authNormal=document.getElementById('auth-normal');
-    const forgotStep1=document.getElementById('forgot-step1');
-    const forgotStep2=document.getElementById('forgot-step2');
+    const forgotInfo=document.getElementById('forgot-info');
+    const registerExtra=document.getElementById('register-extra');
+    const forgotLink=document.getElementById('forgot-link-wrap');
+    const successPanel=document.getElementById('register-success');
+    const registerPwdChecklist=document.getElementById('register-pwd-checklist');
 
-    // Clear any previous session-verification
-    if (mode!=='reset-password') verifiedReset=null;
+    successPanel?.classList.add('hidden');
 
-    loginTab.classList.toggle('active', mode==='login');
-    registerTab.classList.toggle('active', mode==='register');
-    tabs.classList.toggle('hidden', mode==='forgot' || mode==='reset-password');
+    const isRegister = (mode==='register');
+    const isForgot = (mode==='forgot');
 
-    authNormal.classList.toggle('hidden', mode==='forgot' || mode==='reset-password');
-    forgotStep1.classList.toggle('hidden', mode!=='forgot');
-    forgotStep2.classList.toggle('hidden', mode!=='reset-password');
+    loginTab.classList.toggle('active', mode==='login' || mode==='success');
+    registerTab.classList.toggle('active', isRegister);
+    tabs.classList.toggle('hidden', isForgot || mode==='success');
 
-    // Update submit button label for normal mode
+    authNormal.classList.toggle('hidden', isForgot || mode==='success');
+    forgotInfo.classList.toggle('hidden', !isForgot);
+
+    registerExtra.classList.toggle('hidden', !isRegister);
+    forgotLink.classList.toggle('hidden', isRegister || isForgot);
+    registerPwdChecklist?.classList.toggle('hidden', !isRegister);
+
+    if(isRegister){
+        const pwEl=document.getElementById('auth-password');
+        updateRegisterPwdChecklist(pwEl?pwEl.value:'');
+    }
+
+    const pwEl=document.getElementById('auth-password');
+    if(pwEl) pwEl.setAttribute('autocomplete', isRegister?'new-password':'current-password');
+
     const submitBtn=document.getElementById('auth-submit');
     if (mode==='login') submitBtn.textContent='Login';
     else if (mode==='register') submitBtn.textContent='Create Account';
 
-    // Reset fields when going to forgot
-    if (mode==='forgot') {
-        populateForgotCCSelect();
-        document.getElementById('forgot-email').value='';
-    }
-    if (mode==='reset-password') {
-        document.getElementById('forgot-pwd-new').value='';
-        document.getElementById('forgot-pwd-confirm').value='';
-        document.getElementById('forgot-pwd-error').classList.add('hidden');
-        updateForgotPwdChecklist('');
-    }
-
     clearAllAuthErrors();
 }
 
-function populateForgotCCSelect(){
-    const sel=document.getElementById('forgot-cc');
-    if(!sel)return;
-    sel.innerHTML='';
-    getAllCCs().forEach(cc=>{
-        const o=document.createElement('option');
-        o.value=cc;o.textContent=cc;
-        sel.appendChild(o);
+function updateRegisterPwdChecklist(pw){
+    PASSWORD_REQUIREMENTS.forEach(req=>{
+        const el=document.querySelector(`#register-pwd-checklist .pwd-check[data-req="${req.key}"]`);
+        if(el)el.classList.toggle('ok',req.test(pw));
     });
 }
 
+function showRegisterSuccess(){
+    const successPanel=document.getElementById('register-success');
+    document.getElementById('auth-normal').classList.add('hidden');
+    document.getElementById('forgot-info').classList.add('hidden');
+    document.getElementById('auth-tabs').classList.add('hidden');
+    successPanel.classList.remove('hidden');
+    authMode='success';
+}
+
 function clearAllAuthErrors(){
-    ['auth-email','auth-password','auth-name','auth-age','auth-cc','forgot-email','forgot-cc'].forEach(id=>{
+    ['auth-email','auth-password','auth-name','auth-age','auth-cc'].forEach(id=>{
         const i=document.getElementById(id);if(i)i.classList.remove('input-error');
         const e=document.getElementById(id+'-error');if(e)e.classList.add('hidden');
     });
@@ -1205,32 +1344,86 @@ function clearAllAuthErrors(){
 }
 function markError(inputId,errorId,msg){const i=document.getElementById(inputId),e=document.getElementById(errorId);if(i)i.classList.add('input-error');if(e){e.textContent=msg;e.classList.remove('hidden')}}
 
-/* ============================================================
-   AUTH INIT
-   ============================================================ */
 function initAuthScreen(){
     if(initAuthScreen._done)return;
     initAuthScreen._done=true;
 
-    ['auth-email','auth-password','auth-name','auth-age','auth-cc','auth-cc-other','forgot-email','forgot-cc'].forEach(id=>{
+    ['auth-email','auth-password','auth-name','auth-age','auth-cc','auth-cc-other'].forEach(id=>{
         const el=document.getElementById(id);
         if(!el)return;
         el.addEventListener('input',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
         el.addEventListener('change',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
     });
 
+    document.getElementById('auth-password').addEventListener('input',(e)=>{
+        if(authMode==='register')updateRegisterPwdChecklist(e.target.value);
+    });
+
     document.getElementById('auth-submit').addEventListener('click',handleAuthSubmit);
-    document.getElementById('forgot-verify-btn').addEventListener('click',handleForgotVerify);
-    document.getElementById('forgot-save-btn').addEventListener('click',handleForgotSave);
-    document.getElementById('forgot-pwd-new').addEventListener('input',(e)=>updateForgotPwdChecklist(e.target.value));
+
+    document.getElementById('register-success-login-btn').addEventListener('click',()=>{
+        setAuthMode('login');
+        document.getElementById('auth-email').value='';
+        document.getElementById('auth-password').value='';
+        document.getElementById('auth-email').focus();
+        showToast('Please log in to access your account.',3500);
+    });
 }
 
-/* Update the mini checklist inside the forgot-step2 */
-function updateForgotPwdChecklist(pw){
-    PASSWORD_REQUIREMENTS.forEach(req=>{
-        const el=document.querySelector(`#forgot-pwd-checklist .pwd-check[data-req="${req.key}"]`);
-        if(el)el.classList.toggle('ok',req.test(pw));
-    });
+/* ============================================================
+   ROBUST PROFILE WRITER
+   Tries to guarantee a row exists in `profiles`. Because RLS
+   can silently block an INSERT (returns no error, but 0 rows),
+   we verify by reading back the row after writing.
+   Returns {ok: true} on success, {ok: false, reason} on failure.
+   ============================================================ */
+async function writeProfileRow(payload){
+    // Attempt 1: plain INSERT
+    try {
+        const { error: insErr } = await supabase.from('profiles').insert(payload);
+        if (insErr) {
+            console.warn('[SGTT] insert error:', insErr.message, insErr.details || '');
+        }
+    } catch(e) { console.warn('[SGTT] insert exception:', e.message); }
+
+    // Verify with a read-back
+    try {
+        const { data: check1, error: chkErr1 } = await supabase
+            .from('profiles').select('id').eq('id', payload.id).maybeSingle();
+        if (!chkErr1 && check1 && check1.id) return { ok:true, method:'insert' };
+    } catch(e) { console.warn('[SGTT] readback1 exception:', e.message); }
+
+    // Attempt 2: UPSERT
+    try {
+        const { error: upErr } = await supabase
+            .from('profiles').upsert(payload, { onConflict: 'id' });
+        if (upErr) console.warn('[SGTT] upsert error:', upErr.message, upErr.details || '');
+    } catch(e) { console.warn('[SGTT] upsert exception:', e.message); }
+
+    try {
+        const { data: check2, error: chkErr2 } = await supabase
+            .from('profiles').select('id').eq('id', payload.id).maybeSingle();
+        if (!chkErr2 && check2 && check2.id) return { ok:true, method:'upsert' };
+    } catch(e) { console.warn('[SGTT] readback2 exception:', e.message); }
+
+    // Attempt 3: delete + re-insert (in case a broken half-row exists)
+    try {
+        await supabase.from('profiles').delete().eq('id', payload.id);
+    } catch(e) {}
+
+    try {
+        const { error: insErr2 } = await supabase.from('profiles').insert(payload);
+        if (insErr2) console.warn('[SGTT] retry-insert error:', insErr2.message, insErr2.details || '');
+    } catch(e) { console.warn('[SGTT] retry-insert exception:', e.message); }
+
+    try {
+        const { data: check3, error: chkErr3 } = await supabase
+            .from('profiles').select('id').eq('id', payload.id).maybeSingle();
+        if (!chkErr3 && check3 && check3.id) return { ok:true, method:'retry-insert' };
+    } catch(e) { console.warn('[SGTT] readback3 exception:', e.message); }
+
+    // Give up
+    return { ok:false, reason:'Row could not be written (RLS likely blocking insert).' };
 }
 
 /* ============================================================
@@ -1245,8 +1438,8 @@ async function handleAuthSubmit(){
     const password=document.getElementById('auth-password').value;
 
     let hasError=false;
-    if(!email){markError('auth-email','auth-email-error','Email is required');hasError=true}
-    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){markError('auth-email','auth-email-error','Enter a valid email address');hasError=true}
+    if(!email){markError('auth-email','auth-email-error','Login ID is required');hasError=true}
+    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){markError('auth-email','auth-email-error','Enter a valid login ID');hasError=true}
     if(!password){markError('auth-password','auth-password-error','Password is required');hasError=true}
     else if(authMode==='register'&&!isPasswordCompliant(password)){
         markError('auth-password','auth-password-error','Password does not meet all requirements');
@@ -1271,138 +1464,135 @@ async function handleAuthSubmit(){
 
     try{
         if(authMode==='register'){
-            showLoading('Creating account…');
-            const redirectUrl=window.location.origin+window.location.pathname;
-            const{data,error}=await supabase.auth.signUp({
-                email,password,
-                options:{data:{name,age,community_centre:cc,password_policy_v:PASSWORD_POLICY_VERSION},emailRedirectTo:redirectUrl}
-            });
-            if(error){
-                if(/already registered|already exists/i.test(error.message||'')){
+            showLoading('Checking Login ID…');
+
+            /* Pre-check email uniqueness */
+            try {
+                const { data: existingProfile, error: checkErr } = await supabase
+                    .from('profiles').select('id').ilike('email', email).limit(1).maybeSingle();
+                if (checkErr) {
+                    console.warn('[SGTT] Login ID pre-check warning:', checkErr.message);
+                } else if (existingProfile) {
                     hideLoading();
-                    markError('auth-email','auth-email-error','This email is already registered');
-                    showToast('Email already registered. Try login or use forgot password.',6500);
+                    markError('auth-email','auth-email-error','This Login ID is already registered');
+                    showToast('❌ This Login ID is already registered. Please log in instead.',6500);
+                    return;
+                }
+            } catch(e) { console.warn('[SGTT] Login ID pre-check exception:', e.message); }
+
+            showLoading('Creating account…');
+
+            let isFirstUser = false;
+            try {
+                const { data: existingAdmins } = await supabase
+                    .from('profiles').select('id').eq('is_admin', true).limit(1);
+                isFirstUser = !existingAdmins || existingAdmins.length === 0;
+            } catch(e){ console.warn('[SGTT] First-user check:', e.message); }
+
+            suppressAutoLogin = true;
+
+            const { data, error } = await supabase.auth.signUp({
+                email, password,
+                options: {
+                    data: {
+                        name, age,
+                        community_centre: cc,
+                        password_policy_v: PASSWORD_POLICY_VERSION
+                    }
+                }
+            });
+
+            if (error) {
+                suppressAutoLogin = false;
+                if (/already registered|already exists|user already/i.test(error.message || '')) {
+                    hideLoading();
+                    markError('auth-email','auth-email-error','This Login ID is already registered');
+                    showToast('❌ This Login ID is already registered. Please log in instead.',6500);
                     return;
                 }
                 throw error;
             }
-            if(!data.user)throw new Error('Sign up failed.');
-            if(!data.session){hideLoading();showToast('📧 Confirmation email sent! Click the link in your inbox.',8000);return}
-            hideLoading();showToast('Account created!');
-            await onLoggedIn(data.user,'SIGNUP');
-        }else{
-            showLoading('Signing in…');
-            const{data,error}=await supabase.auth.signInWithPassword({email,password});
-            if(error)throw error;
-            hideLoading();showToast('Welcome back!');
-            await onLoggedIn(data.user,'SIGNIN');
-        }
-    }catch(err){
-        hideLoading();console.error('[SGTT] Auth error:',err);
-        let msg=err.message||'Authentication failed.';
-        if(/invalid api key|invalid apikey/i.test(msg))msg='Invalid API key.';
-        else if(/user already registered/i.test(msg)){msg='Already registered — try Login.';markError('auth-email','auth-email-error','Already registered')}
-        else if(/email not confirmed/i.test(msg))msg='Check your inbox and click the confirmation link first.';
-        else if(/invalid login credentials/i.test(msg)){msg='Incorrect email or password.';markError('auth-password','auth-password-error','Incorrect credentials')}
-        else if(/password/i.test(msg)&&/6/i.test(msg)){msg='Password too short.';markError('auth-password','auth-password-error','Min 8 characters')}
-        showToast(msg,7000);
-    }
-}
+            if (!data.user) { suppressAutoLogin = false; throw new Error('Sign up failed.'); }
 
-/* ============================================================
-   FORGOT PASSWORD — Step 1: Verify email + CC
-   ============================================================ */
-async function handleForgotVerify(){
-    supabase=window.supabase;
-    if(!isConfigValid()||!supabase){showToast('Supabase not ready.',5000);return}
+            /* Build the profile payload */
+            const monthKey = currentMonthKey();
+            const newUserSubscription = {
+                status:'active',
+                paid:false,
+                freeTrial:true,
+                freeMonth:monthKey,
+                paidUntil:endOfCurrentMonth(),
+                requestedAt:0,
+                lastPayment:0,
+                autoRenew:false
+            };
 
-    // Clear previous errors
-    ['forgot-email','forgot-cc'].forEach(id=>{
-        document.getElementById(id)?.classList.remove('input-error');
-        document.getElementById(id+'-error')?.classList.add('hidden');
-    });
+            const profilePayload = {
+                id: data.user.id,
+                email: data.user.email,
+                name,
+                age,
+                community_centre: cc,
+                email_confirmed: true,
+                pending_approval: !isFirstUser,
+                is_admin: isFirstUser,
+                subscription: newUserSubscription
+            };
 
-    const email=document.getElementById('forgot-email').value.trim().toLowerCase();
-    const cc=document.getElementById('forgot-cc').value;
+            showLoading('Saving your profile…');
 
-    let hasError=false;
-    if(!email){markError('forgot-email','forgot-email-error','Email is required');hasError=true}
-    else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){markError('forgot-email','forgot-email-error','Enter a valid email');hasError=true}
-    if(!cc){markError('forgot-cc','forgot-cc-error','Select your community centre');hasError=true}
-    if(hasError) return;
+            /* Robust write: tries insert → verify → upsert → verify → retry-insert → verify */
+            const result = await writeProfileRow(profilePayload);
 
-    try{
-        showLoading('Verifying your details…');
-        const{data,error}=await supabase.rpc('verify_recovery_identity',{
-            p_email: email,
-            p_cc: cc
-        });
-        hideLoading();
-        if(error)throw error;
-        if(!data){
-            // Not a match
-            markError('forgot-cc','forgot-cc-error','Email and community centre don\'t match our records');
-            showToast('Verification failed. Please double-check your details.',5000);
-            return;
-        }
-        // Verified! Hold onto the credentials for step 2
-        verifiedReset = { email, cc };
-        showToast('✅ Verified! Enter your new password.',3500);
-        setAuthMode('reset-password');
-    }catch(err){
-        hideLoading();
-        console.error('[SGTT] Verify error:',err);
-        showToast('Verification failed: '+(err.message||'Unknown error'),6500);
-    }
-}
+            /* NOW sign out so the user logs in explicitly */
+            if (data.session) {
+                try { await supabase.auth.signOut(); } catch(e) { console.warn('[SGTT] signOut:', e.message); }
+            }
 
-/* ============================================================
-   FORGOT PASSWORD — Step 2: Save new password
-   ============================================================ */
-async function handleForgotSave(){
-    supabase=window.supabase;
-    if(!isConfigValid()||!supabase){showToast('Supabase not ready.',5000);return}
-    if(!verifiedReset){showToast('Session expired. Please verify again.',5000);setAuthMode('forgot');return}
-
-    const pw=document.getElementById('forgot-pwd-new').value;
-    const confirm=document.getElementById('forgot-pwd-confirm').value;
-    const errEl=document.getElementById('forgot-pwd-error');
-    errEl.classList.add('hidden');
-
-    if(!pw){errEl.textContent='Please enter a new password';errEl.classList.remove('hidden');return}
-    if(!isPasswordCompliant(pw)){errEl.textContent='Password does not meet all requirements';errEl.classList.remove('hidden');return}
-    if(pw!==confirm){errEl.textContent='Passwords do not match';errEl.classList.remove('hidden');return}
-
-    try{
-        showLoading('Updating your password…');
-        const{data,error}=await supabase.rpc('reset_password_verified',{
-            p_email: verifiedReset.email,
-            p_cc: verifiedReset.cc,
-            p_new_password: pw
-        });
-        if(error)throw error;
-        if(!data || !data.success){
+            suppressAutoLogin = false;
             hideLoading();
-            errEl.textContent=(data && data.error) || 'Failed to reset password';
-            errEl.classList.remove('hidden');
+
+            if (!result.ok) {
+                /* Show the actual failure so admin knows to check RLS */
+                console.error('[SGTT] Profile save failed:', result.reason);
+                showToast('❌ Could not save your profile. Please ask an admin to check the database permissions. You will be able to log in, but your account will not appear in the admin list until this is fixed.',12000);
+                /* We STILL show success because the auth user exists and login will retry */
+            }
+
+            showRegisterSuccess();
+            showToast(isFirstUser?'🎉 Admin account created! Please log in.':'🎉 Account created! You can log in now.',6000);
             return;
+
+        } else {
+            showLoading('Signing in…');
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+            if (error) throw error;
+            hideLoading(); showToast('Welcome back!');
+            await onLoggedIn(data.user, 'SIGNIN');
         }
+    } catch(err) {
         hideLoading();
-        // Clear and go back to login
-        verifiedReset=null;
-        showToast('✅ Password updated! Please login with your new password.',6000);
-        setAuthMode('login');
-    }catch(err){
-        hideLoading();
-        console.error('[SGTT] Reset error:',err);
-        errEl.textContent=err.message||'Failed to reset password';
-        errEl.classList.remove('hidden');
+        console.error('[SGTT] Auth error:', err);
+        suppressAutoLogin = false;
+        let msg = err.message || 'Authentication failed.';
+        if (/invalid api key|invalid apikey/i.test(msg)) {
+            msg = 'Invalid API key.';
+        } else if (/user already registered/i.test(msg)) {
+            msg = 'Already registered — try Login.';
+            markError('auth-email','auth-email-error','Already registered');
+        } else if (/email not confirmed|not confirmed/i.test(msg)) {
+            msg = 'Your login is not yet enabled by the server. Please ask an admin to enable.';
+        } else if (/invalid login credentials/i.test(msg)) {
+            msg = 'Incorrect Login ID or password.';
+            markError('auth-password','auth-password-error','Incorrect credentials');
+        } else if (/password/i.test(msg) && /6/i.test(msg)) {
+            msg = 'Password too short.';
+            markError('auth-password','auth-password-error','Min 8 characters');
+        }
+        showToast(msg, 7000);
     }
 }
 
-/* ============================================================
-   PASSWORD MODAL (still used for policy upgrade on existing sessions)
-   ============================================================ */
 let passwordModalMode=null;
 function showPasswordModal(mode){
     passwordModalMode=mode;
@@ -1448,9 +1638,6 @@ document.getElementById('pwd-save').addEventListener('click',async()=>{
 });
 document.getElementById('pwd-logout').addEventListener('click',async()=>{pendingRedirectAfterPasswordChange=null;closePasswordModal();await handleLogout()});
 
-/* ============================================================
-   CONFIG / HELPERS
-   ============================================================ */
 function isConfigValid(){
     const cfg=window.SGTT_CONFIG||{},url=cfg.SUPABASE_URL||'',key=cfg.SUPABASE_ANON_KEY||'';
     if(!url||!key)return false;
@@ -1470,6 +1657,11 @@ function showConfigBannerIfNeeded(){
 function endOfCurrentMonth(){const n=new Date();return new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59,999).getTime()}
 function currentMonthKey(){const n=new Date();return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`}
 function startOfCurrentMonth(){const n=new Date();return new Date(n.getFullYear(),n.getMonth(),1,0,0,0,0).getTime()}
+function nextMonthLabel(){
+    const n=new Date();
+    const d=new Date(n.getFullYear(),n.getMonth()+1,1);
+    return d.toLocaleDateString('en-SG',{month:'long',year:'numeric'});
+}
 function getPromotion(){const raw=dbSettings&&dbSettings.promotion;if(!raw)return{enabled:false,month:'',message:''};try{const p=typeof raw==='string'?JSON.parse(raw):raw;return{enabled:!!p.enabled,month:p.month||'',message:p.message||''}}catch{return{enabled:false,month:'',message:''}}}
 function isPromotionActive(){const p=getPromotion();if(!p.enabled)return false;return p.month===currentMonthKey()}
 async function savePromotion(promo){await upsertSetting('promotion',JSON.stringify(promo))}
@@ -1513,6 +1705,12 @@ async function restoreCC(cc){const h=getHiddenCCs();if(h.includes(cc)){await ups
 
 function nameOf(idOrEmail){if(!idOrEmail)return'?';const u=allProfiles.find(x=>x.id===idOrEmail||x.email===idOrEmail);return u?u.name:idOrEmail}
 function profileOf(idOrEmail){return allProfiles.find(x=>x.id===idOrEmail||x.email===idOrEmail)}
+
+function isAccountEnabled(u){
+    if(!u)return false;
+    if(u.is_admin)return true;
+    return u.pending_approval !== true;
+}
 function isSubscriptionActive(u){
     if(isPromotionActive())return true;
     if(!u||!u.subscription)return false;
@@ -1521,13 +1719,21 @@ function isSubscriptionActive(u){
     if(s.paidUntil>0&&s.paidUntil<Date.now())return false;
     return true;
 }
-function isPaidMember(u){if(isPromotionActive())return true;return u&&u.subscription&&u.subscription.paid===true&&isSubscriptionActive(u)}
+function isPaidMember(u){
+    if(isPromotionActive())return true;
+    if(!u||!u.subscription)return false;
+    return isSubscriptionActive(u);
+}
 function subStatusLabel(u){
     if(isPromotionActive())return{text:'🎉 Free month',cls:'badge-green'};
     if(!u||!u.subscription)return{text:'No subscription',cls:'badge-red'};
     const s=u.subscription;
     if(s.status==='pending')return{text:'Pending',cls:'badge-yellow'};
-    if(s.status==='active'&&s.paidUntil>Date.now()){const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));return{text:`Active • ${days}d`,cls:'badge-green'}}
+    if(s.status==='active'&&s.paidUntil>Date.now()){
+        const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));
+        if(s.freeTrial&&!s.paid)return{text:`🎁 Free 1st month • ${days}d`,cls:'badge-green'};
+        return{text:`Active • ${days}d`,cls:'badge-green'};
+    }
     if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now())return{text:'Expired',cls:'badge-red'};
     return{text:'Inactive',cls:'badge-red'};
 }
@@ -1537,7 +1743,10 @@ function subscriptionPaidLabel(u){
     if(!u||!u.subscription)return 'Not Paid';
     const s=u.subscription;
     if(s.status==='pending')return 'Pending';
-    if(s.status==='active'&&s.paidUntil>Date.now())return s.paid?'Paid':'Active';
+    if(s.status==='active'&&s.paidUntil>Date.now()){
+        if(s.freeTrial&&!s.paid)return 'Free 1st month';
+        return s.paid?'Paid':'Active';
+    }
     if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now())return 'Expired';
     return 'Not Paid';
 }
@@ -1549,18 +1758,27 @@ function timeAgo(ts){
     if(days<7)return days+' days ago';if(days<30)return Math.floor(days/7)+' wks ago';
     if(days<365)return Math.floor(days/30)+' mo ago';return Math.floor(days/365)+' yr ago';
 }
-function daysSince(ts){if(!ts)return null;return Math.floor((Date.now()-ts)/(24*60*60*1000))}
+function daysSince(ts){if(ts===null||ts===undefined)return null;return Math.floor((Date.now()-ts)/(24*60*60*1000))}
 
-function populateCCSelect(sel,{includeOther=true,selectedValue=null}={}){
+function populateCCSelect(sel,{includeOther=true,selectedValue=null,placeholder=null}={}){
     if(!sel)return;
     sel.innerHTML='';
+    if(placeholder){
+        const p=document.createElement('option');
+        p.value='';p.textContent=placeholder;
+        sel.appendChild(p);
+    }
     getAllCCs().forEach(cc=>{const o=document.createElement('option');o.value=cc;o.textContent=cc;sel.appendChild(o)});
     if(includeOther){const o=document.createElement('option');o.value=OTHER_CC_VALUE;o.textContent='➕ Other (not in list)';sel.appendChild(o)}
-    if(selectedValue){const exists=Array.from(sel.options).some(o=>o.value===selectedValue);if(exists)sel.value=selectedValue}
+    if(selectedValue){
+        const exists=Array.from(sel.options).some(o=>o.value===selectedValue);
+        if(exists)sel.value=selectedValue;
+    }
 }
 function populateAllCCSelects(){
-    ['auth-cc','req-cc','ch-cc'].forEach(id=>populateCCSelect(document.getElementById(id)));
-    populateForgotCCSelect();
+    populateCCSelect(document.getElementById('auth-cc'),{placeholder:'— Select your Community Centre —'});
+    populateCCSelect(document.getElementById('req-cc'));
+    populateCCSelect(document.getElementById('ch-cc'));
 }
 function attachCCOtherToggle(selectId,inputId){
     const sel=document.getElementById(selectId),inp=document.getElementById(inputId);
@@ -1569,7 +1787,7 @@ function attachCCOtherToggle(selectId,inputId){
     sel.dataset.otherToggleAttached='1';
     sel.addEventListener('change',()=>{
         if(sel.value===OTHER_CC_VALUE){inp.classList.remove('hidden');inp.focus()}
-        else inp.classList.add('hidden');
+        else {inp.classList.add('hidden');inp.value=''}
     });
 }
 function getEffectiveCC(selectId,inputId){
@@ -1589,7 +1807,6 @@ async function loadDbSettings(){
         settingsLoaded=true;
     }catch(e){console.warn('[SGTT] settings load failed:',e.message)}
 }
-function getAdminPin(){return(dbSettings&&dbSettings.admin_pin)||'0000'}
 
 /* ============================================================
    LOGIN FLOW
@@ -1605,19 +1822,56 @@ async function onLoggedIn(authUser,eventType){
     try{
         await loadAllProfiles();
         let profile=allProfiles.find(p=>p.id===authUser.id);
+
+        /* If profile is missing, create it now (while authenticated) */
         if(!profile){
             const meta=authUser.user_metadata||{};
-            const{error:insErr}=await supabase.from('profiles').insert({
-                id:authUser.id,email:authUser.email,name:meta.name||'Unknown',
-                age:meta.age||null,community_centre:meta.community_centre||null,email_confirmed:!!authUser.email_confirmed_at
-            });
-            if(insErr)console.warn('[SGTT] Profile insert:',insErr.message);
+            const monthKey=currentMonthKey();
+            const newUserSubscription={
+                status:'active',
+                paid:false,
+                freeTrial:true,
+                freeMonth:monthKey,
+                paidUntil:endOfCurrentMonth(),
+                requestedAt:0,
+                lastPayment:0,
+                autoRenew:false
+            };
+            let isFirstUser = false;
+            try { isFirstUser = allProfiles.filter(p=>p.is_admin).length === 0; } catch(e){}
+
+            const payload={
+                id:authUser.id,
+                email:authUser.email,
+                name:meta.name||'Unknown',
+                age:meta.age||null,
+                community_centre:meta.community_centre||null,
+                email_confirmed:true,
+                pending_approval: !isFirstUser,
+                is_admin: isFirstUser,
+                subscription:newUserSubscription
+            };
+
+            showLoading('Setting up your profile…');
+            const result = await writeProfileRow(payload);
+            if (!result.ok) console.warn('[SGTT] Login-time profile write failed:', result.reason);
+
             await loadAllProfiles();
             profile=allProfiles.find(p=>p.id===authUser.id);
         }
+
+        if(!profile){
+            hideLoading();
+            showOnlyScreen('auth');
+            showToast('⚠️ Could not load or create your profile. Please ask an admin to check the database permissions.',9000);
+            try{ await supabase.auth.signOut(); }catch(e){}
+            return;
+        }
+
         userProfile=profile;
+
         if(allProfiles.filter(p=>p.is_admin).length===0){
-            await supabase.from('profiles').update({is_admin:true}).eq('id',authUser.id);
+            await supabase.from('profiles').update({is_admin:true,pending_approval:false}).eq('id',authUser.id);
             await loadAllProfiles();
             userProfile=allProfiles.find(p=>p.id===authUser.id);
         }
@@ -1625,31 +1879,33 @@ async function onLoggedIn(authUser,eventType){
         if (needsPasswordUpdate) {
             hideLoading();showOnlyScreen('auth');
             pendingRedirectAfterPasswordChange=async()=>{
-                await loadRequests();await loadMatches();await loadChallenges();await loadDbSettings();
-                await loadAllMatchesGlobal();populateAllCCSelects();
-                const adminBtn=document.getElementById('tab-admin-btn');
-                if(userProfile.is_admin)adminBtn?.classList.remove('hidden');else adminBtn?.classList.add('hidden');
-                document.getElementById('user-name').textContent=userProfile.name;
-                document.getElementById('user-cc').textContent=userProfile.community_centre||'';
-                renderHeaderSubscription();
-                showOnlyScreen('main');renderDashboard();switchTab('dashboard');
-                startAutoRefresh();updateNotifDots();
-                setTimeout(()=>{const items=buildNotifications();if(items.length>0)showNotifModal(items)},500);
-                setTimeout(()=>checkInactivity(),1500);
+                await enterMainApp();
             };
             showPasswordModal('required');
             return;
         }
 
+        await enterMainApp();
+
+    }catch(err){
+        hideLoading();console.error('[SGTT] Load error:',err);
+        showToast('Failed to load data: '+err.message,6000);
+    }
+}
+
+async function enterMainApp(){
+    showLoading('Loading your data…');
+    try{
         await loadRequests();await loadMatches();await loadChallenges();await loadDbSettings();
         await loadAllMatchesGlobal();populateAllCCSelects();
 
         const adminBtn=document.getElementById('tab-admin-btn');
         if(userProfile.is_admin)adminBtn?.classList.remove('hidden');else adminBtn?.classList.add('hidden');
 
-        document.getElementById('user-name').textContent=userProfile.name;
+        document.getElementById('user-name').textContent=userProfile.name||'';
         document.getElementById('user-cc').textContent=userProfile.community_centre||'';
         renderHeaderSubscription();
+        updatePlayTabLock();
 
         hideLoading();showOnlyScreen('main');renderDashboard();switchTab('dashboard');
         startAutoRefresh();updateNotifDots();
@@ -1658,14 +1914,13 @@ async function onLoggedIn(authUser,eventType){
         setTimeout(()=>{const items=buildNotifications();if(items.length>0)showNotifModal(items)},500);
         setTimeout(()=>checkInactivity(),1500);
 
-        if(eventType==='SIGNED_IN'&&authUser.email_confirmed_at&&window._arrivedFromEmail){
-            window._arrivedFromEmail=false;
-            showToast('✅ Email validated successfully!',6000);
-            try{history.replaceState(null,'',window.location.pathname)}catch(e){}
+        if(userProfile.is_admin && !adminWelcomeShown){
+            adminWelcomeShown=true;
+            setTimeout(()=>maybeShowAdminWelcome(),900);
         }
     }catch(err){
-        hideLoading();console.error('[SGTT] Load error:',err);
-        showToast('Failed to load data: '+err.message,6000);
+        hideLoading();console.error('[SGTT] enterMainApp error:',err);
+        showToast('Failed to load: '+err.message,6000);
     }
 }
 
@@ -1674,13 +1929,12 @@ async function handleLogout(){
     stopAutoRefresh();
     currentUser=null;userProfile=null;
     allProfiles=[];allRequests=[];allMatches=[];allChallenges=[];allMatchesGlobal=[];
-    adminUnlocked=false;settingsLoaded=false;dbSettings={};editingUserId=null;lastNotifSignature='';
-    verifiedReset=null;
+    settingsLoaded=false;dbSettings={};editingUserId=null;lastNotifSignature='';
+    suppressAutoLogin=false;
+    adminWelcomeShown=false;
     document.getElementById('auth-password').value='';
     document.getElementById('auth-email').value='';
-    document.getElementById('admin-pin-input').value='';
-    document.getElementById('admin-new-pin').value='';
-    clearAllAuthErrors();closeNotifModal();closeInactivityModal();closePasswordModal();
+    clearAllAuthErrors();closeNotifModal();closeInactivityModal();closePasswordModal();closeAdminWelcomeModal();
     setAuthMode('login');showOnlyScreen('auth');showToast('Logged out.',2000);
 }
 
@@ -1696,7 +1950,13 @@ function startAutoRefresh(){
             if(activeTab==='dashboard')renderDashboard();
             if(activeTab==='request')renderPlayTab();
             if(activeTab==='subscribe')renderSubscription();
-            if(activeTab==='admin'&&adminUnlocked){renderAdminPendingReqs();renderAdminUserList();renderCCMgmtList();renderInactivityComments()}
+            if(activeTab==='admin'){
+                renderAdminPendingUsers();
+                renderAdminPendingReqs();
+                renderAdminUserList();
+                renderCCMgmtList();
+                renderInactivityComments();
+            }
         }catch(e){console.warn('[SGTT] auto-refresh failed:',e.message)}
     },REFRESH_INTERVAL_MS);
 }
@@ -1717,7 +1977,9 @@ document.getElementById('manual-refresh')?.addEventListener('click',async()=>{
         if(activeTab==='dashboard')renderDashboard();
         if(activeTab==='request')renderPlayTab();
         if(activeTab==='subscribe')renderSubscription();
-        if(activeTab==='admin'&&adminUnlocked){renderAdminPendingReqs();renderAdminUserList();renderCCMgmtList();renderInactivityComments()}
+        if(activeTab==='admin'){
+            renderAdminPendingUsers();renderAdminPendingReqs();renderAdminUserList();renderCCMgmtList();renderInactivityComments();
+        }
         hideLoading();showToast('Data refreshed.');
     }catch(e){hideLoading();showToast('Refresh failed: '+e.message)}
 });
@@ -1732,9 +1994,10 @@ async function refreshAll(){
     await loadDbSettings();await loadAllMatchesGlobal();
     const me=allProfiles.find(p=>p.id===currentUser.id);if(me)userProfile=me;
     if(userProfile){
-        document.getElementById('user-name').textContent=userProfile.name;
+        document.getElementById('user-name').textContent=userProfile.name||'';
         document.getElementById('user-cc').textContent=userProfile.community_centre||'';
         renderHeaderSubscription();
+        updatePlayTabLock();
     }
 }
 
@@ -1742,10 +2005,14 @@ function renderHeaderSubscription(){
     const el=document.getElementById('header-sub-badge');if(!el)return;
     if(!userProfile){el.className='header-sub-badge inactive';el.innerHTML='<span class="hsb-icon">💳</span><span class="hsb-text">—</span>';return}
     let icon='💳',text='Inactive',cls='inactive';
-    if(isPromotionActive()){icon='🎉';text='Free';cls='promo'}
+    if(!isAccountEnabled(userProfile)){icon='🔒';text='Locked';cls='pending'}
+    else if(isPromotionActive()){icon='🎉';text='Free';cls='promo'}
     else{
         const s=userProfile.subscription||{};
-        if(s.status==='active'&&s.paidUntil>Date.now()){icon='✅';text='Active';cls='active'}
+        if(s.status==='active'&&s.paidUntil>Date.now()){
+            if(s.freeTrial&&!s.paid){icon='🎁';text='Free 1st mo';cls='promo'}
+            else{icon='✅';text='Active';cls='active'}
+        }
         else if(s.status==='pending'){icon='⏳';text='Pending';cls='pending'}
         else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now()){icon='⏰';text='Expired';cls='inactive'}
         else{icon='❌';text='Inactive';cls='inactive'}
@@ -1753,6 +2020,17 @@ function renderHeaderSubscription(){
     el.className='header-sub-badge '+cls;
     el.innerHTML=`<span class="hsb-icon">${icon}</span><span class="hsb-text">${text}</span>`;
     el.title='Subscription: '+text+' — tap to manage';
+}
+
+function updatePlayTabLock(){
+    const playBtn=document.getElementById('tab-play-btn');if(!playBtn)return;
+    if(userProfile && !isAccountEnabled(userProfile)){
+        playBtn.classList.add('tab-disabled');
+        playBtn.title='Account pending admin activation';
+    }else{
+        playBtn.classList.remove('tab-disabled');
+        playBtn.title='';
+    }
 }
 
 function computePlayerOfMonth(){const start=startOfCurrentMonth(),winCounts={};for(const m of allMatchesGlobal){const ts=new Date(m.played_at).getTime();if(ts<start)continue;if(!m.winner)continue;winCounts[m.winner]=(winCounts[m.winner]||0)+1}let bestId=null,bestWins=0;for(const[id,w]of Object.entries(winCounts)){if(w>bestWins){bestWins=w;bestId=id}}if(!bestId)return null;const u=profileOf(bestId);if(!u)return null;return{user:u,wins:bestWins}}
@@ -1765,6 +2043,10 @@ function renderDashboard(){
     if(!userProfile)return;
     const promoBanner=document.getElementById('promo-banner');
     if(isPromotionActive()){const p=getPromotion();document.getElementById('promo-title').textContent='🎉 Free Subscription Month!';document.getElementById('promo-message').textContent=p.message||'All matches are free this month. Enjoy!';promoBanner.classList.remove('hidden')}else promoBanner.classList.add('hidden');
+
+    const lockedCard=document.getElementById('dashboard-account-locked');
+    if(!isAccountEnabled(userProfile))lockedCard.classList.remove('hidden');else lockedCard.classList.add('hidden');
+
     const wins=userProfile.wins||0,losses=userProfile.losses||0,total=wins+losses;
     const winRate=total>0?Math.round((wins/total)*100):0;
     document.getElementById('stat-points').textContent=userProfile.points||0;
@@ -1840,12 +2122,12 @@ function renderTopDoubles(){
     }).join('');
 }
 
-function paidMembers(excludeIds=[]){return allProfiles.filter(u=>u.id!==(userProfile&&userProfile.id)).filter(u=>!excludeIds.includes(u.id)).filter(u=>isPaidMember(u)).sort((a,b)=>a.name.localeCompare(b.name))}
+function paidMembers(excludeIds=[]){return allProfiles.filter(u=>u.id!==(userProfile&&userProfile.id)).filter(u=>!excludeIds.includes(u.id)).filter(u=>isPaidMember(u) && isAccountEnabled(u)).sort((a,b)=>a.name.localeCompare(b.name))}
 function fillSelect(sel,users,{includeEmpty=false,emptyLabel='— Select —'}={}){
     if(!sel)return;
     const prev=sel.value;sel.innerHTML='';
     if(includeEmpty){const o=document.createElement('option');o.value='';o.textContent=emptyLabel;sel.appendChild(o)}
-    if(users.length===0){const o=document.createElement('option');o.value='';o.textContent='(no paid members available)';o.disabled=true;o.selected=true;sel.appendChild(o);return}
+    if(users.length===0){const o=document.createElement('option');o.value='';o.textContent='(no active players available)';o.disabled=true;o.selected=true;sel.appendChild(o);return}
     users.forEach(u=>{const o=document.createElement('option');o.value=u.id;o.textContent=`${u.name}  ·  ${u.community_centre||''}`;sel.appendChild(o)});
     if(prev&&users.some(u=>u.id===prev))sel.value=prev;
 }
@@ -1882,6 +2164,7 @@ document.getElementById('req-opponent2').addEventListener('change',refreshReques
 
 document.getElementById('ch-submit').addEventListener('click',async()=>{
     if(!userProfile)return;
+    if(!isAccountEnabled(userProfile)){showToast('Your account is pending admin activation.');return}
     if(!isSubscriptionActive(userProfile)){showToast('Your subscription is not active.');return}
     const type=document.getElementById('ch-type').value;
     const isDoubles=type==='doubles';
@@ -1907,6 +2190,7 @@ document.getElementById('ch-submit').addEventListener('click',async()=>{
 
 document.getElementById('req-submit').addEventListener('click',async()=>{
     if(!userProfile)return;
+    if(!isAccountEnabled(userProfile)){showToast('Your account is pending admin activation.');return}
     if(!isSubscriptionActive(userProfile)){showToast('Your subscription is not active.');return}
     const type=document.getElementById('req-type').value;
     const isDoubles=type==='doubles';
@@ -1937,6 +2221,17 @@ document.getElementById('req-submit').addEventListener('click',async()=>{
 
 function renderPlayTab(){
     if(!userProfile)return;
+    const lockedCard=document.getElementById('play-locked-card');
+    const normalContent=document.getElementById('play-normal-content');
+
+    if(!isAccountEnabled(userProfile)){
+        lockedCard.classList.remove('hidden');
+        normalContent.classList.add('hidden');
+        return;
+    }
+    lockedCard.classList.add('hidden');
+    normalContent.classList.remove('hidden');
+
     const warn=document.getElementById('req-sub-warning');
     if(isSubscriptionActive(userProfile))warn.classList.add('hidden');else warn.classList.remove('hidden');
     refreshChallengeDropdowns();refreshRequestDropdowns();
@@ -2087,28 +2382,58 @@ async function awardPoints(winnerTeam,loserTeam){
 function renderSubscription(){
     if(!userProfile)return;
     const promoCard=document.getElementById('sub-request-card'),statusEl=document.getElementById('sub-current-status');
+    const s=userProfile.subscription||{};
+
+    if(!isAccountEnabled(userProfile)){
+        statusEl.innerHTML=`<div class="sub-status" style="border-color:var(--warning);background:rgba(245,158,11,.08)"><div class="dot dot-yellow"></div><div style="flex:1;min-width:0"><div style="font-weight:700;color:var(--warning)">🔒 Account Pending Activation</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">An admin must activate your account before you can play.</div></div></div>`;
+        promoCard.classList.add('hidden');
+        return;
+    }
+
     if(isPromotionActive()){
         const p=getPromotion();
         statusEl.innerHTML=`<div class="sub-status" style="border-color:var(--accent);background:rgba(34,197,94,.08)"><div class="dot dot-green"></div><div style="flex:1;min-width:0"><div style="font-weight:700;color:var(--accent)">🎉 Free Month — No payment needed!</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${escapeHtml(p.message||'All matches are free this month. Enjoy!')}</div></div></div>`;
-        promoCard.classList.add('hidden');return;
+        promoCard.classList.add('hidden');
+        return;
     }
     promoCard.classList.remove('hidden');
-    const s=userProfile.subscription||{};
+
     const label=subStatusLabel(userProfile);
     const cls=label.cls==='badge-green'?'dot-green':label.cls==='badge-yellow'?'dot-yellow':'dot-red';
+    const activeNow=s.status==='active'&&s.paidUntil>Date.now();
     let detail='',extra='';
-    if(s.status==='active'&&s.paidUntil>Date.now()){const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));detail=`Active until ${new Date(s.paidUntil).toLocaleDateString()} (end of month)`;extra=`${days} day${days===1?'':'s'} remaining this month`}
-    else if(s.status==='pending'){detail='Waiting for admin to verify $2 payment.';extra=`Requested ${new Date(s.requestedAt).toLocaleDateString()}`}
-    else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now())detail='Subscription expired. Renew for this month to continue.';
-    else detail='No active subscription for this month. Request activation below.';
+
+    if(activeNow&&s.freeTrial&&!s.paid){
+        const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));
+        detail=`🎁 Your first month is FREE — active until ${new Date(s.paidUntil).toLocaleDateString()}`;
+        extra=`${days} day${days===1?'':'s'} left • From ${nextMonthLabel()}, $2/month applies.`;
+    }
+    else if(activeNow){
+        const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));
+        detail=`Active until ${new Date(s.paidUntil).toLocaleDateString()} (end of month)`;
+        extra=`${days} day${days===1?'':'s'} remaining this month`;
+    }
+    else if(s.status==='pending'){
+        detail='Waiting for admin to verify $2 payment.';
+        extra=`Requested ${new Date(s.requestedAt).toLocaleDateString()}`;
+    }
+    else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now()){
+        detail='Subscription expired. Renew for this month to continue.';
+    }
+    else{
+        detail='No active subscription for this month. Request activation below.';
+    }
+
     statusEl.innerHTML=`<div class="sub-status"><div class="dot ${cls}"></div><div style="flex:1;min-width:0"><div style="font-weight:600">${label.text}</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${detail}</div>${extra?`<div style="font-size:.74rem;color:var(--text-dim);margin-top:2px">${extra}</div>`:''}</div></div><div style="font-size:.78rem;color:var(--text-muted)">Paid: <strong>${s.paid?'Yes':'No'}</strong> • Auto-renew: <strong>${s.autoRenew?'On':'Off'}</strong></div>`;
+
     const reqBtn=document.getElementById('sub-request-btn');
     if(s.status==='pending'){reqBtn.disabled=true;reqBtn.textContent='⏳ Request Pending Approval'}
-    else if(s.status==='active'&&s.paidUntil>Date.now()){reqBtn.disabled=true;reqBtn.textContent='✅ Active This Month'}
+    else if(activeNow){reqBtn.disabled=true;reqBtn.textContent=(s.freeTrial&&!s.paid)?'🎁 Free This Month':'✅ Active This Month'}
     else{reqBtn.disabled=false;reqBtn.textContent='Request Subscription Activation ($2)'}
 }
 document.getElementById('sub-request-btn').addEventListener('click',async()=>{
     if(!userProfile)return;
+    if(!isAccountEnabled(userProfile)){showToast('Your account is pending admin activation.');return}
     if(isPromotionActive()){showToast('🎉 You already have free play this month!');return}
     const s=userProfile.subscription||{};
     if(s.status==='pending'){showToast('Request already pending.');return}
@@ -2121,14 +2446,190 @@ document.getElementById('sub-request-btn').addEventListener('click',async()=>{
 async function renderAdminPanel(){
     if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');switchTab('dashboard');return}
     if(!settingsLoaded)await loadDbSettings();
-    const locked=document.getElementById('admin-locked'),unlocked=document.getElementById('admin-unlocked'),panel=document.getElementById('admin-panel');
-    if(adminUnlocked){
-        locked.classList.add('hidden');unlocked.classList.remove('hidden');panel.classList.remove('hidden');
-        renderAdminPendingReqs();renderAdminUserList();renderPromotionUI();renderCCMgmtList();renderInactivityComments();
-    }else{
-        locked.classList.remove('hidden');unlocked.classList.add('hidden');panel.classList.add('hidden');
-    }
+    renderAdminPendingUsers();
+    renderAdminPendingReqs();
+    renderAdminUserList();
+    renderPromotionUI();
+    renderCCMgmtList();
+    renderInactivityComments();
 }
+
+function renderAdminPendingUsers(){
+    const el=document.getElementById('admin-pending-users');if(!el)return;
+    const pending=allProfiles.filter(u=>u.pending_approval===true).sort((a,b)=>{
+        const ta=a.created_at?new Date(a.created_at).getTime():0;
+        const tb=b.created_at?new Date(b.created_at).getTime():0;
+        return tb-ta;
+    });
+    if(pending.length===0){el.innerHTML='<p style="color:var(--text-muted)">No pending users. 🎉</p>';return}
+    el.innerHTML=pending.map(u=>{
+        const created=u.created_at?new Date(u.created_at).toLocaleString():'—';
+        return `<div class="user-card pending-new" id="pending-row-${u.id}">
+            <div class="user-card-head">
+                <div class="user-name">${escapeHtml(u.name||'Unknown')} <span class="badge badge-yellow">NEW</span></div>
+            </div>
+            <div class="user-fields">
+                <div class="user-field"><span class="uf-label">Community Centre</span><span class="uf-value">${escapeHtml(u.community_centre||'—')}</span></div>
+                <div class="user-field"><span class="uf-label">Age</span><span class="uf-value">${u.age||'—'}</span></div>
+                <div class="user-field full"><span class="uf-label">Registered</span><span class="uf-value muted">${created}</span></div>
+            </div>
+            <div class="free-month-banner" style="margin-top:10px;margin-bottom:10px">
+                <span class="fm-icon">🎁</span>
+                <div class="fm-text">
+                    <strong>Free 1st month</strong>
+                    <small>Activating will start their free trial for the rest of this calendar month.</small>
+                </div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button class="small" style="background:var(--success);color:#0a1f38" onclick="approveNewUser('${u.id}')">✅ Activate</button>
+                <button class="small danger" onclick="rejectNewUser('${u.id}')">🗑️ Reject</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+window.approveNewUser=async function(id){
+    if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
+    const u=allProfiles.find(x=>x.id===id);
+    if(!u){showToast('User not found.');return}
+    const newSub={
+        ...(u.subscription||{}),
+        status:'active',
+        paid:false,
+        freeTrial:true,
+        freeMonth:currentMonthKey(),
+        paidUntil:endOfCurrentMonth(),
+        requestedAt:0,
+        lastPayment:0,
+        autoRenew:false
+    };
+    try{
+        showLoading('Activating user…');
+        const{error}=await supabase.from('profiles').update({
+            pending_approval:false,
+            subscription:newSub
+        }).eq('id',id);
+        if(error)throw error;
+        await refreshAll();
+        hideLoading();
+        showToast(`✅ ${u.name||'User'} activated! They can now play.`,5000);
+        renderAdminPendingUsers();renderAdminUserList();
+    }catch(err){
+        hideLoading();console.error(err);
+        let msg=err.message||'Failed to activate.';
+        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked this update. Ensure your admin row has is_admin=true.';
+        showToast(msg,7000);
+    }
+};
+
+window.rejectNewUser=async function(id){
+    if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
+    const u=allProfiles.find(x=>x.id===id);
+    if(!u){showToast('User not found.');return}
+    const ok=await showConfirm({
+        title:'Reject User?',
+        message:`Reject and remove "${u.name||'this user'}"? They can re-register later.`,
+        yesLabel:'Yes, Reject',
+        danger:true,
+        icon:'🗑️'
+    });
+    if(!ok)return;
+    try{
+        showLoading('Rejecting…');
+        try{await supabase.from('match_requests').delete().or(`from_user.eq.${id},to_user.eq.${id},partner.eq.${id},opponent2.eq.${id}`)}catch(e){}
+        try{await supabase.from('challenges').delete().or(`challenger.eq.${id},opponent.eq.${id},challenger_partner.eq.${id},opponent_partner.eq.${id}`)}catch(e){}
+        try{await supabase.from('matches').delete().or(`player_a.eq.${id},player_b.eq.${id},partner_a.eq.${id},partner_b.eq.${id}`)}catch(e){}
+        const{error}=await supabase.from('profiles').delete().eq('id',id);
+        if(error)throw error;
+        allProfiles=allProfiles.filter(x=>x.id!==id);
+        await refreshAll();
+        hideLoading();
+        showToast(`🗑️ ${u.name||'User'} rejected and removed.`,5000);
+        renderAdminPendingUsers();renderAdminUserList();
+    }catch(err){
+        hideLoading();console.error(err);
+        let msg=err.message||'Failed to reject.';
+        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete. Check your admin policies.';
+        showToast(msg,7000);
+    }
+};
+
+function maybeShowAdminWelcome(){
+    const pending=allProfiles.filter(u=>u.pending_approval===true);
+    if(pending.length===0)return;
+    const modal=document.getElementById('admin-welcome-modal');
+    const body=document.getElementById('admin-welcome-body');
+    const footer=document.getElementById('admin-welcome-footer');
+    document.getElementById('admin-welcome-title').textContent=`Welcome back! ${pending.length} inactive user${pending.length===1?'':'s'}`;
+    body.innerHTML=`
+        <p style="font-size:.9rem;color:#cbd5e1;line-height:1.6;margin-bottom:14px">
+            The following ${pending.length===1?'user is':'users are'} waiting for activation. Would you like to activate them all now?
+        </p>
+        <div style="max-height:280px;overflow-y:auto">
+            ${pending.map(u=>`<div style="background:var(--bg-dark);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:10px;padding:10px 12px;margin-bottom:8px">
+                <div style="font-weight:700;font-size:.9rem">${escapeHtml(u.name||'Unknown')}</div>
+                <div style="font-size:.72rem;color:var(--text-muted);margin-top:2px">${escapeHtml(u.community_centre||'—')} • Age ${u.age||'—'}</div>
+            </div>`).join('')}
+        </div>
+    `;
+    footer.innerHTML=`
+        <button id="admin-welcome-enable-all" style="margin-bottom:8px">✅ Activate All (${pending.length})</button>
+        <button id="admin-welcome-review" class="secondary" style="margin-bottom:8px">👀 Review Individually</button>
+        <button id="admin-welcome-later" class="secondary" style="margin-bottom:0">Later</button>
+    `;
+    modal.classList.remove('hidden');
+
+    document.getElementById('admin-welcome-enable-all').addEventListener('click',async()=>{
+        await enableAllPendingUsers();
+        closeAdminWelcomeModal();
+    });
+    document.getElementById('admin-welcome-review').addEventListener('click',()=>{
+        closeAdminWelcomeModal();
+        switchTab('admin');
+        setTimeout(()=>document.getElementById('pending-users-card')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
+    });
+    document.getElementById('admin-welcome-later').addEventListener('click',closeAdminWelcomeModal);
+}
+function closeAdminWelcomeModal(){document.getElementById('admin-welcome-modal')?.classList.add('hidden')}
+document.getElementById('admin-welcome-x').addEventListener('click',closeAdminWelcomeModal);
+document.getElementById('admin-welcome-modal').addEventListener('click',(e)=>{if(e.target.id==='admin-welcome-modal')closeAdminWelcomeModal()});
+
+async function enableAllPendingUsers(){
+    const pending=allProfiles.filter(u=>u.pending_approval===true);
+    if(pending.length===0){showToast('No pending users.');return}
+    showLoading(`Activating ${pending.length} user${pending.length===1?'':'s'}…`);
+    let success=0,failed=0;
+    for(const u of pending){
+        try{
+            const newSub={
+                ...(u.subscription||{}),
+                status:'active',
+                paid:false,
+                freeTrial:true,
+                freeMonth:currentMonthKey(),
+                paidUntil:endOfCurrentMonth(),
+                requestedAt:0,
+                lastPayment:0,
+                autoRenew:false
+            };
+            const{error}=await supabase.from('profiles').update({
+                pending_approval:false,
+                subscription:newSub
+            }).eq('id',u.id);
+            if(error)throw error;
+            success++;
+        }catch(e){
+            console.warn('[SGTT] Failed to activate',u.id,e.message);
+            failed++;
+        }
+    }
+    await refreshAll();
+    hideLoading();
+    if(failed===0)showToast(`✅ Activated all ${success} user${success===1?'':'s'}.`,5000);
+    else showToast(`Activated ${success}, ${failed} failed.`,6000);
+    renderAdminPendingUsers();renderAdminUserList();
+}
+
 function renderPromotionUI(){
     const p=getPromotion();
     document.getElementById('promo-enabled').checked=p.enabled;
@@ -2138,7 +2639,7 @@ function renderPromotionUI(){
 }
 document.getElementById('promo-enabled').addEventListener('change',(e)=>{document.getElementById('promo-toggle-label').textContent=e.target.checked?'Enabled':'Disabled'});
 document.getElementById('promo-save').addEventListener('click',async()=>{
-    if(!userProfile.is_admin||!adminUnlocked)return;
+    if(!userProfile||!userProfile.is_admin)return;
     const enabled=document.getElementById('promo-enabled').checked;
     const month=document.getElementById('promo-month').value;
     const message=document.getElementById('promo-message').value.trim();
@@ -2147,7 +2648,7 @@ document.getElementById('promo-save').addEventListener('click',async()=>{
     catch(err){hideLoading();showToast('Failed: '+err.message)}
 });
 document.getElementById('promo-clear').addEventListener('click',async()=>{
-    if(!userProfile.is_admin||!adminUnlocked)return;
+    if(!userProfile||!userProfile.is_admin)return;
     try{showLoading('Clearing promotion…');await savePromotion({enabled:false,month:'',message:''});hideLoading();showToast('Promotion cleared.');renderPromotionUI()}
     catch(err){hideLoading();showToast('Failed: '+err.message)}
 });
@@ -2159,65 +2660,59 @@ function renderCCMgmtList(){
     el.innerHTML=all.map(item=>{
         const tag=item.isBase?'<span class="cc-mgmt-tag base">BASE</span>':'<span class="cc-mgmt-tag custom">CUSTOM</span>';
         const hiddenBadge=item.isHidden?'<span class="badge badge-red" style="font-size:.55rem">Hidden</span>':'';
-        const btn=item.isHidden?`<button class="tiny" style="background:var(--success);color:#0a1f38" onclick="restoreCCUI('${escapeHtml(item.name).replace(/'/g,"\\'")}')">Restore</button>`:`<button class="tiny danger" onclick="deleteCCUI('${escapeHtml(item.name).replace(/'/g,"\\'")}')">🗑️</button>`;
+        const safeName=escapeHtml(item.name).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+        const btn=item.isHidden?`<button class="tiny" style="background:var(--success);color:#0a1f38" onclick="restoreCCUI('${safeName}')">Restore</button>`:`<button class="tiny danger" onclick="deleteCCUI('${safeName}')">🗑️</button>`;
         return `<div class="cc-mgmt-row"><span class="cc-mgmt-name">${escapeHtml(item.name)}</span>${tag}${hiddenBadge}${btn}</div>`;
     }).join('');
 }
 window.deleteCCUI=async function(cc){
-    if(!userProfile.is_admin||!adminUnlocked)return;
-    if(!confirm(`Remove "${cc}" from the dropdown?`))return;
+    if(!userProfile||!userProfile.is_admin)return;
+    const ok=await showConfirm({
+        title:'Remove Community Centre?',
+        message:`Remove "${cc}" from the dropdown list?`,
+        yesLabel:'Yes, Remove',
+        danger:true,
+        icon:'🗑️'
+    });
+    if(!ok)return;
     try{showLoading('Removing…');const r=await deleteCC(cc);hideLoading();showToast(r.action==='hidden'?`"${cc}" hidden from dropdowns.`:`"${cc}" deleted.`);renderCCMgmtList()}
     catch(err){hideLoading();showToast('Failed: '+err.message)}
 };
 window.restoreCCUI=async function(cc){
-    if(!userProfile.is_admin||!adminUnlocked)return;
+    if(!userProfile||!userProfile.is_admin)return;
     try{showLoading('Restoring…');await restoreCC(cc);hideLoading();showToast(`"${cc}" restored.`);renderCCMgmtList()}
     catch(err){hideLoading();showToast('Failed: '+err.message)}
 };
 document.getElementById('add-cc-btn').addEventListener('click',async()=>{
-    if(!userProfile.is_admin||!adminUnlocked)return;
+    if(!userProfile||!userProfile.is_admin)return;
     const input=document.getElementById('new-cc-input');
     const cc=input.value.trim();
     if(!cc){showToast('Please enter a community centre name.');return}
     try{showLoading('Adding…');const r=await addCustomCC(cc);hideLoading();input.value='';showToast(r.action==='restored'?`"${cc}" restored.`:'Community centre added.');renderCCMgmtList()}
     catch(err){hideLoading();showToast(err.message)}
 });
-document.getElementById('admin-pin-submit').addEventListener('click',async()=>{
-    const pin=document.getElementById('admin-pin-input').value.trim();
-    if(!pin){showToast('Enter PIN.');return}
-    if(!settingsLoaded)await loadDbSettings();
-    if(pin===getAdminPin()){adminUnlocked=true;document.getElementById('admin-pin-input').value='';showToast('Admin panel unlocked.');renderAdminPanel()}
-    else showToast('Incorrect PIN.');
-});
-document.getElementById('admin-lock-btn').addEventListener('click',()=>{adminUnlocked=false;showToast('Admin panel locked.');renderAdminPanel()});
-document.getElementById('admin-change-pin').addEventListener('click',async()=>{
-    if(!userProfile.is_admin||!adminUnlocked)return;
-    const np=document.getElementById('admin-new-pin').value.trim();
-    if(!/^\d{4,8}$/.test(np)){showToast('PIN must be 4–8 digits.');return}
-    try{showLoading('Updating PIN…');await upsertSetting('admin_pin',np);hideLoading();document.getElementById('admin-new-pin').value='';showToast('Admin PIN updated. New PIN: '+np)}
-    catch(err){hideLoading();showToast('Failed: '+err.message)}
-});
+
 function renderAdminPendingReqs(){
     const el=document.getElementById('admin-pending-reqs');
-    const pending=allProfiles.filter(u=>u.subscription&&u.subscription.status==='pending');
+    const pending=allProfiles.filter(u=>u.subscription&&u.subscription.status==='pending' && u.pending_approval!==true);
     if(pending.length===0){el.innerHTML='<p style="color:var(--text-muted)">No pending requests.</p>';return}
-    el.innerHTML=pending.map(u=>`<div style="background:var(--bg-dark);border-radius:12px;border:1px solid var(--border);padding:12px;margin-bottom:10px"><div style="font-weight:700;font-size:.9rem">${escapeHtml(u.name)} ${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}</div><div style="font-size:.74rem;color:var(--text-muted);margin-top:3px;word-break:break-word">${escapeHtml(u.email)} • ${escapeHtml(u.community_centre||'')}</div><div style="font-size:.74rem;color:var(--text-muted);margin-top:3px">Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><button class="tiny" style="background:var(--success);color:#0a1f38" onclick="adminApproveSub('${u.id}')">Approve ($2 received)</button><button class="tiny danger" onclick="adminRejectSub('${u.id}')">Reject</button></div></div>`).join('');
+    el.innerHTML=pending.map(u=>`<div style="background:var(--bg-dark);border-radius:12px;border:1px solid var(--border);padding:12px;margin-bottom:10px"><div style="font-weight:700;font-size:.9rem">${escapeHtml(u.name)} ${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}</div><div style="font-size:.74rem;color:var(--text-muted);margin-top:3px;word-break:break-word">${escapeHtml(u.community_centre||'')}</div><div style="font-size:.74rem;color:var(--text-muted);margin-top:3px">Requested: ${new Date(u.subscription.requestedAt).toLocaleString()}</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><button class="tiny" style="background:var(--success);color:#0a1f38" onclick="adminApproveSub('${u.id}')">Approve ($2 received)</button><button class="tiny danger" onclick="adminRejectSub('${u.id}')">Reject</button></div></div>`).join('');
 }
 async function adminApproveSub(id){
-    if(!userProfile.is_admin||!adminUnlocked){showToast('Admin access required.');return}
+    if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
     const u=allProfiles.find(x=>x.id===id);
     if(!u||!u.subscription){showToast('User or subscription not found.');return}
-    const newSub={...u.subscription,status:'active',paid:true,paidUntil:endOfCurrentMonth(),lastPayment:Date.now()};
+    const newSub={...u.subscription,status:'active',paid:true,freeTrial:false,paidUntil:endOfCurrentMonth(),lastPayment:Date.now()};
     try{
         showLoading('Approving subscription…');
         const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);
         if(error)throw error;
         await refreshAll();hideLoading();showToast(`✅ Subscription approved for ${u.name}.`);
         renderAdminPendingReqs();renderAdminUserList();
-    }catch(err){hideLoading();console.error(err);let msg=err.message||'Update failed.';if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked this update. Run the admin SQL.';showToast(msg,7000)}
+    }catch(err){hideLoading();console.error(err);let msg=err.message||'Update failed.';if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked this update.';showToast(msg,7000)}
 }
 async function adminRejectSub(id){
-    if(!userProfile.is_admin||!adminUnlocked){showToast('Admin access required.');return}
+    if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
     const u=allProfiles.find(x=>x.id===id);
     if(!u||!u.subscription)return;
     const newSub={...u.subscription,status:'inactive',requestedAt:0};
@@ -2240,11 +2735,18 @@ function renderInactivityComments(){
     const withReasons=allProfiles.filter(u=>u.inactivity_reason&&u.inactivity_reason.trim());
     if(withReasons.length===0){el.innerHTML='<p style="color:var(--text-muted)">No comments yet.</p>';return}
     withReasons.sort((a,b)=>{const ta=a.inactivity_reason_at?new Date(a.inactivity_reason_at).getTime():0;const tb=b.inactivity_reason_at?new Date(b.inactivity_reason_at).getTime():0;return tb-ta});
-    el.innerHTML=withReasons.map(u=>`<div style="background:var(--bg-dark);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:10px;padding:12px;margin-bottom:10px"><div style="font-weight:700;font-size:.88rem">${escapeHtml(u.name)}</div><div style="font-size:.7rem;color:var(--text-muted);margin-top:2px">${escapeHtml(u.email)} • ${escapeHtml(u.community_centre||'')}</div><div style="font-size:.7rem;color:var(--text-dim);margin-top:4px">Submitted: ${u.inactivity_reason_at?new Date(u.inactivity_reason_at).toLocaleString():'—'}</div><div style="font-size:.82rem;color:#fde68a;margin-top:8px;line-height:1.5;word-break:break-word">"${escapeHtml(u.inactivity_reason)}"</div><div style="margin-top:8px"><button class="tiny secondary" onclick="clearInactivityReason('${u.id}')">Clear</button></div></div>`).join('');
+    el.innerHTML=withReasons.map(u=>`<div style="background:var(--bg-dark);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:10px;padding:12px;margin-bottom:10px"><div style="font-weight:700;font-size:.88rem">${escapeHtml(u.name)}</div><div style="font-size:.7rem;color:var(--text-muted);margin-top:2px">${escapeHtml(u.community_centre||'')}</div><div style="font-size:.7rem;color:var(--text-dim);margin-top:4px">Submitted: ${u.inactivity_reason_at?new Date(u.inactivity_reason_at).toLocaleString():'—'}</div><div style="font-size:.82rem;color:#fde68a;margin-top:8px;line-height:1.5;word-break:break-word">"${escapeHtml(u.inactivity_reason)}"</div><div style="margin-top:8px"><button class="tiny secondary" onclick="clearInactivityReason('${u.id}')">Clear</button></div></div>`).join('');
 }
 window.clearInactivityReason=async function(userId){
-    if(!userProfile.is_admin||!adminUnlocked)return;
-    if(!confirm('Clear this comment?'))return;
+    if(!userProfile||!userProfile.is_admin)return;
+    const ok=await showConfirm({
+        title:'Clear Comment?',
+        message:'Remove this inactivity reason permanently?',
+        yesLabel:'Yes, Clear',
+        danger:true,
+        icon:'🗑️'
+    });
+    if(!ok)return;
     try{const{error}=await supabase.from('profiles').update({inactivity_reason:null,inactivity_reason_at:null}).eq('id',userId);if(error)throw error;await refreshAll();showToast('Comment cleared.');renderInactivityComments()}
     catch(err){showToast('Failed: '+err.message)}
 };
@@ -2271,18 +2773,60 @@ function renderAdminUserList(){
         const lastPlayed=lastPlayedFor(u.id);
         const daysInactive=daysSince(lastPlayed);
         const isInactive=daysInactive===null||daysInactive>=INACTIVITY_THRESHOLD_DAYS;
+        const isPending=u.pending_approval===true;
         const paidLabel=subscriptionPaidLabel(u);
-        const paidClass=paidLabel==='Paid'||paidLabel==='Free (promo)'?'badge-green':paidLabel==='Pending'?'badge-yellow':'badge-red';
+        const paidClass=(paidLabel==='Paid'||paidLabel==='Free (promo)'||paidLabel==='Free 1st month')?'badge-green':paidLabel==='Pending'?'badge-yellow':'badge-red';
         const reasonBox=u.inactivity_reason?`<div class="reason-box"><span class="reason-title">💬 Reason for inactivity</span><div class="reason-text">${escapeHtml(u.inactivity_reason)}</div></div>`:'';
         const editForm=isEditing?`<div class="user-edit-form"><div class="edit-row"><div><label>Name</label><input type="text" id="edit-name-${u.id}" value="${escapeHtml(u.name)}"></div><div><label>Age</label><input type="number" id="edit-age-${u.id}" value="${u.age||''}" min="8" max="120"></div></div><label>Community Centre</label><select id="edit-cc-${u.id}"></select><div class="edit-actions"><button class="small" style="background:var(--success);color:#0a1f38" onclick="saveUserEdit('${u.id}')">💾 Save</button><button class="small secondary" onclick="cancelUserEdit()">Cancel</button></div></div>`:'';
-        return `<div class="user-card ${isEditing?'editing':''} ${isInactive&&!isSelf?'inactive':''}" id="row-${u.id}"><div class="user-card-head"><div class="user-name">${escapeHtml(u.name)}${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}${isSelf?'<span class="badge badge-blue">YOU</span>':''}${isInactive&&!isSelf?'<span class="badge badge-yellow">INACTIVE</span>':''}</div><div class="user-actions"><button class="tiny secondary" onclick="startUserEdit('${u.id}')" title="Edit">✏️</button>${!isSelf?`<button class="tiny danger" onclick="adminDeleteUser('${u.id}')" title="Delete">🗑️</button>`:''}</div></div><div class="user-email">${escapeHtml(u.email)}</div><div class="user-fields"><div class="user-field"><span class="uf-label">Community Centre</span><span class="uf-value">${escapeHtml(u.community_centre||'—')}</span></div><div class="user-field"><span class="uf-label">Age</span><span class="uf-value">${u.age||'—'}</span></div><div class="user-field"><span class="uf-label">Subscription</span><span class="badge ${paidClass}">${paidLabel}</span></div><div class="user-field"><span class="uf-label">Status</span><span class="badge ${label.cls}">${label.text}</span></div><div class="user-field"><span class="uf-label">Created</span><span class="uf-value muted">${formatDate(u.created_at)}</span></div><div class="user-field"><span class="uf-label">Last Played</span><span class="uf-value ${!lastPlayed?'muted':''}">${timeAgo(lastPlayed)}</span></div><div class="user-field full"><span class="uf-label">Points • Record</span><span class="uf-value">${u.points||0} pts • W: ${u.wins||0} / L: ${u.losses||0}</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><button class="tiny ${activeNow?'warn':''}" style="${!activeNow?'background:var(--success);color:#0a1f38':''}" onclick="adminToggleSub('${u.id}')">${activeNow?'Disable sub':'Enable this month'}</button><button class="tiny secondary" onclick="adminTogglePaid('${u.id}')">${s.paid?'Mark Unpaid':'Mark Paid'}</button><button class="tiny secondary" onclick="adminToggleAuto('${u.id}')">Auto-renew ${s.autoRenew?'✓':'✗'}</button>${!isSelf?(u.is_admin?`<button class="tiny danger" onclick="adminToggleAdmin('${u.id}')">Remove Admin</button>`:`<button class="tiny" style="background:#1e40af;color:#dbeafe" onclick="adminToggleAdmin('${u.id}')">Make Admin</button>`):''}</div>${reasonBox}${editForm}</div>`;
+        return `<div class="user-card ${isEditing?'editing':''} ${isPending?'pending-new':''} ${isInactive&&!isSelf&&!isPending?'inactive':''}" id="row-${u.id}">
+            <div class="user-card-head">
+                <div class="user-name">${escapeHtml(u.name)}${u.is_admin?'<span class="badge badge-admin">ADMIN</span>':''}${isSelf?'<span class="badge badge-blue">YOU</span>':''}${isPending?'<span class="badge badge-yellow">PENDING</span>':''}${isInactive&&!isSelf&&!isPending?'<span class="badge badge-yellow">INACTIVE</span>':''}</div>
+                <div class="user-actions">
+                    <button class="tiny secondary" type="button" data-action="edit-user" data-id="${u.id}" title="Edit">✏️</button>
+                    ${!isSelf?`<button class="tiny danger" type="button" data-action="delete-user" data-id="${u.id}" title="Delete">🗑️</button>`:''}
+                </div>
+            </div>
+            <div class="user-fields">
+                <div class="user-field"><span class="uf-label">Community Centre</span><span class="uf-value">${escapeHtml(u.community_centre||'—')}</span></div>
+                <div class="user-field"><span class="uf-label">Age</span><span class="uf-value">${u.age||'—'}</span></div>
+                <div class="user-field"><span class="uf-label">Subscription</span><span class="badge ${paidClass}">${paidLabel}</span></div>
+                <div class="user-field"><span class="uf-label">Status</span><span class="badge ${label.cls}">${label.text}</span></div>
+                <div class="user-field"><span class="uf-label">Created</span><span class="uf-value muted">${formatDate(u.created_at)}</span></div>
+                <div class="user-field"><span class="uf-label">Last Played</span><span class="uf-value ${!lastPlayed?'muted':''}">${timeAgo(lastPlayed)}</span></div>
+                <div class="user-field full"><span class="uf-label">Points • Record</span><span class="uf-value">${u.points||0} pts • W: ${u.wins||0} / L: ${u.losses||0}</span></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
+                ${isPending?`<button class="tiny" style="background:var(--success);color:#0a1f38" type="button" data-action="approve-user" data-id="${u.id}">✅ Activate User</button>`:''}
+                <button class="tiny ${activeNow?'warn':''}" style="${!activeNow?'background:var(--success);color:#0a1f38':''}" type="button" data-action="toggle-sub" data-id="${u.id}">${activeNow?'Disable sub':'Enable this month'}</button>
+                <button class="tiny secondary" type="button" data-action="toggle-paid" data-id="${u.id}">${s.paid?'Mark Unpaid':'Mark Paid'}</button>
+                <button class="tiny secondary" type="button" data-action="toggle-auto" data-id="${u.id}">Auto-renew ${s.autoRenew?'✓':'✗'}</button>
+                ${!isSelf?(u.is_admin?`<button class="tiny danger" type="button" data-action="toggle-admin" data-id="${u.id}">Remove Admin</button>`:`<button class="tiny" style="background:#1e40af;color:#dbeafe" type="button" data-action="toggle-admin" data-id="${u.id}">Make Admin</button>`):''}
+            </div>${reasonBox}${editForm}</div>`;
     }).join('');
     list.forEach(u=>{if(editingUserId===u.id){const sel=document.getElementById('edit-cc-'+u.id);if(sel)populateCCSelect(sel,{includeOther:true,selectedValue:u.community_centre})}});
 }
+
+document.getElementById('admin-user-list').addEventListener('click',function(e){
+    const btn=e.target.closest('button[data-action]');
+    if(!btn)return;
+    e.preventDefault();
+    e.stopPropagation();
+    const action=btn.getAttribute('data-action');
+    const id=btn.getAttribute('data-id');
+    if(!id)return;
+    if(action==='edit-user')window.startUserEdit(id);
+    else if(action==='delete-user')window.adminDeleteUser(id);
+    else if(action==='approve-user')window.approveNewUser(id);
+    else if(action==='toggle-sub')adminToggleSub(id);
+    else if(action==='toggle-paid')adminTogglePaid(id);
+    else if(action==='toggle-auto')adminToggleAuto(id);
+    else if(action==='toggle-admin')adminToggleAdmin(id);
+});
+
 window.startUserEdit=function(id){editingUserId=id;renderAdminUserList();document.getElementById('row-'+id)?.scrollIntoView({behavior:'smooth',block:'center'})};
 window.cancelUserEdit=function(){editingUserId=null;renderAdminUserList()};
 window.saveUserEdit=async function(id){
-    if(!userProfile.is_admin||!adminUnlocked){showToast('Admin access required.');return}
+    if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
     const name=document.getElementById('edit-name-'+id).value.trim();
     const age=parseInt(document.getElementById('edit-age-'+id).value,10);
     const ccSel=document.getElementById('edit-cc-'+id);
@@ -2291,54 +2835,89 @@ window.saveUserEdit=async function(id){
     if(!name){showToast('Name is required.');return}
     if(!age||age<8||age>120){showToast('Age must be 8–120.');return}
     if(!cc){showToast('Community centre is required.');return}
-    try{showLoading('Saving…');const{error,count}=await supabase.from('profiles').update({name,age,community_centre:cc},{count:'exact'}).eq('id',id);if(error)throw error;if(count===0)throw new Error('No rows updated.');await refreshAll();editingUserId=null;hideLoading();showToast('✅ User updated.');renderAdminUserList()}
+    try{showLoading('Saving…');const{error}=await supabase.from('profiles').update({name,age,community_centre:cc}).eq('id',id);if(error)throw error;await refreshAll();editingUserId=null;hideLoading();showToast('✅ User updated.');renderAdminUserList()}
     catch(err){hideLoading();console.error(err);showToast('Failed: '+(err.message||'Unknown error'),7000)}
 };
+
 window.adminDeleteUser=async function(id){
-    if(!userProfile.is_admin||!adminUnlocked){showToast('Admin access required.');return}
+    if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
     if(id===userProfile.id){showToast('You cannot delete yourself.');return}
     const u=allProfiles.find(x=>x.id===id);
     if(!u){showToast('User not found.');return}
-    if(!confirm(`Delete "${u.name}" (${u.email})?`))return;
+
+    const ok=await showConfirm({
+        title:'Delete User?',
+        message:`Permanently delete "${u.name||'this user'}"? This cannot be undone.`,
+        yesLabel:'Yes, Delete',
+        danger:true,
+        icon:'🗑️'
+    });
+    if(!ok)return;
+
     try{
         showLoading('Deleting…');
         try{await supabase.from('match_requests').delete().or(`from_user.eq.${id},to_user.eq.${id},partner.eq.${id},opponent2.eq.${id}`)}catch(e){}
         try{await supabase.from('challenges').delete().or(`challenger.eq.${id},opponent.eq.${id},challenger_partner.eq.${id},opponent_partner.eq.${id}`)}catch(e){}
         try{await supabase.from('matches').delete().or(`player_a.eq.${id},player_b.eq.${id},partner_a.eq.${id},partner_b.eq.${id}`)}catch(e){}
-        const{error,count}=await supabase.from('profiles').delete({count:'exact'}).eq('id',id);
+        const{error}=await supabase.from('profiles').delete().eq('id',id);
         if(error)throw error;
-        if(count===0)throw new Error('No profile row deleted.');
         allProfiles=allProfiles.filter(x=>x.id!==id);
-        await refreshAll();hideLoading();showToast(`✅ ${u.name} deleted.`);renderAdminUserList();
-    }catch(err){hideLoading();console.error(err);let msg=err.message||'Unknown error';if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete.';showToast('Delete failed: '+msg,8000)}
+        await refreshAll();
+        hideLoading();
+        showToast(`✅ ${u.name||'User'} deleted.`,5000);
+        renderAdminUserList();renderAdminPendingUsers();
+    }catch(err){
+        hideLoading();console.error(err);
+        let msg=err.message||'Unknown error';
+        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete. Check your admin policies.';
+        showToast('Delete failed: '+msg,8000);
+    }
 };
-async function adminTogglePaid(id){if(!userProfile.is_admin||!adminUnlocked)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const newSub={...u.subscription,paid:!u.subscription.paid,lastPayment:!u.subscription.paid?Date.now():u.subscription.lastPayment};try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} marked ${newSub.paid?'Paid':'Unpaid'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
-async function adminToggleSub(id){if(!userProfile.is_admin||!adminUnlocked)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const activeNow=u.subscription.status==='active'&&u.subscription.paidUntil>Date.now();let newSub;if(activeNow){newSub={...u.subscription,status:'inactive',paidUntil:0};showToast(`${u.name}'s subscription disabled.`)}else{newSub={...u.subscription,status:'active',paid:true,paidUntil:endOfCurrentMonth(),lastPayment:Date.now()};showToast(`${u.name}'s subscription enabled.`)}try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
-async function adminToggleAuto(id){if(!userProfile.is_admin||!adminUnlocked)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const newSub={...u.subscription,autoRenew:!u.subscription.autoRenew};try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} auto-renew ${newSub.autoRenew?'ON':'OFF'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
-async function adminToggleAdmin(id){if(!userProfile.is_admin||!adminUnlocked)return;if(id===userProfile.id){showToast('You cannot change your own admin rights.');return}const u=allProfiles.find(x=>x.id===id);if(!u)return;try{const{error}=await supabase.from('profiles').update({is_admin:!u.is_admin}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} ${!u.is_admin?'is now an admin':'is no longer an admin'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
+
+async function adminTogglePaid(id){if(!userProfile||!userProfile.is_admin)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const newSub={...u.subscription,paid:!u.subscription.paid,freeTrial:false,lastPayment:!u.subscription.paid?Date.now():u.subscription.lastPayment};try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} marked ${newSub.paid?'Paid':'Unpaid'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
+async function adminToggleSub(id){if(!userProfile||!userProfile.is_admin)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const activeNow=u.subscription.status==='active'&&u.subscription.paidUntil>Date.now();let newSub;if(activeNow){newSub={...u.subscription,status:'inactive',paidUntil:0};showToast(`${u.name}'s subscription disabled.`)}else{newSub={...u.subscription,status:'active',paid:true,freeTrial:false,paidUntil:endOfCurrentMonth(),lastPayment:Date.now()};showToast(`${u.name}'s subscription enabled.`)}try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
+async function adminToggleAuto(id){if(!userProfile||!userProfile.is_admin)return;const u=allProfiles.find(x=>x.id===id);if(!u||!u.subscription)return;const newSub={...u.subscription,autoRenew:!u.subscription.autoRenew};try{const{error}=await supabase.from('profiles').update({subscription:newSub}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} auto-renew ${newSub.autoRenew?'ON':'OFF'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
+async function adminToggleAdmin(id){if(!userProfile||!userProfile.is_admin)return;if(id===userProfile.id){showToast('You cannot change your own admin rights.');return}const u=allProfiles.find(x=>x.id===id);if(!u)return;try{const{error}=await supabase.from('profiles').update({is_admin:!u.is_admin,pending_approval:false}).eq('id',id);if(error)throw error;await refreshAll();showToast(`${u.name} ${!u.is_admin?'is now an admin':'is no longer an admin'}.`);renderAdminUserList()}catch(err){showToast('Failed: '+err.message)}}
 
 function buildNotifications(){
     if(!userProfile)return[];
     const myId=userProfile.id;
     const items=[];
+
+    if(!isAccountEnabled(userProfile)){
+        items.push({tab:'request',icon:'🔒',title:'Your account is pending admin activation',body:'An admin needs to activate your account before you can play. You can still browse the leaderboards and info.',action:'Tap to view →',severity:'warning'});
+    }
+
     const incomingChallenges=allChallenges.filter(c=>(c.opponent===myId||c.opponent_partner===myId)&&c.status==='pending');
     incomingChallenges.forEach(c=>{const iAmPrimary=c.opponent===myId;items.push({tab:'request',icon:'⚔️',title:iAmPrimary?'New challenge to accept!':'You\'re in a pending challenge',body:`${nameOf(c.challenger)}${c.challenger_partner?' & '+nameOf(c.challenger_partner):''} challenged you to a ${c.type} match at ${c.community_centre}.`,action:iAmPrimary?'Tap to accept or decline →':'Tap to view →',severity:'info'})});
     const incomingRequests=allRequests.filter(r=>r.to_user===myId&&r.status==='pending');
     incomingRequests.forEach(r=>{items.push({tab:'request',icon:'🏓',title:'Match request awaiting your approval',body:`${nameOf(r.from_user)}${r.partner?' & '+nameOf(r.partner):''} submitted a ${r.type} match score ${r.score_a}–${r.score_b} at ${r.community_centre}.`,action:'Tap to approve or reject →',severity:'info'})});
     const awaitingAck=allChallenges.filter(c=>c.status==='score_submitted'&&c.score_submitted_by!==myId&&(c.opponent===myId||c.opponent_partner===myId||c.challenger===myId||c.challenger_partner===myId));
     awaitingAck.forEach(c=>{items.push({tab:'request',icon:'📝',title:'Score submitted — please acknowledge',body:`${nameOf(c.score_submitted_by)} submitted the score ${c.score_challenger}–${c.score_opponent}.`,action:'Tap to acknowledge →',severity:'info'})});
-    if(isPromotionActive()){
-        const sub=userProfile.subscription||{};
-        const isActive=sub.status==='active'&&sub.paidUntil>Date.now();
-        if(!isActive)items.push({tab:'subscribe',icon:'🎉',title:'Free subscription active this month!',body:'You have free play this month — no payment needed. Enjoy!',action:'Tap to view →',severity:'info'});
-    }else{
-        const sub=userProfile.subscription||{};
-        const isActive=sub.status==='active'&&sub.paidUntil>Date.now();
-        if(!isActive&&sub.status!=='pending'){
-            const isExpired=sub.status==='active'&&sub.paidUntil>0&&sub.paidUntil<=Date.now();
-            items.push({tab:'subscribe',icon:'💳',title:isExpired?'Your subscription has expired':'Subscription required',body:isExpired?'Renew your $2 subscription to continue playing this month.':'You need an active $2/month subscription to challenge and play matches.',action:'Tap to subscribe →',severity:'danger'});
-        }else if(sub.status==='pending'){
-            items.push({tab:'subscribe',icon:'⏳',title:'Subscription pending admin approval',body:'Your request is being reviewed.',action:'Tap to view status →',severity:'warning'});
+
+    if(userProfile.is_admin){
+        const pendingUsers=allProfiles.filter(u=>u.pending_approval===true);
+        if(pendingUsers.length>0){
+            items.push({tab:'admin',icon:'👋',title:`${pendingUsers.length} new user${pendingUsers.length===1?'':'s'} awaiting activation`,body:'Tap to review and activate them.',action:'Go to Admin →',severity:'warning'});
+        }
+    }
+
+    const sub=userProfile.subscription||{};
+    const isActive=sub.status==='active'&&sub.paidUntil>Date.now();
+
+    if(isAccountEnabled(userProfile)){
+        if(isPromotionActive()){
+            if(!isActive)items.push({tab:'subscribe',icon:'🎉',title:'Free subscription active this month!',body:'You have free play this month — no payment needed. Enjoy!',action:'Tap to view →',severity:'info'});
+        }else{
+            if(sub.freeTrial&&!sub.paid&&isActive){
+                const daysLeft=Math.ceil((sub.paidUntil-Date.now())/(24*60*60*1000));
+                items.push({tab:'subscribe',icon:'🎁',title:'Your first month is FREE!',body:`You have free play until ${new Date(sub.paidUntil).toLocaleDateString()} (${daysLeft} day${daysLeft===1?'':'s'} left). From ${nextMonthLabel()} the $2/month subscription starts.`,action:'Tap to view →',severity:'info'});
+            }else if(!isActive&&sub.status!=='pending'){
+                const isExpired=sub.status==='active'&&sub.paidUntil>0&&sub.paidUntil<=Date.now();
+                items.push({tab:'subscribe',icon:'💳',title:isExpired?'Your subscription has expired':'Subscription required',body:isExpired?'Renew your $2 subscription to continue playing this month.':'You need an active $2/month subscription to challenge and play matches.',action:'Tap to subscribe →',severity:'danger'});
+            }else if(sub.status==='pending'){
+                items.push({tab:'subscribe',icon:'⏳',title:'Subscription pending admin approval',body:'Your request is being reviewed.',action:'Tap to view status →',severity:'warning'});
+            }
         }
     }
     return items;
@@ -2379,10 +2958,17 @@ let inactivityModalOpen=false;
 function checkInactivity(){
     if(!userProfile)return;
     if(userProfile.is_admin)return;
+    if(!isAccountEnabled(userProfile))return;
     const sessionKey='sgtt_inactivity_prompted_'+userProfile.id;
     if(sessionStorage.getItem(sessionKey)==='1')return;
     const lastPlayed=lastPlayedFor(userProfile.id);
     const days=daysSince(lastPlayed);
+
+    if(lastPlayed===null){
+        const accountAge=userProfile.created_at?daysSince(new Date(userProfile.created_at).getTime()):0;
+        if(accountAge===null||accountAge<INACTIVITY_THRESHOLD_DAYS)return;
+    }
+
     const isInactive=days===null||days>=INACTIVITY_THRESHOLD_DAYS;
     if(!isInactive)return;
     if(userProfile.inactivity_reason_at){const reasonAge=daysSince(new Date(userProfile.inactivity_reason_at).getTime());if(reasonAge!==null&&reasonAge<7)return}
@@ -2422,13 +3008,7 @@ function closeInactivityModal(){document.getElementById('inactivity-modal')?.cla
 document.getElementById('inactivity-x').addEventListener('click',closeInactivityModal);
 document.getElementById('inactivity-modal').addEventListener('click',(e)=>{if(e.target.id==='inactivity-modal')closeInactivityModal()});
 
-/* ============================================================
-   INITIALISE
-   ============================================================ */
 (function immediateInit(){
-    const hash=window.location.hash||'';
-    const search=window.location.search||'';
-    if(hash.includes('access_token')||hash.includes('type=signup')||search.includes('type=signup')){window._arrivedFromEmail=true}
     try{populateAllCCSelects()}catch(e){console.error(e)}
     try{
         attachCCOtherToggle('auth-cc','auth-cc-other');
@@ -2453,15 +3033,14 @@ async function boot(){
         console.log('[SGTT] Auth event:',event);
         if(event==='SIGNED_OUT'){if(!currentUser)showOnlyScreen('auth')}
         else if(event==='SIGNED_IN'&&session&&session.user&&!currentUser){
-            const fromEmail=!!window._arrivedFromEmail;
-            await onLoggedIn(session.user,fromEmail?'SIGNED_IN':'INITIAL');
+            if(suppressAutoLogin){console.log('[SGTT] Suppressing auto-login during registration');return;}
+            await onLoggedIn(session.user,'INITIAL');
         }
     });
     try{
         const{data:{session}}=await supabase.auth.getSession();
         if(session&&session.user&&!currentUser){
-            const fromEmail=!!window._arrivedFromEmail;
-            await onLoggedIn(session.user,fromEmail?'SIGNED_IN':'INITIAL');
+            if(!suppressAutoLogin) await onLoggedIn(session.user,'INITIAL');
         }else if(!session){hideLoading();showOnlyScreen('auth')}
     }catch(e){console.error(e);hideLoading();showOnlyScreen('auth')}
 }
@@ -2496,6 +3075,8 @@ window.deleteCCUI=deleteCCUI;
 window.restoreCCUI=restoreCCUI;
 window.clearInactivityReason=clearInactivityReason;
 window.setAuthMode=setAuthMode;
+window.approveNewUser=approveNewUser;
+window.rejectNewUser=rejectNewUser;
 </script>
 </body>
 </html>
