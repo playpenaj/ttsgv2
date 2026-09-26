@@ -38,18 +38,13 @@ body{
 h1{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;margin-bottom:2px}
 h2{font-size:.72rem;font-weight:700;color:var(--accent);margin-bottom:12px;letter-spacing:.05em;text-transform:uppercase}
 h3{font-size:.92rem;font-weight:600;margin-bottom:8px}
-
 .card{background:var(--bg-card);border-radius:16px;padding:16px;margin-bottom:14px;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.03);position:relative;overflow:hidden;min-width:0}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent) 30%,var(--accent) 70%,transparent);opacity:.6}
-.card-accent{border-color:var(--accent)}
-.card-accent::before{opacity:1;background:var(--accent)}
-.card-warn{border-color:var(--warning)}
-.card-warn::before{background:var(--warning);opacity:1}
-.card-danger{border-color:var(--danger)}
-.card-danger::before{background:var(--danger);opacity:1}
+.card-accent{border-color:var(--accent)}.card-accent::before{opacity:1;background:var(--accent)}
+.card-warn{border-color:var(--warning)}.card-warn::before{background:var(--warning);opacity:1}
+.card-danger{border-color:var(--danger)}.card-danger::before{background:var(--danger);opacity:1}
 .card-sponsor{border-color:var(--warning);background:linear-gradient(135deg,rgba(245,158,11,.1),var(--bg-card))}
 .card-sponsor::before{background:var(--warning);opacity:1}
-
 button{font-family:inherit;font-size:.92rem;font-weight:700;min-height:46px;padding:12px 18px;border:none;border-radius:12px;cursor:pointer;transition:transform .1s,background .15s,box-shadow .15s;width:100%;background:var(--accent);color:#0a1f38;margin-bottom:8px;box-shadow:0 2px 8px rgba(34,197,94,.35);letter-spacing:.01em}
 button:hover:not(:disabled){background:var(--accent-hover)}
 button:active:not(:disabled){transform:scale(.97)}
@@ -61,7 +56,6 @@ button.danger:hover:not(:disabled){background:#dc2626}
 button.warn{background:var(--warning);color:#0a1f38}
 button.small{width:auto;min-height:34px;padding:7px 12px;font-size:.76rem;display:inline-block;margin:0 6px 6px 0;border-radius:9px}
 button.tiny{width:auto;min-height:30px;padding:5px 10px;font-size:.7rem;display:inline-block;margin:0 4px 4px 0;border-radius:8px}
-
 input,select,textarea{font-family:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text);width:100%;margin-bottom:12px;min-height:46px;-webkit-appearance:none;appearance:none;transition:border-color .15s,box-shadow .15s}
 input::placeholder,textarea::placeholder{color:var(--text-dim)}
 select{background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
@@ -71,7 +65,6 @@ input.input-error,select.input-error,textarea.input-error{border-color:var(--dan
 .field-error{color:var(--danger);font-size:.75rem;margin-top:-8px;margin-bottom:12px;display:flex;align-items:center;gap:4px;font-weight:600}
 .field-error::before{content:'⚠'}
 label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
-
 .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.66rem;font-weight:700;background:var(--bg-elevated);color:var(--text-muted);white-space:nowrap;letter-spacing:.03em;text-transform:uppercase;border:1px solid var(--border)}
 .badge-green{background:var(--success-soft);color:#86efac;border-color:rgba(34,197,94,.3)}
 .badge-yellow{background:rgba(245,158,11,.15);color:#fcd34d;border-color:rgba(245,158,11,.3)}
@@ -79,13 +72,11 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .badge-admin{background:rgba(34,197,94,.15);color:#86efac;border-color:rgba(34,197,94,.3)}
 .badge-blue{background:rgba(59,130,246,.15);color:#93c5fd;border-color:rgba(59,130,246,.3)}
 .badge-purple{background:rgba(168,85,247,.15);color:#d8b4fe;border-color:rgba(168,85,247,.3)}
-
 .stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .stat-item{background:var(--bg-dark);padding:14px 8px;border-radius:12px;text-align:center;border:1px solid var(--border);position:relative;overflow:hidden}
 .stat-item::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:2px;background:var(--accent);opacity:.4;border-radius:2px}
 .stat-value{font-size:1.7rem;font-weight:800;color:var(--accent);line-height:1.1;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(34,197,94,.35)}
 .stat-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;font-weight:600}
-
 .leader-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .leader-mini{background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.03));border:1px solid rgba(34,197,94,.35);border-radius:12px;padding:10px 6px;text-align:center;min-width:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:2px}
 .leader-mini.gold{background:linear-gradient(135deg,rgba(251,191,36,.2),rgba(217,119,6,.05));border-color:rgba(251,191,36,.5)}
@@ -101,8 +92,7 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .leader-mini.gold .lm-stat{color:#fbbf24}
 .leader-mini.blue .lm-stat{color:#60a5fa}
 .leader-mini .lm-stat.empty{color:var(--text-dim);font-weight:500;font-size:.62rem}
-
-.rank-row{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg-dark);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:border-color .15s}
+.rank-row{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg-dark);border:1px solid var(--border);border-radius:10px;margin-bottom:8px}
 .rank-row:last-child{margin-bottom:0}
 .rank-row.mine{border-color:var(--accent);background:linear-gradient(135deg,rgba(34,197,94,.08),var(--bg-dark))}
 .rank-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;flex-shrink:0;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);font-variant-numeric:tabular-nums}
@@ -116,18 +106,15 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .rank-stat{text-align:right;flex-shrink:0}
 .rank-rating{font-weight:800;font-size:.95rem;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.15}
 .rank-wl{font-size:.62rem;color:var(--text-muted);margin-top:2px;font-weight:600}
-
 .match-item{background:var(--bg-dark);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;position:relative;overflow:hidden}
 .match-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:.5}
 .match-item .info{flex:1;min-width:0;padding-left:6px}
 .match-item .info strong{display:block;font-size:.9rem;word-break:break-word;color:var(--text);font-weight:700}
 .match-item .info small{color:var(--text-muted);font-size:.72rem;display:block;margin-top:3px;word-break:break-word}
 .match-item .result{text-align:right;flex-shrink:0}
-
 .scroll-list{max-height:340px;overflow-y:auto;overflow-x:hidden;padding-right:4px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .scroll-list::-webkit-scrollbar{width:6px}
 .scroll-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-
 .collapsible{cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:10px 0;user-select:none;border-bottom:1px solid var(--border);font-weight:600;color:var(--text)}
 .collapsible::after{content:"▸";font-size:1.2rem;color:var(--accent);transition:transform .2s}
 .collapsible.open::after{transform:rotate(90deg)}
@@ -145,7 +132,6 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .points-table tr:last-child td{border-bottom:none}
 .points-table .win-cell{color:#86efac;font-weight:700}
 .points-table .lose-cell{color:#fca5a5;font-weight:700}
-
 #app-header{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,var(--bg-primary) 90%,rgba(10,31,56,.96));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding-top:var(--safe-top);overflow-x:hidden}
 .header-wrap{max-width:720px;margin:0 auto;padding:10px 14px 12px;width:100%}
 .app-title-bar{font-size:.92rem;font-weight:800;color:var(--accent);letter-spacing:-.01em;margin-bottom:8px;display:flex;align-items:center;gap:8px;word-break:break-word}
@@ -155,86 +141,61 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .header-greeting .greet-name{font-size:1.02rem;font-weight:700;color:var(--text);word-break:break-word;line-height:1.2}
 .header-greeting .greet-cc{font-size:.7rem;color:var(--text-muted);display:block;word-break:break-word;margin-top:2px}
 .header-actions{flex-shrink:0;display:flex;align-items:center;gap:6px}
-.header-sub-badge{font-family:inherit;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:5px 9px;border-radius:16px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:3px;margin:0;min-height:32px;width:auto;max-width:90px;box-shadow:none;transition:transform .1s,filter .15s;border:1px solid transparent;overflow:hidden}
-.header-sub-badge:active{transform:scale(.95)}
-.header-sub-badge:hover{filter:brightness(1.15)}
+.header-sub-badge{font-family:inherit;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:5px 9px;border-radius:16px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:3px;margin:0;min-height:32px;width:auto;max-width:90px;box-shadow:none;border:1px solid transparent;overflow:hidden}
 .header-sub-badge .hsb-icon{font-size:.85rem;line-height:1;flex-shrink:0}
 .header-sub-badge .hsb-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .header-sub-badge.active{background:rgba(34,197,94,.15);color:#86efac;border-color:rgba(34,197,94,.4)}
 .header-sub-badge.pending{background:rgba(245,158,11,.15);color:#fcd34d;border-color:rgba(245,158,11,.4)}
 .header-sub-badge.inactive{background:rgba(239,68,68,.15);color:#fca5a5;border-color:rgba(239,68,68,.4)}
-.header-sub-badge.promo{background:linear-gradient(135deg,rgba(34,197,94,.3),rgba(34,197,94,.1));color:#86efac;border-color:#22c55e;box-shadow:0 0 10px rgba(34,197,94,.3)}
-.header-actions .bell-btn{position:relative;width:38px;height:38px;min-height:38px;min-width:38px;border-radius:50%;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:1.1rem;padding:0;margin:0;box-shadow:none;cursor:pointer;transition:background .15s}
-.header-actions .bell-btn:hover{background:var(--bg-secondary)}
-.header-actions .bell-btn .bell-count{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 4px;border-radius:10px;background:var(--danger);color:#fff;font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(239,68,68,.7)}
-.header-actions .bell-btn.pulse{animation:bellPulse 1.4s ease-in-out infinite}
-@keyframes bellPulse{0%,100%{transform:rotate(0)}15%{transform:rotate(12deg)}30%{transform:rotate(-12deg)}45%{transform:rotate(10deg)}60%{transform:rotate(-10deg)}75%{transform:rotate(6deg)}}
+.header-sub-badge.promo{background:linear-gradient(135deg,rgba(34,197,94,.3),rgba(34,197,94,.1));color:#86efac;border-color:#22c55e}
+.header-actions .bell-btn{position:relative;width:38px;height:38px;min-height:38px;min-width:38px;border-radius:50%;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:1.1rem;padding:0;margin:0;box-shadow:none;cursor:pointer}
+.header-actions .bell-btn .bell-count{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 4px;border-radius:10px;background:var(--danger);color:#fff;font-size:.62rem;font-weight:800;display:flex;align-items:center;justify-content:center}
 .header-actions .logout-btn{min-height:36px;padding:7px 12px;font-size:.72rem;white-space:nowrap}
-
 .tt-logo{text-align:center;padding:24px 16px 16px}
 .tt-logo-svg{display:block;margin:0 auto 12px;width:180px;height:130px;max-width:100%}
-.tt-logo .tt-ball{transform-origin:center;animation:ttBallAnim 3s ease-in-out infinite}
-@keyframes ttBallAnim{0%,100%{transform:translate(0,-6px)}50%{transform:translate(0,8px)}}
-.tt-logo .tt-shadow{animation:ttShadowAnim 3s ease-in-out infinite}
-@keyframes ttShadowAnim{0%,100%{opacity:.15;transform:scaleX(.85)}50%{opacity:.35;transform:scaleX(1.1)}}
-.tt-logo .tt-trail-dot{animation:ttTrailAnim 3s ease-in-out infinite}
-@keyframes ttTrailAnim{0%,100%{opacity:.7}50%{opacity:.15}}
 .tt-logo h1{color:var(--accent);font-size:1.5rem;letter-spacing:-.02em}
 .tt-logo p{color:var(--text-muted);font-size:.88rem;margin-top:4px}
 .logo-mini-svg{display:block}
-.logo-mini .mini-ball{animation:miniBallAnim 3s ease-in-out infinite}
-@keyframes miniBallAnim{0%,100%{transform:translateY(-2px)}50%{transform:translateY(2px)}}
-
-.tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg-card);border-top:2px solid var(--accent);display:flex;justify-content:space-around;padding:6px 0;padding-bottom:calc(6px + var(--safe-bottom));z-index:1000;box-shadow:0 -4px 16px rgba(0,0,0,.5);overflow-x:hidden}
-.tab-bar::before{content:'';position:absolute;top:-2px;left:0;right:0;height:2px;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 12px)}
-.tab-bar button{background:none;color:var(--text-dim);width:auto;padding:6px 4px;font-size:.6rem;margin:0;border-radius:8px;display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;min-width:0;min-height:0;font-weight:700;box-shadow:none;transition:color .15s,transform .1s;text-transform:uppercase;letter-spacing:.03em;position:relative;max-width:140px}
-.tab-bar button:hover:not(.active){color:var(--text-muted)}
-.tab-bar button:active{transform:scale(.95)}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg-card);border-top:2px solid var(--accent);display:flex;justify-content:space-around;padding:6px 0;padding-bottom:calc(6px + var(--safe-bottom));z-index:1000;box-shadow:0 -4px 16px rgba(0,0,0,.5)}
+.tab-bar button{background:none;color:var(--text-dim);width:auto;padding:6px 4px;font-size:.6rem;margin:0;border-radius:8px;display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;min-width:0;min-height:0;font-weight:700;box-shadow:none;text-transform:uppercase;letter-spacing:.03em;position:relative;max-width:140px}
 .tab-bar button.active{color:var(--accent)}
-.tab-bar button.active .icon{filter:drop-shadow(0 0 8px rgba(34,197,94,.6))}
-.tab-bar button .icon{font-size:1.3rem;line-height:1;transition:filter .2s}
-.tab-bar button .notif-dot{position:absolute;top:4px;right:calc(50% - 18px);width:8px;height:8px;border-radius:50%;background:var(--danger);box-shadow:0 0 8px var(--danger)}
+.tab-bar button .icon{font-size:1.3rem;line-height:1}
+.tab-bar button .notif-dot{position:absolute;top:4px;right:calc(50% - 18px);width:8px;height:8px;border-radius:50%;background:var(--danger)}
 .tab-bar button.tab-disabled{opacity:.45}
 .tab-bar button.tab-disabled::after{content:'🔒';position:absolute;top:2px;left:calc(50% + 8px);font-size:.6rem;line-height:1}
-
 .hidden{display:none!important}
-#toast{position:fixed;top:calc(16px + var(--safe-top));left:50%;transform:translateX(-50%);background:var(--bg-card);color:var(--text);padding:14px 22px;border-radius:12px;border:1px solid var(--accent);font-size:.88rem;z-index:9999;max-width:92vw;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.6),0 0 24px rgba(34,197,94,.2);transition:opacity .3s,transform .3s;word-break:break-word}
+#toast{position:fixed;top:calc(16px + var(--safe-top));left:50%;transform:translateX(-50%);background:var(--bg-card);color:var(--text);padding:14px 22px;border-radius:12px;border:1px solid var(--accent);font-size:.88rem;z-index:9999;max-width:92vw;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.6);word-break:break-word}
 #toast.hidden{display:none}
 .rank-display{font-size:3rem;font-weight:800;color:var(--accent);text-align:center;line-height:1;text-shadow:0 0 32px rgba(34,197,94,.5);font-variant-numeric:tabular-nums}
-.sub-price{font-size:2.8rem;font-weight:800;color:var(--accent);text-align:center;line-height:1;text-shadow:0 0 24px rgba(34,197,94,.4)}
+.sub-price{font-size:2.8rem;font-weight:800;color:var(--accent);text-align:center;line-height:1}
 .sub-price small{font-size:.9rem;color:var(--text-muted);font-weight:500}
 .sub-status{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:var(--bg-dark);margin-bottom:12px;border:1px solid var(--border)}
 .sub-status .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .dot-green{background:var(--success);box-shadow:0 0 12px var(--success)}
 .dot-yellow{background:var(--warning);box-shadow:0 0 12px var(--warning)}
 .dot-red{background:var(--danger);box-shadow:0 0 12px var(--danger)}
-
 .free-month-banner{background:linear-gradient(135deg,rgba(34,197,94,.22),rgba(34,197,94,.06));border:2px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.free-month-banner .fm-icon{font-size:1.7rem;line-height:1;flex-shrink:0;filter:drop-shadow(0 0 10px rgba(34,197,94,.55))}
+.free-month-banner .fm-icon{font-size:1.7rem;line-height:1;flex-shrink:0}
 .free-month-banner .fm-text{flex:1;min-width:0}
 .free-month-banner .fm-text strong{display:block;color:var(--accent);font-size:.88rem;font-weight:800;margin-bottom:2px}
 .free-month-banner .fm-text small{color:#bbf7d0;font-size:.74rem;line-height:1.4;display:block}
-
 .play-locked-hero{text-align:center;padding:28px 16px}
-.play-locked-hero .plh-icon{font-size:4rem;line-height:1;margin-bottom:14px;filter:drop-shadow(0 0 20px rgba(245,158,11,.55));animation:plhBob 2.4s ease-in-out infinite}
-@keyframes plhBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.play-locked-hero .plh-icon{font-size:4rem;line-height:1;margin-bottom:14px}
 .play-locked-hero h2{color:var(--warning);font-size:1.25rem;font-weight:800;text-transform:none;letter-spacing:-.01em;margin-bottom:10px}
 .play-locked-hero p{font-size:.9rem;color:#cbd5e1;line-height:1.6;margin-bottom:8px}
 .play-locked-hero .plh-steps{background:var(--bg-dark);border-radius:12px;padding:14px 16px;margin-top:16px;text-align:left;border:1px solid var(--border)}
 .play-locked-hero .plh-steps .plh-step{display:flex;gap:10px;font-size:.85rem;color:#cbd5e1;line-height:1.5;margin-bottom:10px}
 .play-locked-hero .plh-steps .plh-step:last-child{margin-bottom:0}
 .play-locked-hero .plh-steps .plh-step .num{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--warning);color:#0a1f38;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem}
-
 .user-cards-list{display:flex;flex-direction:column;gap:10px}
-.user-card{background:var(--bg-dark);border:1px solid var(--border);border-radius:12px;padding:12px;transition:border-color .15s;min-width:0}
-.user-card.editing{border-color:var(--accent);border-left-width:3px}
-.user-card.inactive{border-color:var(--warning);border-left:3px solid var(--warning)}
+.user-card{background:var(--bg-dark);border:1px solid var(--border);border-radius:12px;padding:12px;min-width:0}
 .user-card.pending-new{border-color:var(--warning);border-left:3px solid var(--warning);background:linear-gradient(135deg,rgba(245,158,11,.08),var(--bg-dark))}
+.user-card.inactive{border-color:var(--warning);border-left:3px solid var(--warning)}
 .user-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;flex-wrap:wrap}
 .user-card-head .user-name{font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap;word-break:break-word;flex:1;min-width:0}
 .user-card-head .user-name .badge{font-size:.55rem;padding:2px 6px}
-.user-card-head .user-actions{display:flex;gap:4px;flex-shrink:0;position:relative;z-index:2}
-.user-card-head .user-actions button{margin:0;min-height:32px;min-width:34px;padding:6px 10px;font-size:.85rem;border-radius:8px;width:auto;cursor:pointer;position:relative;z-index:3}
+.user-card-head .user-actions{display:flex;gap:4px;flex-shrink:0}
+.user-card-head .user-actions button{margin:0;min-height:32px;min-width:34px;padding:6px 10px;font-size:.85rem;border-radius:8px;width:auto}
 .user-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;font-size:.78rem;margin-top:6px}
 .user-field{display:flex;flex-direction:column;gap:2px;min-width:0}
 .user-field .uf-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);font-weight:700}
@@ -249,11 +210,10 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .user-card .reason-box{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:8px 10px;margin-top:10px;font-size:.78rem}
 .user-card .reason-box .reason-title{color:var(--warning);font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;display:block}
 .user-card .reason-box .reason-text{color:#fde68a;line-height:1.5}
-
 .search-wrap{position:relative;margin-bottom:10px}
 .search-wrap input{margin-bottom:0;padding-left:40px}
 .search-wrap::before{content:"🔍";position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none}
-.team-block{background:var(--bg-dark);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid var(--border);position:relative}
+.team-block{background:var(--bg-dark);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid var(--border)}
 .team-block h3{font-size:.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-weight:700}
 .challenge-item{background:var(--bg-dark);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid var(--border);border-left:4px solid var(--accent);position:relative}
 .challenge-item .chead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:6px}
@@ -265,59 +225,50 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .config-banner{background:rgba(239,68,68,.1);border:2px solid var(--danger);color:#fecaca;padding:14px 16px;border-radius:12px;margin-bottom:14px;font-size:.85rem;line-height:1.55}
 .config-banner strong{color:#fff;display:block;margin-bottom:6px;font-size:.95rem}
 .config-banner code{background:var(--bg-dark);padding:1px 5px;border-radius:4px;font-size:.78rem;color:#fde68a;word-break:break-all}
-.loading-overlay{position:fixed;inset:0;background:rgba(10,31,56,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9998;color:var(--text-muted);font-size:.9rem;backdrop-filter:blur(4px);transition:opacity .3s}
+.loading-overlay{position:fixed;inset:0;background:rgba(10,31,56,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9998;color:var(--text-muted);font-size:.9rem;backdrop-filter:blur(4px)}
 .loading-overlay.hidden{display:none!important;pointer-events:none}
 .spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-ball{width:20px;height:20px;background:var(--accent);border-radius:50%;margin-bottom:12px;box-shadow:0 0 20px var(--accent);animation:bounce 1s ease-in-out infinite}
+.loading-ball{width:20px;height:20px;background:var(--accent);border-radius:50%;margin-bottom:12px;animation:bounce 1s ease-in-out infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.modal-overlay{position:fixed;inset:0;background:rgba(10,31,56,.88);display:flex;align-items:center;justify-content:center;z-index:9997;padding:16px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fadeIn .2s ease}
+.modal-overlay{position:fixed;inset:0;background:rgba(10,31,56,.88);display:flex;align-items:center;justify-content:center;z-index:9997;padding:16px;backdrop-filter:blur(6px)}
 .modal-overlay.hidden{display:none!important}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-card{background:var(--bg-card);border-radius:20px;max-width:min(480px,calc(100vw - 32px));width:100%;max-height:88vh;display:flex;flex-direction:column;border:2px solid var(--accent);box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 40px rgba(34,197,94,.2);overflow:hidden;animation:slideUp .25s cubic-bezier(.34,1.56,.64,1)}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-card{background:var(--bg-card);border-radius:20px;max-width:min(520px,calc(100vw - 32px));width:100%;max-height:88vh;display:flex;flex-direction:column;border:2px solid var(--accent);box-shadow:0 24px 64px rgba(0,0,0,.6);overflow:hidden}
 .modal-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(180deg,var(--bg-secondary),var(--bg-card))}
 .modal-header h2{margin:0;font-size:1.05rem;font-weight:800;color:var(--text);text-transform:none;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
-.modal-close{background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;padding:0;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:none;margin:0;min-height:0;transition:background .15s,color .15s}
-.modal-close:hover{background:var(--bg-dark);color:var(--text)}
-.modal-body{padding:16px 20px;overflow-y:auto;flex:1;scrollbar-width:thin}
-.modal-body::-webkit-scrollbar{width:6px}
-.modal-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.modal-close{background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;padding:0;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:none;margin:0;min-height:0}
+.modal-body{padding:16px 20px;overflow-y:auto;flex:1}
 .modal-footer{padding:12px 20px 18px;border-top:1px solid var(--border);background:var(--bg-secondary)}
-.notif-item{background:var(--bg-dark);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--border);border-left:4px solid var(--accent);cursor:pointer;transition:transform .15s,background .15s;position:relative}
-.notif-item:hover{background:var(--bg-secondary);transform:translateX(2px)}
+.notif-item{background:var(--bg-dark);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--border);border-left:4px solid var(--accent);cursor:pointer}
 .notif-item.danger{border-left-color:var(--danger)}
 .notif-item.warning{border-left-color:var(--warning)}
 .notif-item .n-icon{font-size:1.5rem;margin-bottom:6px;display:block;line-height:1}
 .notif-item .n-title{font-weight:700;font-size:.95rem;margin-bottom:4px;color:var(--text)}
 .notif-item .n-body{font-size:.82rem;color:var(--text-muted);line-height:1.5;word-break:break-word}
 .notif-item .n-action{display:inline-block;margin-top:10px;font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
-.promo-banner{background:linear-gradient(135deg,rgba(34,197,94,.25),rgba(34,197,94,.08));border:2px solid var(--accent);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
-.promo-banner::before{content:'🎉';font-size:2rem;line-height:1;filter:drop-shadow(0 0 12px rgba(34,197,94,.6))}
+.promo-banner{background:linear-gradient(135deg,rgba(34,197,94,.25),rgba(34,197,94,.08));border:2px solid var(--accent);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.promo-banner::before{content:'🎉';font-size:2rem;line-height:1}
 .promo-banner .promo-text{flex:1;min-width:0}
 .promo-banner .promo-text strong{display:block;color:var(--accent);font-size:.95rem;font-weight:800;margin-bottom:2px}
 .promo-banner .promo-text small{color:#bbf7d0;font-size:.78rem;line-height:1.4;display:block}
 .sponsor-card{display:flex;align-items:center;gap:14px}
-.sponsor-logo{font-size:2.2rem;line-height:1;flex-shrink:0;filter:drop-shadow(0 0 12px rgba(245,158,11,.5))}
+.sponsor-logo{font-size:2.2rem;line-height:1;flex-shrink:0}
 .sponsor-info{flex:1;min-width:0}
 .sponsor-info .sponsor-name{font-weight:800;font-size:.95rem;color:var(--warning);margin-bottom:2px}
 .sponsor-info .sponsor-tag{font-size:.78rem;color:var(--text-muted);line-height:1.4}
 .sponsor-info a{color:var(--accent);text-decoration:none;font-weight:700;font-size:.82rem;display:inline-block;margin-top:6px;word-break:break-word}
-.sponsor-info a:hover{text-decoration:underline}
 .promo-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
 .promo-controls .switch{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-size:.85rem;color:var(--text)}
 .promo-controls .switch input{display:none}
 .promo-controls .slider{width:44px;height:24px;background:var(--bg-dark);border-radius:12px;position:relative;transition:background .2s;border:1px solid var(--border)}
-.promo-controls .slider::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--text-muted);border-radius:50%;transition:transform .2s,background .2s}
+.promo-controls .slider::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:var(--text-muted);border-radius:50%;transition:transform .2s}
 .promo-controls .switch input:checked + .slider{background:var(--accent-soft);border-color:var(--accent)}
 .promo-controls .switch input:checked + .slider::after{transform:translateX(20px);background:var(--accent)}
 .refresh-bar{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:8px 12px;background:var(--bg-dark);border-radius:10px;border:1px solid var(--border);font-size:.75rem;color:var(--text-muted)}
-.refresh-bar .dot-live{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);animation:pulse 2s infinite}
+.refresh-bar .dot-live{width:8px;height:8px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .refresh-bar button{margin:0 0 0 auto;min-height:28px;padding:4px 10px;font-size:.7rem;width:auto}
 .cc-mgmt-list{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:320px;overflow-y:auto;padding-right:4px}
-.cc-mgmt-list::-webkit-scrollbar{width:6px}
-.cc-mgmt-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 .cc-mgmt-row{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg-dark);border:1px solid var(--border);border-radius:10px}
 .cc-mgmt-row .cc-mgmt-name{flex:1;min-width:0;font-size:.85rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cc-mgmt-row .cc-mgmt-tag{font-size:.6rem;padding:2px 6px;border-radius:10px;text-transform:uppercase;font-weight:700;letter-spacing:.04em;flex-shrink:0}
@@ -325,22 +276,20 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .cc-mgmt-row .cc-mgmt-tag.custom{background:var(--accent-soft);color:#86efac;border:1px solid rgba(34,197,94,.3)}
 .cc-mgmt-row button{margin:0;min-height:30px;min-width:30px;padding:4px 8px;font-size:.75rem;border-radius:8px;width:auto}
 .inactivity-cta{background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));border:2px solid var(--accent);border-radius:16px;padding:22px 18px;text-align:center;margin-bottom:8px}
-.inactivity-cta .ic-icon{font-size:3rem;display:block;margin-bottom:10px;filter:drop-shadow(0 0 16px rgba(34,197,94,.5))}
+.inactivity-cta .ic-icon{font-size:3rem;display:block;margin-bottom:10px}
 .inactivity-cta h3{font-size:1.15rem;color:var(--accent);margin-bottom:8px;font-weight:800}
 .inactivity-cta p{font-size:.9rem;color:#cbd5e1;line-height:1.6}
 .inactivity-cta .ic-days{display:inline-block;background:rgba(34,197,94,.2);color:#86efac;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.85rem;margin:6px 4px}
 .pwd-checklist{background:var(--bg-dark);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:.78rem;line-height:1.7}
-.pwd-check{color:var(--text-muted);transition:color .2s;display:flex;align-items:center;gap:6px}
-.pwd-check::before{content:'✗';color:var(--danger);font-weight:800;display:inline-block;width:14px;text-align:center;transition:color .2s}
+.pwd-check{color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.pwd-check::before{content:'✗';color:var(--danger);font-weight:800;display:inline-block;width:14px;text-align:center}
 .pwd-check.ok{color:#86efac}
 .pwd-check.ok::before{content:'✓';color:var(--success)}
 .auth-tabs{display:flex;gap:4px;margin-bottom:14px;background:var(--bg-dark);padding:4px;border-radius:12px;border:1px solid var(--border)}
-.auth-tab{flex:1;background:transparent;color:var(--text-muted);border:none;border-radius:9px;padding:10px 8px;font-size:.82rem;font-weight:700;cursor:pointer;min-height:40px;margin:0;box-shadow:none;transition:all .15s}
-.auth-tab:hover{color:var(--text);background:rgba(255,255,255,.03)}
-.auth-tab.active{background:var(--accent);color:#0a1f38;box-shadow:0 2px 8px rgba(34,197,94,.35)}
+.auth-tab{flex:1;background:transparent;color:var(--text-muted);border:none;border-radius:9px;padding:10px 8px;font-size:.82rem;font-weight:700;cursor:pointer;min-height:40px;margin:0;box-shadow:none}
+.auth-tab.active{background:var(--accent);color:#0a1f38}
 .forgot-link{text-align:right;margin-top:-6px;margin-bottom:12px}
 .forgot-link button{font-size:.78rem;color:var(--text-muted);text-decoration:underline;padding:4px 2px;min-height:auto;background:none;border:none;box-shadow:none;font-weight:600;width:auto;margin:0}
-.forgot-link button:hover{color:var(--accent);background:none}
 .verified-banner{background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));border:2px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .verified-banner .vb-icon{font-size:1.6rem;line-height:1;flex-shrink:0}
 .verified-banner .vb-text{flex:1;min-width:0}
@@ -353,15 +302,10 @@ label{display:block;font-size:.78rem;font-weight:600;color:var(--text-muted);mar
 .info-banner .ib-text small{color:#fde68a;font-size:.74rem;line-height:1.4;display:block}
 img,svg,video,canvas{max-width:100%;height:auto}
 pre,code{max-width:100%;overflow-x:auto;word-break:break-word}
-table{max-width:100%}
 @media (max-width:380px){
     .leader-mini .lm-name{font-size:.72rem}
     .leader-mini .lm-label{font-size:.5rem}
-    .leader-mini .lm-icon{font-size:1.35rem}
-    .leader-mini .lm-stat{font-size:.62rem}
     .header-sub-badge{max-width:70px;font-size:.55rem;padding:4px 7px}
-    .header-greeting .greet-name{font-size:.95rem}
-    .header-actions .logout-btn{padding:6px 10px;font-size:.68rem}
 }
 </style>
 </head>
@@ -394,8 +338,8 @@ table{max-width:100%}
                     <ellipse cx="16" cy="11" rx="4" ry="2.5" fill="#fecaca" opacity="0.5"/>
                     <rect x="17.5" y="28" width="5" height="10" rx="2" fill="#78350f"/>
                 </g>
-                <circle class="mini-ball" cx="46" cy="14" r="5" fill="url(#miniBall)"/>
-                <circle class="mini-ball" cx="44.5" cy="12.5" r="1.6" fill="#fff" opacity="0.85"/>
+                <circle cx="46" cy="14" r="5" fill="url(#miniBall)"/>
+                <circle cx="44.5" cy="12.5" r="1.6" fill="#fff" opacity="0.85"/>
             </svg>
             Singapore Table Tennis League
         </div>
@@ -409,8 +353,7 @@ table{max-width:100%}
                     <span class="hsb-icon">💳</span><span class="hsb-text">—</span>
                 </button>
                 <button id="bell-btn" class="bell-btn" title="Notifications" aria-label="Notifications">
-                    🔔
-                    <span id="bell-count" class="bell-count hidden">0</span>
+                    🔔<span id="bell-count" class="bell-count hidden">0</span>
                 </button>
                 <button id="logout-btn" class="danger small logout-btn" style="width:auto;margin:0">Logout</button>
             </div>
@@ -439,43 +382,17 @@ table{max-width:100%}
                         <stop offset="45%" stop-color="#ef4444"/>
                         <stop offset="100%" stop-color="#991b1b"/>
                     </radialGradient>
-                    <radialGradient id="paddleBlack" cx="35%" cy="30%" r="80%">
-                        <stop offset="0%" stop-color="#64748b"/>
-                        <stop offset="100%" stop-color="#0f172a"/>
-                    </radialGradient>
                     <linearGradient id="handleGrad" x1="0" y1="0" x2="1" y2="1">
                         <stop offset="0%" stop-color="#a16207"/>
-                        <stop offset="50%" stop-color="#78350f"/>
                         <stop offset="100%" stop-color="#451a03"/>
                     </linearGradient>
-                    <filter id="ballShadow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-                        <feOffset dx="0" dy="2" result="offsetblur"/>
-                        <feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
-                        <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
                 </defs>
-                <rect x="8" y="15" width="184" height="110" rx="4" fill="none" stroke="#22c55e" stroke-width="0.7" opacity="0.12"/>
-                <line x1="100" y1="15" x2="100" y2="125" stroke="#22c55e" stroke-width="0.7" opacity="0.12"/>
-                <g transform="rotate(-22 75 70)"><ellipse cx="78" cy="63" rx="42" ry="46" fill="url(#paddleBlack)" opacity="0.35"/></g>
                 <g transform="rotate(-22 75 70)">
                     <ellipse cx="80" cy="60" rx="42" ry="46" fill="url(#paddleRed)"/>
-                    <ellipse cx="80" cy="60" rx="42" ry="46" fill="none" stroke="#7f1d1d" stroke-width="1.2"/>
-                    <ellipse cx="68" cy="45" rx="14" ry="9" fill="#fecaca" opacity="0.4"/>
-                    <ellipse cx="90" cy="75" rx="10" ry="6" fill="#fff" opacity="0.08"/>
                     <rect x="74" y="102" width="12" height="32" rx="5" fill="url(#handleGrad)"/>
-                    <rect x="76.5" y="104" width="7" height="26" rx="3" fill="#a16207" opacity="0.35"/>
-                    <line x1="75" y1="112" x2="85" y2="112" stroke="#451a03" stroke-width="0.6" opacity="0.5"/>
-                    <line x1="75" y1="118" x2="85" y2="118" stroke="#451a03" stroke-width="0.6" opacity="0.5"/>
                 </g>
-                <circle class="tt-trail-dot" cx="128" cy="58" r="2" fill="#fbbf24" opacity="0.6"/>
-                <circle class="tt-trail-dot" cx="122" cy="54" r="1.6" fill="#fbbf24" opacity="0.4"/>
-                <circle class="tt-trail-dot" cx="116" cy="58" r="1.2" fill="#fbbf24" opacity="0.25"/>
-                <g filter="url(#ballShadow)">
-                    <circle class="tt-ball" cx="150" cy="55" r="14" fill="url(#ballGrad)"/>
-                    <circle class="tt-ball" cx="146" cy="51" r="4.5" fill="#fff" opacity="0.85"/>
-                </g>
-                <ellipse class="tt-shadow" cx="150" cy="92" rx="16" ry="3" fill="#000" opacity="0.25"/>
+                <circle cx="150" cy="55" r="14" fill="url(#ballGrad)"/>
+                <circle cx="146" cy="51" r="4.5" fill="#fff" opacity="0.85"/>
             </svg>
             <h1>Singapore Table Tennis League</h1>
             <p>Track matches. Earn points. Get discounts.</p>
@@ -551,7 +468,7 @@ table{max-width:100%}
                     <span class="fm-icon">🎁</span>
                     <div class="fm-text">
                         <strong>Your first month is FREE!</strong>
-                        <small>Once your account is activated by an admin, you'll play free for the rest of this calendar month. The $2/month subscription begins next month.</small>
+                        <small>Once activated, you'll play free for the rest of this calendar month. The $2/month subscription begins next month.</small>
                     </div>
                 </div>
 
@@ -568,11 +485,7 @@ table{max-width:100%}
                 </div>
 
                 <p style="font-size:.88rem;color:#cbd5e1;margin-bottom:14px;line-height:1.6">
-                    Please contact your club admin with your <strong>name</strong>, <strong>Login ID</strong>, and <strong>community centre</strong>. They will verify your identity and help you reset your password.
-                </p>
-
-                <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:14px;line-height:1.6">
-                    You can find the admin's contact details on the club notice board or in person at your community centre.
+                    Please contact your club admin with your <strong>name</strong>, <strong>Login ID</strong>, and <strong>community centre</strong>.
                 </p>
 
                 <button class="secondary" type="button" onclick="setAuthMode('login')">Back to Login</button>
@@ -594,7 +507,7 @@ table{max-width:100%}
                 <div class="play-locked-hero" style="padding:14px 8px">
                     <div class="plh-icon" style="font-size:2.4rem;margin-bottom:6px">🔒</div>
                     <h2 style="font-size:1rem;margin-bottom:6px">Account Pending Activation</h2>
-                    <p style="font-size:.85rem">An admin needs to activate your account before you can play. You can still browse the leaderboards and info while you wait.</p>
+                    <p style="font-size:.85rem">An admin needs to activate your account before you can play.</p>
                 </div>
             </div>
 
@@ -663,7 +576,7 @@ table{max-width:100%}
                 <p id="discount-info" style="font-size:.9rem">Play matches to earn points and unlock discounts!</p>
                 <div style="margin-top:10px">
                     <div style="background:var(--bg-dark);border-radius:8px;height:12px;overflow:hidden;border:1px solid var(--border)">
-                        <div id="discount-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));transition:width .5s;box-shadow:0 0 12px rgba(34,197,94,.5)"></div>
+                        <div id="discount-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));transition:width .5s"></div>
                     </div>
                 </div>
                 <p style="font-size:.78rem;color:var(--text-muted);margin-top:10px">Redeem your discount at <a href="https://www.sintensports.com.sg/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">Sin Ten Sports Trading</a>.</p>
@@ -678,12 +591,11 @@ table{max-width:100%}
         </div>
 
         <div id="tab-request" class="tab-content hidden">
-
             <div id="play-locked-card" class="card card-warn hidden">
                 <div class="play-locked-hero">
                     <div class="plh-icon">🔒</div>
                     <h2>Play Tab Locked</h2>
-                    <p>Your account is created but not yet activated by an admin. Once activated, you'll be able to send challenges, log scores, and join matches.</p>
+                    <p>Your account is created but not yet activated by an admin.</p>
                     <div class="plh-steps">
                         <div class="plh-step"><span class="num">1</span><span>Your registration is complete.</span></div>
                         <div class="plh-step"><span class="num">2</span><span>An admin needs to activate your account.</span></div>
@@ -695,16 +607,14 @@ table{max-width:100%}
             <div id="play-normal-content">
                 <div id="req-sub-warning" class="card card-danger hidden">
                     <h2>⚠️ Subscription Required</h2>
-                    <p style="font-size:.9rem">You need an active subscription to play. Tap the badge in the header to subscribe.</p>
+                    <p style="font-size:.9rem">You need an active subscription to play.</p>
                 </div>
 
                 <div class="card card-accent">
                     <h2>⚔️ Challenge a Player</h2>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Send a challenge. The opponent accepts, then you play. After the match, one side submits the score and the other acknowledges it to award points.</p>
-
+                    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Send a challenge. The opponent accepts, then you play.</p>
                     <label for="ch-type">Match Type</label>
                     <select id="ch-type"><option value="singles">Singles</option><option value="doubles">Doubles</option></select>
-
                     <div id="ch-doubles-fields" class="hidden">
                         <div class="team-block">
                             <h3>👥 Your Team</h3>
@@ -712,7 +622,6 @@ table{max-width:100%}
                             <select id="ch-partner"></select>
                         </div>
                     </div>
-
                     <div class="team-block">
                         <h3>🎯 Opponent</h3>
                         <label for="ch-opponent1">Opponent Player 1</label>
@@ -722,11 +631,9 @@ table{max-width:100%}
                             <select id="ch-opponent2"></select>
                         </div>
                     </div>
-
                     <label for="ch-cc">Community Centre</label>
                     <select id="ch-cc"></select>
                     <input type="text" id="ch-cc-other" class="hidden" placeholder="Enter community centre name">
-
                     <button id="ch-submit" style="margin-top:6px">Submit Challenge</button>
                 </div>
 
@@ -742,11 +649,8 @@ table{max-width:100%}
 
                 <div class="card">
                     <h2>Quick Match Entry (with score)</h2>
-                    <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px">Already played? Log the score directly — opponent still has to approve.</p>
-
                     <label for="req-type">Match Type</label>
                     <select id="req-type"><option value="singles">Singles</option><option value="doubles">Doubles</option></select>
-
                     <div id="req-doubles-fields" class="hidden">
                         <div class="team-block">
                             <h3>👥 Your Team</h3>
@@ -754,7 +658,6 @@ table{max-width:100%}
                             <select id="req-partner"></select>
                         </div>
                     </div>
-
                     <div class="team-block">
                         <h3>🎯 Opponent</h3>
                         <label for="req-opponent1">Opponent Player 1</label>
@@ -764,16 +667,13 @@ table{max-width:100%}
                             <select id="req-opponent2"></select>
                         </div>
                     </div>
-
                     <label for="req-cc">Community Centre</label>
                     <select id="req-cc"></select>
                     <input type="text" id="req-cc-other" class="hidden" placeholder="Enter community centre name">
-
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
                         <div><label for="req-score">Your Score</label><input type="number" id="req-score" placeholder="3" min="0" max="5"></div>
                         <div><label for="req-opp-score">Opp. Score</label><input type="number" id="req-opp-score" placeholder="1" min="0" max="5"></div>
                     </div>
-
                     <button id="req-submit" style="margin-top:6px">Submit Match request</button>
                 </div>
 
@@ -803,13 +703,11 @@ table{max-width:100%}
                     <span class="fm-icon">🎁</span>
                     <div class="fm-text">
                         <strong>New players: first month free</strong>
-                        <small>Every new account plays free for the rest of the month it was created. The $2/month fee begins the following month.</small>
+                        <small>Every new account plays free for the rest of the month it was created.</small>
                     </div>
                 </div>
             </div>
-
             <div class="card"><h2>Your Status</h2><div id="sub-current-status"></div></div>
-
             <div class="card" id="sub-request-card">
                 <h2>Request Subscription</h2>
                 <p style="font-size:.88rem;margin-bottom:12px;color:#cbd5e1">
@@ -819,7 +717,6 @@ table{max-width:100%}
                 </p>
                 <button id="sub-request-btn">Request Subscription Activation</button>
             </div>
-
             <div class="card">
                 <h2>Payment Info</h2>
                 <p style="font-size:.85rem;color:#cbd5e1"><strong>PayNow:</strong> 9123 4567 (Singapore Table Tennis League)<br><strong>Reference:</strong> Your registered name<br><strong>Amount:</strong> $2.00 per month</p>
@@ -829,9 +726,8 @@ table{max-width:100%}
         <div id="tab-admin" class="tab-content hidden">
             <div class="card card-accent">
                 <h2>⚙️ Admin Panel</h2>
-                <p style="font-size:.85rem;color:#bbf7d0">✅ You have admin access. All controls are available below.</p>
+                <p style="font-size:.85rem;color:#bbf7d0">✅ You have admin access.</p>
             </div>
-
             <div id="admin-panel">
                 <div class="refresh-bar" id="refresh-bar-admin">
                     <span class="dot-live"></span>
@@ -852,13 +748,11 @@ table{max-width:100%}
 
                 <div class="card card-warn" id="inactivity-comments-card">
                     <h2>💬 Inactivity Comments</h2>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Players inactive 10+ days who shared a reason.</p>
                     <div id="inactivity-comments-list" class="scroll-list"><p style="color:var(--text-muted)">No comments yet.</p></div>
                 </div>
 
                 <div class="card card-accent">
                     <h2>🎉 Promotion — Free Subscription Month</h2>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Enable this to give <strong>everyone</strong> free play for a chosen month.</p>
                     <div class="promo-controls">
                         <label class="switch">
                             <input type="checkbox" id="promo-enabled">
@@ -869,14 +763,13 @@ table{max-width:100%}
                     <label for="promo-month" style="margin-top:14px">Promotion Month</label>
                     <input type="month" id="promo-month">
                     <label for="promo-message">Custom Message (optional)</label>
-                    <input type="text" id="promo-message" placeholder="e.g. December is FREE for everyone!" maxlength="120">
+                    <input type="text" id="promo-message" placeholder="e.g. December is FREE!" maxlength="120">
                     <button id="promo-save" class="secondary small" style="margin-top:6px">Save Promotion</button>
                     <button id="promo-clear" class="danger small" style="margin-top:6px">Clear Promotion</button>
                 </div>
 
                 <div class="card">
                     <h2>🏟️ Manage Community Centres</h2>
-                    <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:12px">Add missing centres or delete existing ones.</p>
                     <label for="new-cc-input">Add Community Centre</label>
                     <input type="text" id="new-cc-input" placeholder="e.g. Punggol Community Club">
                     <button id="add-cc-btn" class="secondary small">➕ Add Community Centre</button>
@@ -901,29 +794,11 @@ table{max-width:100%}
         <div id="tab-points" class="tab-content hidden">
             <div class="card card-accent">
                 <h2>📖 How Points Work</h2>
-                <p style="font-size:.9rem;margin-bottom:14px;color:#cbd5e1;line-height:1.6">Think of points like a <strong>ranking score</strong>. Win matches to climb up. The better your opponent, the more you gain!</p>
-
-                <div style="background:var(--bg-dark);border-radius:12px;padding:14px;margin-bottom:14px;border:1px solid var(--border)">
-                    <div style="font-size:.85rem;margin-bottom:10px"><strong style="color:var(--accent)">🎯 You start with:</strong> 1000 points</div>
-                    <div style="font-size:.85rem;margin-bottom:10px"><strong style="color:var(--accent)">🏆 When you win:</strong> You gain points</div>
-                    <div style="font-size:.85rem"><strong style="color:var(--accent)">😢 When you lose:</strong> You lose points</div>
-                </div>
-
+                <p style="font-size:.9rem;margin-bottom:14px;color:#cbd5e1;line-height:1.6">Think of points like a <strong>ranking score</strong>. Win matches to climb up!</p>
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🌍 Inspired by ITTF</h3></div>
                 <div class="collapsible-content">
-                    <p>Our scoring system is <strong>inspired by the International Table Tennis Federation (ITTF)</strong> rating philosophy.</p>
-                    <p style="font-size:.85rem;color:var(--text-muted)">The ITTF uses an "Elo-like" system to keep competitions fair: beating a stronger player is rewarded far more than beating a weaker one.</p>
+                    <p>Our scoring system is inspired by the ITTF rating philosophy.</p>
                 </div>
-
-                <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🧮 The Formula in Detail</h3></div>
-                <div class="collapsible-content">
-                    <div class="formula-box">Rating Gap = |Loser Rating − Winner Rating|</div>
-                    <div class="formula-box">New Winner Rating = Old Winner Rating + Base Points
-New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
-                    <p style="font-size:.82rem;color:var(--text-muted)"><strong>For doubles:</strong></p>
-                    <div class="formula-box">Team Rating = (Player 1 Rating + Player 2 Rating) ÷ 2</div>
-                </div>
-
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>📊 Points Reference Table</h3></div>
                 <div class="collapsible-content">
                     <table class="points-table">
@@ -934,27 +809,10 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
                             <tr><td>50–99</td><td class="win-cell">+14</td><td class="lose-cell">−14</td></tr>
                             <tr><td>100–149</td><td class="win-cell">+16</td><td class="lose-cell">−16</td></tr>
                             <tr><td>150–199</td><td class="win-cell">+20</td><td class="lose-cell">−20</td></tr>
-                            <tr><td>200–299</td><td class="win-cell">+24</td><td class="lose-cell">−24</td></tr>
-                            <tr><td>300–399</td><td class="win-cell">+28</td><td class="lose-cell">−28</td></tr>
-                            <tr><td>400–499</td><td class="win-cell">+32</td><td class="lose-cell">−32</td></tr>
-                            <tr><td>500–749</td><td class="win-cell">+36</td><td class="lose-cell">−36</td></tr>
-                            <tr><td>750+</td><td class="win-cell">+40</td><td class="lose-cell">−40</td></tr>
+                            <tr><td>200+</td><td class="win-cell">+24 to +40</td><td class="lose-cell">−24 to −40</td></tr>
                         </tbody>
                     </table>
                 </div>
-
-                <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🔐 Password Security</h3></div>
-                <div class="collapsible-content">
-                    <ul>
-                        <li>At least <strong>8 characters</strong></li>
-                        <li>Contains an <strong>uppercase</strong> letter</li>
-                        <li>Contains a <strong>lowercase</strong> letter</li>
-                        <li>Contains a <strong>number</strong></li>
-                        <li>Contains a <strong>special character</strong></li>
-                    </ul>
-                    <p style="font-size:.85rem;color:var(--text-muted)">Passwords are hashed with <strong>bcrypt</strong> and transmitted over <strong>HTTPS/TLS</strong>.</p>
-                </div>
-
                 <div class="collapsible" onclick="toggleCollapsible(this)"><h3>🎁 Shop Discounts</h3></div>
                 <div class="collapsible-content">
                     <table class="points-table">
@@ -967,20 +825,8 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
                         </tbody>
                     </table>
                 </div>
-
-                <div class="collapsible" onclick="toggleCollapsible(this)"><h3>💳 Monthly Subscription</h3></div>
-                <div class="collapsible-content">
-                    <ul>
-                        <li><strong>$2/month</strong> to play</li>
-                        <li>Valid for the <strong>current calendar month</strong></li>
-                        <li><strong>New players get their first month FREE</strong> (the month they register)</li>
-                        <li>From the <strong>following month</strong>, the usual $2/month fee applies</li>
-                        <li>Free during promotion months</li>
-                    </ul>
-                </div>
             </div>
         </div>
-
     </div>
 
     <div class="tab-bar" id="tab-bar">
@@ -997,9 +843,9 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
 
 <div id="confirm-modal" class="modal-overlay hidden">
     <div class="modal-card" id="confirm-card" style="border-color:var(--danger)">
-        <div class="modal-header" id="confirm-header" style="background:linear-gradient(180deg,rgba(239,68,68,.15),var(--bg-card))">
+        <div class="modal-header" id="confirm-header">
             <h2><span id="confirm-icon">⚠️</span> <span id="confirm-title">Confirm</span></h2>
-            <button class="modal-close" id="confirm-x" aria-label="Close">×</button>
+            <button class="modal-close" id="confirm-x">×</button>
         </div>
         <div class="modal-body">
             <p id="confirm-message" style="font-size:.9rem;color:#cbd5e1;line-height:1.6;word-break:break-word"></p>
@@ -1011,11 +857,42 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
     </div>
 </div>
 
+<!-- ============================================================
+     DATABASE FIX MODAL — shown when profile insert fails
+     ============================================================ -->
+<div id="db-fix-modal" class="modal-overlay hidden">
+    <div class="modal-card" style="border-color:var(--danger)">
+        <div class="modal-header" style="background:linear-gradient(180deg,rgba(239,68,68,.15),var(--bg-card))">
+            <h2><span>⚠️</span> Database Setup Required</h2>
+            <button class="modal-close" id="db-fix-x">×</button>
+        </div>
+        <div class="modal-body">
+            <p style="font-size:.88rem;color:#fecaca;line-height:1.6;margin-bottom:12px">
+                Your account was created, but your <strong>profile row could not be saved</strong> to the database. This is almost always caused by Row Level Security (RLS) blocking the insert.
+            </p>
+            <p style="font-size:.85rem;color:#fecaca;line-height:1.6;margin-bottom:12px">
+                <strong>What you need to do:</strong> ask the club admin to open the Supabase SQL Editor and run the SQL below. After that, you'll be able to log in and your profile will appear in the admin panel automatically.
+            </p>
+            <p style="font-size:.8rem;color:#fde68a;line-height:1.6;margin-bottom:8px">Also check: <strong>Supabase Dashboard → Authentication → Providers → Email → "Confirm email" should be OFF.</strong></p>
+            <label style="font-size:.7rem;color:#fecaca">SQL to run in Supabase SQL Editor:</label>
+            <pre id="db-fix-sql" style="background:#0a1f38;padding:12px;border-radius:8px;overflow-x:auto;font-size:.68rem;color:#86efac;line-height:1.5;border:1px solid #1e4a72;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow-y:auto"></pre>
+            <p style="font-size:.72rem;color:var(--text-muted);margin-top:10px;line-height:1.5">
+                Error details (also in browser console):<br>
+                <code id="db-fix-error" style="color:#fca5a5;word-break:break-all"></code>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button id="db-fix-copy" style="margin-bottom:8px">📋 Copy SQL</button>
+            <button id="db-fix-continue" class="secondary" style="margin-bottom:0">I'll fix it later</button>
+        </div>
+    </div>
+</div>
+
 <div id="notif-modal" class="modal-overlay hidden">
     <div class="modal-card">
         <div class="modal-header">
             <h2><span>🔔</span> You have updates</h2>
-            <button class="modal-close" id="notif-modal-x" aria-label="Close">×</button>
+            <button class="modal-close" id="notif-modal-x">×</button>
         </div>
         <div class="modal-body" id="notif-body"></div>
         <div class="modal-footer">
@@ -1027,8 +904,8 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
 <div id="admin-welcome-modal" class="modal-overlay hidden">
     <div class="modal-card" style="border-color:var(--warning)">
         <div class="modal-header" style="background:linear-gradient(180deg,rgba(245,158,11,.15),var(--bg-card))">
-            <h2><span>👋</span> <span id="admin-welcome-title">Welcome back, Admin!</span></h2>
-            <button class="modal-close" id="admin-welcome-x" aria-label="Close">×</button>
+            <h2><span>👋</span> <span id="admin-welcome-title">Welcome back!</span></h2>
+            <button class="modal-close" id="admin-welcome-x">×</button>
         </div>
         <div class="modal-body" id="admin-welcome-body"></div>
         <div class="modal-footer" id="admin-welcome-footer"></div>
@@ -1037,43 +914,12 @@ New Loser Rating  = max(100, Old Loser Rating − Base Points)</div>
 
 <div id="inactivity-modal" class="modal-overlay hidden">
     <div class="modal-card" style="border-color:var(--accent)">
-        <div class="modal-header" style="background:linear-gradient(180deg,rgba(34,197,94,.15),var(--bg-card))">
+        <div class="modal-header">
             <h2><span>🏓</span> We miss you!</h2>
-            <button class="modal-close" id="inactivity-x" aria-label="Close">×</button>
+            <button class="modal-close" id="inactivity-x">×</button>
         </div>
         <div class="modal-body" id="inactivity-body"></div>
         <div class="modal-footer" id="inactivity-footer"></div>
-    </div>
-</div>
-
-<div id="password-modal" class="modal-overlay hidden">
-    <div class="modal-card" style="border-color:var(--warning)">
-        <div class="modal-header" style="background:linear-gradient(180deg,rgba(245,158,11,.15),var(--bg-card))">
-            <h2><span id="pwd-modal-icon">🔐</span> <span id="pwd-modal-title">Set New Password</span></h2>
-        </div>
-        <div class="modal-body">
-            <p id="pwd-modal-msg" style="font-size:.88rem;color:#cbd5e1;margin-bottom:14px;line-height:1.55"></p>
-
-            <label for="pwd-new">New Password</label>
-            <input type="password" id="pwd-new" placeholder="Enter new password" autocomplete="new-password">
-
-            <label for="pwd-confirm">Confirm Password</label>
-            <input type="password" id="pwd-confirm" placeholder="Re-enter password" autocomplete="new-password">
-
-            <div class="field-error hidden" id="pwd-error"></div>
-
-            <div class="pwd-checklist" id="pwd-checklist">
-                <div class="pwd-check" data-req="length">At least 8 characters</div>
-                <div class="pwd-check" data-req="upper">One uppercase letter (A–Z)</div>
-                <div class="pwd-check" data-req="lower">One lowercase letter (a–z)</div>
-                <div class="pwd-check" data-req="number">One number (0–9)</div>
-                <div class="pwd-check" data-req="special">One special character (!@#$…)</div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button id="pwd-save">Save Password</button>
-            <button id="pwd-logout" class="secondary" style="margin-bottom:0">Logout</button>
-        </div>
     </div>
 </div>
 
@@ -1113,29 +959,23 @@ if (looksLikePlaceholder(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY)) {
 
 <script>
 /* =============================================================
-   SINGAPORE TABLE TENNIS LEAGUE (v32)
-   Changes:
-   - NEW USER REGISTRATION PROFILE SAVE — ROBUST VERSION
-     The bug: Supabase INSERT with RLS enabled returns 0 rows
-     (NOT an error) when RLS silently blocks it. The old code
-     only checked for `error`, so it thought the insert succeeded
-     even when zero rows were written → no user appeared in admin.
-
-     The fix:
-       1. After INSERT, we READ BACK the row via .select().eq()
-          and verify the count is exactly 1.
-       2. If the read-back is 0, we try UPSERT.
-       3. If upsert also fails to produce a row, we retry the
-          whole insert one more time after a short delay.
-       4. If it STILL fails, we surface the exact RLS error to the
-          user so the admin knows to fix policies.
-   - UPDATED login error message (shortened).
+   SINGAPORE TABLE TENNIS LEAGUE (v33)
+   CRITICAL FIXES:
+   1. Saves registration data to localStorage BEFORE signUp,
+      so it survives even if the profile insert fails.
+   2. Multi-strategy writeProfileRow: tries full → reduced →
+      minimal payloads, each with a read-back verification.
+   3. On login, if profile is still missing, retries using
+      localStorage data (now authenticated → RLS allows insert).
+   4. Shows a modal with the exact SQL fix when insert fails.
+   5. Clear diagnostic in browser console.
    ============================================================= */
 
 const OTHER_CC_VALUE = '__OTHER__';
 const REFRESH_INTERVAL_MS = 30000;
 const INACTIVITY_THRESHOLD_DAYS = 10;
 const PASSWORD_POLICY_VERSION = 2;
+const PENDING_REG_KEY = 'sgtt_pending_registration_v1';
 
 const PASSWORD_REQUIREMENTS = [
     { key: 'length',  test: pw => pw.length >= 8 },
@@ -1240,44 +1080,208 @@ function showConfirm({title='Confirm', message='', yesLabel='Yes, Confirm', dang
         const yes=document.getElementById('confirm-yes');
         const no=document.getElementById('confirm-no');
         const x=document.getElementById('confirm-x');
-
-        titleEl.textContent=title;
-        msgEl.textContent=message;
-        yes.textContent=yesLabel;
-        iconEl.textContent=icon;
-
-        if(danger){
-            card.style.borderColor='var(--danger)';
-            header.style.background='linear-gradient(180deg,rgba(239,68,68,.15),var(--bg-card))';
-            yes.className='danger';
-        }else{
-            card.style.borderColor='var(--accent)';
-            header.style.background='linear-gradient(180deg,rgba(34,197,94,.15),var(--bg-card))';
-            yes.className='';
-        }
-
-        function cleanup(){
-            modal.classList.add('hidden');
-            yes.onclick=null;
-            no.onclick=null;
-            x.onclick=null;
-            modal.onclick=null;
-        }
+        titleEl.textContent=title; msgEl.textContent=message; yes.textContent=yesLabel; iconEl.textContent=icon;
+        if(danger){card.style.borderColor='var(--danger)';header.style.background='linear-gradient(180deg,rgba(239,68,68,.15),var(--bg-card))';yes.className='danger';}
+        else{card.style.borderColor='var(--accent)';header.style.background='linear-gradient(180deg,rgba(34,197,94,.15),var(--bg-card))';yes.className='';}
+        function cleanup(){modal.classList.add('hidden');yes.onclick=null;no.onclick=null;x.onclick=null;modal.onclick=null;}
         yes.onclick=()=>{cleanup();resolve(true);};
         no.onclick=()=>{cleanup();resolve(false);};
         x.onclick=()=>{cleanup();resolve(false);};
         modal.onclick=(e)=>{if(e.target===modal){cleanup();resolve(false);}};
-
         modal.classList.remove('hidden');
         setTimeout(()=>yes.focus(),150);
     });
 }
 
+/* ============================================================
+   localStorage helpers for pending registration
+   ============================================================ */
+function savePendingRegistration(data){
+    try{localStorage.setItem(PENDING_REG_KEY,JSON.stringify(data));console.log('[SGTT] Saved pending registration to localStorage:',data);}catch(e){console.warn('[SGTT] localStorage save failed:',e.message);}
+}
+function getPendingRegistration(){
+    try{const raw=localStorage.getItem(PENDING_REG_KEY);return raw?JSON.parse(raw):null;}catch(e){return null;}
+}
+function clearPendingRegistration(){
+    try{localStorage.removeItem(PENDING_REG_KEY);}catch(e){}
+}
+
+/* ============================================================
+   DATABASE FIX MODAL
+   ============================================================ */
+const DB_FIX_SQL = `-- ================================================================
+-- SINGAPORE TABLE TENNIS LEAGUE — Database Fix
+-- Run this in Supabase Dashboard → SQL Editor → New Query
+-- ================================================================
+
+-- 1) Add any missing columns to profiles (safe — won't affect existing data)
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS pending_approval boolean DEFAULT true;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS is_admin boolean DEFAULT false;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS email_confirmed boolean DEFAULT false;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS age integer;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS community_centre text;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS subscription jsonb;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS rating integer DEFAULT 1000;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS points integer DEFAULT 0;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS wins integer DEFAULT 0;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS losses integer DEFAULT 0;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS inactivity_reason text;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS inactivity_reason_at timestamptz;
+
+-- 2) Enable Row Level Security (usually already on)
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+
+-- 3) Drop any old conflicting policies
+DROP POLICY IF EXISTS "Users can insert own profile" ON profiles;
+DROP POLICY IF EXISTS "Users can update own profile" ON profiles;
+DROP POLICY IF EXISTS "Public read profiles" ON profiles;
+DROP POLICY IF EXISTS "Anyone can read profiles" ON profiles;
+DROP POLICY IF EXISTS "Profiles are viewable by everyone" ON profiles;
+
+-- 4) Allow ANYONE (anon + authenticated) to read profiles
+--    (needed so leaderboards and registration checks work)
+CREATE POLICY "Public read profiles"
+    ON profiles FOR SELECT
+    TO anon, authenticated
+    USING (true);
+
+-- 5) Allow the newly signed-up user to insert their OWN profile row
+--    (auth.uid() = id means "the row I'm creating is for me")
+CREATE POLICY "Users can insert own profile"
+    ON profiles FOR INSERT
+    TO anon, authenticated
+    WITH CHECK (auth.uid() = id);
+
+-- 6) Allow the user to update their own profile row
+CREATE POLICY "Users can update own profile"
+    ON profiles FOR UPDATE
+    TO anon, authenticated
+    USING (auth.uid() = id)
+    WITH CHECK (auth.uid() = id);
+
+-- 7) Also allow ANYONE authenticated to delete rows (admin actions)
+CREATE POLICY "Anyone can delete profiles"
+    ON profiles FOR DELETE
+    TO authenticated
+    USING (true);
+
+-- ================================================================
+-- ALSO MAKE SURE (in Supabase Dashboard):
+--   Authentication → Providers → Email → "Confirm email" = OFF
+-- ================================================================`;
+
+function showDbFixModal(errorMessage){
+    const modal=document.getElementById('db-fix-modal');
+    document.getElementById('db-fix-sql').textContent=DB_FIX_SQL;
+    document.getElementById('db-fix-error').textContent=errorMessage||'(no error details)';
+    modal.classList.remove('hidden');
+}
+function closeDbFixModal(){document.getElementById('db-fix-modal')?.classList.add('hidden')}
+document.getElementById('db-fix-x')?.addEventListener('click',closeDbFixModal);
+document.getElementById('db-fix-continue')?.addEventListener('click',closeDbFixModal);
+document.getElementById('db-fix-modal')?.addEventListener('click',(e)=>{if(e.target.id==='db-fix-modal')closeDbFixModal()});
+document.getElementById('db-fix-copy')?.addEventListener('click',async()=>{
+    try{
+        await navigator.clipboard.writeText(DB_FIX_SQL);
+        showToast('📋 SQL copied to clipboard!',3500);
+    }catch(e){
+        /* fallback */
+        const ta=document.createElement('textarea');
+        ta.value=DB_FIX_SQL;
+        document.body.appendChild(ta);
+        ta.select();
+        try{document.execCommand('copy');showToast('📋 SQL copied!',3500);}catch(err){showToast('Copy failed — select manually.',3500);}
+        document.body.removeChild(ta);
+    }
+});
+
+/* ============================================================
+   MULTI-STRATEGY PROFILE WRITER
+   Tries progressively simpler payloads and verifies each via
+   read-back. Returns {ok, method} or {ok:false, reason}.
+   ============================================================ */
+async function writeProfileRow(fullPayload){
+    /* Build strategy list — always include id/email/name at minimum */
+    const base = {
+        id: fullPayload.id,
+        email: fullPayload.email,
+        name: fullPayload.name
+    };
+
+    const strategies = [
+        { name: 'full',           data: fullPayload },
+        { name: 'no-flags',       data: { ...base, age: fullPayload.age, community_centre: fullPayload.community_centre, subscription: fullPayload.subscription } },
+        { name: 'no-subscription',data: { ...base, age: fullPayload.age, community_centre: fullPayload.community_centre } },
+        { name: 'minimal',        data: base }
+    ];
+
+    let lastError = null;
+    let lastErrorDetails = null;
+
+    for(const strategy of strategies){
+        /* ---- Attempt INSERT ---- */
+        try{
+            const res = await supabase.from('profiles').insert(strategy.data);
+            if(res.error){
+                lastError = res.error.message;
+                lastErrorDetails = res.error.details || res.error.hint || '';
+                console.warn(`[SGTT] INSERT (${strategy.name}) failed:`, res.error.message, lastErrorDetails);
+            }
+        }catch(e){
+            lastError = e.message;
+            console.warn(`[SGTT] INSERT (${strategy.name}) exception:`, e.message);
+        }
+
+        /* ---- Read back to verify ---- */
+        try{
+            const chk = await supabase.from('profiles').select('id').eq('id', fullPayload.id).maybeSingle();
+            if(chk.data && chk.data.id){
+                console.log(`[SGTT] ✓ Profile verified via INSERT (${strategy.name})`);
+                /* If we used a reduced payload, try to update with full data now */
+                if(strategy.name !== 'full'){
+                    try{
+                        await supabase.from('profiles').update(fullPayload).eq('id', fullPayload.id);
+                    }catch(e){ /* non-fatal */ }
+                }
+                return { ok:true, method:`insert-${strategy.name}` };
+            }
+        }catch(e){ console.warn(`[SGTT] Readback (${strategy.name}):`, e.message); }
+    }
+
+    /* ---- Attempt UPSERT as a last resort ---- */
+    for(const strategy of strategies){
+        try{
+            const res = await supabase.from('profiles').upsert(strategy.data, { onConflict: 'id' });
+            if(res.error){
+                lastError = res.error.message;
+                lastErrorDetails = res.error.details || res.error.hint || '';
+                console.warn(`[SGTT] UPSERT (${strategy.name}) failed:`, res.error.message);
+            }
+        }catch(e){
+            lastError = e.message;
+            console.warn(`[SGTT] UPSERT (${strategy.name}) exception:`, e.message);
+        }
+        try{
+            const chk = await supabase.from('profiles').select('id').eq('id', fullPayload.id).maybeSingle();
+            if(chk.data && chk.data.id){
+                console.log(`[SGTT] ✓ Profile verified via UPSERT (${strategy.name})`);
+                return { ok:true, method:`upsert-${strategy.name}` };
+            }
+        }catch(e){}
+    }
+
+    const reason = lastError ? `${lastError}${lastErrorDetails?' — '+lastErrorDetails:''}` : 'All insert strategies failed (row not found after every attempt).';
+    console.error('[SGTT] ✗ Profile write FAILED:', reason);
+    return { ok: false, reason };
+}
+
+/* ============================================================
+   AUTH MODES
+   ============================================================ */
 let authMode='login';
 
 function setAuthMode(mode){
     authMode=mode;
-
     const loginTab=document.getElementById('tab-auth-login');
     const registerTab=document.getElementById('tab-auth-register');
     const tabs=document.getElementById('auth-tabs');
@@ -1287,35 +1291,26 @@ function setAuthMode(mode){
     const forgotLink=document.getElementById('forgot-link-wrap');
     const successPanel=document.getElementById('register-success');
     const registerPwdChecklist=document.getElementById('register-pwd-checklist');
-
     successPanel?.classList.add('hidden');
-
     const isRegister = (mode==='register');
     const isForgot = (mode==='forgot');
-
     loginTab.classList.toggle('active', mode==='login' || mode==='success');
     registerTab.classList.toggle('active', isRegister);
     tabs.classList.toggle('hidden', isForgot || mode==='success');
-
     authNormal.classList.toggle('hidden', isForgot || mode==='success');
     forgotInfo.classList.toggle('hidden', !isForgot);
-
     registerExtra.classList.toggle('hidden', !isRegister);
     forgotLink.classList.toggle('hidden', isRegister || isForgot);
     registerPwdChecklist?.classList.toggle('hidden', !isRegister);
-
     if(isRegister){
         const pwEl=document.getElementById('auth-password');
         updateRegisterPwdChecklist(pwEl?pwEl.value:'');
     }
-
     const pwEl=document.getElementById('auth-password');
     if(pwEl) pwEl.setAttribute('autocomplete', isRegister?'new-password':'current-password');
-
     const submitBtn=document.getElementById('auth-submit');
     if (mode==='login') submitBtn.textContent='Login';
     else if (mode==='register') submitBtn.textContent='Create Account';
-
     clearAllAuthErrors();
 }
 
@@ -1347,20 +1342,16 @@ function markError(inputId,errorId,msg){const i=document.getElementById(inputId)
 function initAuthScreen(){
     if(initAuthScreen._done)return;
     initAuthScreen._done=true;
-
     ['auth-email','auth-password','auth-name','auth-age','auth-cc','auth-cc-other'].forEach(id=>{
         const el=document.getElementById(id);
         if(!el)return;
         el.addEventListener('input',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
         el.addEventListener('change',()=>{el.classList.remove('input-error');document.getElementById(id+'-error')?.classList.add('hidden')});
     });
-
     document.getElementById('auth-password').addEventListener('input',(e)=>{
         if(authMode==='register')updateRegisterPwdChecklist(e.target.value);
     });
-
     document.getElementById('auth-submit').addEventListener('click',handleAuthSubmit);
-
     document.getElementById('register-success-login-btn').addEventListener('click',()=>{
         setAuthMode('login');
         document.getElementById('auth-email').value='';
@@ -1368,62 +1359,6 @@ function initAuthScreen(){
         document.getElementById('auth-email').focus();
         showToast('Please log in to access your account.',3500);
     });
-}
-
-/* ============================================================
-   ROBUST PROFILE WRITER
-   Tries to guarantee a row exists in `profiles`. Because RLS
-   can silently block an INSERT (returns no error, but 0 rows),
-   we verify by reading back the row after writing.
-   Returns {ok: true} on success, {ok: false, reason} on failure.
-   ============================================================ */
-async function writeProfileRow(payload){
-    // Attempt 1: plain INSERT
-    try {
-        const { error: insErr } = await supabase.from('profiles').insert(payload);
-        if (insErr) {
-            console.warn('[SGTT] insert error:', insErr.message, insErr.details || '');
-        }
-    } catch(e) { console.warn('[SGTT] insert exception:', e.message); }
-
-    // Verify with a read-back
-    try {
-        const { data: check1, error: chkErr1 } = await supabase
-            .from('profiles').select('id').eq('id', payload.id).maybeSingle();
-        if (!chkErr1 && check1 && check1.id) return { ok:true, method:'insert' };
-    } catch(e) { console.warn('[SGTT] readback1 exception:', e.message); }
-
-    // Attempt 2: UPSERT
-    try {
-        const { error: upErr } = await supabase
-            .from('profiles').upsert(payload, { onConflict: 'id' });
-        if (upErr) console.warn('[SGTT] upsert error:', upErr.message, upErr.details || '');
-    } catch(e) { console.warn('[SGTT] upsert exception:', e.message); }
-
-    try {
-        const { data: check2, error: chkErr2 } = await supabase
-            .from('profiles').select('id').eq('id', payload.id).maybeSingle();
-        if (!chkErr2 && check2 && check2.id) return { ok:true, method:'upsert' };
-    } catch(e) { console.warn('[SGTT] readback2 exception:', e.message); }
-
-    // Attempt 3: delete + re-insert (in case a broken half-row exists)
-    try {
-        await supabase.from('profiles').delete().eq('id', payload.id);
-    } catch(e) {}
-
-    try {
-        const { error: insErr2 } = await supabase.from('profiles').insert(payload);
-        if (insErr2) console.warn('[SGTT] retry-insert error:', insErr2.message, insErr2.details || '');
-    } catch(e) { console.warn('[SGTT] retry-insert exception:', e.message); }
-
-    try {
-        const { data: check3, error: chkErr3 } = await supabase
-            .from('profiles').select('id').eq('id', payload.id).maybeSingle();
-        if (!chkErr3 && check3 && check3.id) return { ok:true, method:'retry-insert' };
-    } catch(e) { console.warn('[SGTT] readback3 exception:', e.message); }
-
-    // Give up
-    return { ok:false, reason:'Row could not be written (RLS likely blocking insert).' };
 }
 
 /* ============================================================
@@ -1489,8 +1424,23 @@ async function handleAuthSubmit(){
                 isFirstUser = !existingAdmins || existingAdmins.length === 0;
             } catch(e){ console.warn('[SGTT] First-user check:', e.message); }
 
+            /* =====================================================
+               STEP 1: Save registration to localStorage FIRST,
+               so we never lose the data even if the DB insert fails.
+               ===================================================== */
+            const pendingData = {
+                email, name, age,
+                community_centre: cc,
+                is_first_user: isFirstUser,
+                saved_at: new Date().toISOString()
+            };
+            savePendingRegistration(pendingData);
+
             suppressAutoLogin = true;
 
+            /* =====================================================
+               STEP 2: Create the auth user
+               ===================================================== */
             const { data, error } = await supabase.auth.signUp({
                 email, password,
                 options: {
@@ -1506,6 +1456,7 @@ async function handleAuthSubmit(){
                 suppressAutoLogin = false;
                 if (/already registered|already exists|user already/i.test(error.message || '')) {
                     hideLoading();
+                    clearPendingRegistration();
                     markError('auth-email','auth-email-error','This Login ID is already registered');
                     showToast('❌ This Login ID is already registered. Please log in instead.',6500);
                     return;
@@ -1514,7 +1465,13 @@ async function handleAuthSubmit(){
             }
             if (!data.user) { suppressAutoLogin = false; throw new Error('Sign up failed.'); }
 
-            /* Build the profile payload */
+            /* Update localStorage with the user ID */
+            pendingData.user_id = data.user.id;
+            savePendingRegistration(pendingData);
+
+            /* =====================================================
+               STEP 3: Build the full profile payload
+               ===================================================== */
             const monthKey = currentMonthKey();
             const newUserSubscription = {
                 status:'active',
@@ -1541,10 +1498,31 @@ async function handleAuthSubmit(){
 
             showLoading('Saving your profile…');
 
-            /* Robust write: tries insert → verify → upsert → verify → retry-insert → verify */
-            const result = await writeProfileRow(profilePayload);
+            /* =====================================================
+               STEP 4: Write the profile row (with multi-strategy fallback)
+               We do this BEFORE signing out, so if Supabase returned
+               a session we are authenticated and RLS will allow us.
+               ===================================================== */
+            let profileWritten = false;
+            let writeError = null;
 
-            /* NOW sign out so the user logs in explicitly */
+            if (data.session) {
+                /* We have an authenticated session — try to write now */
+                const result = await writeProfileRow(profilePayload);
+                profileWritten = result.ok;
+                if (!result.ok) writeError = result.reason;
+            } else {
+                /* No session (email confirmation is ON) — the insert will
+                   run as anonymous and may be blocked by RLS. We still try. */
+                console.warn('[SGTT] No session after signUp — email confirmation may be ON. Attempting anonymous insert...');
+                const result = await writeProfileRow(profilePayload);
+                profileWritten = result.ok;
+                if (!result.ok) writeError = result.reason;
+            }
+
+            /* =====================================================
+               STEP 5: Sign out if we have a session
+               ===================================================== */
             if (data.session) {
                 try { await supabase.auth.signOut(); } catch(e) { console.warn('[SGTT] signOut:', e.message); }
             }
@@ -1552,11 +1530,12 @@ async function handleAuthSubmit(){
             suppressAutoLogin = false;
             hideLoading();
 
-            if (!result.ok) {
-                /* Show the actual failure so admin knows to check RLS */
-                console.error('[SGTT] Profile save failed:', result.reason);
-                showToast('❌ Could not save your profile. Please ask an admin to check the database permissions. You will be able to log in, but your account will not appear in the admin list until this is fixed.',12000);
-                /* We STILL show success because the auth user exists and login will retry */
+            if (!profileWritten) {
+                /* Show the DB-fix modal — the user needs to run the SQL */
+                showDbFixModal(writeError || 'Row not found after insert — likely RLS blocking.');
+                showToast('⚠️ Profile could not be saved. Please check the setup instructions.',9000);
+            } else {
+                clearPendingRegistration();
             }
 
             showRegisterSuccess();
@@ -1593,51 +1572,6 @@ async function handleAuthSubmit(){
     }
 }
 
-let passwordModalMode=null;
-function showPasswordModal(mode){
-    passwordModalMode=mode;
-    const title=document.getElementById('pwd-modal-title'),icon=document.getElementById('pwd-modal-icon'),msg=document.getElementById('pwd-modal-msg');
-    if (mode==='required') {
-        icon.textContent='🔐'; title.textContent='Update Your Password';
-        msg.innerHTML='For your security, we\'ve strengthened our password policy. Please set a new password before continuing.';
-    } else if (mode==='reset') {
-        icon.textContent='🔑'; title.textContent='Set New Password';
-        msg.innerHTML='Enter a new password for your account that meets all requirements below.';
-    }
-    document.getElementById('pwd-new').value='';
-    document.getElementById('pwd-confirm').value='';
-    document.getElementById('pwd-error').classList.add('hidden');
-    updatePasswordChecklist('');
-    document.getElementById('password-modal').classList.remove('hidden');
-    setTimeout(()=>document.getElementById('pwd-new').focus(),150);
-}
-function closePasswordModal(){document.getElementById('password-modal').classList.add('hidden');passwordModalMode=null}
-function updatePasswordChecklist(pw){
-    PASSWORD_REQUIREMENTS.forEach(req=>{
-        const el=document.querySelector(`#pwd-checklist .pwd-check[data-req="${req.key}"]`);
-        if(el)el.classList.toggle('ok',req.test(pw));
-    });
-}
-document.getElementById('pwd-new').addEventListener('input',(e)=>updatePasswordChecklist(e.target.value));
-document.getElementById('pwd-save').addEventListener('click',async()=>{
-    const pw=document.getElementById('pwd-new').value,confirm=document.getElementById('pwd-confirm').value;
-    const errEl=document.getElementById('pwd-error');
-    errEl.classList.add('hidden');
-    if(!pw){errEl.textContent='Please enter a new password';errEl.classList.remove('hidden');return}
-    if(!isPasswordCompliant(pw)){errEl.textContent='Password does not meet all requirements';errEl.classList.remove('hidden');return}
-    if(pw!==confirm){errEl.textContent='Passwords do not match';errEl.classList.remove('hidden');return}
-    try{
-        showLoading('Updating password…');
-        const{error}=await supabase.auth.updateUser({password:pw,data:{password_policy_v:PASSWORD_POLICY_VERSION}});
-        if(error)throw error;
-        const{data:{user}}=await supabase.auth.getUser();
-        if(user)currentUser=user;
-        hideLoading();closePasswordModal();showToast('✅ Password updated!',3500);
-        if(pendingRedirectAfterPasswordChange){const fn=pendingRedirectAfterPasswordChange;pendingRedirectAfterPasswordChange=null;await fn()}
-    }catch(err){hideLoading();console.error(err);errEl.textContent=err.message||'Failed to update password';errEl.classList.remove('hidden')}
-});
-document.getElementById('pwd-logout').addEventListener('click',async()=>{pendingRedirectAfterPasswordChange=null;closePasswordModal();await handleLogout()});
-
 function isConfigValid(){
     const cfg=window.SGTT_CONFIG||{},url=cfg.SUPABASE_URL||'',key=cfg.SUPABASE_ANON_KEY||'';
     if(!url||!key)return false;
@@ -1657,11 +1591,7 @@ function showConfigBannerIfNeeded(){
 function endOfCurrentMonth(){const n=new Date();return new Date(n.getFullYear(),n.getMonth()+1,0,23,59,59,999).getTime()}
 function currentMonthKey(){const n=new Date();return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`}
 function startOfCurrentMonth(){const n=new Date();return new Date(n.getFullYear(),n.getMonth(),1,0,0,0,0).getTime()}
-function nextMonthLabel(){
-    const n=new Date();
-    const d=new Date(n.getFullYear(),n.getMonth()+1,1);
-    return d.toLocaleDateString('en-SG',{month:'long',year:'numeric'});
-}
+function nextMonthLabel(){const n=new Date();const d=new Date(n.getFullYear(),n.getMonth()+1,1);return d.toLocaleDateString('en-SG',{month:'long',year:'numeric'});}
 function getPromotion(){const raw=dbSettings&&dbSettings.promotion;if(!raw)return{enabled:false,month:'',message:''};try{const p=typeof raw==='string'?JSON.parse(raw):raw;return{enabled:!!p.enabled,month:p.month||'',message:p.message||''}}catch{return{enabled:false,month:'',message:''}}}
 function isPromotionActive(){const p=getPromotion();if(!p.enabled)return false;return p.month===currentMonthKey()}
 async function savePromotion(promo){await upsertSetting('promotion',JSON.stringify(promo))}
@@ -1763,17 +1693,10 @@ function daysSince(ts){if(ts===null||ts===undefined)return null;return Math.floo
 function populateCCSelect(sel,{includeOther=true,selectedValue=null,placeholder=null}={}){
     if(!sel)return;
     sel.innerHTML='';
-    if(placeholder){
-        const p=document.createElement('option');
-        p.value='';p.textContent=placeholder;
-        sel.appendChild(p);
-    }
+    if(placeholder){const p=document.createElement('option');p.value='';p.textContent=placeholder;sel.appendChild(p);}
     getAllCCs().forEach(cc=>{const o=document.createElement('option');o.value=cc;o.textContent=cc;sel.appendChild(o)});
     if(includeOther){const o=document.createElement('option');o.value=OTHER_CC_VALUE;o.textContent='➕ Other (not in list)';sel.appendChild(o)}
-    if(selectedValue){
-        const exists=Array.from(sel.options).some(o=>o.value===selectedValue);
-        if(exists)sel.value=selectedValue;
-    }
+    if(selectedValue){const exists=Array.from(sel.options).some(o=>o.value===selectedValue);if(exists)sel.value=selectedValue;}
 }
 function populateAllCCSelects(){
     populateCCSelect(document.getElementById('auth-cc'),{placeholder:'— Select your Community Centre —'});
@@ -1823,9 +1746,16 @@ async function onLoggedIn(authUser,eventType){
         await loadAllProfiles();
         let profile=allProfiles.find(p=>p.id===authUser.id);
 
-        /* If profile is missing, create it now (while authenticated) */
+        /* ===================================================
+           If profile is missing, create it NOW.
+           We're authenticated now, so RLS will allow the insert.
+           Use localStorage pending data if available, otherwise
+           fall back to user_metadata.
+           =================================================== */
         if(!profile){
+            console.log('[SGTT] Profile missing on login — attempting to create.');
             const meta=authUser.user_metadata||{};
+            const pending=getPendingRegistration();
             const monthKey=currentMonthKey();
             const newUserSubscription={
                 status:'active',
@@ -1843,9 +1773,9 @@ async function onLoggedIn(authUser,eventType){
             const payload={
                 id:authUser.id,
                 email:authUser.email,
-                name:meta.name||'Unknown',
-                age:meta.age||null,
-                community_centre:meta.community_centre||null,
+                name: pending?.name || meta.name || 'Unknown',
+                age: pending?.age || meta.age || null,
+                community_centre: pending?.community_centre || meta.community_centre || null,
                 email_confirmed:true,
                 pending_approval: !isFirstUser,
                 is_admin: isFirstUser,
@@ -1854,7 +1784,14 @@ async function onLoggedIn(authUser,eventType){
 
             showLoading('Setting up your profile…');
             const result = await writeProfileRow(payload);
-            if (!result.ok) console.warn('[SGTT] Login-time profile write failed:', result.reason);
+
+            if(result.ok){
+                console.log('[SGTT] ✓ Profile created on login:', result.method);
+                clearPendingRegistration();
+            } else {
+                console.error('[SGTT] ✗ Login-time profile write failed:', result.reason);
+                showDbFixModal(result.reason);
+            }
 
             await loadAllProfiles();
             profile=allProfiles.find(p=>p.id===authUser.id);
@@ -1863,7 +1800,8 @@ async function onLoggedIn(authUser,eventType){
         if(!profile){
             hideLoading();
             showOnlyScreen('auth');
-            showToast('⚠️ Could not load or create your profile. Please ask an admin to check the database permissions.',9000);
+            showToast('⚠️ Could not load your profile. Please check the database setup.',9000);
+            showDbFixModal('Profile row not found and could not be created on login.');
             try{ await supabase.auth.signOut(); }catch(e){}
             return;
         }
@@ -1878,9 +1816,7 @@ async function onLoggedIn(authUser,eventType){
 
         if (needsPasswordUpdate) {
             hideLoading();showOnlyScreen('auth');
-            pendingRedirectAfterPasswordChange=async()=>{
-                await enterMainApp();
-            };
+            pendingRedirectAfterPasswordChange=async()=>{ await enterMainApp(); };
             showPasswordModal('required');
             return;
         }
@@ -1930,11 +1866,10 @@ async function handleLogout(){
     currentUser=null;userProfile=null;
     allProfiles=[];allRequests=[];allMatches=[];allChallenges=[];allMatchesGlobal=[];
     settingsLoaded=false;dbSettings={};editingUserId=null;lastNotifSignature='';
-    suppressAutoLogin=false;
-    adminWelcomeShown=false;
+    suppressAutoLogin=false;adminWelcomeShown=false;
     document.getElementById('auth-password').value='';
     document.getElementById('auth-email').value='';
-    clearAllAuthErrors();closeNotifModal();closeInactivityModal();closePasswordModal();closeAdminWelcomeModal();
+    clearAllAuthErrors();closeNotifModal();closeInactivityModal();closeAdminWelcomeModal();closeDbFixModal();
     setAuthMode('login');showOnlyScreen('auth');showToast('Logged out.',2000);
 }
 
@@ -1950,13 +1885,7 @@ function startAutoRefresh(){
             if(activeTab==='dashboard')renderDashboard();
             if(activeTab==='request')renderPlayTab();
             if(activeTab==='subscribe')renderSubscription();
-            if(activeTab==='admin'){
-                renderAdminPendingUsers();
-                renderAdminPendingReqs();
-                renderAdminUserList();
-                renderCCMgmtList();
-                renderInactivityComments();
-            }
+            if(activeTab==='admin'){renderAdminPendingUsers();renderAdminPendingReqs();renderAdminUserList();renderCCMgmtList();renderInactivityComments();}
         }catch(e){console.warn('[SGTT] auto-refresh failed:',e.message)}
     },REFRESH_INTERVAL_MS);
 }
@@ -1977,9 +1906,7 @@ document.getElementById('manual-refresh')?.addEventListener('click',async()=>{
         if(activeTab==='dashboard')renderDashboard();
         if(activeTab==='request')renderPlayTab();
         if(activeTab==='subscribe')renderSubscription();
-        if(activeTab==='admin'){
-            renderAdminPendingUsers();renderAdminPendingReqs();renderAdminUserList();renderCCMgmtList();renderInactivityComments();
-        }
+        if(activeTab==='admin'){renderAdminPendingUsers();renderAdminPendingReqs();renderAdminUserList();renderCCMgmtList();renderInactivityComments();}
         hideLoading();showToast('Data refreshed.');
     }catch(e){hideLoading();showToast('Refresh failed: '+e.message)}
 });
@@ -2009,10 +1936,7 @@ function renderHeaderSubscription(){
     else if(isPromotionActive()){icon='🎉';text='Free';cls='promo'}
     else{
         const s=userProfile.subscription||{};
-        if(s.status==='active'&&s.paidUntil>Date.now()){
-            if(s.freeTrial&&!s.paid){icon='🎁';text='Free 1st mo';cls='promo'}
-            else{icon='✅';text='Active';cls='active'}
-        }
+        if(s.status==='active'&&s.paidUntil>Date.now()){if(s.freeTrial&&!s.paid){icon='🎁';text='Free 1st mo';cls='promo'}else{icon='✅';text='Active';cls='active'}}
         else if(s.status==='pending'){icon='⏳';text='Pending';cls='pending'}
         else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now()){icon='⏰';text='Expired';cls='inactive'}
         else{icon='❌';text='Inactive';cls='inactive'}
@@ -2024,13 +1948,8 @@ function renderHeaderSubscription(){
 
 function updatePlayTabLock(){
     const playBtn=document.getElementById('tab-play-btn');if(!playBtn)return;
-    if(userProfile && !isAccountEnabled(userProfile)){
-        playBtn.classList.add('tab-disabled');
-        playBtn.title='Account pending admin activation';
-    }else{
-        playBtn.classList.remove('tab-disabled');
-        playBtn.title='';
-    }
+    if(userProfile && !isAccountEnabled(userProfile)){playBtn.classList.add('tab-disabled');playBtn.title='Account pending admin activation';}
+    else{playBtn.classList.remove('tab-disabled');playBtn.title='';}
 }
 
 function computePlayerOfMonth(){const start=startOfCurrentMonth(),winCounts={};for(const m of allMatchesGlobal){const ts=new Date(m.played_at).getTime();if(ts<start)continue;if(!m.winner)continue;winCounts[m.winner]=(winCounts[m.winner]||0)+1}let bestId=null,bestWins=0;for(const[id,w]of Object.entries(winCounts)){if(w>bestWins){bestWins=w;bestId=id}}if(!bestId)return null;const u=profileOf(bestId);if(!u)return null;return{user:u,wins:bestWins}}
@@ -2043,10 +1962,8 @@ function renderDashboard(){
     if(!userProfile)return;
     const promoBanner=document.getElementById('promo-banner');
     if(isPromotionActive()){const p=getPromotion();document.getElementById('promo-title').textContent='🎉 Free Subscription Month!';document.getElementById('promo-message').textContent=p.message||'All matches are free this month. Enjoy!';promoBanner.classList.remove('hidden')}else promoBanner.classList.add('hidden');
-
     const lockedCard=document.getElementById('dashboard-account-locked');
     if(!isAccountEnabled(userProfile))lockedCard.classList.remove('hidden');else lockedCard.classList.add('hidden');
-
     const wins=userProfile.wins||0,losses=userProfile.losses||0,total=wins+losses;
     const winRate=total>0?Math.round((wins/total)*100):0;
     document.getElementById('stat-points').textContent=userProfile.points||0;
@@ -2072,13 +1989,8 @@ function renderDashboard(){
             const oppScore=iAmTeamA?m.score_b:m.score_a;
             const won=myScore>oppScore;
             let myTeam,oppTeam;
-            if(m.type==='doubles'){
-                myTeam=iAmTeamA?`${nameOf(m.player_a)} & ${nameOf(m.partner_a)}`:`${nameOf(m.player_b)} & ${nameOf(m.partner_b)}`;
-                oppTeam=iAmTeamA?`${nameOf(m.player_b)} & ${nameOf(m.partner_b)}`:`${nameOf(m.player_a)} & ${nameOf(m.partner_a)}`;
-            }else{
-                myTeam=iAmTeamA?nameOf(m.player_a):nameOf(m.player_b);
-                oppTeam=iAmTeamA?nameOf(m.player_b):nameOf(m.player_a);
-            }
+            if(m.type==='doubles'){myTeam=iAmTeamA?`${nameOf(m.player_a)} & ${nameOf(m.partner_a)}`:`${nameOf(m.player_b)} & ${nameOf(m.partner_b)}`;oppTeam=iAmTeamA?`${nameOf(m.player_b)} & ${nameOf(m.partner_b)}`:`${nameOf(m.player_a)} & ${nameOf(m.partner_a)}`;}
+            else{myTeam=iAmTeamA?nameOf(m.player_a):nameOf(m.player_b);oppTeam=iAmTeamA?nameOf(m.player_b):nameOf(m.player_a);}
             const badge=won?'badge-green':'badge-red';
             const result=won?'WIN':'LOSS';
             return `<div class="match-item"><div class="info"><strong>${escapeHtml(myTeam)} vs ${escapeHtml(oppTeam)}</strong><small>${m.type} • ${escapeHtml(m.community_centre)} • ${new Date(m.played_at).toLocaleDateString()}</small></div><div class="result"><span class="badge ${badge}">${result}</span><div style="font-size:.8rem;margin-top:4px;font-weight:700;font-variant-numeric:tabular-nums">${myScore} – ${oppScore}</div></div></div>`;
@@ -2223,15 +2135,8 @@ function renderPlayTab(){
     if(!userProfile)return;
     const lockedCard=document.getElementById('play-locked-card');
     const normalContent=document.getElementById('play-normal-content');
-
-    if(!isAccountEnabled(userProfile)){
-        lockedCard.classList.remove('hidden');
-        normalContent.classList.add('hidden');
-        return;
-    }
-    lockedCard.classList.add('hidden');
-    normalContent.classList.remove('hidden');
-
+    if(!isAccountEnabled(userProfile)){lockedCard.classList.remove('hidden');normalContent.classList.add('hidden');return;}
+    lockedCard.classList.add('hidden');normalContent.classList.remove('hidden');
     const warn=document.getElementById('req-sub-warning');
     if(isSubscriptionActive(userProfile))warn.classList.add('hidden');else warn.classList.remove('hidden');
     refreshChallengeDropdowns();refreshRequestDropdowns();
@@ -2383,13 +2288,11 @@ function renderSubscription(){
     if(!userProfile)return;
     const promoCard=document.getElementById('sub-request-card'),statusEl=document.getElementById('sub-current-status');
     const s=userProfile.subscription||{};
-
     if(!isAccountEnabled(userProfile)){
         statusEl.innerHTML=`<div class="sub-status" style="border-color:var(--warning);background:rgba(245,158,11,.08)"><div class="dot dot-yellow"></div><div style="flex:1;min-width:0"><div style="font-weight:700;color:var(--warning)">🔒 Account Pending Activation</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">An admin must activate your account before you can play.</div></div></div>`;
         promoCard.classList.add('hidden');
         return;
     }
-
     if(isPromotionActive()){
         const p=getPromotion();
         statusEl.innerHTML=`<div class="sub-status" style="border-color:var(--accent);background:rgba(34,197,94,.08)"><div class="dot dot-green"></div><div style="flex:1;min-width:0"><div style="font-weight:700;color:var(--accent)">🎉 Free Month — No payment needed!</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${escapeHtml(p.message||'All matches are free this month. Enjoy!')}</div></div></div>`;
@@ -2397,35 +2300,16 @@ function renderSubscription(){
         return;
     }
     promoCard.classList.remove('hidden');
-
     const label=subStatusLabel(userProfile);
     const cls=label.cls==='badge-green'?'dot-green':label.cls==='badge-yellow'?'dot-yellow':'dot-red';
     const activeNow=s.status==='active'&&s.paidUntil>Date.now();
     let detail='',extra='';
-
-    if(activeNow&&s.freeTrial&&!s.paid){
-        const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));
-        detail=`🎁 Your first month is FREE — active until ${new Date(s.paidUntil).toLocaleDateString()}`;
-        extra=`${days} day${days===1?'':'s'} left • From ${nextMonthLabel()}, $2/month applies.`;
-    }
-    else if(activeNow){
-        const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));
-        detail=`Active until ${new Date(s.paidUntil).toLocaleDateString()} (end of month)`;
-        extra=`${days} day${days===1?'':'s'} remaining this month`;
-    }
-    else if(s.status==='pending'){
-        detail='Waiting for admin to verify $2 payment.';
-        extra=`Requested ${new Date(s.requestedAt).toLocaleDateString()}`;
-    }
-    else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now()){
-        detail='Subscription expired. Renew for this month to continue.';
-    }
-    else{
-        detail='No active subscription for this month. Request activation below.';
-    }
-
+    if(activeNow&&s.freeTrial&&!s.paid){const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));detail=`🎁 Your first month is FREE — active until ${new Date(s.paidUntil).toLocaleDateString()}`;extra=`${days} day${days===1?'':'s'} left • From ${nextMonthLabel()}, $2/month applies.`;}
+    else if(activeNow){const days=Math.ceil((s.paidUntil-Date.now())/(24*60*60*1000));detail=`Active until ${new Date(s.paidUntil).toLocaleDateString()} (end of month)`;extra=`${days} day${days===1?'':'s'} remaining this month`;}
+    else if(s.status==='pending'){detail='Waiting for admin to verify $2 payment.';extra=`Requested ${new Date(s.requestedAt).toLocaleDateString()}`;}
+    else if(s.status==='active'&&s.paidUntil>0&&s.paidUntil<=Date.now()){detail='Subscription expired. Renew for this month to continue.';}
+    else{detail='No active subscription for this month. Request activation below.';}
     statusEl.innerHTML=`<div class="sub-status"><div class="dot ${cls}"></div><div style="flex:1;min-width:0"><div style="font-weight:600">${label.text}</div><div style="font-size:.8rem;color:var(--text-muted);word-break:break-word">${detail}</div>${extra?`<div style="font-size:.74rem;color:var(--text-dim);margin-top:2px">${extra}</div>`:''}</div></div><div style="font-size:.78rem;color:var(--text-muted)">Paid: <strong>${s.paid?'Yes':'No'}</strong> • Auto-renew: <strong>${s.autoRenew?'On':'Off'}</strong></div>`;
-
     const reqBtn=document.getElementById('sub-request-btn');
     if(s.status==='pending'){reqBtn.disabled=true;reqBtn.textContent='⏳ Request Pending Approval'}
     else if(activeNow){reqBtn.disabled=true;reqBtn.textContent=(s.freeTrial&&!s.paid)?'🎁 Free This Month':'✅ Active This Month'}
@@ -2492,32 +2376,19 @@ window.approveNewUser=async function(id){
     if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
     const u=allProfiles.find(x=>x.id===id);
     if(!u){showToast('User not found.');return}
-    const newSub={
-        ...(u.subscription||{}),
-        status:'active',
-        paid:false,
-        freeTrial:true,
-        freeMonth:currentMonthKey(),
-        paidUntil:endOfCurrentMonth(),
-        requestedAt:0,
-        lastPayment:0,
-        autoRenew:false
-    };
+    const newSub={...(u.subscription||{}),status:'active',paid:false,freeTrial:true,freeMonth:currentMonthKey(),paidUntil:endOfCurrentMonth(),requestedAt:0,lastPayment:0,autoRenew:false};
     try{
         showLoading('Activating user…');
-        const{error}=await supabase.from('profiles').update({
-            pending_approval:false,
-            subscription:newSub
-        }).eq('id',id);
+        const{error}=await supabase.from('profiles').update({pending_approval:false,subscription:newSub}).eq('id',id);
         if(error)throw error;
         await refreshAll();
         hideLoading();
-        showToast(`✅ ${u.name||'User'} activated! They can now play.`,5000);
+        showToast(`✅ ${u.name||'User'} activated!`,5000);
         renderAdminPendingUsers();renderAdminUserList();
     }catch(err){
         hideLoading();console.error(err);
         let msg=err.message||'Failed to activate.';
-        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked this update. Ensure your admin row has is_admin=true.';
+        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked this update. Please run the SQL fix.';
         showToast(msg,7000);
     }
 };
@@ -2526,13 +2397,7 @@ window.rejectNewUser=async function(id){
     if(!userProfile||!userProfile.is_admin){showToast('Admin access required.');return}
     const u=allProfiles.find(x=>x.id===id);
     if(!u){showToast('User not found.');return}
-    const ok=await showConfirm({
-        title:'Reject User?',
-        message:`Reject and remove "${u.name||'this user'}"? They can re-register later.`,
-        yesLabel:'Yes, Reject',
-        danger:true,
-        icon:'🗑️'
-    });
+    const ok=await showConfirm({title:'Reject User?',message:`Reject and remove "${u.name||'this user'}"? They can re-register later.`,yesLabel:'Yes, Reject',danger:true,icon:'🗑️'});
     if(!ok)return;
     try{
         showLoading('Rejecting…');
@@ -2549,7 +2414,7 @@ window.rejectNewUser=async function(id){
     }catch(err){
         hideLoading();console.error(err);
         let msg=err.message||'Failed to reject.';
-        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete. Check your admin policies.';
+        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete. Please run the SQL fix.';
         showToast(msg,7000);
     }
 };
@@ -2561,33 +2426,11 @@ function maybeShowAdminWelcome(){
     const body=document.getElementById('admin-welcome-body');
     const footer=document.getElementById('admin-welcome-footer');
     document.getElementById('admin-welcome-title').textContent=`Welcome back! ${pending.length} inactive user${pending.length===1?'':'s'}`;
-    body.innerHTML=`
-        <p style="font-size:.9rem;color:#cbd5e1;line-height:1.6;margin-bottom:14px">
-            The following ${pending.length===1?'user is':'users are'} waiting for activation. Would you like to activate them all now?
-        </p>
-        <div style="max-height:280px;overflow-y:auto">
-            ${pending.map(u=>`<div style="background:var(--bg-dark);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:10px;padding:10px 12px;margin-bottom:8px">
-                <div style="font-weight:700;font-size:.9rem">${escapeHtml(u.name||'Unknown')}</div>
-                <div style="font-size:.72rem;color:var(--text-muted);margin-top:2px">${escapeHtml(u.community_centre||'—')} • Age ${u.age||'—'}</div>
-            </div>`).join('')}
-        </div>
-    `;
-    footer.innerHTML=`
-        <button id="admin-welcome-enable-all" style="margin-bottom:8px">✅ Activate All (${pending.length})</button>
-        <button id="admin-welcome-review" class="secondary" style="margin-bottom:8px">👀 Review Individually</button>
-        <button id="admin-welcome-later" class="secondary" style="margin-bottom:0">Later</button>
-    `;
+    body.innerHTML=`<p style="font-size:.9rem;color:#cbd5e1;line-height:1.6;margin-bottom:14px">The following ${pending.length===1?'user is':'users are'} waiting for activation. Would you like to activate them all now?</p><div style="max-height:280px;overflow-y:auto">${pending.map(u=>`<div style="background:var(--bg-dark);border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:10px;padding:10px 12px;margin-bottom:8px"><div style="font-weight:700;font-size:.9rem">${escapeHtml(u.name||'Unknown')}</div><div style="font-size:.72rem;color:var(--text-muted);margin-top:2px">${escapeHtml(u.community_centre||'—')} • Age ${u.age||'—'}</div></div>`).join('')}</div>`;
+    footer.innerHTML=`<button id="admin-welcome-enable-all" style="margin-bottom:8px">✅ Activate All (${pending.length})</button><button id="admin-welcome-review" class="secondary" style="margin-bottom:8px">👀 Review Individually</button><button id="admin-welcome-later" class="secondary" style="margin-bottom:0">Later</button>`;
     modal.classList.remove('hidden');
-
-    document.getElementById('admin-welcome-enable-all').addEventListener('click',async()=>{
-        await enableAllPendingUsers();
-        closeAdminWelcomeModal();
-    });
-    document.getElementById('admin-welcome-review').addEventListener('click',()=>{
-        closeAdminWelcomeModal();
-        switchTab('admin');
-        setTimeout(()=>document.getElementById('pending-users-card')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
-    });
+    document.getElementById('admin-welcome-enable-all').addEventListener('click',async()=>{await enableAllPendingUsers();closeAdminWelcomeModal();});
+    document.getElementById('admin-welcome-review').addEventListener('click',()=>{closeAdminWelcomeModal();switchTab('admin');setTimeout(()=>document.getElementById('pending-users-card')?.scrollIntoView({behavior:'smooth',block:'start'}),250);});
     document.getElementById('admin-welcome-later').addEventListener('click',closeAdminWelcomeModal);
 }
 function closeAdminWelcomeModal(){document.getElementById('admin-welcome-modal')?.classList.add('hidden')}
@@ -2601,27 +2444,11 @@ async function enableAllPendingUsers(){
     let success=0,failed=0;
     for(const u of pending){
         try{
-            const newSub={
-                ...(u.subscription||{}),
-                status:'active',
-                paid:false,
-                freeTrial:true,
-                freeMonth:currentMonthKey(),
-                paidUntil:endOfCurrentMonth(),
-                requestedAt:0,
-                lastPayment:0,
-                autoRenew:false
-            };
-            const{error}=await supabase.from('profiles').update({
-                pending_approval:false,
-                subscription:newSub
-            }).eq('id',u.id);
+            const newSub={...(u.subscription||{}),status:'active',paid:false,freeTrial:true,freeMonth:currentMonthKey(),paidUntil:endOfCurrentMonth(),requestedAt:0,lastPayment:0,autoRenew:false};
+            const{error}=await supabase.from('profiles').update({pending_approval:false,subscription:newSub}).eq('id',u.id);
             if(error)throw error;
             success++;
-        }catch(e){
-            console.warn('[SGTT] Failed to activate',u.id,e.message);
-            failed++;
-        }
+        }catch(e){console.warn('[SGTT] Failed to activate',u.id,e.message);failed++;}
     }
     await refreshAll();
     hideLoading();
@@ -2667,13 +2494,7 @@ function renderCCMgmtList(){
 }
 window.deleteCCUI=async function(cc){
     if(!userProfile||!userProfile.is_admin)return;
-    const ok=await showConfirm({
-        title:'Remove Community Centre?',
-        message:`Remove "${cc}" from the dropdown list?`,
-        yesLabel:'Yes, Remove',
-        danger:true,
-        icon:'🗑️'
-    });
+    const ok=await showConfirm({title:'Remove Community Centre?',message:`Remove "${cc}" from the dropdown list?`,yesLabel:'Yes, Remove',danger:true,icon:'🗑️'});
     if(!ok)return;
     try{showLoading('Removing…');const r=await deleteCC(cc);hideLoading();showToast(r.action==='hidden'?`"${cc}" hidden from dropdowns.`:`"${cc}" deleted.`);renderCCMgmtList()}
     catch(err){hideLoading();showToast('Failed: '+err.message)}
@@ -2739,13 +2560,7 @@ function renderInactivityComments(){
 }
 window.clearInactivityReason=async function(userId){
     if(!userProfile||!userProfile.is_admin)return;
-    const ok=await showConfirm({
-        title:'Clear Comment?',
-        message:'Remove this inactivity reason permanently?',
-        yesLabel:'Yes, Clear',
-        danger:true,
-        icon:'🗑️'
-    });
+    const ok=await showConfirm({title:'Clear Comment?',message:'Remove this inactivity reason permanently?',yesLabel:'Yes, Clear',danger:true,icon:'🗑️'});
     if(!ok)return;
     try{const{error}=await supabase.from('profiles').update({inactivity_reason:null,inactivity_reason_at:null}).eq('id',userId);if(error)throw error;await refreshAll();showToast('Comment cleared.');renderInactivityComments()}
     catch(err){showToast('Failed: '+err.message)}
@@ -2844,16 +2659,8 @@ window.adminDeleteUser=async function(id){
     if(id===userProfile.id){showToast('You cannot delete yourself.');return}
     const u=allProfiles.find(x=>x.id===id);
     if(!u){showToast('User not found.');return}
-
-    const ok=await showConfirm({
-        title:'Delete User?',
-        message:`Permanently delete "${u.name||'this user'}"? This cannot be undone.`,
-        yesLabel:'Yes, Delete',
-        danger:true,
-        icon:'🗑️'
-    });
+    const ok=await showConfirm({title:'Delete User?',message:`Permanently delete "${u.name||'this user'}"? This cannot be undone.`,yesLabel:'Yes, Delete',danger:true,icon:'🗑️'});
     if(!ok)return;
-
     try{
         showLoading('Deleting…');
         try{await supabase.from('match_requests').delete().or(`from_user.eq.${id},to_user.eq.${id},partner.eq.${id},opponent2.eq.${id}`)}catch(e){}
@@ -2869,7 +2676,7 @@ window.adminDeleteUser=async function(id){
     }catch(err){
         hideLoading();console.error(err);
         let msg=err.message||'Unknown error';
-        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete. Check your admin policies.';
+        if(/row-level security|RLS|permission/i.test(msg))msg='RLS blocked the delete. Please run the SQL fix.';
         showToast('Delete failed: '+msg,8000);
     }
 };
@@ -2883,41 +2690,29 @@ function buildNotifications(){
     if(!userProfile)return[];
     const myId=userProfile.id;
     const items=[];
-
     if(!isAccountEnabled(userProfile)){
         items.push({tab:'request',icon:'🔒',title:'Your account is pending admin activation',body:'An admin needs to activate your account before you can play. You can still browse the leaderboards and info.',action:'Tap to view →',severity:'warning'});
     }
-
     const incomingChallenges=allChallenges.filter(c=>(c.opponent===myId||c.opponent_partner===myId)&&c.status==='pending');
     incomingChallenges.forEach(c=>{const iAmPrimary=c.opponent===myId;items.push({tab:'request',icon:'⚔️',title:iAmPrimary?'New challenge to accept!':'You\'re in a pending challenge',body:`${nameOf(c.challenger)}${c.challenger_partner?' & '+nameOf(c.challenger_partner):''} challenged you to a ${c.type} match at ${c.community_centre}.`,action:iAmPrimary?'Tap to accept or decline →':'Tap to view →',severity:'info'})});
     const incomingRequests=allRequests.filter(r=>r.to_user===myId&&r.status==='pending');
-    incomingRequests.forEach(r=>{items.push({tab:'request',icon:'🏓',title:'Match request awaiting your approval',body:`${nameOf(r.from_user)}${r.partner?' & '+nameOf(r.partner):''} submitted a ${r.type} match score ${r.score_a}–${r.score_b} at ${r.community_centre}.`,action:'Tap to approve or reject →',severity:'info'})});
+    incomingRequests.forEach(r=>{items.push({tab:'request',icon:'🏓',title:'Match request awaiting your approval',body:`${nameOf(r.from_user)}${r.partner?' & '+nameOf(r.partner):''} submitted a ${r.type} match score ${r.score_a}–${r.score_b}.`,action:'Tap to approve or reject →',severity:'info'})});
     const awaitingAck=allChallenges.filter(c=>c.status==='score_submitted'&&c.score_submitted_by!==myId&&(c.opponent===myId||c.opponent_partner===myId||c.challenger===myId||c.challenger_partner===myId));
     awaitingAck.forEach(c=>{items.push({tab:'request',icon:'📝',title:'Score submitted — please acknowledge',body:`${nameOf(c.score_submitted_by)} submitted the score ${c.score_challenger}–${c.score_opponent}.`,action:'Tap to acknowledge →',severity:'info'})});
-
     if(userProfile.is_admin){
         const pendingUsers=allProfiles.filter(u=>u.pending_approval===true);
         if(pendingUsers.length>0){
             items.push({tab:'admin',icon:'👋',title:`${pendingUsers.length} new user${pendingUsers.length===1?'':'s'} awaiting activation`,body:'Tap to review and activate them.',action:'Go to Admin →',severity:'warning'});
         }
     }
-
     const sub=userProfile.subscription||{};
     const isActive=sub.status==='active'&&sub.paidUntil>Date.now();
-
     if(isAccountEnabled(userProfile)){
-        if(isPromotionActive()){
-            if(!isActive)items.push({tab:'subscribe',icon:'🎉',title:'Free subscription active this month!',body:'You have free play this month — no payment needed. Enjoy!',action:'Tap to view →',severity:'info'});
-        }else{
-            if(sub.freeTrial&&!sub.paid&&isActive){
-                const daysLeft=Math.ceil((sub.paidUntil-Date.now())/(24*60*60*1000));
-                items.push({tab:'subscribe',icon:'🎁',title:'Your first month is FREE!',body:`You have free play until ${new Date(sub.paidUntil).toLocaleDateString()} (${daysLeft} day${daysLeft===1?'':'s'} left). From ${nextMonthLabel()} the $2/month subscription starts.`,action:'Tap to view →',severity:'info'});
-            }else if(!isActive&&sub.status!=='pending'){
-                const isExpired=sub.status==='active'&&sub.paidUntil>0&&sub.paidUntil<=Date.now();
-                items.push({tab:'subscribe',icon:'💳',title:isExpired?'Your subscription has expired':'Subscription required',body:isExpired?'Renew your $2 subscription to continue playing this month.':'You need an active $2/month subscription to challenge and play matches.',action:'Tap to subscribe →',severity:'danger'});
-            }else if(sub.status==='pending'){
-                items.push({tab:'subscribe',icon:'⏳',title:'Subscription pending admin approval',body:'Your request is being reviewed.',action:'Tap to view status →',severity:'warning'});
-            }
+        if(isPromotionActive()){if(!isActive)items.push({tab:'subscribe',icon:'🎉',title:'Free subscription active this month!',body:'You have free play this month.',action:'Tap to view →',severity:'info'});}
+        else{
+            if(sub.freeTrial&&!sub.paid&&isActive){const daysLeft=Math.ceil((sub.paidUntil-Date.now())/(24*60*60*1000));items.push({tab:'subscribe',icon:'🎁',title:'Your first month is FREE!',body:`You have free play until ${new Date(sub.paidUntil).toLocaleDateString()} (${daysLeft} day${daysLeft===1?'':'s'} left).`,action:'Tap to view →',severity:'info'});}
+            else if(!isActive&&sub.status!=='pending'){const isExpired=sub.status==='active'&&sub.paidUntil>0&&sub.paidUntil<=Date.now();items.push({tab:'subscribe',icon:'💳',title:isExpired?'Your subscription has expired':'Subscription required',body:isExpired?'Renew your $2 subscription to continue playing this month.':'You need an active $2/month subscription.',action:'Tap to subscribe →',severity:'danger'});}
+            else if(sub.status==='pending'){items.push({tab:'subscribe',icon:'⏳',title:'Subscription pending admin approval',body:'Your request is being reviewed.',action:'Tap to view status →',severity:'warning'});}
         }
     }
     return items;
@@ -2963,12 +2758,7 @@ function checkInactivity(){
     if(sessionStorage.getItem(sessionKey)==='1')return;
     const lastPlayed=lastPlayedFor(userProfile.id);
     const days=daysSince(lastPlayed);
-
-    if(lastPlayed===null){
-        const accountAge=userProfile.created_at?daysSince(new Date(userProfile.created_at).getTime()):0;
-        if(accountAge===null||accountAge<INACTIVITY_THRESHOLD_DAYS)return;
-    }
-
+    if(lastPlayed===null){const accountAge=userProfile.created_at?daysSince(new Date(userProfile.created_at).getTime()):0;if(accountAge===null||accountAge<INACTIVITY_THRESHOLD_DAYS)return;}
     const isInactive=days===null||days>=INACTIVITY_THRESHOLD_DAYS;
     if(!isInactive)return;
     if(userProfile.inactivity_reason_at){const reasonAge=daysSince(new Date(userProfile.inactivity_reason_at).getTime());if(reasonAge!==null&&reasonAge<7)return}
@@ -2978,7 +2768,7 @@ function checkInactivity(){
 function showInactivityModal(days){
     const modal=document.getElementById('inactivity-modal'),body=document.getElementById('inactivity-body'),footer=document.getElementById('inactivity-footer');
     const daysText=days===null?'You haven\'t played a match yet':`It's been <span class="ic-days">${days} days</span> since your last match`;
-    body.innerHTML=`<div class="inactivity-cta"><span class="ic-icon">🏓</span><h3>We miss you at the table!</h3><p>${daysText}. Come back and play a match to keep your ranking and discount active!</p></div><p style="font-size:.85rem;color:var(--text-muted);text-align:center;margin-top:12px">Every match counts — even a friendly one keeps your streak alive.</p>`;
+    body.innerHTML=`<div class="inactivity-cta"><span class="ic-icon">🏓</span><h3>We miss you at the table!</h3><p>${daysText}. Come back and play a match to keep your ranking and discount active!</p></div>`;
     footer.innerHTML=`<button id="inactivity-play" style="margin-bottom:8px">🎾 I'll be back soon</button><button id="inactivity-reason" class="secondary" style="margin-bottom:0">💬 Share a reason</button>`;
     modal.classList.remove('hidden');inactivityModalOpen=true;
     document.getElementById('inactivity-play').addEventListener('click',()=>{closeInactivityModal();switchTab('request')});
@@ -3007,6 +2797,51 @@ function showReasonForm(){
 function closeInactivityModal(){document.getElementById('inactivity-modal')?.classList.add('hidden');inactivityModalOpen=false}
 document.getElementById('inactivity-x').addEventListener('click',closeInactivityModal);
 document.getElementById('inactivity-modal').addEventListener('click',(e)=>{if(e.target.id==='inactivity-modal')closeInactivityModal()});
+
+let passwordModalMode=null;
+function showPasswordModal(mode){
+    passwordModalMode=mode;
+    const title=document.getElementById('pwd-modal-title'),icon=document.getElementById('pwd-modal-icon'),msg=document.getElementById('pwd-modal-msg');
+    if (mode==='required') {
+        icon.textContent='🔐'; title.textContent='Update Your Password';
+        msg.innerHTML='For your security, we\'ve strengthened our password policy. Please set a new password before continuing.';
+    } else if (mode==='reset') {
+        icon.textContent='🔑'; title.textContent='Set New Password';
+        msg.innerHTML='Enter a new password for your account.';
+    }
+    document.getElementById('pwd-new').value='';
+    document.getElementById('pwd-confirm').value='';
+    document.getElementById('pwd-error').classList.add('hidden');
+    updatePasswordChecklist('');
+    document.getElementById('password-modal').classList.remove('hidden');
+    setTimeout(()=>document.getElementById('pwd-new').focus(),150);
+}
+function closePasswordModal(){document.getElementById('password-modal')?.classList.add('hidden');passwordModalMode=null}
+function updatePasswordChecklist(pw){
+    PASSWORD_REQUIREMENTS.forEach(req=>{
+        const el=document.querySelector(`#pwd-checklist .pwd-check[data-req="${req.key}"]`);
+        if(el)el.classList.toggle('ok',req.test(pw));
+    });
+}
+document.getElementById('pwd-new').addEventListener('input',(e)=>updatePasswordChecklist(e.target.value));
+document.getElementById('pwd-save').addEventListener('click',async()=>{
+    const pw=document.getElementById('pwd-new').value,confirm=document.getElementById('pwd-confirm').value;
+    const errEl=document.getElementById('pwd-error');
+    errEl.classList.add('hidden');
+    if(!pw){errEl.textContent='Please enter a new password';errEl.classList.remove('hidden');return}
+    if(!isPasswordCompliant(pw)){errEl.textContent='Password does not meet all requirements';errEl.classList.remove('hidden');return}
+    if(pw!==confirm){errEl.textContent='Passwords do not match';errEl.classList.remove('hidden');return}
+    try{
+        showLoading('Updating password…');
+        const{error}=await supabase.auth.updateUser({password:pw,data:{password_policy_v:PASSWORD_POLICY_VERSION}});
+        if(error)throw error;
+        const{data:{user}}=await supabase.auth.getUser();
+        if(user)currentUser=user;
+        hideLoading();closePasswordModal();showToast('✅ Password updated!',3500);
+        if(pendingRedirectAfterPasswordChange){const fn=pendingRedirectAfterPasswordChange;pendingRedirectAfterPasswordChange=null;await fn()}
+    }catch(err){hideLoading();console.error(err);errEl.textContent=err.message||'Failed to update password';errEl.classList.remove('hidden')}
+});
+document.getElementById('pwd-logout').addEventListener('click',async()=>{pendingRedirectAfterPasswordChange=null;closePasswordModal();await handleLogout()});
 
 (function immediateInit(){
     try{populateAllCCSelects()}catch(e){console.error(e)}
